@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@master
         
     - name: Copy required Files to deployment directory
-      run: mkdir deploy & cp src deploy & cp web deploy
+      run: mkdir deploy/webapps/ROOT & cp src deploy/webapps/ROOT/src & cp web deploy/webapps/ROOT/web
       
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
@@ -27,4 +27,4 @@ jobs:
         package: '${{ github.workspace }}/deploy'
 
     - name: Clean build files
-      run: rm deploy
+      run: rm -R deploy
