@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@master
         
     - name: Copy required Files to deployment directory
-      run: mkdir -p ${{ github.workspace }}/deploy/webapps/ROOT & cp ${{ github.workspace }}/src ${{ github.workspace }}/deploy/webapps/ROOT/src & cp ${{ github.workspace }}/web ${{ github.workspace }}/deploy/webapps/ROOT/web
+      run: mkdir -p ${{ github.workspace }}/deploy/webapps/ROOT & cp src deploy/webapps/ROOT/src & cp web deploy/webapps/ROOT/web
       
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
