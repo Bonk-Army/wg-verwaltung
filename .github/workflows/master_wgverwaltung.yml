@@ -14,19 +14,19 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-
-    #- name: Set up Java version
-      #uses: actions/setup-java@v1
-      #with:
-        #java-version: '11'
-
-    #- name: Build with Maven
-      #run: mvn clean install
-
+        
+    - name: Copy required Files to deployment directory
+      run: mkdir deploy
+           cp src deploy/src
+           cp web deploy/web
+      
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
       with:
         app-name: 'wgverwaltung'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_ca79de3be900449da3ae5ec1d8d0253b }}
-        #package: '${{ github.workspace }}/target/*.jar'
+        package: '${{ github.workspace }}/deploy'
+
+    - name: Clean build files
+      run: rm deploy
