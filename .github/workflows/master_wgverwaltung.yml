@@ -16,9 +16,7 @@ jobs:
     - uses: actions/checkout@master
         
     - name: Copy required Files to deployment directory
-      run: mkdir deploy
-           cp src deploy/src
-           cp web deploy/web
+      run: mkdir deploy & cp src deploy & cp web deploy
       
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
