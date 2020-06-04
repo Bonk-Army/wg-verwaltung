@@ -4,11 +4,11 @@ package beans;
 // import models.User;
 
 public class LoginBean {
-    //Variables
+    // Variables
 
         // private User user;
 
-    //Public Methods
+    // Public Methods
 
         // checkLogin() { SQL Query: Try to find combination of username and password }
         // Check if username and password is in SQL
@@ -19,7 +19,9 @@ public class LoginBean {
 
         // sendPassword() { mail service }
 
-    //Getter and Setter
+    // Private Methods
+
+    // Getter and Setter
 
         // getUser() { return this.User; }
 }
