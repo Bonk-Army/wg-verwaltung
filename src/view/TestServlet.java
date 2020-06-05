@@ -22,7 +22,12 @@ public class TestServlet extends HttpServlet{
         readPart(out,"templates//htmlTop.html");
         readPart(out,"templates//head.html");
         out.println("<body>");
-        readPart(out,"templates//navi.html");
+        out.println("<div class=\"wrapper\">");
+        readPart(out,"templates//sidebar.html");
+        out.println("<div id=\"content\">");
+        readPart(out,"pages//testpage.html");
+        out.println("</div>");
+        out.println("</div>");
         out.println("</body>");
         readPart(out,"templates//htmlBottom.html");
     }
