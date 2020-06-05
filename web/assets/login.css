@@ -1,0 +1,33 @@
+/* ==========
+    Grid
+=========== */
+
+body {
+    background: #3c415e;
+    display: grid;
+    grid-template-areas:
+            "header header header"
+            "main main main"
+            "footer footer footer";
+    grid-template-rows: 7% 1fr 7%;
+    grid-template-columns: 20% 1fr 15%;
+    grid-row-gap: 1em;
+    grid-column-gap: 1em;
+    height: 100vh;
+    margin: 0;
+}
+.header {
+    grid-area: header;
+    background: #738598
+}
+.main {
+    grid-area: main;
+}
+.footer {
+    grid-area: footer;
+    background: #738598
+}
+
+
+
+
