@@ -22,9 +22,7 @@
                 Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p></div></div>
             <div class="verticalLine"></div>
             <div class="logincontainer">
-                <p>LOGIN</p>
             </div>
-
         </div>
         <div class="footer">
             <div class="ftlinks">
