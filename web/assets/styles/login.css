@@ -1,0 +1,100 @@
+
+
+body {
+    background: #3c415e;
+    display: grid;
+    grid-template-areas:
+            "header header header header"
+            "main main main main"
+            "footer footer footer footer";
+    grid-template-rows: 7% 1fr 7%;
+    grid-template-columns: 15% 1fr 1fr 15%;
+    grid-column-gap: 1em;
+    height: 100vh;
+    margin: 0;
+}
+
+/* ==========
+   Header
+=========== */
+.header {
+    grid-area: header;
+    background: #738598
+}
+.header h2 {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    letter-spacing: 0.2em;
+    color: whitesmoke;
+}
+
+/* ==========
+    Main
+=========== */
+.main {
+    grid-area: main;
+    display: inline-grid;
+    grid-template-columns: repeat(3, 12.5%) 25% repeat(3, 12.5%);
+    grid-template-rows: repeat(8,12.5%);
+    background-image: url("../images/monstera.jpg");
+}
+
+.overview {
+    grid-column: 2/4;
+    grid-row: 2/4;
+}
+
+
+.overview h2 {
+    font-family: "Times New Roman", serif;
+    color: whitesmoke;
+    grid-row: 2;
+}
+
+.overview #overviewbox {
+    color: whitesmoke;
+}
+
+
+
+.verticalLine {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    grid-column: 4;
+    grid-row: 2/7;
+    border: solid thin whitesmoke;
+    height: 100%;
+}
+/* ==========
+   Login
+=========== */
+.logincontainer {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    grid-column: 6;
+    grid-row: 4;
+    width: 40em;
+    height: 20em;
+    border: solid aliceblue;
+}
+/* ==========
+   Footer
+=========== */
+.footer {
+    grid-area: footer;
+    background: #738598;
+}
+
+.ftlinks {
+    display: flex;
+    justify-content: center;
+    color: whitesmoke;
+}
+
+.ftlinks a {
+    padding: 0 2em 0 2em;
+}
+
