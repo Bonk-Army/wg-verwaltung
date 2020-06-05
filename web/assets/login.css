@@ -18,14 +18,16 @@ body {
 }
 .header {
     grid-area: header;
-    background: #dfe2e2
+    background: #738598
 }
 .main {
     grid-area: main;
 }
 .footer {
     grid-area: footer;
-    background: #dfe2e2
+    background: #738598
 }
+
+
 
 
