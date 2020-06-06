@@ -9,10 +9,10 @@ import java.sql.SQLException;
 public class SQLDatabaseConnection {
     public static void main(String[] args) {
         String connectionURL =
-                "jdbc:sqlserver://v220190910299696193.nicesrv.de:3306;"
+                "jdbc:sqlserver://v220190910299696193.nicesrv.de:22;"
                         + "database=wg-verwaltung;"
-                        + "user=wg_admin;"
-                        + "password=;"
+                        + "user=root;"
+                        + "password=xxxxxxxxxxxxx;"
                         + "encrypt=true;"
                         + "trustServerCertificate=false;"
                         + "loginTimeout=30;";
