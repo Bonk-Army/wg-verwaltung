@@ -1,8 +1,8 @@
-package beans;
+package main.java.beans;
 
 // Imports
 
-public class OverviewBean {
+public class ToDoBean {
     // Variables
 
     // Public Methods

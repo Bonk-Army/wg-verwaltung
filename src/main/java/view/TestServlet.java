@@ -1,4 +1,4 @@
-package view;
+package main.java.view;
 
 import java.io.*;
 
@@ -25,7 +25,7 @@ public class TestServlet extends HttpServlet{
         out.println("<div class=\"wrapper\">");
         readPart(out,"templates//sidebar.html");
         out.println("<div id=\"content\">");
-        readPart(out,"pages//testpage.html");
+        readPart(out, "main/java/pages//testpage.html");
         out.println("</div>");
         out.println("</div>");
         out.println("</body>");
