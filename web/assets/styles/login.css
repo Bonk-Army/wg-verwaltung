@@ -12,6 +12,7 @@ body {
     grid-column-gap: 1em;
     height: 100vh;
     margin: 0;
+    font-family: Helvetica, serif;
 }
 
 /* ==========
@@ -19,14 +20,13 @@ body {
 =========== */
 .header {
     grid-area: header;
+    display: flex;
+    align-self: center;
+    justify-self: center;
 }
 .header h2 {
-    display: flex;
-    justify-content: center;
-    align-content: center;
     letter-spacing: 0.2em;
     color: black;
-    font-family: "Times New Roman", serif;
 }
 
 /* ==========
@@ -47,7 +47,6 @@ body {
 
 
 .overview h2 {
-    font-family: "Times New Roman", serif;
     color: whitesmoke;
     grid-row: 2;
 }
@@ -274,16 +273,14 @@ a {
 /* ==========
    Footer
 =========== */
-.footer {
+.footer { /* TODO Items noch richtig anpassen */
     grid-area: footer;
+    display: flex;
+    justify-self: center;
 }
 
 .ftlinks {
-    display: flex;
-    justify-content: center;
     color: black;
-    font-family: "Times New Roman", serif;
-    padding: 2em;
 }
 
 
