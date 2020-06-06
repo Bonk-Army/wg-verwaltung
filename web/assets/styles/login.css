@@ -127,6 +127,7 @@ body {
 
 .login-snip .sign-in:checked+.tab,
 .login-snip .sign-up:checked+.tab {
+    color: white;
     border-color: #1161ee
 }
 
@@ -168,7 +169,7 @@ body {
 }
 
 .login-space .group .button {
-    background: #1161ee
+    background: grey;
 }
 
 .login-space .group label .icon {
