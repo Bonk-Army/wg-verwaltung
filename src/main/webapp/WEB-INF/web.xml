@@ -8,7 +8,7 @@
     <!-- TestServlet declaration and mapping -->
     <servlet>
         <servlet-name>TestServlet</servlet-name>
-        <servlet-class>main.java.view.TestServlet</servlet-class>
+        <servlet-class>view.TestServlet</servlet-class>
         <init-param>
             <param-name>myInitParam</param-name>
             <param-value>Deployment-Descriptor</param-value>
