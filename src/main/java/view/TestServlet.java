@@ -48,7 +48,7 @@ public class TestServlet extends HttpServlet{
                 line = in.readLine();
             }
             in.close();
-        } catch (Exception e){
+        } catch (Exception ignored){
         }
     }
 }
