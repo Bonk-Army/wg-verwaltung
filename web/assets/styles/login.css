@@ -275,8 +275,6 @@ a {
 =========== */
 .footer { /* TODO Items noch richtig anpassen */
     grid-area: footer;
-    display: flex;
-    justify-self: center;
 }
 
 .ftlinks {

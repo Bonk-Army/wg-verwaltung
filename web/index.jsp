@@ -49,9 +49,6 @@
                 </div>
         <div class="footer">
             <div class="ftlinks">
-            <a>FAQ</a>
-            <p>© 2020 TINF19B4 Gruppe Gelb</p>
-            <a>Impressum</a>
             </div>
         </div>
     </body>
