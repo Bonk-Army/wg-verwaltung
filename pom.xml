@@ -83,6 +83,7 @@
         <directory>src/main/java</directory>
         <includes>
           <include>templates/*.html</include>
+          <include>pages/*.html</include>
         </includes>
       </resource>
       <resource>
