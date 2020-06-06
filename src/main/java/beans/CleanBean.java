@@ -1,4 +1,4 @@
-package main.java.beans;
+package beans;
 
 // Imports
 // import models.User;
