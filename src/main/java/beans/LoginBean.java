@@ -10,13 +10,21 @@ public class LoginBean {
     // private User user;
 
     // Public Methods
-    public boolean login(String username, String password){
+
+    /**
+     * Called by LoginServlet upon login action from user. Returns user id in case of successfull login, otherwise
+     * returns an empty String
+     * @param username The entered username
+     * @param password The entered password
+     * @return The user id or an empty String.
+     */
+    public String login(String username, String password){
         String salt = ""; //Get salt from SQL
         String hash = ""; //Get hash from SQL
 
         String newHash = PasswordHasher.hashPassword(password, salt.getBytes());
 
-        return newHash.equals(hash);
+        return newHash.equals(hash) ? getUserId(username) : "";
     }
         // checkLogin() { SQL Query: Try to find combination of username and password }
         // Check if username and password is in SQL
@@ -28,6 +36,9 @@ public class LoginBean {
         // sendPassword() { mail service }
 
     // Private Methods
+    private String getUserId(String username){
+        return "";
+    }
 
     // Getter and Setter
 

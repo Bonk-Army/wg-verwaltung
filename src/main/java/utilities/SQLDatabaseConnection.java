@@ -3,16 +3,18 @@ package main.java.utilities;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 //import com.jcraft.jsch.*;
 
 public class SQLDatabaseConnection {
     public static void main(String[] args) {
         String connectionURL =
-                "jdbc:sqlserver://v220190910299696193.nicesrv.de:22;"
+                "jdbc:sqlserver://v220190910299696193.nicesrv.de:3306;"
                         + "database=wg-verwaltung;"
                         + "user=root;"
-                        + "password=xxxxxxxxxxxxx;"
+                        + "password=" + SQLPassword.pw + ";"
                         + "encrypt=true;"
                         + "trustServerCertificate=false;"
                         + "loginTimeout=30;";
