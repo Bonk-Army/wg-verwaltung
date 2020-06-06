@@ -19,17 +19,17 @@ public class TestServlet extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        readPart(out,"templates//htmlTop.html");
-        readPart(out,"templates//head.html");
+        readPart(out,"templates/htmlTop.html");
+        readPart(out,"templates/head.html");
         out.println("<body>");
         out.println("<div class=\"wrapper\">");
         readPart(out,"templates//sidebar.html");
         out.println("<div id=\"content\">");
-        readPart(out, "main/java/pages//testpage.html");
+        readPart(out, "main/java/pages/testpage.html");
         out.println("</div>");
         out.println("</div>");
         out.println("</body>");
-        readPart(out,"templates//htmlBottom.html");
+        readPart(out,"templates/htmlBottom.html");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -40,7 +40,7 @@ public class TestServlet extends HttpServlet{
 
     protected void readPart (PrintWriter out,String dateipfad){
         try {
-            BufferedReader in = new BufferedReader(new FileReader(new File(getServletContext().getRealPath("/") + "WEB-INF//classes//"+dateipfad)));
+            BufferedReader in = new BufferedReader(new FileReader(new File(getServletContext().getRealPath("/") + "WEB-INF/classes/"+dateipfad)));
             String line = in.readLine();
             while (!line.equals("")){
                 out.println(line);
