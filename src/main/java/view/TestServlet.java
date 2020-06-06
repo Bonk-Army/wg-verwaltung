@@ -22,7 +22,12 @@ public class TestServlet extends HttpServlet{
         readPart(out,"templates//htmlTop.html");
         readPart(out,"templates//head.html");
         out.println("<body>");
-        readPart(out,"templates//navi.html");
+        out.println("<div class=\"wrapper\">");
+        readPart(out,"templates//sidebar.html");
+        out.println("<div id=\"content\">");
+        readPart(out, "main/java/pages//testpage.html");
+        out.println("</div>");
+        out.println("</div>");
         out.println("</body>");
         readPart(out,"templates//htmlBottom.html");
     }
@@ -36,8 +41,7 @@ public class TestServlet extends HttpServlet{
     protected void readPart (PrintWriter out,String dateipfad){
         try {
             BufferedReader in = new BufferedReader(new FileReader(new File(getServletContext().getRealPath("/") + "WEB-INF//classes//"+dateipfad)));
-            String line = "";
-            line = in.readLine();
+            String line = in.readLine();
             while (!line.equals("")){
                 out.println(line);
                 line = in.readLine();

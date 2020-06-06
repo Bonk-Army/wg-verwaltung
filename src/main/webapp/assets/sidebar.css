@@ -1,7 +1,6 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
     font-family: 'Poppins', sans-serif;
-    background: #fafafa;
 }
 
 p {
@@ -42,8 +41,7 @@ a:focus {
     margin: 40px 0;
 }
 
-i,
-span {
+i {
     display: inline-block;
 }
 
@@ -70,8 +68,7 @@ span {
     text-align: center;
 }
 
-#sidebar.active .sidebar-header h3,
-#sidebar.active .CTAs {
+#sidebar.active .sidebar-header h3 {
     display: none;
 }
 
@@ -163,40 +160,6 @@ ul ul a {
     background: #6d7fcc;
 }
 
-ul.CTAs {
-    padding: 20px;
-}
-
-ul.CTAs a {
-    text-align: center;
-    font-size: 0.9em !important;
-    display: block;
-    border-radius: 5px;
-    margin-bottom: 5px;
-}
-
-a.download {
-    background: #fff;
-    color: #7386D5;
-}
-
-a.article,
-a.article:hover {
-    background: #6d7fcc !important;
-    color: #fff !important;
-}
-
-/* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
-
-#content {
-    width: 100%;
-    padding: 20px;
-    min-height: 100vh;
-    transition: all 0.3s;
-}
-
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
@@ -206,7 +169,7 @@ a.article:hover {
         min-width: 80px;
         max-width: 80px;
         text-align: center;
-        margin-left: -80px !important;
+        margin-left: 0px !important;
     }
     .dropdown-toggle::after {
         top: auto;
@@ -219,8 +182,7 @@ a.article:hover {
     #sidebar.active {
         margin-left: 0 !important;
     }
-    #sidebar .sidebar-header h3,
-    #sidebar .CTAs {
+    #sidebar .sidebar-header h3 {
         display: none;
     }
     #sidebar .sidebar-header strong {
@@ -228,8 +190,7 @@ a.article:hover {
     }
     #sidebar ul li a {
         padding: 20px 10px;
-    }
-    #sidebar ul li a span {
+        text-align: center;
         font-size: 0.85em;
     }
     #sidebar ul li a i {
@@ -244,8 +205,5 @@ a.article:hover {
     }
     #sidebar {
         margin-left: 0;
-    }
-    #sidebarCollapse span {
-        display: none;
     }
 }
