@@ -40,8 +40,8 @@ public class TestServlet extends HttpServlet{
 
     protected void readPart (PrintWriter out,String dateipfad){
         try {
-            //BufferedReader in = new BufferedReader(new FileReader(new File(getServletContext().getRealPath("/") + "WEB-INF//classes//"+dateipfad)));
-            BufferedReader in = new BufferedReader(new FileReader(new File( System.getProperty("user.dir") + "/target/ROOT/WEB-INF/classes/"+dateipfad)));
+            BufferedReader in = new BufferedReader(new FileReader(new File(getServletContext().getRealPath("/") + "WEB-INF/classes/"+dateipfad)));
+            //BufferedReader in = new BufferedReader(new FileReader(new File( System.getProperty("user.dir") + "/target/ROOT/WEB-INF/classes/"+dateipfad)));
             String line = in.readLine();
             while (!line.equals("")){
                 out.println(line);
