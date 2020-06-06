@@ -1,12 +1,17 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy JAR app to Azure Web App - wgverwaltung
+name: Build and deploy WAR app to Azure Web App - wgverwaltung
 
 on:
   push:
     branches:
       - master
+
+env:
+  AZURE_WEBAPP_NAME: wgverwaltung  # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: ${{ github.workspace }} # set this to the path to your web app project
+  AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.AzureAppService_PublishProfile_ca79de3be900449da3ae5ec1d8d0253b }}
 
 jobs:
   build-and-deploy:
@@ -14,17 +19,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-        
-    - name: Copy required Files to deployment directory
-      run: mkdir -p ${{ github.workspace }}/deploy/webapps/ROOT & cp -r src deploy/webapps/ROOT/src & cp -r web deploy/webapps/ROOT/web
-      
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v1
-      with:
-        app-name: 'wgverwaltung'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_ca79de3be900449da3ae5ec1d8d0253b }}
-        package: '${{ github.workspace }}/deploy'
 
-    - name: Clean build files
-      run: rm -R deploy
+    # New config
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '14.0.1' # The JDK version to make available on the path.
+        java-package: jdk # (jre, jdk, or jdk+fx) - defaults to jdk
+        architecture: x64 # (x64 or x86) - defaults to x64
+
+    - name: Build with Maven
+      run: mvn package --file pom.xml
+
+    - name: 'Deploy to Azure WebApp'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        slot-name: 'production'
+        publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*.war'
