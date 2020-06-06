@@ -80,16 +80,16 @@
 
     <resources>
       <resource>
-        <directory>src/main/java</directory>
+        <directory>src</directory>
         <includes>
-          <include>templates/*.html</include>
-          <include>pages/*.html</include>
+          <include>main/java/templates/*.html</include>
+          <include>main/java/pages/*.html</include>
         </includes>
       </resource>
       <resource>
-        <directory>src/main/java</directory>
+        <directory>src</directory>
         <includes>
-          <include>Drivers/sqljdbc_8.2/deu/mssql-jdbc-8.2.2.jre13.jar</include>
+          <include>main/java/Drivers/sqljdbc_8.2/deu/mssql-jdbc-8.2.2.jre13.jar</include>
         </includes>
       </resource>
     </resources>
