@@ -18,5 +18,18 @@
         <servlet-name>TestServlet</servlet-name>
         <url-pattern>/TestServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ContentServlet</servlet-name>
+        <servlet-class>view.servlets.subservlets.Content</servlet-class>
+        <init-param>
+            <param-name>myInitParam</param-name>
+            <param-value>Deployment-Descriptor</param-value>
+        </init-param>
+        <load-on-startup>-1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ContentServlet</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
 
 </web-app>

@@ -82,8 +82,7 @@
       <resource>
         <directory>src/main/resources</directory>
         <includes>
-          <include>templates/*.html</include>
-          <include>pages/*.html</include>
+          <include>**/*.html</include>
         </includes>
       </resource>
       <resource>
