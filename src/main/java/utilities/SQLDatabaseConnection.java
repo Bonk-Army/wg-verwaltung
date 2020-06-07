@@ -4,12 +4,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service class to save and fetch data to and from SQL
+ */
 public class SQLDatabaseConnection {
-    public static void main(String[] args) {
-        System.out.println(System.getenv("SQL_PASSWORD"));
-        System.out.println(validateUser("patrick2"));
-    }
-
     /**
      * Create a user in the database
      * @param username The username of the user
@@ -74,9 +72,15 @@ public class SQLDatabaseConnection {
         return salt;
     }
 
-    public static boolean validateUser(String username){
+    /**
+     * Set the "isVerified" field for the specified user to true and delete verification code to de-validate it.
+     * @param username The user that has been verified
+     * @return if the value has been changed successfully. If not, the process has to be tried again.
+     */
+    public static boolean verifyUser(String username){
         try{
             ResultSet rs = executeQuery("UPDATE users SET isVerified = true WHERE username = '" + username + "'");
+            ResultSet rs2 = executeQuery("UPDATE users SET verificationCode = '' WHERE username = '" + username + "'");
             return true;
         } catch(Exception e){
             e.printStackTrace();
@@ -86,13 +90,54 @@ public class SQLDatabaseConnection {
     }
 
     /**
-     * Get all user names (used to check if name is already used
+     * Get the unique user id for the requested user
+     * @param username The user that the id has to be returned for
+     * @return The id as a String
+     */
+    public static String getUserId(String username){
+        String id = "";
+
+        ResultSet rs = executeQuery("SELECT uniqueID FROM users WHERE username='" + username + "'");
+
+        try {
+            while (rs.next()) {
+                id = String.valueOf(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return id;
+    }
+
+    /**
+     * Get all user names (used to check if name is already used)
      * @return A List of all usernames
      */
     public static List<String> getAllUserNames() {
         List<String> retList = new ArrayList<String>();
 
         ResultSet rs = executeQuery("SELECT username FROM users");
+
+        try {
+            while (rs.next()) {
+                retList.add(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return retList;
+    }
+
+    /**
+     * Get a list of all email addresses (used to check for duplicate email)
+     * @return A list of all emails
+     */
+    public static List<String> getAllEmails(){
+        List<String> retList = new ArrayList<String>();
+
+        ResultSet rs = executeQuery("SELECT email FROM users");
 
         try {
             while (rs.next()) {

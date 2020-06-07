@@ -1,8 +1,12 @@
 package beans;
 
 // Imports
-// import models.User;
-import main.java.utilities.PasswordHasher;
+import utilities.PasswordHasher;
+import utilities.MailSender;
+import utilities.RandomStringGenerator;
+import utilities.SQLDatabaseConnection;
+
+import java.util.List;
 
 /**
  * Bean that handles all backend logic and database callouts required for user login and registration.
@@ -21,8 +25,8 @@ public class LoginBean {
      * @return The user id or an empty String.
      */
     public String login(String username, String password){
-        String salt = ""; //Get salt from SQL
-        String hash = ""; //Get hash from SQL
+        String salt = SQLDatabaseConnection.getPasswordSalt(username);
+        String hash = SQLDatabaseConnection.getPasswordHash(username);
 
         String newHash = PasswordHasher.hashPassword(password, salt.getBytes());
 
@@ -38,17 +42,30 @@ public class LoginBean {
      * @return The user id or an empty String.
      */
     public String register(String username, String password, String email){
+        //Generate random salt
         byte[] salt = PasswordHasher.generateSalt();
 
+        //Calculate password hash
         String hash = PasswordHasher.hashPassword(password, salt);
 
-        //Call SQL to ask if username / email already exists. If not, continue
-        if(true){
-            //If either exists, return an empty String
+        //Call SQL to ask if username / email is unique. If unique, it continues registration process, else it stops
+        if(isUsernameUnique(username) && isEmailUnqiue(email)){
+            //Create new user. Generate random, 10-digit verification code for email verification.
+            String verificationCode = new RandomStringGenerator(10).nextString();
+
+            // If the user creation was successful, send an email and continue registration
+            if(SQLDatabaseConnection.createUser(username, email, hash, new String(salt), verificationCode)){
+                // Now send an email to the user with the verification link
+                MailSender.sendEmail(email, "Willkommen bei wg-verwaltung!", ("Bitte bestätige noch kurz deine "
+                + "E-Mail-Adresse, indem du auf den folgenden Link klickst oder ihn in deinem Browser eingibst: "
+                + "https://wgverwaltung.azurewebsites.net/verify?key=" + verificationCode));
+
+                // And return the new user id:
+                return SQLDatabaseConnection.getUserId(username);
+            }
             return "";
         }else{
-            //Create new user. Generate new random user id (must be unique, so check that!) and save id, username,
-            //password hash and email to sql
+            //If either already exists, return an empty String
             return "";
         }
 
@@ -64,7 +81,29 @@ public class LoginBean {
      * @return The ID as a String
      */
     private String getUserId(String username){
-        return "";
+        return SQLDatabaseConnection.getUserId(username);
+    }
+
+    /**
+     * Checks if the username is not already in use
+     * @param username The username to be checked
+     * @return If the username is unique (so it returns true if the name can be used)
+     */
+    private boolean isUsernameUnique(String username){
+        List<String> usedNames = SQLDatabaseConnection.getAllUserNames();
+
+        return usedNames.contains(username) ? false : true;
+    }
+
+    /**
+     * Checks if the email is not already in use
+     * @param email The email to be checked
+     * @return If the email is unique (so it returns true if the email can be used)
+     */
+    private boolean isEmailUnqiue(String email){
+        List<String> usedEmails = SQLDatabaseConnection.getAllEmails();
+
+        return usedEmails.contains(email) ? false : true;
     }
 
     // Getter and Setter

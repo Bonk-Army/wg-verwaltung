@@ -7,12 +7,17 @@ import com.sendgrid.helpers.mail.objects.Email;
 
 import java.io.IOException;
 
-
+/**
+ * Used to send emails via SendGrid
+ */
 public class MailSender {
-    public static void main(String[] args) throws IOException {
-        sendEmail("patrick@mueller-patrick.tech", "Test", "Test2");
-    }
-
+    /**
+     * Send an email via SendGrid
+     * @param receiver The email address of the receiver of the message
+     * @param subject The subject of the email
+     * @param contentString The content of the email
+     * @return If the email has been sent successful
+     */
     public static boolean sendEmail(String receiver, String subject, String contentString){
         Email from = new Email("no-reply@wgverwaltung.azurewebsites.net");
         Email to = new Email(receiver);

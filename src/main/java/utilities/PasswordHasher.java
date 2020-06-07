@@ -1,4 +1,4 @@
-package main.java.utilities;
+package utilities;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -7,6 +7,9 @@ import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
+/**
+ * Used to hash the passwords before storing them in SQL
+ */
 public class PasswordHasher {
 
     public static void main(String[] args) {
@@ -40,6 +43,10 @@ public class PasswordHasher {
         return null;
     }
 
+    /**
+     * Generate a random salt used to salt the hash of the password
+     * @return The salt as a byte array
+     */
     public static byte[] generateSalt() {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
