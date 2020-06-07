@@ -1,42 +1,21 @@
 package utilities;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
-//import com.jcraft.jsch.*;
+import com.jcraft.jsch.*;
 
 public class SQLDatabaseConnection {
     public static void main(String[] args) {
-        String connectionURL =
-                "jdbc:sqlserver://v220190910299696193.nicesrv.de:3306;"
-                        + "database=wg-verwaltung;"
-                        + "user=root;"
-                        + "password=" + SecretsReader.getSqlPassword() + ";"
-                        + "encrypt=true;"
-                        + "trustServerCertificate=false;"
-                        + "loginTimeout=30;";
-
-        try (Connection connection = DriverManager.getConnection(connectionURL);) {
-            System.out.println("Success!!!");
+        try {
+            Connection con = DriverManager.getConnection(
+                    ("jdbc:mariadb://v220190910299696193.nicesrv.de:3306/wg_verwaltung?user=wg_admin&password=" + SecretsReader.getSqlPassword()));
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("select * from users");
+            while (rs.next())
+                System.out.println(rs.getString(1));
+            con.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
-
-        /*try {
-            JSch jsch = new JSch();
-            String user = "wg_admin";
-            String host = "v220190910299696193.nicesrv.de";
-            int port = 3306;
-            Session session = jsch.getSession(user, host, port);
-            session.connect();
-            Channel channel=session.openChannel("sftp");
-            channel.connect();
-            ChannelSftp c=(ChannelSftp)channel;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
     }
 }
