@@ -23,7 +23,7 @@
     <!-- LoginServlet declaration and mapping -->
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>main.java.view.LoginServlet</servlet-class>
+        <servlet-class>view.LoginServlet</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
     <servlet-mapping>
