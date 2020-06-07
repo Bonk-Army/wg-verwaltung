@@ -14,8 +14,6 @@ import java.util.List;
 public class LoginBean {
     // Variables
 
-    // private User user;
-
     // Public Methods
     /**
      * Called by LoginServlet upon login action from user. Returns user id in case of successfull login, otherwise
@@ -28,9 +26,13 @@ public class LoginBean {
         String salt = SQLDatabaseConnection.getPasswordSalt(username);
         String hash = SQLDatabaseConnection.getPasswordHash(username);
 
-        String newHash = PasswordHasher.hashPassword(password, salt.getBytes());
+        if(!salt.isEmpty() && !hash.isEmpty()) {
+            String newHash = PasswordHasher.hashPassword(password, salt);
 
-        return newHash.equals(hash) ? getUserId(username) : "";
+            return newHash.equals(hash) ? getUserId(username) : "";
+        }
+
+        return "";
     }
 
     /**
@@ -43,7 +45,7 @@ public class LoginBean {
      */
     public String register(String username, String password, String email){
         //Generate random salt
-        byte[] salt = PasswordHasher.generateSalt();
+        String salt = PasswordHasher.generateSalt();
 
         //Calculate password hash
         String hash = PasswordHasher.hashPassword(password, salt);
