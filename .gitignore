@@ -5,6 +5,3 @@
 
 # Maven target dir
 /target/
-
-# Secrets file
-**/secrets.txt
