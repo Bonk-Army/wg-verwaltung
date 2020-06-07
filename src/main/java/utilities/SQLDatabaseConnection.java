@@ -14,7 +14,7 @@ public class SQLDatabaseConnection {
                 "jdbc:sqlserver://v220190910299696193.nicesrv.de:3306;"
                         + "database=wg-verwaltung;"
                         + "user=root;"
-                        + "password=" + SQLPassword.pw + ";"
+                        + "password=" + SecretsReader.getSqlPassword() + ";"
                         + "encrypt=true;"
                         + "trustServerCertificate=false;"
                         + "loginTimeout=30;";

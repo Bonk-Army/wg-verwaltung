@@ -19,7 +19,7 @@ public class MailSender {
         Content content = new Content("text/plain", contentString);
         Mail mail = new Mail(from, subject, to, content);
 
-        SendGrid sg = new SendGrid(SQLPassword.sendgrid);
+        SendGrid sg = new SendGrid(SecretsReader.getSendGridKey());
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
