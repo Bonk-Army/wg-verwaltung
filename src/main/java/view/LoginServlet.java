@@ -53,8 +53,8 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<meta charset='UTF-8'>");
-            out.println("<meta tile='Success!");
+            out.println("<meta charset=\"UTF-8\">");
+            out.println("<meta tile=\"Success!\"");
             out.println("</head>");
             out.println("<body>");
             out.println(("Successfully logged you in, your ID is " + userId));
@@ -65,8 +65,8 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<meta charset='UTF-8'>");
-            out.println("<meta tile='Success!");
+            out.println("<meta charset=\"UTF-8\">");
+            out.println("<meta tile=\"Success!\"");
             out.println("</head>");
             out.println("<body>");
             out.println(("Could not log you in"));
