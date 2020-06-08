@@ -29,6 +29,8 @@ public class HTML extends HTMLPart {
 
         result += readHTMLTemplate(className,className+"_Bottom","html");
 
+        this.clear();
+
         return result;
     }
 }

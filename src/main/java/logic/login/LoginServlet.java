@@ -1,4 +1,4 @@
-package view.servlets.subservlets;
+package logic.login;
 
 import beans.LoginBean;
 import view.parts.ContentSubparts.*;
@@ -54,10 +54,10 @@ public class LoginServlet extends Servlet {
 
         if(!userId.isEmpty()){
             head.setPageName("Success!");
-            body.addContentPart(new Login(true,userId));
+            body.addContentPart(new Login_Register(true,userId));
         } else{
             head.setPageName("Failure!");
-            body.addContentPart(new Login(false,userId));
+            body.addContentPart(new Login_Register(false,userId));
         }
 
         PrintWriter out = response.getWriter();
