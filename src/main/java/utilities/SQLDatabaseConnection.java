@@ -44,7 +44,7 @@ public class SQLDatabaseConnection {
             while (rs.next()) {
                 hash = rs.getString(1);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -65,7 +65,7 @@ public class SQLDatabaseConnection {
             while (rs.next()) {
                 salt = rs.getString(1);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -103,7 +103,7 @@ public class SQLDatabaseConnection {
             while (rs.next()) {
                 id = String.valueOf(rs.getInt(1));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -123,7 +123,7 @@ public class SQLDatabaseConnection {
             while (rs.next()) {
                 retList.add(rs.getString(1));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -143,7 +143,7 @@ public class SQLDatabaseConnection {
             while (rs.next()) {
                 retList.add(rs.getString(1));
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
