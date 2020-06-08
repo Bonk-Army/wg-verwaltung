@@ -8,23 +8,24 @@ public class Login  extends ContentPart {
     String uid;
 
     public Login(){
-        this.status = false;
-        this.uid = "";
+        this(false,"");
     }
 
     public Login (boolean status,String uid){
         this.status = status;
         this.uid = uid;
+        generateContent();
     }
 
-    @Override
-    public String toString() {
-        if (status){
-            //add fancy shit here
-            return "<h1>Successfully logged you in, your ID is " + uid+"</h1>";
+    private void generateContent() {
+        this.content = readContentTemplate("GUIElements","Login","html");
+        if(status){
+            this.content.replaceAll("REPLACEME",("You succesfully logged in, your UID is "+uid));
+        }else{
+            this.content.replaceAll("REPLACEME","You failed logging logged in");
         }
-        else{
-            return "<h1>Failure!</h1>";
-        }
+        System.out.println("Hi");
     }
+
+
 }
