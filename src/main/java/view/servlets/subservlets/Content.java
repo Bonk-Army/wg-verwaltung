@@ -21,6 +21,7 @@ public class Content extends Servlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         head.addContentPart(new TemplateFromPath("CustomHTMLElements","head","html"));
+        //head.setPageName("TestPage");
 
         body.addContentPart(new SideBar());
         body.addContentPart(new TemplateFromPath("Pages","testpage","html"));
