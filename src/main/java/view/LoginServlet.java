@@ -49,7 +49,17 @@ public class LoginServlet extends HttpServlet {
         String userId = isRegister ? bean.register(username, password, email) : bean.login(username, password);
 
         if(!userId.isEmpty()){
-            //Login / Registration was successfull, return overview page or sth
+            PrintWriter out = response.getWriter();
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<meta charset='UTF-8'>");
+            out.println("<meta tile='Success!");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("Successfully logged you in, your ID is " + userId);
+            out.println("</body>");
+            out.println("</html>");
         } else{
             //Login / Registration was not successfull, return error page
         }
