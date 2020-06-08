@@ -28,8 +28,6 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Call LoginBean with required Logic
-
         LoginBean bean = new LoginBean();
 
         Boolean isRegister = Boolean.valueOf(request.getParameter("isRegister"));
