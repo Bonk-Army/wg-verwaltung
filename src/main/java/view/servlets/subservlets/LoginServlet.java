@@ -1,9 +1,7 @@
 package view.servlets.subservlets;
 
 import beans.LoginBean;
-import view.parts.ContentSubparts.SideBar;
-import view.parts.ContentSubparts.TemplateFromPath;
-import view.parts.ContentSubparts.TemplateFromString;
+import view.parts.ContentSubparts.*;
 import view.servlets.Servlet;
 
 import javax.servlet.ServletException;
@@ -56,11 +54,10 @@ public class LoginServlet extends Servlet {
 
         if(!userId.isEmpty()){
             head.setPageName("Success!");
-            body.addContentPart(new TemplateFromString("<h1>Successfully logged you in, your ID is " + userId+"</h1>"));
+            body.addContentPart(new Login(true,userId));
         } else{
             head.setPageName("Failure!");
-            body.addContentPart(new TemplateFromString("<h1>Failure!</1>"));
-            //Login / Registration was not successfull, return error page
+            body.addContentPart(new Login(false,userId));
         }
 
         PrintWriter out = response.getWriter();
