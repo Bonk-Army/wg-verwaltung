@@ -1,6 +1,6 @@
 package view.parts;
 
-import view.config.globalConfig;
+import config.globalConfig;
 
 import java.io.*;
 

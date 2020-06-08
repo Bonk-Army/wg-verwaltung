@@ -1,7 +1,6 @@
 package view.servlets.subservlets;
 
-import view.config.globalConfig;
-import view.parts.ContentPart;
+import config.globalConfig;
 import view.servlets.Servlet;
 import view.parts.ContentSubparts.*;
 

@@ -6,19 +6,6 @@
          version="4.0">
 
     <servlet>
-        <servlet-name>TestServlet</servlet-name>
-        <servlet-class>view.TestServlet</servlet-class>
-        <init-param>
-            <param-name>myInitParam</param-name>
-            <param-value>Deployment-Descriptor</param-value>
-        </init-param>
-        <load-on-startup>-1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>TestServlet</servlet-name>
-        <url-pattern>/TestServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>ContentServlet</servlet-name>
         <servlet-class>view.servlets.subservlets.Content</servlet-class>
         <init-param>
@@ -32,4 +19,14 @@
         <url-pattern>/test</url-pattern>
     </servlet-mapping>
 
+    <!-- LoginServlet declaration and mapping -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>view.LoginServlet</servlet-class>
+        <load-on-startup>-1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
 </web-app>
