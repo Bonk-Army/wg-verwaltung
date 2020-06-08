@@ -30,7 +30,10 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean bean = new LoginBean();
 
-        Boolean isRegister = request.getParameter("isRegister").equals("on");
+        Boolean isRegister = false;
+        if(request.getParameter("isRegister") != null) {
+            isRegister = request.getParameter("isRegister").equals("on");
+        }
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = "";
