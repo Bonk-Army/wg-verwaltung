@@ -111,6 +111,43 @@ public class SQLDatabaseConnection {
     }
 
     /**
+     * Get the username for the requested unique user id
+     * @param userID The unique id
+     * @return The username as a String
+     */
+    public static String getUsername(String userID){
+        String name = "";
+
+        ResultSet rs = executeQuery("SELECT username FROM users WHERE uniqueID=" + Integer.valueOf(userID));
+
+        try {
+            while (rs.next()) {
+                name = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return name;
+    }
+
+    public static String getUserVerificationCode(String username){
+        String code = "";
+
+        ResultSet rs = executeQuery("SELECT verificationCode FROM users WHERE username='" +username + "'");
+
+        try {
+            while (rs.next()) {
+                code = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return code;
+    }
+
+    /**
      * Get all user names (used to check if name is already used)
      * @return A List of all usernames
      */
@@ -163,7 +200,7 @@ public class SQLDatabaseConnection {
             Class.forName("org.mariadb.jdbc.Driver");
 
             Connection con = DriverManager.getConnection(
-                    ("jdbc:mariadb://v220190910299696193.nicesrv.de:3306/wg_verwaltung?user=wg_admin&password=" + System.getenv("SQL_PASSWORD")));
+                    ("jdbc:mariadb://v220190910299696193.nicesrv.de:3306/wg_verwaltung_dev?user=wg_admin&password=" + System.getenv("SQL_PASSWORD")));
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             returnSet = rs;

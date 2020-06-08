@@ -29,4 +29,15 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+    
+    <!-- VerifyServlet declaration and mapping -->
+    <servlet>
+        <servlet-name>VerifyServlet</servlet-name>
+        <servlet-class>view.servlets.subservlets.VerifyServlet</servlet-class>
+        <load-on-startup>-1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VerifyServlet</servlet-name>
+        <url-pattern>/verify</url-pattern>
+    </servlet-mapping>
 </web-app>

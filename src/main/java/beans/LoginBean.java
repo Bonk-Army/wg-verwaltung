@@ -60,7 +60,7 @@ public class LoginBean {
                 // Now send an email to the user with the verification link
                 MailSender.sendEmail(email, "Willkommen bei wg-verwaltung!", ("Bitte bestätige noch kurz deine "
                 + "E-Mail-Adresse, indem du auf den folgenden Link klickst oder ihn in deinem Browser eingibst: "
-                + "https://wgverwaltung.azurewebsites.net/verify?key=" + verificationCode));
+                + "https://wgverwaltung.azurewebsites.net/verify?id=" + SQLDatabaseConnection.getUserId(username) + "&key=" + verificationCode));
 
                 // And return the new user id:
                 return SQLDatabaseConnection.getUserId(username);
@@ -71,6 +71,19 @@ public class LoginBean {
             return "";
         }
 
+    }
+
+    public boolean verifyUser(String userID, String verificationCode){
+        String username = SQLDatabaseConnection.getUsername(userID);
+        String savedVerificationCode = SQLDatabaseConnection.getUserVerificationCode(username);
+
+        if(verificationCode.equals(savedVerificationCode)){
+            SQLDatabaseConnection.verifyUser(username);
+
+            return true;
+        }
+
+        return false;
     }
 
     // sendPassword() { mail service }
