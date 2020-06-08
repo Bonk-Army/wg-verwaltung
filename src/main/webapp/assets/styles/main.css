@@ -4,6 +4,8 @@ body {
     font-family: 'Poppins', sans-serif;
     background: #3c415e;
     color: aliceblue;
+    display: flex;
+    align-items: stretch;
 }
 
 p {
