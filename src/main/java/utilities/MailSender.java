@@ -13,12 +13,13 @@ import java.io.IOException;
 public class MailSender {
     /**
      * Send an email via SendGrid
-     * @param receiver The email address of the receiver of the message
-     * @param subject The subject of the email
+     *
+     * @param receiver      The email address of the receiver of the message
+     * @param subject       The subject of the email
      * @param contentString The content of the email
      * @return If the email has been sent successful
      */
-    public static boolean sendEmail(String receiver, String subject, String contentString){
+    public static boolean sendEmail(String receiver, String subject, String contentString) {
         Email from = new Email("no-reply@wgverwaltung.azurewebsites.net");
         Email to = new Email(receiver);
         Content content = new Content("text/plain", contentString);

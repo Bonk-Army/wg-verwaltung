@@ -10,20 +10,21 @@ import java.util.List;
 public class SQLDatabaseConnection {
     /**
      * Create a user in the database
-     * @param username The username of the user
-     * @param email The email address of the user (check this before inserting!)
-     * @param pwhash The hashed password
-     * @param pwsalt The salt that has been used for hashing
+     *
+     * @param username         The username of the user
+     * @param email            The email address of the user (check this before inserting!)
+     * @param pwhash           The hashed password
+     * @param pwsalt           The salt that has been used for hashing
      * @param verificationCode The randomly generated code that the user needs to verify his email
      * @return If the user has been created successful. If not, the user has to be informed!
      */
     public static boolean createUser(String username, String email, String pwhash, String pwsalt, String verificationCode) {
-        try{
+        try {
             ResultSet rs = executeQuery(("INSERT INTO users (username, email, pwhash, pwsalt, verificationCode)"
-            + "VALUES ('" + username + "', '" + email + "', '" + pwhash + "', '" + pwsalt + "', '" + verificationCode + "')"));
+                    + "VALUES ('" + username + "', '" + email + "', '" + pwhash + "', '" + pwsalt + "', '" + verificationCode + "')"));
 
             return true;
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -32,6 +33,7 @@ public class SQLDatabaseConnection {
 
     /**
      * Get the password hash for a given username
+     *
      * @param username The username that the hash is returned for
      * @return The hash as String
      */
@@ -53,10 +55,11 @@ public class SQLDatabaseConnection {
 
     /**
      * Get the salt required for hashing the password of the given username
+     *
      * @param username The username the salt is returned for
      * @return The salt as a String
      */
-    public static String getPasswordSalt(String username){
+    public static String getPasswordSalt(String username) {
         String salt = "";
 
         ResultSet rs = executeQuery("SELECT pwsalt FROM users WHERE username='" + username + "'");
@@ -74,15 +77,16 @@ public class SQLDatabaseConnection {
 
     /**
      * Set the "isVerified" field for the specified user to true and delete verification code to de-validate it.
+     *
      * @param username The user that has been verified
      * @return if the value has been changed successfully. If not, the process has to be tried again.
      */
-    public static boolean verifyUser(String username){
-        try{
+    public static boolean verifyUser(String username) {
+        try {
             ResultSet rs = executeQuery("UPDATE users SET isVerified = true WHERE username = '" + username + "'");
             ResultSet rs2 = executeQuery("UPDATE users SET verificationCode = '' WHERE username = '" + username + "'");
             return true;
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -91,10 +95,11 @@ public class SQLDatabaseConnection {
 
     /**
      * Get the unique user id for the requested user
+     *
      * @param username The user that the id has to be returned for
      * @return The id as a String
      */
-    public static String getUserId(String username){
+    public static String getUserId(String username) {
         String id = "";
 
         ResultSet rs = executeQuery("SELECT uniqueID FROM users WHERE username='" + username + "'");
@@ -112,10 +117,11 @@ public class SQLDatabaseConnection {
 
     /**
      * Get the username for the requested unique user id
+     *
      * @param userID The unique id
      * @return The username as a String
      */
-    public static String getUsername(String userID){
+    public static String getUsername(String userID) {
         String name = "";
 
         ResultSet rs = executeQuery("SELECT username FROM users WHERE uniqueID=" + Integer.valueOf(userID));
@@ -131,10 +137,10 @@ public class SQLDatabaseConnection {
         return name;
     }
 
-    public static String getUserVerificationCode(String username){
+    public static String getUserVerificationCode(String username) {
         String code = "";
 
-        ResultSet rs = executeQuery("SELECT verificationCode FROM users WHERE username='" +username + "'");
+        ResultSet rs = executeQuery("SELECT verificationCode FROM users WHERE username='" + username + "'");
 
         try {
             while (rs.next()) {
@@ -149,6 +155,7 @@ public class SQLDatabaseConnection {
 
     /**
      * Get all user names (used to check if name is already used)
+     *
      * @return A List of all usernames
      */
     public static List<String> getAllUserNames() {
@@ -169,9 +176,10 @@ public class SQLDatabaseConnection {
 
     /**
      * Get a list of all email addresses (used to check for duplicate email)
+     *
      * @return A list of all emails
      */
-    public static List<String> getAllEmails(){
+    public static List<String> getAllEmails() {
         List<String> retList = new ArrayList<String>();
 
         ResultSet rs = executeQuery("SELECT email FROM users");
@@ -190,6 +198,7 @@ public class SQLDatabaseConnection {
 
     /**
      * Executes a given sql query and returns the ResultSet
+     *
      * @param query The desired query
      * @return The ResultSet
      */
