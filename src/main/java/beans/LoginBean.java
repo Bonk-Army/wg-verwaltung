@@ -94,7 +94,7 @@ public class LoginBean {
     private boolean isUsernameUnique(String username){
         List<String> usedNames = SQLDatabaseConnection.getAllUserNames();
 
-        return usedNames.contains(username) ? false : true;
+        return !usedNames.contains(username);
     }
 
     /**
@@ -105,7 +105,7 @@ public class LoginBean {
     private boolean isEmailUnqiue(String email){
         List<String> usedEmails = SQLDatabaseConnection.getAllEmails();
 
-        return usedEmails.contains(email) ? false : true;
+        return !usedEmails.contains(email);
     }
 
     // Getter and Setter
