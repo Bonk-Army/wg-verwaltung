@@ -1,23 +1,26 @@
-package view;
-
-import java.io.*;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+package view.servlets.subservlets;
 
 import beans.LoginBean;
+import view.parts.ContentSubparts.SideBar;
+import view.parts.ContentSubparts.TemplateFromPath;
+import view.parts.ContentSubparts.TemplateFromString;
+import view.servlets.Servlet;
 
-/**
- * LoginServlet to handle user login. Gets login data from html form and returns success or failure page.
- */
-public class LoginServlet extends HttpServlet {
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
+public class LoginServlet extends Servlet {
     private static final long serialVersionUID = 1L;
 
     public LoginServlet() {
         super();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**
@@ -38,7 +41,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         String email = "";
         Boolean stayLoggedIn = false;   // This determines the lifetime of the cookie that we send to the user
-                                        // (false = session cookie, true = cookie that lasts 30 days or so)
+        // (false = session cookie, true = cookie that lasts 30 days or so)
 
         if(isRegister){
             email = request.getParameter("email");
@@ -48,20 +51,20 @@ public class LoginServlet extends HttpServlet {
 
         String userId = isRegister ? bean.register(username, password, email) : bean.login(username, password);
 
+
+        head.addContentPart(new TemplateFromPath("CustomHTMLElements","head","html"));
+
         if(!userId.isEmpty()){
-            PrintWriter out = response.getWriter();
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<meta charset='UTF-8'>");
-            out.println("<meta tile='Success!");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("Successfully logged you in, your ID is " + userId);
-            out.println("</body>");
-            out.println("</html>");
+            head.setPageName("Success!");
+            body.addContentPart(new TemplateFromString("<h1>Successfully logged you in, your ID is " + userId+"</h1>"));
         } else{
+            head.setPageName("Failure!");
+            body.addContentPart(new TemplateFromString("<h1>Failure!</1>"));
             //Login / Registration was not successfull, return error page
         }
+
+        PrintWriter out = response.getWriter();
+        out.write(html.generateThisPart());
+        this.html.clear();
     }
 }
