@@ -5,6 +5,7 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <!-- TestServlet declaration and mapping -->
     <servlet>
         <servlet-name>TestServlet</servlet-name>
         <servlet-class>view.TestServlet</servlet-class>
@@ -19,4 +20,14 @@
         <url-pattern>/TestServlet</url-pattern>
     </servlet-mapping>
 
+    <!-- LoginServlet declaration and mapping -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>view.LoginServlet</servlet-class>
+        <load-on-startup>-1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
 </web-app>
