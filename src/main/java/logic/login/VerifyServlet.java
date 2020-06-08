@@ -38,9 +38,11 @@ public class VerifyServlet extends Servlet {
         //If verification was successful, show success message. Otherwise show error.
         if(bean.verifyUser(userID, verificationCode)){
             head.setPageName("Success!");
+            //TODO Change this to be a link back to the login form or smth
             body.addContentPart(new Login_Register());
         } else {
             head.setPageName("Failure!");
+            //TODO Change this to be a link back to the login form or smth
             body.addContentPart(new Login_Register());
         }
 

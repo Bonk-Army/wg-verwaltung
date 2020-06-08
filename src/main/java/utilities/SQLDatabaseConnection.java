@@ -200,7 +200,7 @@ public class SQLDatabaseConnection {
             Class.forName("org.mariadb.jdbc.Driver");
 
             Connection con = DriverManager.getConnection(
-                    ("jdbc:mariadb://v220190910299696193.nicesrv.de:3306/wg_verwaltung_dev?user=wg_admin&password=" + System.getenv("SQL_PASSWORD")));
+                    ("jdbc:mariadb://v220190910299696193.nicesrv.de:3306/wg_verwaltung?user=wg_admin&password=" + System.getenv("SQL_PASSWORD")));
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             returnSet = rs;
