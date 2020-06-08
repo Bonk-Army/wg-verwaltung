@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
             out.println("<meta tile='Success!");
             out.println("</head>");
             out.println("<body>");
-            out.println("Successfully logged you in, your ID is " + userId);
+            out.println(("Successfully logged you in, your ID is " + userId));
             out.println("</body>");
             out.println("</html>");
         } else{
@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
             out.println("<meta tile='Success!");
             out.println("</head>");
             out.println("<body>");
-            out.println("Successfully logged you in, your ID is " + userId);
+            out.println(("Could not log you in"));
             out.println("</body>");
             out.println("</html>");
         }
