@@ -120,6 +120,8 @@ public class SQLDatabaseConnection {
         ResultSet rs = executeQuery("SELECT username FROM users");
 
         try {
+            System.out.println(rs.getString(1));
+            
             while (rs.next()) {
                 retList.add(rs.getString(1));
             }
