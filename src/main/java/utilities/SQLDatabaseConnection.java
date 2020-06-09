@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import config.globalConfig;
+
 /**
  * Service class to save and fetch data to and from SQL
  */
@@ -161,9 +163,10 @@ public class SQLDatabaseConnection {
 
         try {
             Class.forName("org.mariadb.jdbc.Driver");
+            String database = globalConfig.isTest ? "wg_verwaltung_dev" : "wg_verwaltung";
 
             Connection con = DriverManager.getConnection(
-                    ("jdbc:mariadb://v220190910299696193.nicesrv.de:3306/wg_verwaltung?user=wg_admin&password=" + System.getenv("SQL_PASSWORD")));
+                    ("jdbc:mariadb://v220190910299696193.nicesrv.de:3306/" + database + "?user=wg_admin&password=" + System.getenv("SQL_PASSWORD")));
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             returnSet = rs;
