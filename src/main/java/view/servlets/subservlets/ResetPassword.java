@@ -1,6 +1,5 @@
 package view.servlets.subservlets;
 
-import config.globalConfig;
 import view.parts.ContentSubparts.TemplateFromPath;
 import view.servlets.Servlet;
 
@@ -10,21 +9,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class Login extends Servlet {
+public class ResetPassword extends Servlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        head.setPageName("Login Page");
-        head.addCSS("Login","css");
+        head.setPageName("Reset Password Page");
+        head.addCSS("ResetPassword","css");
         head.addContentPart(new TemplateFromPath("Import","Global","html"));
         head.addContentPart(new TemplateFromPath("Import","Bootstrap","html"));
 
-        body.addContentPart(new view.parts.ContentSubparts.Login());
+        String username = request.getParameter("uname");
+        String key = request.getParameter("key");
+
+        body.addContentPart(new view.parts.ContentSubparts.ResetPassword(username, key));
 
         PrintWriter out = response.getWriter();
         out.write(html.generateThisPart());
-
     }
 
     @Override

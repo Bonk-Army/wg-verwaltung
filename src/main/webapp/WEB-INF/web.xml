@@ -5,21 +5,10 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <servlet>
-        <servlet-name>ContentServlet</servlet-name>
-        <servlet-class>view.servlets.subservlets.Content</servlet-class>
-        <init-param>
-            <param-name>myInitParam</param-name>
-            <param-value>Deployment-Descriptor</param-value>
-        </init-param>
-        <load-on-startup>-1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ContentServlet</servlet-name>
-        <url-pattern>/test</url-pattern>
-    </servlet-mapping>
 
-    <!-- LoginServlet declaration and mapping -->
+    <!-- Hier beginnen die GUI Seiten -->
+
+    <!-- Login declaration and mapping -->
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>view.servlets.subservlets.Login</servlet-class>
@@ -29,7 +18,7 @@
         <servlet-name>Login</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-    <!-- LoginServlet declaration and mapping -->
+    <!-- Register declaration and mapping -->
     <servlet>
         <servlet-name>Register</servlet-name>
         <servlet-class>view.servlets.subservlets.Register</servlet-class>
@@ -39,26 +28,67 @@
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
-    <!-- LoginServlet declaration and mapping -->
+    <!-- Password Reset declaration and mapping -->
     <servlet>
-        <servlet-name>LoginServletLogic</servlet-name>
+        <servlet-name>ResetPassword</servlet-name>
+        <servlet-class>view.servlets.subservlets.ResetPassword</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/resetPassword</url-pattern>
+    </servlet-mapping>
+    <!-- Shopping declaration and mapping -->
+    <servlet>
+        <servlet-name>Shopping</servlet-name>
+        <servlet-class>view.servlets.subservlets.Shopping</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Shopping</servlet-name>
+        <url-pattern>/shopping</url-pattern>
+    </servlet-mapping>
+    <!-- Financial declaration and mapping -->
+    <servlet>
+        <servlet-name>Financial</servlet-name>
+        <servlet-class>view.servlets.subservlets.Financial</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Financial</servlet-name>
+        <url-pattern>/financial</url-pattern>
+    </servlet-mapping>
+    <!-- To-Do declaration and mapping -->
+    <servlet>
+        <servlet-name>ToDo</servlet-name>
+        <servlet-class>view.servlets.subservlets.ToDo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ToDo</servlet-name>
+        <url-pattern>/todo</url-pattern>
+    </servlet-mapping>
+
+
+
+    <!-- Hier beginnt die Logic -->
+
+    <!-- LoginLogic declaration and mapping -->
+    <servlet>
+        <servlet-name>LoginLogic</servlet-name>
         <servlet-class>logic.Login</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LoginServletLogic</servlet-name>
+        <servlet-name>LoginLogic</servlet-name>
         <url-pattern>/loginLogic</url-pattern>
     </servlet-mapping>
-    
+
     <!-- Reset Logic Servlet mapping -->
     <servlet>
-        <servlet-name>ResetServletLogic</servlet-name>
+        <servlet-name>ResetLogic</servlet-name>
         <servlet-class>logic.Reset</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ResetServletLogic</servlet-name>
-        <url-pattern>/resetPassword</url-pattern>
+        <servlet-name>ResetLogic</servlet-name>
+        <url-pattern>/reset</url-pattern>
     </servlet-mapping>
     <!-- Reset Complete Servlet mapping -->
     <servlet>
@@ -73,12 +103,12 @@
 
     <!-- VerifyServlet declaration and mapping -->
     <servlet>
-        <servlet-name>VerifyServletLogic</servlet-name>
+        <servlet-name>VerifyLogic</servlet-name>
         <servlet-class>logic.Verify</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>VerifyServletLogic</servlet-name>
+        <servlet-name>VerifyLogic</servlet-name>
         <url-pattern>/verify</url-pattern>
     </servlet-mapping>
 </web-app>

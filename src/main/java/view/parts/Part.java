@@ -6,20 +6,28 @@ import java.io.*;
 
 public abstract class Part {
 
+    /**
+     * Class to implement an Basic Part
+     */
     public Part(){
+        super();
     }
 
-    //Reading in Template in HTML Folder
+    /**
+     * Reading in Template in ressources Folder
+     * @param type Represents the Folder in ressources
+     * @param subtype Represents the nested Folders in the Main Folders in ressources
+     * @param filename Represents the filenmae
+     * @param ending Represents the filename
+     * @return the content of the file
+     */
     public String readRessource(String type,String subtype,String filename,String ending){
         try {
             BufferedReader in;
             File file;
-            if (globalConfig.isTest()){
-                file = new File( System.getProperty("user.dir") + "//target//classes//"+type+"//"+subtype+"//"+filename+"."+ending);
-            }else{
-                file = new File("WEB-INF/classes/"+type+"/"+subtype+"/"+filename+"."+ending);
-            }
+            file = new File(generatePath("classes",type,subtype,filename,ending));
             in = new BufferedReader(new FileReader(file));
+            // Reading the full file and saving the content in result
             String line = in.readLine();
             String result ="";
             while (line != null){
@@ -34,5 +42,35 @@ public abstract class Part {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public String generatePath(String mainfolder,String type,String subtype,String filename,String ending){
+        if (globalConfig.isWindows()){
+            if (globalConfig.isTest()){
+                if (subtype != ""){
+                    return System.getProperty("user.dir") + "\\target\\"+mainfolder+"\\"+type+"\\"+subtype+"\\"+filename+"."+ending;
+                }
+                else{
+                    return System.getProperty("user.dir") + "\\target\\"+mainfolder+"\\"+type+"\\"+filename+"."+ending;
+                }
+            }
+            return "";
+        }else{
+            if (globalConfig.isTest()){
+                if (subtype != ""){
+                    return System.getProperty("user.dir") + "//target//"+mainfolder+"//"+type+"//"+subtype+"//"+filename+"."+ending;
+                }
+                else{
+                    return System.getProperty("user.dir") + "//target//"+mainfolder+"//"+type+"//"+filename+"."+ending;
+                }
+            }else{
+                if (subtype != ""){
+                    return "WEB-INF/"+mainfolder+"/"+type+"/"+subtype+"/"+filename+"."+ending;
+                }
+                else{
+                    return "WEB-INF/"+mainfolder+"/"+type+"/"+filename+"."+ending;
+                }
+            }
+        }
     }
 }

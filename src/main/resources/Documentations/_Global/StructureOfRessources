@@ -1,0 +1,19 @@
+
+                            .d88888b    dP                                dP
+                            88.    "'   88                                88
+                            `Y88888b. d8888P 88d888b. dP    dP .d8888b. d8888P dP    dP 88d888b. .d8888b.
+                                  `8b   88   88'  `88 88    88 88'  `""   88   88    88 88'  `88 88ooood8
+                            d8'   .8P   88   88       88.  .88 88.  ...   88   88.  .88 88       88.  ...
+                             Y88888P    dP   dP       `88888P' `88888P'   dP   `88888P' dP       `88888P'
+
+------------|
+            |---- Contents              - All Content related Stuff lands here i.e. the content of all generated Pages
+            |---- Documentations        - Place for Documentations for every Team i.e. GUI Team uses the GUI Folder and is responsilbe for it
+                |---- Backend           - Place for the additional Documentation of the Backend Team
+                |---- Frontend          - Place for the additional Documentation of the Frontend Team
+            |---- Scripts               - Place to save Scripts which could be Imported into Components with the command readScriptTemplate(Name,Ending)
+            |---- Styles                - Main Folder for all imported Styles
+            |---- Templates             - Place for all the Templates of Components,HTMLParts and Head Imports
+                |---- Components        - Place for all the Templates of Components
+                |---- HTMLComponents    - Place for all the Templates of HTMLParts
+                |---- Imports           - Place for all the Templates of Head Imports

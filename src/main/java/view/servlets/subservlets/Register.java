@@ -12,18 +12,13 @@ package view.servlets.subservlets;
 
 public class Register extends Servlet {
 
-    public Register(){
-        //Fuck lazy Initzialisation....
-        globalConfig g = new globalConfig();
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         head.setPageName("Register Page");
-        head.setCssFilePath("./assets/styles/Login/LoginRegister.css");
-        head.addContentPart(new TemplateFromPath("CustomHTMLElements//Head","Global","html"));
-        head.addContentPart(new TemplateFromPath("CustomHTMLElements//Head","Bootstrap","html"));
+        head.addCSS("Login","css");
+        head.addContentPart(new TemplateFromPath("Import","Global","html"));
+        head.addContentPart(new TemplateFromPath("Import","Bootstrap","html"));
 
         body.addContentPart(new view.parts.ContentSubparts.Register());
 
