@@ -51,5 +51,8 @@ public class LoginLogic extends Servlet {
 
 
         //Weiterleitung
+        //<head>
+        //    <meta http-equiv="Refresh" content="0; URL=https://wgverwaltung.azurewebsites.net/overview">
+        //</head>
     }
 }

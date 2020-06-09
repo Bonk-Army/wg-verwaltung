@@ -44,6 +44,10 @@ public class VerifyLogic extends Servlet {
             body.addContentPart(new Login_Register());
         }
 
+        //<head>
+        //    <meta http-equiv="Refresh" content="0; URL=https://wgverwaltung.azurewebsites.net/login">
+        //</head>
+
         PrintWriter out = response.getWriter();
         out.write(html.generateThisPart());
         this.html.clear();
