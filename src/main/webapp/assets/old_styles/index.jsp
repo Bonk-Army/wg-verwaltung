@@ -4,7 +4,7 @@
 <head>
     <title>WG-Verwaltung</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="assets/styles/login.css">
+    <link rel="stylesheet" type="text/css" href="login.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
@@ -42,7 +42,7 @@
                 <label for="tab-2" class="tab">Sign Up</label>
 
                 <div class="login-space">
-                    <form class="login" action="login" method="POST">
+                    <form class="login" action="loginLogic" method="POST">
                         <div class="group">
                             <label for="user" class="label">Username</label>
                             <input id="user" type="text" class="input" placeholder="Enter your username"

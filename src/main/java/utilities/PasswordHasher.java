@@ -15,16 +15,6 @@ import java.security.spec.KeySpec;
  * Used to hash the passwords before storing them in SQL
  */
 public class PasswordHasher {
-
-    public static void main(String[] args) {
-        //byte[] salt = generateSalt();
-        //System.out.println(salt);
-        String salt = "1234";
-        System.out.println(hashPassword("HelloWorld!12334534564567456234534", salt));
-        System.out.println(hashPassword("HelloWorld!12334534564567456234534", salt));
-        System.out.println(hashPassword("HelloWorld!12334534564567456234535", salt));
-    }
-
     /**
      * Hashes the given password with PBKDF2
      *
@@ -57,6 +47,7 @@ public class PasswordHasher {
 
     /**
      * Generate a random salt used to salt the hash of the password
+     *
      * @return The salt as a byte array
      */
     public static String generateSalt() {

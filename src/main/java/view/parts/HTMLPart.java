@@ -6,7 +6,7 @@ import view.parts.ContentSubparts.TemplateFromString;
 
 public abstract class HTMLPart extends Part{
 
-    ArrayList<ContentPart> components;
+    protected ArrayList<ContentPart> components;
 
     public HTMLPart(){
         components = new ArrayList<ContentPart>();

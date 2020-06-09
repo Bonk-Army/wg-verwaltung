@@ -14,14 +14,15 @@ import config.globalConfig;
  */
 public class MailSender {
     /**
-     * Send an email via SendGrid (or print the String if testing locally
-     * @param receiver The email address of the receiver of the message
-     * @param subject The subject of the email
+     * Send an email via SendGrid
+     *
+     * @param receiver      The email address of the receiver of the message
+     * @param subject       The subject of the email
      * @param contentString The content of the email
      * @return If the email has been sent successful
      */
-    public static boolean sendEmail(String receiver, String subject, String contentString){
-        if(!globalConfig.isTest()) {
+    public static boolean sendEmail(String receiver, String subject, String contentString) {
+        if (!globalConfig.isTest()) {
             Email from = new Email("no-reply@wgverwaltung.azurewebsites.net");
             Email to = new Email(receiver);
             Content content = new Content("text/plain", contentString);
