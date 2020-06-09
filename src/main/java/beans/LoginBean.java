@@ -115,6 +115,20 @@ public class LoginBean {
         return false;
     }
 
+    public boolean resetPassword(String username, String key, String password){
+        String salt = SQLDatabaseConnection.getPasswordSalt(username);
+        String savedKey = SQLDatabaseConnection.getPasswordKey(username);
+
+        String pwhash = PasswordHasher.hashPassword(password, salt);
+
+        if(key.equals(savedKey)){
+            if(SQLDatabaseConnection.setPassword(username, pwhash)){
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     /**
      * Fetches the saved user id for the given username from sql
