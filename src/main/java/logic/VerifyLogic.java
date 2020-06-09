@@ -1,4 +1,4 @@
-package logic.login;
+package logic;
 
 import beans.LoginBean;
 import view.parts.ContentSubparts.Login;

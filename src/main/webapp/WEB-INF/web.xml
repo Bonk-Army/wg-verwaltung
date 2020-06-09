@@ -42,7 +42,7 @@
     <!-- LoginServlet declaration and mapping -->
     <servlet>
         <servlet-name>LoginServletLogic</servlet-name>
-        <servlet-class>logic.login.LoginLogic</servlet-class>
+        <servlet-class>logic.LoginLogic</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -51,7 +51,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ResetServletLogic</servlet-name>
-        <servlet-class>logic.login.ResetLogic</servlet-class>
+        <servlet-class>logic.ResetLogic</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -63,7 +63,7 @@
     <!-- VerifyServlet declaration and mapping -->
     <servlet>
         <servlet-name>VerifyServletLogic</servlet-name>
-        <servlet-class>logic.login.VerifyLogic</servlet-class>
+        <servlet-class>logic.VerifyLogic</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
     <servlet-mapping>
