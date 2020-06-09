@@ -11,17 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class VerifyServlet extends Servlet {
+public class VerifyLogic extends Servlet {
     private static final long serialVersionUID = 1L;
 
-    public VerifyServlet() {
+    public VerifyLogic(){
         super();
     }
 
     /**
      * Called when the user opens the link to verify his email address
-     *
-     * @param request  The http GET request
+     * @param request The http GET request
      * @param response The http response
      * @throws ServletException
      * @throws IOException
@@ -34,16 +33,14 @@ public class VerifyServlet extends Servlet {
         String verificationCode = request.getParameter("key");
         String userID = request.getParameter("id");
 
-        head.addContentPart(new TemplateFromPath("CustomHTMLElements", "head", "html"));
+        head.addContentPart(new TemplateFromPath("CustomHTMLElements","head","html"));
 
         //If verification was successful, show success message. Otherwise show error.
-        if (bean.verifyUser(userID, verificationCode)) {
+        if(bean.verifyUser(userID, verificationCode)){
             head.setPageName("Success!");
-            //TODO Change this to be a link back to the login form or smth
             body.addContentPart(new Login_Register());
         } else {
             head.setPageName("Failure!");
-            //TODO Change this to be a link back to the login form or smth
             body.addContentPart(new Login_Register());
         }
 

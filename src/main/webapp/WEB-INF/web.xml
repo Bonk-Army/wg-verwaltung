@@ -27,12 +27,12 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Login_RegisterServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <!-- LoginServlet declaration and mapping -->
     <servlet>
         <servlet-name>LoginServletLogic</servlet-name>
-        <servlet-class>logic.login.LoginServlet</servlet-class>
+        <servlet-class>logic.login.LoginLogic</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
     <servlet-mapping>
@@ -44,7 +44,7 @@
     <!-- VerifyServlet declaration and mapping -->
     <servlet>
         <servlet-name>VerifyServletLogic</servlet-name>
-        <servlet-class>logic.login.VerifyServlet</servlet-class>
+        <servlet-class>logic.login.VerifyLogic</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
     <servlet-mapping>

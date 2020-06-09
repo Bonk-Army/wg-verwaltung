@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class LoginServlet extends Servlet {
+public class LoginLogic extends Servlet {
     private static final long serialVersionUID = 1L;
 
-    public LoginServlet() {
+    public LoginLogic() {
         super();
     }
 
@@ -23,8 +23,7 @@ public class LoginServlet extends Servlet {
 
     /**
      * Called when the html login form from index.jsp is sent to the url for this servlet.
-     *
-     * @param request  The http POST request
+     * @param request The http POST request
      * @param response The http response
      * @throws ServletException
      * @throws IOException
@@ -33,7 +32,7 @@ public class LoginServlet extends Servlet {
         LoginBean bean = new LoginBean();
 
         Boolean isRegister = false;
-        if (request.getParameter("isRegister") != null) {
+        if(request.getParameter("isRegister") != null) {
             isRegister = request.getParameter("isRegister").equals("on");
         }
         String username = request.getParameter("username");
@@ -42,27 +41,15 @@ public class LoginServlet extends Servlet {
         Boolean stayLoggedIn = false;   // This determines the lifetime of the cookie that we send to the user
         // (false = session cookie, true = cookie that lasts 30 days or so)
 
-        if (isRegister) {
+        if(isRegister){
             email = request.getParameter("email");
-        } else {
+        }else{
             stayLoggedIn = Boolean.valueOf(request.getParameter("keepSignedIn"));
         }
 
         String userId = isRegister ? bean.register(username, password, email) : bean.login(username, password);
 
 
-        head.addContentPart(new TemplateFromPath("CustomHTMLElements", "head", "html"));
-
-        if (!userId.isEmpty()) {
-            head.setPageName("Success!");
-            body.addContentPart(new Login_Register(true, userId));
-        } else {
-            head.setPageName("Failure!");
-            body.addContentPart(new Login_Register(false, userId));
-        }
-
-        PrintWriter out = response.getWriter();
-        out.write(html.generateThisPart());
-        this.html.clear();
+        //Weiterleitung
     }
 }
