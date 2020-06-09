@@ -2,7 +2,7 @@ package view.parts.ContentSubparts;
 
 import view.parts.ContentPart;
 
-public class Register extends ContentPart{
+public class Register extends ContentPart {
 
     /**
      * No Special Attributes ... :/

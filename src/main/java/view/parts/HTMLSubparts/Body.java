@@ -6,7 +6,7 @@ public class Body extends HTMLPart {
     /**
      * Nothing special here.... :(
      */
-    public Body(){
+    public Body() {
         super();
     }
 }

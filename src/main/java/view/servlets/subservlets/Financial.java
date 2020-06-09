@@ -17,11 +17,11 @@ public class Financial extends Servlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         head.setPageName("Financial Page");
-        head.addCSS("Login","css");
-        head.addContentPart(new TemplateFromPath("Import","Global","html"));
-        head.addContentPart(new TemplateFromPath("Import","Bootstrap","html"));
+        head.addCSS("Login", "css");
+        head.addContentPart(new TemplateFromPath("Import", "Global", "html"));
+        head.addContentPart(new TemplateFromPath("Import", "Bootstrap", "html"));
 
-        body.addContentPart(new TemplateFromPath("Content","Financial","html"));
+        body.addContentPart(new TemplateFromPath("Content", "Financial", "html"));
 
         PrintWriter out = response.getWriter();
         out.write(html.generateThisPart());

@@ -12,6 +12,6 @@ public class TemplateFromString extends ContentPart {
      * Generating the Component
      */
     private void generateContent() {
-        this.content = readComponentTemplate("Login","html");
+        this.content = readComponentTemplate("Login", "html");
     }
 }

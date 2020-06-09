@@ -23,7 +23,8 @@ public class Login extends Servlet {
 
     /**
      * Called when the html login form from index.jsp is sent to the url for this servlet.
-     * @param request The http POST request
+     *
+     * @param request  The http POST request
      * @param response The http response
      * @throws ServletException
      * @throws IOException
@@ -32,7 +33,7 @@ public class Login extends Servlet {
         LoginBean bean = new LoginBean();
 
         Boolean isRegister = false;
-        if(request.getParameter("isRegister") != null) {
+        if (request.getParameter("isRegister") != null) {
             isRegister = request.getParameter("isRegister").equals("on");
         }
         String username = request.getParameter("username");
@@ -41,9 +42,9 @@ public class Login extends Servlet {
         Boolean stayLoggedIn = false;   // This determines the lifetime of the cookie that we send to the user
         // (false = session cookie, true = cookie that lasts 30 days or so)
 
-        if(isRegister){
+        if (isRegister) {
             email = request.getParameter("email");
-        }else{
+        } else {
             stayLoggedIn = Boolean.valueOf(request.getParameter("keepSignedIn"));
         }
 

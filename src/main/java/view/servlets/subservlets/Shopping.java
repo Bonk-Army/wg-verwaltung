@@ -17,11 +17,11 @@ public class Shopping extends Servlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         head.setPageName("Shopping Page");
-        head.addCSS("Login","css");
-        head.addContentPart(new TemplateFromPath("Import","Global","html"));
-        head.addContentPart(new TemplateFromPath("Import","Bootstrap","html"));
+        head.addCSS("Login", "css");
+        head.addContentPart(new TemplateFromPath("Import", "Global", "html"));
+        head.addContentPart(new TemplateFromPath("Import", "Bootstrap", "html"));
 
-        body.addContentPart(new TemplateFromPath("Content","Shopping","html"));
+        body.addContentPart(new TemplateFromPath("Content", "Shopping", "html"));
 
         PrintWriter out = response.getWriter();
         out.write(html.generateThisPart());

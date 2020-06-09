@@ -8,6 +8,12 @@ public class ResetPassword extends ContentPart {
         generateContent(username, key);
     }
 
+    /**
+     * Generate the form and pre-fill the hidden input fields with the username and the password reset key
+     *
+     * @param username The username to be set
+     * @param key      The key to be set
+     */
     private void generateContent(String username, String key) {
         CharSequence usernameCharSeq = username;
         CharSequence keyCharSeq = key;

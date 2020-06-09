@@ -14,9 +14,9 @@ public class ResetPassword extends Servlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         head.setPageName("Reset Password Page");
-        head.addCSS("ResetPassword","css");
-        head.addContentPart(new TemplateFromPath("Import","Global","html"));
-        head.addContentPart(new TemplateFromPath("Import","Bootstrap","html"));
+        head.addCSS("ResetPassword", "css");
+        head.addContentPart(new TemplateFromPath("Import", "Global", "html"));
+        head.addContentPart(new TemplateFromPath("Import", "Bootstrap", "html"));
 
         String username = request.getParameter("uname");
         String key = request.getParameter("key");

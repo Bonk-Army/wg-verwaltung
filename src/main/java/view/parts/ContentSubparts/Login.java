@@ -13,16 +13,17 @@ public class Login extends ContentPart {
     /**
      * Default constructor
      */
-    public Login(){
-        this(false,"");
+    public Login() {
+        this(false, "");
     }
 
     /**
      * Constructor to instanciate the Login Component
+     *
      * @param status
      * @param uid
      */
-    public Login(boolean status, String uid){
+    public Login(boolean status, String uid) {
         this.status = status;
         this.uid = uid;
         generateContent();
@@ -32,6 +33,6 @@ public class Login extends ContentPart {
      * Generating the Component
      */
     private void generateContent() {
-        this.content = readComponentTemplate("Login","html");
+        this.content = readComponentTemplate("Login", "html");
     }
 }

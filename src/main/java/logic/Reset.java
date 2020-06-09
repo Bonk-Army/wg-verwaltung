@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Reset extends Servlet {
-    public Reset(){
+    public Reset() {
         super();
     }
 
