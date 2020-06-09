@@ -16,9 +16,10 @@ public class Reset extends Servlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LoginBean bean = new LoginBean();
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/changePassword");
-        dispatcher.forward(request, response);
+        //LoginBean bean = new LoginBean();
+        //RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/changePassword");
+        //dispatcher.forward(request, response);
+        //DEPRECATED???
 
         //TODO: @GUI-TEAM create page for changing password
     }
