@@ -9,7 +9,7 @@ public class globalConfig {
      * @return If this is a testing environment
      */
     public static boolean isTest(){
-        if(System.getenv("isTest") == null){
+        if(System.getenv("IS_AZURE") == null){
             return true;
         }
 
