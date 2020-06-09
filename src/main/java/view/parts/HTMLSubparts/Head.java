@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 public class Head extends HTMLPart {
 
+    /**
+     * Saving the Page Name and an Arraylist of the css files
+     */
     private String pageName ="";
     private ArrayList<String> cssFiles;
 
@@ -16,31 +19,49 @@ public class Head extends HTMLPart {
         cssFiles = new ArrayList<String>();
     }
 
+    /**
+     * if theres no name given, use an name to get attention....
+     */
     public Head(){
         this("Find nen Namen du Esel!");
     }
 
+    /**
+     * Adding an css to the head object
+     * @param filename
+     * @param ending
+     */
     public void addCSS(String filename,String ending) {
         this.cssFiles.add(System.getProperty("user.dir") + "//target//classes//Styles//"+filename+"."+ending);
     }
 
+    /**
+     * Setting the PageName
+     */
     public void setPageName(String pageName){
         this.pageName = pageName;
     }
 
+    /**
+     * Clearing the component, SPECIALTY, because Head has an secound CSS List
+     */
     @Override
     public void clear() {
         super.clear();
         this.cssFiles.clear();
     }
 
+    /**
+     * Overriding the generateThisPart to add the special of the Head, the CSS and Imports
+     * @return
+     */
     @Override
     public String generateThisPart(){
         String className = this.getClass().getSimpleName();
 
         String result = "";
 
-        result += readTemplate("HTMLComponents",className+"_Top","html");
+        result += readHTMLTemplate(className+"_Top","html");
 
         result += "<title>"+pageName+"</title>";
 
@@ -52,7 +73,7 @@ public class Head extends HTMLPart {
             result += part.toString();
         }
 
-        result += readTemplate("HTMLComponents",className+"_Bottom","html");
+        result += readHTMLTemplate(className+"_Bottom","html");
 
         this.clear();
 
