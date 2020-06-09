@@ -5,6 +5,7 @@ package beans;
 import utilities.*;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Bean that handles all backend logic and database callouts required for user login and registration.
@@ -52,7 +53,7 @@ public class LoginBean {
         String hash = PasswordHasher.hashPassword(password, salt);
 
         //Call SQL to ask if username / email is unique. If unique, it continues registration process, else it stops
-        if (isUsernameUnique(username) && isEmailUnique(email) && RegexHelper.checkUsername(username) && RegexHelper.checkEmail(email)) {
+        if (isUsernameUnique(username) && isEmailUnqiue(email) && RegexHelper.checkUsername(username) && RegexHelper.checkEmail(email)) {
             //Create new user. Generate random, 10-digit verification code for email verification.
             String verificationCode = new RandomStringGenerator(10).nextString();
 
@@ -114,14 +115,24 @@ public class LoginBean {
         return false;
     }
 
-    public boolean resetPassword(String username, String key, String password){
+    /**
+     * Reset the password for the user
+     *
+     * @param username The username of the user
+     * @param key      The reset key for the password reset
+     * @param password The new password
+     * @return If it was successful
+     */
+    public boolean resetPassword(String username, String key, String password) {
         String salt = SQLDatabaseConnection.getPasswordSalt(username);
         String savedKey = SQLDatabaseConnection.getPasswordKey(username);
 
         String pwhash = PasswordHasher.hashPassword(password, salt);
 
-        if(key.equals(savedKey)){
-            return SQLDatabaseConnection.setPassword(username, pwhash);
+        if (key.equals(savedKey)) {
+            if (SQLDatabaseConnection.setPassword(username, pwhash)) {
+                return true;
+            }
         }
 
         return false;
@@ -155,7 +166,7 @@ public class LoginBean {
      * @param email The email to be checked
      * @return If the email is unique (so it returns true if the email can be used)
      */
-    private boolean isEmailUnique(String email) {
+    private boolean isEmailUnqiue(String email) {
         List<String> usedEmails = SQLDatabaseConnection.getAllEmails();
 
         return !usedEmails.contains(email);
