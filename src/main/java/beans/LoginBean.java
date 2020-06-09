@@ -117,19 +117,20 @@ public class LoginBean {
 
     /**
      * Reset the password for the user
+     *
      * @param username The username of the user
-     * @param key The reset key for the password reset
+     * @param key      The reset key for the password reset
      * @param password The new password
      * @return If it was successful
      */
-    public boolean resetPassword(String username, String key, String password){
+    public boolean resetPassword(String username, String key, String password) {
         String salt = SQLDatabaseConnection.getPasswordSalt(username);
         String savedKey = SQLDatabaseConnection.getPasswordKey(username);
 
         String pwhash = PasswordHasher.hashPassword(password, salt);
 
-        if(key.equals(savedKey)){
-            if(SQLDatabaseConnection.setPassword(username, pwhash)){
+        if (key.equals(savedKey)) {
+            if (SQLDatabaseConnection.setPassword(username, pwhash)) {
                 return true;
             }
         }
