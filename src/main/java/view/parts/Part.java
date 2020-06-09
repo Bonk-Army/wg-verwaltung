@@ -58,9 +58,11 @@ public abstract class Part {
         } else {
             if (globalConfig.isTest()) {
                 if (subtype != "") {
-                    return System.getProperty("user.dir") + "//target//" + mainfolder + "//" + type + "//" + subtype + "//" + filename + "." + ending;
+                    // Changed Path format from //target// to /target/ROOT/WEB-INF/
+                    return System.getProperty("user.dir") + "/target/ROOT/WEB-INF/" + mainfolder + "/" + type + "/" + subtype + "/" + filename + "." + ending;
                 } else {
-                    return System.getProperty("user.dir") + "//target//" + mainfolder + "//" + type + "//" + filename + "." + ending;
+                    // Changed Path format from //target// to /target/ROOT/WEB-INF/
+                    return System.getProperty("user.dir") + "/target/ROOT/WEB-INF/" + mainfolder + "/" + type + "/" + filename + "." + ending;
                 }
             } else {
                 if (subtype != "") {
