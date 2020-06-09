@@ -75,9 +75,17 @@ public class LoginBean {
 
     }
 
+    /**
+     * Set a user's status to verified
+     *
+     * @param username         The username of the user to be verified
+     * @param verificationCode The verification code the user 'entered'
+     * @return If the verification was successful
+     */
     public boolean verifyUser(String username, String verificationCode) {
         String savedVerificationCode = SQLDatabaseConnection.getUserVerificationCode(username);
 
+        // If the entererd verification code matches the saved one, verify the user
         if (verificationCode.equals(savedVerificationCode)) {
             SQLDatabaseConnection.verifyUser(username);
 
@@ -87,6 +95,12 @@ public class LoginBean {
         return false;
     }
 
+    /**
+     * Send an email with a link to reset their password to the user
+     *
+     * @param email The email address that was entered by the user
+     * @return If the email has been sent successfully
+     */
     public boolean sendPasswordResetLink(String email) {
         if (RegexHelper.checkEmail(email)) {
             String randomKey = new RandomStringGenerator(30).nextString();

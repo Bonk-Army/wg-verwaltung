@@ -137,6 +137,12 @@ public class SQLDatabaseConnection {
         return name;
     }
 
+    /**
+     * Get the username of a user by his email address
+     *
+     * @param email The email address
+     * @return The username
+     */
     public static String getUsernameByEmail(String email) {
         String username = "";
 
@@ -153,6 +159,12 @@ public class SQLDatabaseConnection {
         return username;
     }
 
+    /**
+     * Get the verification code for the given user
+     *
+     * @param username The user
+     * @return The verification code
+     */
     public static String getUserVerificationCode(String username) {
         String code = "";
 
@@ -211,6 +223,41 @@ public class SQLDatabaseConnection {
         return retList;
     }
 
+    /**
+     * Save the key to reset the password to SQL
+     *
+     * @param email The users email address
+     * @param key   The key that the user needs to reset the password
+     * @return If it  was successful
+     */
+    public static boolean setPasswordKey(String email, String key) {
+        try {
+            executeQuery("UPDATE users SET passwordResetKey='" + key + "' WHERE email='" + email + "'");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * Set the new password for a user
+     *
+     * @param username The username that the password should be set for
+     * @param pwhash   The new password hash
+     * @return If it was successful
+     */
+    public static boolean setPassword(String username, String pwhash) {
+        try {
+            executeQuery("UPDATE users SET pwhash='" + pwhash + "', passwordResetKey=NULL WHERE username='" + username + "'");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 
     /**
      * Executes a given sql query and returns the ResultSet
@@ -235,23 +282,5 @@ public class SQLDatabaseConnection {
         }
 
         return returnSet;
-    }
-
-    public static boolean setPasswordKey(String email, String key) {
-        try {
-            executeQuery("UPDATE users SET passwordResetKey='" + key + "' WHERE email='" + email + "'");
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public static boolean setPassword(String username, String key, String pwhash) {
-        try {
-            executeQuery("UPDATE users SET pwhash='" + pwhash + "', passwordResetKey=NULL WHERE username='" + username + "'");
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 }
