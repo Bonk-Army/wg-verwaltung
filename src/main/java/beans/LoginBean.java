@@ -5,7 +5,6 @@ package beans;
 import utilities.*;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * Bean that handles all backend logic and database callouts required for user login and registration.
@@ -53,7 +52,7 @@ public class LoginBean {
         String hash = PasswordHasher.hashPassword(password, salt);
 
         //Call SQL to ask if username / email is unique. If unique, it continues registration process, else it stops
-        if (isUsernameUnique(username) && isEmailUnqiue(email) && RegexHelper.checkUsername(username) && RegexHelper.checkEmail(email)) {
+        if (isUsernameUnique(username) && isEmailUnique(email) && RegexHelper.checkUsername(username) && RegexHelper.checkEmail(email)) {
             //Create new user. Generate random, 10-digit verification code for email verification.
             String verificationCode = new RandomStringGenerator(10).nextString();
 
@@ -122,9 +121,7 @@ public class LoginBean {
         String pwhash = PasswordHasher.hashPassword(password, salt);
 
         if(key.equals(savedKey)){
-            if(SQLDatabaseConnection.setPassword(username, pwhash)){
-                return true;
-            }
+            return SQLDatabaseConnection.setPassword(username, pwhash);
         }
 
         return false;
@@ -158,7 +155,7 @@ public class LoginBean {
      * @param email The email to be checked
      * @return If the email is unique (so it returns true if the email can be used)
      */
-    private boolean isEmailUnqiue(String email) {
+    private boolean isEmailUnique(String email) {
         List<String> usedEmails = SQLDatabaseConnection.getAllEmails();
 
         return !usedEmails.contains(email);
