@@ -21,6 +21,7 @@ public class ToDo extends Servlet {
         head.addContentPart(new TemplateFromPath("Import", "Global", "html"));
         head.addContentPart(new TemplateFromPath("Import", "Bootstrap", "html"));
 
+        body.addContentPart(new TemplateFromPath("Component", "sidebar", "html"));
         body.addContentPart(new TemplateFromPath("Content", "ToDo", "html"));
 
         PrintWriter out = response.getWriter();
