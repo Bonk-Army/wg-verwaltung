@@ -15,9 +15,9 @@ public class RegexHelper {
         return username.matches("^[^;?&%\\s]*$");
     }
 
-    public static boolean checkEmail(String email){
-        if(!email.matches(".*;")){
-            if(email.matches(".+@.+\\..+")){
+    public static boolean checkEmail(String email) {
+        if (!email.matches(".*;")) {
+            if (email.matches(".+@.+\\..+")) {
                 return true;
             }
         }

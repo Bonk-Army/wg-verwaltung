@@ -21,12 +21,34 @@
 
     <!-- LoginServlet declaration and mapping -->
     <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>view.LoginServlet</servlet-class>
+        <servlet-name>Login_RegisterServlet</servlet-name>
+        <servlet-class>view.servlets.subservlets.Login_RegisterServlet</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
+        <servlet-name>Login_RegisterServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <!-- LoginServlet declaration and mapping -->
+    <servlet>
+        <servlet-name>LoginServletLogic</servlet-name>
+        <servlet-class>logic.login.LoginLogic</servlet-class>
+        <load-on-startup>-1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServletLogic</servlet-name>
+        <url-pattern>/loginLogic</url-pattern>
+    </servlet-mapping>
+
+
+    <!-- VerifyServlet declaration and mapping -->
+    <servlet>
+        <servlet-name>VerifyServletLogic</servlet-name>
+        <servlet-class>logic.login.VerifyLogic</servlet-class>
+        <load-on-startup>-1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VerifyServletLogic</servlet-name>
+        <url-pattern>/verify</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -24,7 +24,6 @@ public abstract class Part {
             String result ="";
             while (line != null){
                 result += line;
-                System.out.println(line);
                 line = in.readLine();
             }
             in.close();
