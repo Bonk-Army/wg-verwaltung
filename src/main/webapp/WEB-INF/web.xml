@@ -21,13 +21,23 @@
 
     <!-- LoginServlet declaration and mapping -->
     <servlet>
-        <servlet-name>Login_RegisterServlet</servlet-name>
-        <servlet-class>view.servlets.subservlets.Login_RegisterServlet</servlet-class>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>view.servlets.subservlets.Login</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Login_RegisterServlet</servlet-name>
+        <servlet-name>Login</servlet-name>
         <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <!-- LoginServlet declaration and mapping -->
+    <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>view.servlets.subservlets.Register</servlet-class>
+        <load-on-startup>-1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <!-- LoginServlet declaration and mapping -->
     <servlet>

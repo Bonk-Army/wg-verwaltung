@@ -1,7 +1,7 @@
 package logic.login;
 
 import beans.LoginBean;
-import view.parts.ContentSubparts.Login_Register;
+import view.parts.ContentSubparts.Login;
 import view.parts.ContentSubparts.TemplateFromPath;
 import view.servlets.Servlet;
 
@@ -38,10 +38,10 @@ public class VerifyLogic extends Servlet {
         //If verification was successful, show success message. Otherwise show error.
         if(bean.verifyUser(username, verificationCode)){
             head.setPageName("Success!");
-            body.addContentPart(new Login_Register());
+            body.addContentPart(new Login());
         } else {
             head.setPageName("Failure!");
-            body.addContentPart(new Login_Register());
+            body.addContentPart(new Login());
         }
 
         //<head>
