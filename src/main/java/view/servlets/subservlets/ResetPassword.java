@@ -18,7 +18,10 @@ public class ResetPassword extends Servlet {
         head.addContentPart(new TemplateFromPath("Import","Global","html"));
         head.addContentPart(new TemplateFromPath("Import","Bootstrap","html"));
 
-        body.addContentPart(new view.parts.ContentSubparts.ResetPassword());
+        String username = request.getParameter("uname");
+        String key = request.getParameter("key");
+
+        body.addContentPart(new view.parts.ContentSubparts.ResetPassword(username, key));
 
         PrintWriter out = response.getWriter();
         out.write(html.generateThisPart());
