@@ -245,4 +245,13 @@ public class SQLDatabaseConnection {
             return false;
         }
     }
+
+    public static boolean setPassword(String username, String key, String pwhash) {
+        try {
+            executeQuery("UPDATE users SET pwhash='" + pwhash + "', passwordResetKey=NULL WHERE username='" + username + "'");
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

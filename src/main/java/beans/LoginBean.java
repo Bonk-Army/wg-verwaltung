@@ -101,10 +101,6 @@ public class LoginBean {
         return false;
     }
 
-    // Post: send request
-    // Get: change password
-
-    // Private Methods
 
     /**
      * Fetches the saved user id for the given username from sql
