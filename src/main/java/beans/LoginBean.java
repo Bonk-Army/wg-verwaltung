@@ -115,6 +115,13 @@ public class LoginBean {
         return false;
     }
 
+    /**
+     * Reset the password for the user
+     * @param username The username of the user
+     * @param key The reset key for the password reset
+     * @param password The new password
+     * @return If it was successful
+     */
     public boolean resetPassword(String username, String key, String password){
         String salt = SQLDatabaseConnection.getPasswordSalt(username);
         String savedKey = SQLDatabaseConnection.getPasswordKey(username);
