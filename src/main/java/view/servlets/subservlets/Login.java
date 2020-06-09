@@ -21,9 +21,9 @@ public class Login extends Servlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         head.setPageName("Login Page");
-        head.setCssFilePath("./assets/styles/Login/LoginRegister.css");
+        head.setCssFilePath("./assets/styles/Login.css");
         head.addContentPart(new TemplateFromPath("CustomHTMLElements//Head","Global","html"));
-        head.addContentPart(new TemplateFromPath("CustomHTMLElements//Head","Login_Register","html"));
+        head.addContentPart(new TemplateFromPath("CustomHTMLElements//Head","Bootstrap","html"));
 
         body.addContentPart(new view.parts.ContentSubparts.Login());
 

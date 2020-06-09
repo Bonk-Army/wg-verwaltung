@@ -23,9 +23,9 @@ public class Register extends Servlet {
         head.setPageName("Register Page");
         head.setCssFilePath("./assets/styles/Login/LoginRegister.css");
         head.addContentPart(new TemplateFromPath("CustomHTMLElements//Head","Global","html"));
-        head.addContentPart(new TemplateFromPath("CustomHTMLElements//Head","Register","html"));
+        head.addContentPart(new TemplateFromPath("CustomHTMLElements//Head","Bootstrap","html"));
 
-        body.addContentPart(new view.parts.ContentSubparts.Login());
+        body.addContentPart(new view.parts.ContentSubparts.Register());
 
         PrintWriter out = response.getWriter();
         out.write(html.generateThisPart());

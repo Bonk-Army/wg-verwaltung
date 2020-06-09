@@ -18,7 +18,6 @@ public class Login extends ContentPart {
     }
 
     private void generateContent() {
-        this.content = readContentTemplate("GUIElements","Login","html");
-        this.content += readScriptTemplate("Login_Register","js");
+        this.content = readContentTemplate("HTMLTemplates","Login","html");
     }
 }
