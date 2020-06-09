@@ -18,6 +18,6 @@ public class Login extends ContentPart {
     }
 
     private void generateContent() {
-        this.content = readContentTemplate("HTMLTemplates","Login","html");
+        this.content = readComponentTemplate("Login","html");
     }
 }

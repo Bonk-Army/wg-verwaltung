@@ -11,6 +11,6 @@ public class Register extends ContentPart{
 
 
     private void generateContent() {
-        this.content = readContentTemplate("HTMLTemplates", "Register", "html");
+        this.content = readComponentTemplate("Register", "html");
     }
 }

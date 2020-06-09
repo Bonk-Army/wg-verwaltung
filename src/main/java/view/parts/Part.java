@@ -15,9 +15,19 @@ public abstract class Part {
             BufferedReader in;
             File file;
             if (globalConfig.isTest()){
-                file = new File( System.getProperty("user.dir") + "//target//classes//"+type+"//"+subtype+"//"+filename+"."+ending);
+                if (subtype != ""){
+                    file = new File( System.getProperty("user.dir") + "//target//classes//"+type+"//"+subtype+"//"+filename+"."+ending);
+                }
+                else{
+                    file = new File( System.getProperty("user.dir") + "//target//classes//"+type+"//"+filename+"."+ending);
+                }
             }else{
-                file = new File("WEB-INF/classes/"+type+"/"+subtype+"/"+filename+"."+ending);
+                if (subtype != ""){
+                    file = new File("WEB-INF/classes/"+type+"/"+subtype+"/"+filename+"."+ending);
+                }
+                else{
+                    file = new File("WEB-INF/classes/"+type+"/"+filename+"."+ending);
+                }
             }
             in = new BufferedReader(new FileReader(file));
             String line = in.readLine();

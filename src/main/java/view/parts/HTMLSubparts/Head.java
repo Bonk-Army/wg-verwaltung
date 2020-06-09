@@ -20,8 +20,8 @@ public class Head extends HTMLPart {
         this("Find nen Namen du Esel!");
     }
 
-    public void setCssFilePath(String cssFilePath) {
-        this.cssFiles.add(cssFilePath);
+    public void addCSS(String filename,String ending) {
+        this.cssFiles.add(System.getProperty("user.dir") + "//target//classes//Styles//"+filename+"."+ending);
     }
 
     public void setPageName(String pageName){
@@ -40,11 +40,10 @@ public class Head extends HTMLPart {
 
         String result = "";
 
-        result += readHTMLTemplate(className,className+"_Top","html");
+        result += readTemplate("HTMLComponents",className+"_Top","html");
 
         result += "<title>"+pageName+"</title>";
 
-        //Beispielpath : ./assets/styles/main.css
         for(String cssPath : cssFiles){
             result += "<link rel=\"stylesheet\" type=\"text/css\" href=\""+cssPath+"\">";
         }
@@ -53,7 +52,7 @@ public class Head extends HTMLPart {
             result += part.toString();
         }
 
-        result += readHTMLTemplate(className,className+"_Bottom","html");
+        result += readTemplate("HTMLComponents",className+"_Bottom","html");
 
         this.clear();
 

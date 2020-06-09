@@ -19,7 +19,7 @@ public class HTML extends HTMLPart {
 
         String result = "";
 
-        result += readHTMLTemplate(className,className+"_Top","html");
+        result += readTemplate("HTMLComponents",className+"_Top","html");
 
         result += head.generateThisPart();
         result += body.generateThisPart();
@@ -27,7 +27,7 @@ public class HTML extends HTMLPart {
         head.clear();
         body.clear();
 
-        result += readHTMLTemplate(className,className+"_Bottom","html");
+        result += readTemplate("HTMLComponents",className+"_Bottom","html");
 
         this.clear();
 

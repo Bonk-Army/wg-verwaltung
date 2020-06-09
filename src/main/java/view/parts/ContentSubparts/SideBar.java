@@ -6,7 +6,7 @@ public class SideBar extends ContentPart {
 
     public SideBar(){
         this.content = readScriptTemplate ("sidebar","js");
-        this.content += readContentTemplate("GUIElements","sidebar","html");
+        this.content += readContentTemplate("sidebar","html");
     }
 
 }

@@ -37,7 +37,7 @@ body {
     display: inline-grid;
     grid-template-columns: repeat(3, 12.5%) 25% repeat(3, 12.5%);
     grid-template-rows: repeat(8,12.5%);
-    background-image: url("../images/monstera.jpg");
+    background-image: url("../../webapp/assets/images/monstera.jpg");
 }
 
 .overview {

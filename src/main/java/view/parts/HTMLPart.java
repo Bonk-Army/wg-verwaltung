@@ -12,14 +12,14 @@ public abstract class HTMLPart extends Part{
         components = new ArrayList<ContentPart>();
     }
 
-    //adding COntent Parts
+    //adding Content Parts
     public void addContentPart(ContentPart p){
         this.components.add(p);
     }
 
     //Reading in Template in HTML Folder
-    protected String readHTMLTemplate (String subtype,String filename,String ending){
-        return readRessource("Framework//HTML",subtype,filename,ending);
+    protected String readTemplate (String subtype,String filename,String ending){
+        return readRessource("Templates",subtype,filename,ending);
     }
 
     public void clear(){
@@ -31,13 +31,13 @@ public abstract class HTMLPart extends Part{
 
         String result = "";
 
-        result += readHTMLTemplate(className,className+"_Top","html");
+        result += readTemplate("HTMLComponents",className+"_Top","html");
 
         for (ContentPart part : this.components){
             result += part.toString();
         }
 
-        result += readHTMLTemplate(className,className+"_Bottom","html");
+        result += readTemplate("HTMLComponents",className+"_Bottom","html");
 
         return result;
     }

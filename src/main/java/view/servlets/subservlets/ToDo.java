@@ -15,14 +15,15 @@ public class ToDo extends Servlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        head.addContentPart(new TemplateFromPath("CustomHTMLElements","head","html"));
+        head.setPageName("ToDo Page");
+        head.addCSS("Login","css");
+        head.addContentPart(new TemplateFromPath("Import","Global","html"));
+        head.addContentPart(new TemplateFromPath("Import","Bootstrap","html"));
 
-        body.addContentPart(new SideBar());
-        body.addContentPart(new TemplateFromPath("Pages","ToDo","html"));
+        body.addContentPart(new TemplateFromPath("Content","ToDo","html"));
 
         PrintWriter out = response.getWriter();
         out.write(html.generateThisPart());
-        this.html.clear();
     }
 
     @Override

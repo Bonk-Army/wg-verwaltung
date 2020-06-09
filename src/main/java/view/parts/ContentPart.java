@@ -8,14 +8,22 @@ abstract public class ContentPart extends Part{
         super();
     }
 
-    protected String readContentTemplate (String subtype,String filename,String ending){
-       return readRessource("Content",subtype,filename,ending);
+    protected String readContentTemplate (String filename,String ending){
+       return readRessource("Contents","",filename,ending);
+    }
+
+    protected String readComponentTemplate (String filename,String ending){
+        return readRessource("Templates","Components",filename,ending);
+    }
+
+    protected String readImportTemplate (String filename,String ending){
+        return readRessource("Templates","Imports",filename,ending);
     }
 
     protected String readScriptTemplate (String filename,String ending){
         String result = "";
         result += "<script>";
-        result += readRessource("Content","Scripts",filename,ending);
+        result += readRessource("Scripts","",filename,ending);
         result += "</script>";
         return result;
     }
