@@ -1,284 +1,44 @@
-
-
+html,
 body {
-    background: #3c415e;
-    display: grid;
-    grid-template-areas:
-            "header header header header"
-            "main main main main"
-            "footer footer footer footer";
-    grid-template-rows: 7% 1fr 7%;
-    grid-template-columns: 15% 1fr 1fr 15%;
-    grid-column-gap: 1em;
-    height: 100vh;
-    margin: 0;
-    font-family: Helvetica, serif;
-}
-
-/* ==========
-   Header
-=========== */
-.header {
-    grid-area: header;
-    display: flex;
-    align-self: center;
-    justify-self: center;
-}
-.header h2 {
-    letter-spacing: 0.2em;
-    color: black;
-}
-
-/* ==========
-    Main
-=========== */
-.main {
-    grid-area: main;
-    display: inline-grid;
-    grid-template-columns: repeat(3, 12.5%) 25% repeat(3, 12.5%);
-    grid-template-rows: repeat(8,12.5%);
-    background-image: url("../../webapp/assets/images/monstera.jpg");
-}
-
-.overview {
-    grid-column: 2/4;
-    grid-row: 2/4;
-}
-
-
-.overview h2 {
-    color: whitesmoke;
-    grid-row: 2;
-}
-
-.overview #overviewbox {
-    color: whitesmoke;
-}
-
-
-
-.verticalLine {
-    display: flex;
-    justify-self: center;
-    align-self: center;
-    grid-column: 4;
-    grid-row: 2/7;
-    border: solid thin whitesmoke;
     height: 100%;
 }
-/* ==========
-   Login
-=========== */
+
 body {
-    margin: 0;
-    color: #6a6f8c;
-    background: #c8c8c8;
-    font: 600 16px/18px 'Open Sans', sans-serif
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
 }
 
-
-.login-box {
+.form-signin {
     width: 100%;
+    max-width: 330px;
+    padding: 15px;
     margin: auto;
-    max-width: 525px;
-    min-height: 670px;
+}
+.form-signin .checkbox {
+    font-weight: 400;
+}
+.form-signin .form-control {
     position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
 }
-
-.login-snip {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    padding: 20px 70px 50px 70px;
+.form-signin .form-control:focus {
+    z-index: 2;
 }
-
-.login-snip .login,
-.login-snip .sign-up-form {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    transform: rotateY(180deg);
-    backface-visibility: hidden;
-    transition: all .4s linear
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }
-
-.login-snip .sign-in,
-.login-snip .sign-up,
-.login-space .group .check {
-    display: none
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
-
-.login-snip .tab,
-.login-space .group .label,
-.login-space .group .button {
-    text-transform: uppercase
-}
-
-.login-snip .tab {
-    font-size: 22px;
-    padding-bottom: 5px;
-    margin: 0 15px 10px 0;
-    display: inline-block;
-    border-bottom: 2px solid transparent
-}
-
-.login-snip .sign-in:checked+.tab,
-.login-snip .sign-up:checked+.tab {
-    color: white;
-    border-color: #1161ee
-}
-
-.login-space {
-    min-height: 345px;
-    position: relative;
-    perspective: 1000px;
-    transform-style: preserve-3d
-}
-
-.login-space .group {
-    margin-bottom: 15px
-}
-
-.login-space .group .label,
-.login-space .group .input,
-.login-space .group .button {
-    width: 100%;
-    color: #fff;
-    display: block
-}
-
-.login-space .group .input,
-.login-space .group .button {
-    border: none;
-    padding: 15px 20px;
-    border-radius: 25px;
-    background: rgba(255, 255, 255, .1)
-}
-
-.login-space .group input[data-type="password"] {
-    text-security: circle;
-    -webkit-text-security: circle
-}
-
-.login-space .group .label {
-    color: #aaa;
-    font-size: 12px
-}
-
-.login-space .group .button {
-    background: grey;
-}
-
-.login-space .group label .icon {
-    width: 15px;
-    height: 15px;
-    border-radius: 2px;
-    position: relative;
-    display: inline-block;
-    background: rgba(255, 255, 255, .1)
-}
-
-.login-space .group label .icon:before,
-.login-space .group label .icon:after {
-    content: '';
-    width: 10px;
-    height: 2px;
-    background: #fff;
-    position: absolute;
-    transition: all .2s ease-in-out 0s
-}
-
-.login-space .group label .icon:before {
-    left: 3px;
-    width: 5px;
-    bottom: 6px;
-    transform: scale(0) rotate(0)
-}
-
-.login-space .group label .icon:after {
-    top: 6px;
-    right: 0;
-    transform: scale(0) rotate(0)
-}
-
-.login-space .group .check:checked+label {
-    color: #fff
-}
-
-.login-space .group .check:checked+label .icon {
-    background: #1161ee
-}
-
-.login-space .group .check:checked+label .icon:before {
-    transform: scale(1) rotate(45deg)
-}
-
-.login-space .group .check:checked+label .icon:after {
-    transform: scale(1) rotate(-45deg)
-}
-
-.login-snip .sign-in:checked+.tab+.sign-up+.tab+.login-space .login {
-    transform: rotate(0)
-}
-
-.login-snip .sign-up:checked+.tab+.login-space .sign-up-form {
-    transform: rotate(0)
-}
-
-*,
-:after,
-:before {
-    box-sizing: border-box
-}
-
-.clearfix:after,
-.clearfix:before {
-    content: '';
-    display: table
-}
-
-.clearfix:after {
-    clear: both;
-    display: block
-}
-
-a {
-    color: inherit;
-    text-decoration: none
-}
-
-.hr {
-    height: 2px;
-    background: rgba(255, 255, 255, .2)
-}
-
-.foot {
-    text-align: center
-}
-
-.card {
-    width: 500px;
-    grid-row: 2;
-    grid-column: 5;
-    background-color: transparent!important; /* TODO Hier versuchen ohne !important klarzukommen */
-    border: none!important;
-
-}
-
-::placeholder {
-    color: #b3b3b3
-}
-/* ==========
-   Footer
-=========== */
-.footer { /* TODO Items noch richtig anpassen */
-    grid-area: footer;
-}
-
-.ftlinks {
-    color: black;
-}
-
-

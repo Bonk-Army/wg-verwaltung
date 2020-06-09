@@ -26,6 +26,15 @@
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+    <!-- Password Reset declaration and mapping -->
+    <servlet>
+        <servlet-name>ResetPassword</servlet-name>
+        <servlet-class>view.servlets.subservlets.ResetPassword</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/resetPassword</url-pattern>
+    </servlet-mapping>
     <!-- Shopping declaration and mapping -->
     <servlet>
         <servlet-name>Shopping</servlet-name>
