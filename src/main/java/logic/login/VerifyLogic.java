@@ -31,12 +31,12 @@ public class VerifyLogic extends Servlet {
         LoginBean bean = new LoginBean();
 
         String verificationCode = request.getParameter("key");
-        String userID = request.getParameter("id");
+        String username = request.getParameter("uname");
 
         head.addContentPart(new TemplateFromPath("CustomHTMLElements","head","html"));
 
         //If verification was successful, show success message. Otherwise show error.
-        if(bean.verifyUser(userID, verificationCode)){
+        if(bean.verifyUser(username, verificationCode)){
             head.setPageName("Success!");
             body.addContentPart(new Login_Register());
         } else {

@@ -5,6 +5,7 @@ package beans;
 import utilities.*;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Bean that handles all backend logic and database callouts required for user login and registration.
@@ -61,7 +62,7 @@ public class LoginBean {
                 // Now send an email to the user with the verification link
                 MailSender.sendEmail(email, "Willkommen bei wg-verwaltung!", ("Bitte bestätige noch kurz deine "
                         + "E-Mail-Adresse, indem du auf den folgenden Link klickst oder ihn in deinem Browser eingibst: "
-                        + "https://wgverwaltung.azurewebsites.net/verify?id=" + SQLDatabaseConnection.getUserId(username) + "&key=" + verificationCode));
+                        + "https://wgverwaltung.azurewebsites.net/verify?uname=" + username + "&key=" + verificationCode));
 
                 // And return the new user id:
                 return SQLDatabaseConnection.getUserId(username);
@@ -74,8 +75,7 @@ public class LoginBean {
 
     }
 
-    public boolean verifyUser(String userID, String verificationCode) {
-        String username = SQLDatabaseConnection.getUsername(userID);
+    public boolean verifyUser(String username, String verificationCode) {
         String savedVerificationCode = SQLDatabaseConnection.getUserVerificationCode(username);
 
         if (verificationCode.equals(savedVerificationCode)) {
@@ -87,7 +87,11 @@ public class LoginBean {
         return false;
     }
 
-    // sendPassword() { mail service }
+    public boolean sendPasswordResetLink(String email) {
+        String randomKey = new RandomStringGenerator(30).nextString();
+
+        return false;
+    }
 
     // Private Methods
 
