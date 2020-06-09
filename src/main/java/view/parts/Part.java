@@ -14,7 +14,7 @@ public abstract class Part {
         try {
             BufferedReader in;
             File file;
-            if (globalConfig.isTest){
+            if (globalConfig.isTest()){
                 file = new File( System.getProperty("user.dir") + "//target//classes//"+type+"//"+subtype+"//"+filename+"."+ending);
             }else{
                 file = new File("WEB-INF/classes/"+type+"/"+subtype+"/"+filename+"."+ending);
