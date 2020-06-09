@@ -88,10 +88,21 @@ public class LoginBean {
     }
 
     public boolean sendPasswordResetLink(String email) {
-        String randomKey = new RandomStringGenerator(30).nextString();
-
+        if (RegexHelper.checkEmail(email)) {
+            String randomKey = new RandomStringGenerator(30).nextString();
+            if (SQLDatabaseConnection.setPasswordKey(email, randomKey)) {
+                String username = SQLDatabaseConnection.getUsernameByEmail(email);
+                String resetLink = "https://wgverwaltung.azurewebsites.net/resetPassword?uname=" + username + "&key=" + randomKey;
+                MailSender.sendEmail(email, "Hat da jemand sein Passwort vergessen?",
+                        "Hier ist der Link zum Zurücksetzen: " + resetLink);
+                return true;
+            }
+        }
         return false;
     }
+
+    // Post: send request
+    // Get: change password
 
     // Private Methods
 
@@ -114,7 +125,7 @@ public class LoginBean {
     private boolean isUsernameUnique(String username) {
         List<String> usedNames = SQLDatabaseConnection.getAllUserNames();
 
-        return usedNames.contains(username) ? false : true;
+        return !usedNames.contains(username);
     }
 
     /**
@@ -126,7 +137,7 @@ public class LoginBean {
     private boolean isEmailUnqiue(String email) {
         List<String> usedEmails = SQLDatabaseConnection.getAllEmails();
 
-        return usedEmails.contains(email) ? false : true;
+        return !usedEmails.contains(email);
     }
 
     // Getter and Setter

@@ -137,6 +137,22 @@ public class SQLDatabaseConnection {
         return name;
     }
 
+    public static String getUsernameByEmail(String email) {
+        String username = "";
+
+        ResultSet rs = executeQuery("SELECT username FROM users WHERE email=" + email);
+
+        try {
+            while (rs.next()) {
+                username = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return username;
+    }
+
     public static String getUserVerificationCode(String username) {
         String code = "";
 
@@ -219,5 +235,14 @@ public class SQLDatabaseConnection {
         }
 
         return returnSet;
+    }
+
+    public static boolean setPasswordKey(String email, String key) {
+        try {
+            executeQuery("UPDATE users SET passwordResetKey='" + key + "' WHERE email='" + email + "'");
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
