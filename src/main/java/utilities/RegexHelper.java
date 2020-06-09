@@ -7,16 +7,16 @@ public class RegexHelper {
 
     /**
      * Checks if the entered String matches the rules we have for usernames.
-     * Not allowed are whitespaces and ;?&% (; because we dont want SQLi)
+     * Not allowed are whitespaces and ;?&%' (; because we dont want SQLi)
      * @param username The username to be matched
      * @return If the username is allowed
      */
     public static boolean checkUsername(String username){
-        return username.matches("^[^;?&%\\s]*$");
+        return username.matches("^[^;?&%'\\s]*$");
     }
 
     public static boolean checkEmail(String email) {
-        if (!email.matches(".*;")) {
+        if (!email.matches("^[^;?&%'\\s]*$")) {
             if (email.matches(".+@.+\\..+")) {
                 return true;
             }
