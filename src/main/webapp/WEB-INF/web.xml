@@ -39,6 +39,15 @@
         <servlet-name>LoginServletLogic</servlet-name>
         <url-pattern>/loginLogic</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ResetServletLogic</servlet-name>
+        <servlet-class>logic.login.ResetLogic</servlet-class>
+        <load-on-startup>-1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResetServletLogic</servlet-name>
+        <url-pattern>/resetPassword</url-pattern>
+    </servlet-mapping>
 
 
     <!-- VerifyServlet declaration and mapping -->
