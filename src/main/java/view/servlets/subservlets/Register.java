@@ -12,11 +12,6 @@ package view.servlets.subservlets;
 
 public class Register extends Servlet {
 
-    public Register(){
-        //Fuck lazy Initzialisation....
-        globalConfig g = new globalConfig();
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

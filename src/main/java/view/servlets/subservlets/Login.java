@@ -12,11 +12,6 @@ import java.io.PrintWriter;
 
 public class Login extends Servlet {
 
-    public Login(){
-        //Fuck lazy Initzialisation....
-        globalConfig g = new globalConfig();
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

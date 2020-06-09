@@ -25,22 +25,7 @@ public abstract class Part {
         try {
             BufferedReader in;
             File file;
-            //Changing paths for test or prod on the boolean in config
-            if (globalConfig.isTest()){
-                if (subtype != ""){
-                    file = new File( System.getProperty("user.dir") + "//target//classes//"+type+"//"+subtype+"//"+filename+"."+ending);
-                }
-                else{
-                    file = new File( System.getProperty("user.dir") + "//target//classes//"+type+"//"+filename+"."+ending);
-                }
-            }else{
-                if (subtype != ""){
-                    file = new File("WEB-INF/classes/"+type+"/"+subtype+"/"+filename+"."+ending);
-                }
-                else{
-                    file = new File("WEB-INF/classes/"+type+"/"+filename+"."+ending);
-                }
-            }
+            file = new File(generatePath("classes",type,subtype,filename,ending));
             in = new BufferedReader(new FileReader(file));
             // Reading the full file and saving the content in result
             String line = in.readLine();
@@ -57,5 +42,35 @@ public abstract class Part {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public String generatePath(String mainfolder,String type,String subtype,String filename,String ending){
+        if (globalConfig.isWindows()){
+            if (globalConfig.isTest()){
+                if (subtype != ""){
+                    return System.getProperty("user.dir") + "\\target\\"+mainfolder+"\\"+type+"\\"+subtype+"\\"+filename+"."+ending;
+                }
+                else{
+                    return System.getProperty("user.dir") + "\\target\\"+mainfolder+"\\"+type+"\\"+filename+"."+ending;
+                }
+            }
+            return "";
+        }else{
+            if (globalConfig.isTest()){
+                if (subtype != ""){
+                    return System.getProperty("user.dir") + "//target//"+mainfolder+"//"+type+"//"+subtype+"//"+filename+"."+ending;
+                }
+                else{
+                    return System.getProperty("user.dir") + "//target//"+mainfolder+"//"+type+"//"+filename+"."+ending;
+                }
+            }else{
+                if (subtype != ""){
+                    return "WEB-INF/"+mainfolder+"/"+type+"/"+subtype+"/"+filename+"."+ending;
+                }
+                else{
+                    return "WEB-INF/"+mainfolder+"/"+type+"/"+filename+"."+ending;
+                }
+            }
+        }
     }
 }

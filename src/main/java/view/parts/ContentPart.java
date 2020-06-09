@@ -28,7 +28,7 @@ abstract public class ContentPart extends Part{
      * @return the content of the source as an String
      */
     protected String readImportTemplate (String filename,String ending){
-        return readRessource("Templates","Import",filename,ending);
+        return readRessource("Templates","Imports",filename,ending);
     }
 
     /**
