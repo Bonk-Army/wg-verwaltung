@@ -33,6 +33,7 @@ public class Head extends HTMLPart {
      * @param ending
      */
     public void addCSS(String filename,String ending) {
+        // TODO Fixx the CSS ISSUES
         this.cssFiles.add(generatePath("classes","Scripts","",filename,ending));
         //this.cssFiles.add("./Styles/"+filename+"."+ending);
     }
