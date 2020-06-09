@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Reset extends Servlet {
-    public Reset(){
+    public Reset() {
         super();
     }
 
@@ -29,8 +29,11 @@ public class Reset extends Servlet {
         LoginBean bean = new LoginBean();
 
         String email = request.getParameter("email");
-        bean.sendPasswordResetLink(email);
 
-        //TODO: Update page view for user...
+        if (bean.sendPasswordResetLink(email)) {
+            //TODO show success page
+        } else {
+            //TODO show error page
+        }
     }
 }

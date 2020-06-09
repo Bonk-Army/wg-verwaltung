@@ -49,7 +49,7 @@ public class Login extends Servlet {
 
         String userId = isRegister ? bean.register(username, password, email) : bean.login(username, password);
 
-
+        //TODO forward to Homepage
         //Weiterleitung
         //<head>
         //    <meta http-equiv="Refresh" content="0; URL=https://wgverwaltung.azurewebsites.net/overview">

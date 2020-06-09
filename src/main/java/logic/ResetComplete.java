@@ -26,10 +26,10 @@ public class ResetComplete extends Servlet {
         String passwordResetKey =  request.getParameter("key");
 
         if(bean.resetPassword(username, passwordResetKey, password)) {
-            System.out.println("Ich bumse Deine Mutter.");
+            System.out.println("Reset completed");
             //TODO
         } else {
-            System.out.println("Ich bumse Deine Mutter nicht.");
+            System.out.println("Reset not completed");
             //TODO
         }
     }
