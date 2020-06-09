@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class LoginLogic extends Servlet {
+public class Login extends Servlet {
     private static final long serialVersionUID = 1L;
 
-    public LoginLogic() {
+    public Login() {
         super();
     }
 

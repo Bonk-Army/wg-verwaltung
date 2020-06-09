@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class VerifyLogic extends Servlet {
+public class Verify extends Servlet {
     private static final long serialVersionUID = 1L;
 
-    public VerifyLogic(){
+    public Verify(){
         super();
     }
 
