@@ -21,7 +21,7 @@ public class MailSender {
      * @return If the email has been sent successful
      */
     public static boolean sendEmail(String receiver, String subject, String contentString){
-        if(!globalConfig.isTest) {
+        if(!globalConfig.isTest()) {
             Email from = new Email("no-reply@wgverwaltung.azurewebsites.net");
             Email to = new Email(receiver);
             Content content = new Content("text/plain", contentString);
