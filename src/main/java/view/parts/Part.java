@@ -66,9 +66,9 @@ public abstract class Part {
                 }
             } else {
                 if (subtype != "") {
-                    return "./WEB-INF/" + mainfolder + "/" + type + "/" + subtype + "/" + filename + "." + ending;
+                    return "/WEB-INF/" + mainfolder + "/" + type + "/" + subtype + "/" + filename + "." + ending;
                 } else {
-                    return "/.WEB-INF/" + mainfolder + "/" + type + "/" + filename + "." + ending;
+                    return "/WEB-INF/" + mainfolder + "/" + type + "/" + filename + "." + ending;
                 }
             }
         }
