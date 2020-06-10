@@ -1,39 +1,36 @@
 package logic;
 
 import beans.LoginBean;
+import utilities.SQLDatabaseConnection;
 import view.servlets.Servlet;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class Reset extends Servlet {
-    public Reset() {
-        super();
-    }
+public class ResetComplete extends Servlet {
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //LoginBean bean = new LoginBean();
-        //RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/changePassword");
-        //dispatcher.forward(request, response);
-        //DEPRECATED???
 
-        //TODO: @GUI-TEAM create page for changing password
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean bean = new LoginBean();
 
-        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String username = request.getParameter("username");
+        String passwordResetKey =  request.getParameter("key");
 
-        if (bean.sendPasswordResetLink(email)) {
-            //TODO show success page
+        if(bean.resetPassword(username, passwordResetKey, password)) {
+            System.out.println("Reset completed");
+            //TODO
         } else {
-            //TODO show error page
+            System.out.println("Reset not completed");
+            //TODO
         }
     }
 }

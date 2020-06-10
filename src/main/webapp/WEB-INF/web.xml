@@ -12,6 +12,7 @@
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>view.servlets.subservlets.Login</servlet-class>
+        <load-on-startup>-1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -21,6 +22,7 @@
     <servlet>
         <servlet-name>Register</servlet-name>
         <servlet-class>view.servlets.subservlets.Register</servlet-class>
+        <load-on-startup>-1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -78,7 +80,7 @@
         <url-pattern>/loginLogic</url-pattern>
     </servlet-mapping>
 
-    <!-- ResetLogic declaration and mapping -->
+    <!-- Reset Logic Servlet mapping -->
     <servlet>
         <servlet-name>ResetLogic</servlet-name>
         <servlet-class>logic.Reset</servlet-class>
@@ -87,6 +89,16 @@
     <servlet-mapping>
         <servlet-name>ResetLogic</servlet-name>
         <url-pattern>/reset</url-pattern>
+    </servlet-mapping>
+    <!-- Reset Complete Servlet mapping -->
+    <servlet>
+        <servlet-name>ResetCompleteLogic</servlet-name>
+        <servlet-class>logic.ResetComplete</servlet-class>
+        <load-on-startup>-1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResetCompleteLogic</servlet-name>
+        <url-pattern>/resetComplete</url-pattern>
     </servlet-mapping>
 
     <!-- VerifyServlet declaration and mapping -->
