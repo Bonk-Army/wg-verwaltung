@@ -18,7 +18,7 @@ public class Financial extends Servlet {
 
         head.setPageName("Financial Page");
         head.addCSS("Login", "css");
-        head.addCSS("sidebar", "css");
+        head.addCSS("Sidebar", "css");
         head.addContentPart(new TemplateFromPath("Import", "Global", "html"));
         head.addContentPart(new TemplateFromPath("Import", "Bootstrap", "html"));
 

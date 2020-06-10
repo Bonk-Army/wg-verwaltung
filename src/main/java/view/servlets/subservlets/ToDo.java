@@ -18,6 +18,7 @@ public class ToDo extends Servlet {
 
         head.setPageName("ToDo Page");
         head.addCSS("Login", "css");
+        head.addCSS("Sidebar", "css");
         head.addContentPart(new TemplateFromPath("Import", "Global", "html"));
         head.addContentPart(new TemplateFromPath("Import", "Bootstrap", "html"));
 
