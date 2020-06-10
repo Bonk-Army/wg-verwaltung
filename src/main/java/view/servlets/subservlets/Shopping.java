@@ -17,7 +17,8 @@ public class Shopping extends Servlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         head.setPageName("Shopping Page");
-        head.addCSS("Login", "css");
+        head.addCSS("shopping", "css");
+        head.addCSS("sidebar", "css");
         head.addContentPart(new TemplateFromPath("Import", "Global", "html"));
         head.addContentPart(new TemplateFromPath("Import", "Bootstrap", "html"));
 
