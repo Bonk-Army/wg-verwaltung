@@ -1,6 +1,5 @@
 package view.servlets.subservlets;
 
-import view.parts.ContentSubparts.SideBar;
 import view.parts.ContentSubparts.TemplateFromPath;
 import view.servlets.Servlet;
 
@@ -20,7 +19,7 @@ public class Shopping extends Servlet {
         //head.addCSS("Shopping", "css");
         head.addCSS("Sidebar", "css");
         head.addContentPart(new TemplateFromPath("Import", "Global", "html"));
-        head.addContentPart(new TemplateFromPath("Import", "NewBootstrap", "html"));
+        head.addContentPart(new TemplateFromPath("Import", "Bootstrap", "html"));
         head.addContentPart(new TemplateFromPath("Import", "Fonts", "html"));
 
         body.addContentPart(new view.parts.ContentSubparts.SideBar());
