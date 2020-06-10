@@ -1,6 +1,5 @@
 package view.parts.HTMLSubparts;
 
-import config.globalConfig;
 import view.parts.ContentPart;
 import view.parts.HTMLPart;
 
@@ -35,7 +34,7 @@ public class Head extends HTMLPart {
      */
     public void addCSS(String filename, String ending) {
         // TODO Fixx the CSS ISSUES
-        this.cssFiles.add(generatePath("classes", "Styles", "", filename, ending));
+        this.cssFiles.add("./Styles/"+filename+"."+ending);
         //this.cssFiles.add("./Styles/"+filename+"."+ending);
     }
 
