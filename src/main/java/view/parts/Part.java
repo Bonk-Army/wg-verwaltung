@@ -65,7 +65,7 @@ public abstract class Part {
                     return System.getProperty("user.dir") + "/target/ROOT/WEB-INF/" + mainfolder + "/" + type + "/" + filename + "." + ending;
                 }
             } else {
-                System.out.println("WORKDIR: " + System.getenv("user.dir"));
+                System.out.println("WORKDIR: " + System.getProperty("user.dir"));
                 if (subtype != "") {
                     return "/WEB-INF/" + mainfolder + "/" + type + "/" + subtype + "/" + filename + "." + ending;
                 } else {
