@@ -2,12 +2,13 @@ package view.parts.ContentSubparts;
 
 import view.parts.ContentPart;
 
-public class SideBar extends ContentPart {
+public class Register extends ContentPart {
 
     /**
      * No Special Attributes ... :/
      */
-    public SideBar() {
+    public Register() {
+        super();
         generateContent();
     }
 
@@ -15,7 +16,6 @@ public class SideBar extends ContentPart {
      * Generating the Component
      */
     private void generateContent() {
-        this.content = readScriptTemplate("sidebar", "js");
-        this.content += readContentTemplate("sidebar", "html");
+        this.content = readComponentTemplate("Register", "html");
     }
 }
