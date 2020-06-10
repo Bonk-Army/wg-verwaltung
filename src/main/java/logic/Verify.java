@@ -14,13 +14,14 @@ import java.io.PrintWriter;
 public class Verify extends Servlet {
     private static final long serialVersionUID = 1L;
 
-    public Verify(){
+    public Verify() {
         super();
     }
 
     /**
      * Called when the user opens the link to verify his email address
-     * @param request The http GET request
+     *
+     * @param request  The http GET request
      * @param response The http response
      * @throws ServletException
      * @throws IOException
@@ -33,10 +34,10 @@ public class Verify extends Servlet {
         String verificationCode = request.getParameter("key");
         String username = request.getParameter("uname");
 
-        head.addContentPart(new TemplateFromPath("CustomHTMLElements","head","html"));
+        head.addContentPart(new TemplateFromPath("CustomHTMLElements", "head", "html"));
 
         //If verification was successful, show success message. Otherwise show error.
-        if(bean.verifyUser(username, verificationCode)){
+        if (bean.verifyUser(username, verificationCode)) {
             head.setPageName("Success!");
             //TODO Change this
             body.addContentPart(new Login());

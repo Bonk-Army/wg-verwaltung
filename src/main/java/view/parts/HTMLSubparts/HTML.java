@@ -10,22 +10,23 @@ public class HTML extends HTMLPart {
     private Head head;
     private Body body;
 
-    public HTML(Head head,Body body){
+    public HTML(Head head, Body body) {
         this.head = head;
         this.body = body;
     }
 
     /**
      * Overriding the generateThisPart to add body and head to the output
+     *
      * @return
      */
     @Override
-    public String generateThisPart(){
+    public String generateThisPart() {
         String className = this.getClass().getSimpleName();
 
         String result = "";
 
-        result += readHTMLTemplate(className+"_Top","html");
+        result += readHTMLTemplate(className + "_Top", "html");
 
         result += head.generateThisPart();
         result += body.generateThisPart();
@@ -33,7 +34,7 @@ public class HTML extends HTMLPart {
         head.clear();
         body.clear();
 
-        result += readHTMLTemplate(className+"_Bottom","html");
+        result += readHTMLTemplate(className + "_Bottom", "html");
 
         this.clear();
 

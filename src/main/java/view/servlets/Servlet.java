@@ -10,21 +10,22 @@ import java.io.*;
 
 public abstract class Servlet extends HttpServlet {
     /**
-     * We use an HTML Object in an Servlet to generate a fully functional HTML Output
+     * We use a HTML Object in an Servlet to generate a fully functional HTML Output
      */
     protected Head head = new Head();
     protected Body body = new Body();
-    protected HTML html = new HTML(head,body);
+    protected HTML html = new HTML(head, body);
 
     /**
      * Constructor of Servlet
      */
-    public Servlet(){
+    public Servlet() {
         super();
     }
 
     /**
      * Methode um die GET Requests zu bearbeiten
+     *
      * @param request
      * @param response
      * @throws ServletException
@@ -34,6 +35,7 @@ public abstract class Servlet extends HttpServlet {
 
     /**
      * Methode um die POST Requests zu bearbeiten
+     *
      * @param request
      * @param response
      * @throws ServletException

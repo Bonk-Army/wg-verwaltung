@@ -1,56 +1,60 @@
 package view.parts;
 
-abstract public class ContentPart extends Part{
+abstract public class ContentPart extends Part {
 
     /**
-     * The content as an source HTML String
+     * The content as a source HTML String
      */
     protected String content = "";
 
-    public ContentPart(){
+    public ContentPart() {
         super();
     }
 
     /**
-     * Read an template from the folder"ressources/Content/"
+     * Read a template from the folder"ressources/Content/"
+     *
      * @param filename
      * @param ending
-     * @return the content of the source as an String
+     * @return the content of the source as a String
      */
-    protected String readContentTemplate (String filename,String ending){
-       return readRessource("Contents","",filename,ending);
+    protected String readContentTemplate(String filename, String ending) {
+        return readRessource("Contents", "", filename, ending);
     }
 
     /**
-     * Read an template from the folder"ressources/Templates/Imports"
+     * Read a template from the folder"ressources/Templates/Imports"
+     *
      * @param filename
      * @param ending
-     * @return the content of the source as an String
+     * @return the content of the source as a String
      */
-    protected String readImportTemplate (String filename,String ending){
-        return readRessource("Templates","Imports",filename,ending);
+    protected String readImportTemplate(String filename, String ending) {
+        return readRessource("Templates", "Imports", filename, ending);
     }
 
     /**
-     * Read an template from the folder"ressources/Templates/Components"
+     * Read a template from the folder"ressources/Templates/Components"
+     *
      * @param filename
      * @param ending
-     * @return the content of the source as an String
+     * @return the content of the source as a String
      */
-    protected String readComponentTemplate (String filename,String ending){
-        return readRessource("Templates","Components",filename,ending);
+    protected String readComponentTemplate(String filename, String ending) {
+        return readRessource("Templates", "Components", filename, ending);
     }
 
     /**
-     * Read an template from the folder"ressources/Scripts/"
+     * Read a template from the folder"ressources/Scripts/"
+     *
      * @param filename
      * @param ending
-     * @return the content of the source as an String
+     * @return the content of the source as a String
      */
-    protected String readScriptTemplate (String filename,String ending){
+    protected String readScriptTemplate(String filename, String ending) {
         String result = "";
         result += "<script>";
-        result += readRessource("Scripts","",filename,ending);
+        result += readRessource("Scripts", "", filename, ending);
         result += "</script>";
         return result;
     }

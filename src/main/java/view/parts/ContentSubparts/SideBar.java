@@ -7,7 +7,7 @@ public class SideBar extends ContentPart {
     /**
      * No Special Attributes ... :/
      */
-    public SideBar(){
+    public SideBar() {
         generateContent();
     }
 
@@ -15,7 +15,7 @@ public class SideBar extends ContentPart {
      * Generating the Component
      */
     private void generateContent() {
-        this.content = readScriptTemplate ("sidebar","js");
-        this.content += readContentTemplate("sidebar","html");
+        this.content = readScriptTemplate("sidebar", "js");
+        this.content += readContentTemplate("sidebar", "html");
     }
 }
