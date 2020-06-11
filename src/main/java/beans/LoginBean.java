@@ -59,9 +59,8 @@ public class LoginBean {
             // If the user creation was successful, send an email and continue registration
             if (SQLDatabaseConnection.createUser(username, email, hash, new String(salt), verificationCode)) {
                 // Now send an email to the user with the verification link
-                MailSender.sendEmail(email, "Willkommen bei wg-verwaltung!", ("Bitte bestätige noch kurz deine "
-                        + "E-Mail-Adresse, indem du auf den folgenden Link klickst oder ihn in deinem Browser eingibst: "
-                        + "https://wgverwaltung.azurewebsites.net/verify?uname=" + username + "&key=" + verificationCode));
+                String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
+                MailSender.sendVerificationMail(email, username, verifyLink);
 
                 // And return the new user id:
                 return SQLDatabaseConnection.getUserId(username);
@@ -105,9 +104,8 @@ public class LoginBean {
             String randomKey = new RandomStringGenerator(30).nextString();
             if (SQLDatabaseConnection.setPasswordKey(email, randomKey)) {
                 String username = SQLDatabaseConnection.getUsernameByEmail(email);
-                String resetLink = "https://wgverwaltung.azurewebsites.net/resetPassword?uname=" + username + "&key=" + randomKey;
-                MailSender.sendEmail(email, "Hat da jemand sein Passwort vergessen?",
-                        "Hier ist der Link zum Zurücksetzen: " + resetLink);
+                String resetLink = "resetPassword?uname=" + username + "&key=" + randomKey;
+                MailSender.sendResetPasswordMail(email, username, resetLink);
                 return true;
             }
         }
