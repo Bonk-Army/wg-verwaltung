@@ -23,8 +23,8 @@ public class LoginBean {
      * @return The user id or an empty String.
      */
     public String login(String username, String password) {
-        String salt = SQLDatabaseConnection.getPasswordSalt(username);
-        String hash = SQLDatabaseConnection.getPasswordHash(username);
+        String salt = SQLDCLogin.getPasswordSalt(username);
+        String hash = SQLDCLogin.getPasswordHash(username);
 
         if (!salt.isEmpty() && !hash.isEmpty()) {
             String newHash = PasswordHasher.hashPassword(password, salt);
@@ -57,13 +57,13 @@ public class LoginBean {
             String verificationCode = new RandomStringGenerator(10).nextString();
 
             // If the user creation was successful, send an email and continue registration
-            if (SQLDatabaseConnection.createUser(username, email, hash, new String(salt), verificationCode)) {
+            if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode)) {
                 // Now send an email to the user with the verification link
                 String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
                 MailSender.sendVerificationMail(email, username, verifyLink);
 
                 // And return the new user id:
-                return SQLDatabaseConnection.getUserId(username);
+                return SQLDCLogin.getUserId(username);
             }
             return "";
         } else {
@@ -81,11 +81,11 @@ public class LoginBean {
      * @return If the verification was successful
      */
     public boolean verifyUser(String username, String verificationCode) {
-        String savedVerificationCode = SQLDatabaseConnection.getUserVerificationCode(username);
+        String savedVerificationCode = SQLDCLogin.getUserVerificationCode(username);
 
         // If the entered verification code matches the saved one, verify the user
         if (verificationCode.equals(savedVerificationCode)) {
-            SQLDatabaseConnection.verifyUser(username);
+            SQLDCLogin.verifyUser(username);
 
             return true;
         }
@@ -102,8 +102,8 @@ public class LoginBean {
     public boolean sendPasswordResetLink(String email) {
         if (RegexHelper.checkEmail(email)) {
             String randomKey = new RandomStringGenerator(30).nextString();
-            if (SQLDatabaseConnection.setPasswordKey(email, randomKey)) {
-                String username = SQLDatabaseConnection.getUsernameByEmail(email);
+            if (SQLDCLogin.setPasswordKey(email, randomKey)) {
+                String username = SQLDCLogin.getUsernameByEmail(email);
                 String resetLink = "resetPassword?uname=" + username + "&key=" + randomKey;
                 MailSender.sendResetPasswordMail(email, username, resetLink);
                 return true;
@@ -121,13 +121,13 @@ public class LoginBean {
      * @return If it was successful
      */
     public boolean resetPassword(String username, String key, String password) {
-        String salt = SQLDatabaseConnection.getPasswordSalt(username);
-        String savedKey = SQLDatabaseConnection.getPasswordKey(username);
+        String salt = SQLDCLogin.getPasswordSalt(username);
+        String savedKey = SQLDCLogin.getPasswordKey(username);
 
         String pwhash = PasswordHasher.hashPassword(password, salt);
 
         if (key.equals(savedKey)) {
-            return SQLDatabaseConnection.setPassword(username, pwhash);
+            return SQLDCLogin.setPassword(username, pwhash);
         }
 
         return false;
@@ -140,7 +140,7 @@ public class LoginBean {
      * @return The ID as a String
      */
     private String getUserId(String username) {
-        return SQLDatabaseConnection.getUserId(username);
+        return SQLDCLogin.getUserId(username);
     }
 
     /**
@@ -150,7 +150,7 @@ public class LoginBean {
      * @return If the username is unique (so it returns true if the name can be used)
      */
     private boolean isUsernameUnique(String username) {
-        List<String> usedNames = SQLDatabaseConnection.getAllUserNames();
+        List<String> usedNames = SQLDCLogin.getAllUserNames();
 
         return !usedNames.contains(username);
     }
@@ -162,7 +162,7 @@ public class LoginBean {
      * @return If the email is unique (so it returns true if the email can be used)
      */
     private boolean isEmailUnique(String email) {
-        List<String> usedEmails = SQLDatabaseConnection.getAllEmails();
+        List<String> usedEmails = SQLDCLogin.getAllEmails();
 
         return !usedEmails.contains(email);
     }
