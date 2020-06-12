@@ -26,7 +26,7 @@ public class RegexHelper {
     public static boolean checkEmail(String email) {
         //Check for illegal characters
         if (email.matches("^[^;?&%'\\s]*$")) {
-            //Check for corret email address format
+            //Check for correct email address format
             if (email.matches(".+@.+\\..+")) {
                 return true;
             }
