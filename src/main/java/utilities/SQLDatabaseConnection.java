@@ -244,6 +244,27 @@ public class SQLDatabaseConnection {
     }
 
     /**
+     * Get the saved password reset key for a user
+     * @param username The user to get the key from
+     * @return The key as a String
+     */
+    public static String getPasswordKey(String username){
+        String key = "";
+
+        try{
+            ResultSet rs = executeQuery("SELECT passwordResetKey FROM users WHERE username = '" + username + "'");
+
+            while(rs.next()){
+                key = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return key;
+    }
+
+    /**
      * Set the new password for a user
      *
      * @param username The username that the password should be set for

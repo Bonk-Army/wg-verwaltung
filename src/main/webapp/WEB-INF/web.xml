@@ -92,6 +92,11 @@
         <load-on-startup>-1</load-on-startup>
     </servlet>
     <servlet>
+        <servlet-name>ResetCompleteLogic</servlet-name>
+        <servlet-class>logic.ResetComplete</servlet-class>
+        <load-on-startup>-1</load-on-startup>
+    </servlet>
+    <servlet>
         <servlet-name>VerifyLogic</servlet-name>
         <servlet-class>logic.Verify</servlet-class>
         <load-on-startup>-1</load-on-startup>
@@ -164,6 +169,10 @@
     <servlet-mapping>
         <servlet-name>ResetLogic</servlet-name>
         <url-pattern>/reset</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetCompleteLogic</servlet-name>
+        <url-pattern>/resetComplete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>VerifyLogic</servlet-name>

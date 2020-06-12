@@ -20,6 +20,10 @@ public class ResetPassword extends ContentPart {
         CharSequence replaceUsernameSeq = "REPLACE_USERNAME";
         CharSequence replaceKeySeq = "REPLACE_KEY";
 
-        this.content = readComponentTemplate("ResetPassword", "html").replace(replaceUsernameSeq, usernameCharSeq).replace(replaceKeySeq, keyCharSeq);
+        try {
+            this.content = readComponentTemplate("ResetPassword", "html").replace(replaceUsernameSeq, usernameCharSeq).replace(replaceKeySeq, keyCharSeq);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
