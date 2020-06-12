@@ -27,15 +27,7 @@ public class MailSender {
      */
     public static boolean sendEmail(String receiver, Mailtypes type, Map<String, String> args) {
         if (!globalConfig.isTest()) {
-            String templateId = "";
-            switch (type) {
-                case VERIFY:
-                    templateId = "d-48e403a281cb4e9382351342188b786b";
-                    break;
-                case RESETPW:
-                    templateId = "d-d6e6140c08c343fdb1c1136b07c36829";
-                    break;
-            }
+            String templateId = type.getTemplateID();
 
             // Create the email object and set basic params
             Email from = new Email("no-reply@wgverwaltung.azurewebsites.net");
@@ -115,7 +107,17 @@ public class MailSender {
      * Enum for types of emails we send
      */
     public static enum Mailtypes {
-        VERIFY,
-        RESETPW
-    }
+        VERIFY("d-48e403a281cb4e9382351342188b786b"),
+        RESETPW("d-d6e6140c08c343fdb1c1136b07c36829")
+
+        private String templateID;
+
+        private Mailtypes(String templateID) {
+            this.templateID = templateID;
+        }
+
+        public String getTemplateID() {
+            return this.templateID;
+        }
+        }
 }
