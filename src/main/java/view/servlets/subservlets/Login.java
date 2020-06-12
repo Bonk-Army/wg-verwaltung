@@ -24,7 +24,6 @@ public class Login extends Servlet {
 
         PrintWriter out = response.getWriter();
         out.write(html.generateThisPart());
-
     }
 
     @Override
