@@ -6,7 +6,10 @@ import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import com.sendgrid.helpers.mail.objects.Personalization;
 import config.globalConfig;
 
 /**
@@ -14,19 +17,43 @@ import config.globalConfig;
  */
 public class MailSender {
     /**
-     * Send an email via SendGrid
+     * Universal class to send emails. Takes a type of mail from the enum below and a map of custom arguments.
+     * Mocked for testing without the api key
      *
-     * @param receiver      The email address of the receiver of the message
-     * @param subject       The subject of the email
-     * @param contentString The content of the email
-     * @return If the email has been sent successful
+     * @param receiver The email address of the receiver
+     * @param type     The type of mail to be send (Choose from enum!)
+     * @param args     The map of custom arguments
+     * @return If it was successful
      */
-    public static boolean sendEmail(String receiver, String subject, String contentString) {
+    public static boolean sendEmail(String receiver, Mailtypes type, Map<String, String> args) {
         if (!globalConfig.isTest()) {
+            String templateId = "";
+            switch (type) {
+                case VERIFY:
+                    templateId = "d-48e403a281cb4e9382351342188b786b";
+                    break;
+                case RESETPW:
+                    templateId = "d-d6e6140c08c343fdb1c1136b07c36829";
+                    break;
+            }
+
+            // Create the email object and set basic params
             Email from = new Email("no-reply@wgverwaltung.azurewebsites.net");
             Email to = new Email(receiver);
-            Content content = new Content("text/plain", contentString);
-            Mail mail = new Mail(from, subject, to, content);
+            Mail mail = new Mail();
+            mail.setFrom(from);
+            mail.setTemplateId(templateId);
+
+            // Add custom parameters
+            Personalization personalization = new Personalization();
+            for (String key : args.keySet()) {
+                personalization.addDynamicTemplateData(key, args.get(key));
+            }
+            // Set receiver
+            personalization.addTo(to);
+
+            // Add the custom params to the mail
+            mail.addPersonalization(personalization);
 
             SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
             Request request = new Request();
@@ -44,9 +71,51 @@ public class MailSender {
                 return false;
             }
         } else {
-            String mailString = "SENDMAIL:\nTO: " + receiver + "\nSUBJECT: " + subject + "\nMESSAGE: " + contentString;
+            String mailString = "SENDMAIL:\nTO: " + receiver + "\nTYPE: " + type + "\nARGS: " + args;
             System.out.printf(mailString);
             return true;
         }
+    }
+
+    /**
+     * Sends an email for the user to verify his email address. The link-parameter might look like this:
+     * verify?uname=Bob&key=ABC123DEF4
+     *
+     * @param receiver The email address of the user
+     * @param username The username of the user (To greet him in the email)
+     * @param link     The sublink to verify (So everything after https://wgverwaltung.azurewebsites.net/)
+     * @return If it was successful
+     */
+    public static boolean sendVerificationMail(String receiver, String username, String link) {
+        Map<String, String> args = new HashMap<String, String>();
+        args.put("username", username);
+        args.put("verifyLink", link);
+
+        return sendEmail(receiver, Mailtypes.VERIFY, args);
+    }
+
+    /**
+     * Sends an email for the user to reset his password. The link-parameter might look like this:
+     * reset?uname=Bob&key=ABCDEF123456ABCG2435DSFSDGNB
+     *
+     * @param receiver The email address of the user
+     * @param username The username of the user
+     * @param link     The sublink to reset (so everything after https://wgverwaltung.azurewebsites.net/)
+     * @return If it was successful
+     */
+    public static boolean sendResetPasswordMail(String receiver, String username, String link) {
+        Map<String, String> args = new HashMap<String, String>();
+        args.put("username", username);
+        args.put("resetLink", link);
+
+        return sendEmail(receiver, Mailtypes.RESETPW, args);
+    }
+
+    /**
+     * Enum for types of emails we send
+     */
+    public static enum Mailtypes {
+        VERIFY,
+        RESETPW
     }
 }
