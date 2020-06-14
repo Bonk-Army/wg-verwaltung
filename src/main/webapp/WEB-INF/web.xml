@@ -43,11 +43,11 @@
     -->
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>view.servlets.subservlets.Login</servlet-class>
+        <jsp-file>/de/login/Login.jsp</jsp-file>
     </servlet>
     <servlet>
         <servlet-name>Register</servlet-name>
-        <servlet-class>view.servlets.subservlets.Register</servlet-class>
+        <jsp-file>/de/register/Register.jsp</jsp-file>
     </servlet>
     <servlet>
         <servlet-name>ResetPassword</servlet-name>

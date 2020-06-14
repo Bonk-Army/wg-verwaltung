@@ -19,7 +19,7 @@ abstract public class ContentPart extends Part {
      * @return the content of the source as a String
      */
     protected String readContentTemplate(String filename, String ending) {
-        return readRessource("Contents", "", filename, ending);
+        return readRessource("src/main/webapp/assets/Contents", "", filename, ending);
     }
 
     /**
@@ -30,7 +30,7 @@ abstract public class ContentPart extends Part {
      * @return the content of the source as a String
      */
     protected String readImportTemplate(String filename, String ending) {
-        return readRessource("Templates", "Imports", filename, ending);
+        return readRessource("src/main/webapp/assets/Templates", "Imports", filename, ending);
     }
 
     /**
@@ -41,7 +41,7 @@ abstract public class ContentPart extends Part {
      * @return the content of the source as a String
      */
     protected String readComponentTemplate(String filename, String ending) {
-        return readRessource("Templates", "Components", filename, ending);
+        return readRessource("src/main/webapp/assets/Templates", "Components", filename, ending);
     }
 
     /**
@@ -54,7 +54,7 @@ abstract public class ContentPart extends Part {
     protected String readScriptTemplate(String filename, String ending) {
         String result = "";
         result += "<script>";
-        result += readRessource("Scripts", "", filename, ending);
+        result += readRessource("src/main/webapp/assets/Scripts", "", filename, ending);
         result += "</script>";
         return result;
     }

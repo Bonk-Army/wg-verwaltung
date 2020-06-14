@@ -34,7 +34,7 @@ public abstract class HTMLPart extends Part {
      * @return the content of the File
      */
     protected String readHTMLTemplate(String filename, String ending) {
-        return readRessource("Templates", "HTMLComponents", filename, ending);
+        return readRessource("src/main/webapp/assets/Templates", "HTMLComponents", filename, ending);
     }
 
     /**
