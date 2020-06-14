@@ -51,7 +51,8 @@ public class Login extends Servlet {
         String userId = isRegister ? bean.register(username, password, email) : bean.login(username, password);
 
         if(!userId.isEmpty()){
-            //TODO redirect to homepage
+            //Redirect user to home page
+            response.sendRedirect("/de/home/");
         } else {
             System.out.println("error");
             // Show error page via forward
