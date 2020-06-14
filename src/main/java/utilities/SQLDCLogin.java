@@ -143,7 +143,7 @@ public class SQLDCLogin extends SQLDatabaseConnection {
     public static String getUsernameByEmail(String email) {
         String username = "";
 
-        ResultSet rs = executeQuery("SELECT username FROM users WHERE email=" + email);
+        ResultSet rs = executeQuery("SELECT username FROM users WHERE email='" + email + "'");
 
         try {
             while (rs.next()) {

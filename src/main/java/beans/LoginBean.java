@@ -10,29 +10,31 @@ import java.util.List;
  * Bean that handles all backend logic and database callouts required for user login and registration.
  */
 public class LoginBean {
-    // Variables
-
-    // Public Methods
-
     /**
      * Called by LoginServlet upon login action from user. Returns user id in case of successfull login, otherwise
      * returns an empty String
      *
      * @param username The entered username
      * @param password The entered password
-     * @return The user id or an empty String.
+     * @return The status of the request
      */
-    public String login(String username, String password) {
+    public ErrorCodes login(String username, String password) {
+        if (!RegexHelper.checkUsername(username)) {
+            return ErrorCodes.WRONGUNAME;
+        }
+
         String salt = SQLDCLogin.getPasswordSalt(username);
         String hash = SQLDCLogin.getPasswordHash(username);
 
         if (!salt.isEmpty() && !hash.isEmpty()) {
             String newHash = PasswordHasher.hashPassword(password, salt);
 
-            return newHash.equals(hash) ? getUserId(username) : "";
+            //Login was either successful or one of the entered params was wrong
+            return newHash.equals(hash) ? ErrorCodes.SUCCESS : ErrorCodes.WRONGENTRY;
         }
 
-        return "";
+        //Something failed server-side, return FAILURE
+        return ErrorCodes.FAILURE;
     }
 
     /**
@@ -42,9 +44,9 @@ public class LoginBean {
      * @param username The entered username (must not exist yet)
      * @param password The entered password
      * @param email    The entered email (must not exist yet)
-     * @return The user id or an empty String.
+     * @return The status of the request
      */
-    public String register(String username, String password, String email) {
+    public ErrorCodes register(String username, String password, String email) {
         //Generate random salt
         String salt = PasswordHasher.generateSalt();
 
@@ -62,13 +64,14 @@ public class LoginBean {
                 String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
                 MailSender.sendVerificationMail(email, username, verifyLink);
 
-                // And return the new user id:
-                return SQLDCLogin.getUserId(username);
+                // And return success
+                return ErrorCodes.SUCCESS;
             }
-            return "";
+            // If something failed server-side, return FAILURE
+            return ErrorCodes.FAILURE;
         } else {
-            //If either already exists, return an empty String
-            return "";
+            //If either already exists, WRONGENTRY
+            return ErrorCodes.WRONGENTRY;
         }
 
     }
@@ -134,12 +137,13 @@ public class LoginBean {
     }
 
     /**
-     * Fetches the saved user id for the given username from sql
+     * Fetches the saved user id for the given username from sql.
+     * Public because we need to access it from the Login Servlet
      *
      * @param username The username of the required id
      * @return The ID as a String
      */
-    private String getUserId(String username) {
+    public String getUserId(String username) {
         return SQLDCLogin.getUserId(username);
     }
 
@@ -166,8 +170,4 @@ public class LoginBean {
 
         return !usedEmails.contains(email);
     }
-
-    // Getter and Setter
-
-    // getUser() { return this.User; }
 }
