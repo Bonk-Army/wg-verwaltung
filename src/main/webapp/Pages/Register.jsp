@@ -13,7 +13,9 @@
     <title>Register mit JSP HURENSOHNTECHNOLOGIE</title>
     <%@include file="../assets/Templates/Imports/Bootstrap.jsp" %>
     <script><%@include file="../assets/Scripts/register.js" %></script>
+    <script><%@include file="../assets/Scripts/password.js" %></script>
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Login.css">
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/password.css">
 </head>
 <body>
 <%@include file="../assets/Templates/Components/Register.jsp" %>

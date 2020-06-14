@@ -8,8 +8,9 @@
         <input name="lastName" type="name" id="lastName" class="form-control" placeholder="Nachname" required autofocus>
         <label for="username" class="sr-only">Benutzername</label>
         <input name="username" type="user" id="username" class="form-control" placeholder="Benutzername" required autofocus>
+        <div id="strengthbar"><div id="bar" class="bar0"></div></div>
         <label for="password" class="sr-only">Passwort</label>
-        <input name="password" type="password" id="password" class="form-control" placeholder="Passwort" required>
+        <input name="password" onkeyup="checkPassword()" type="password" id="password" class="form-control" placeholder="Passwort" required st>
         <label for="password2" class="sr-only">Passwort wiederholen</label>
         <input type="password" id="password2" class="form-control" placeholder="Passwort wiederholen" required>
         <label for="email" class="sr-only">E-Mail</label>
