@@ -15,10 +15,11 @@ public class SQLDCLogin extends SQLDatabaseConnection {
      * @param verificationCode The randomly generated code that the user needs to verify his email
      * @return If the user has been created successful. If not, the user has to be informed!
      */
-    public static boolean createUser(String username, String email, String pwhash, String pwsalt, String verificationCode) {
+    public static boolean createUser(String username, String email, String pwhash, String pwsalt, String verificationCode, String firstName, String lastName) {
         try {
-            ResultSet rs = executeQuery(("INSERT INTO users (username, email, pwhash, pwsalt, verificationCode)"
-                    + "VALUES ('" + username + "', '" + email + "', '" + pwhash + "', '" + pwsalt + "', '" + verificationCode + "')"));
+            ResultSet rs = executeQuery(("INSERT INTO users (username, email, pwhash, pwsalt, verificationCode, firstName, lastName)"
+                    + "VALUES ('" + username + "', '" + email + "', '" + pwhash + "', '"
+                    + pwsalt + "', '" + verificationCode + "', '" + firstName + "', '" + lastName + "')"));
 
             return true;
         } catch (Exception e) {
@@ -276,5 +277,47 @@ public class SQLDCLogin extends SQLDatabaseConnection {
         }
 
         return false;
+    }
+
+    /**
+     * Return the first name of the user by his username
+     *
+     * @param username The username of the user
+     * @return The first name of the user as a String
+     */
+    public static String getFirstName(String username) {
+        String firstName = "";
+        try {
+            ResultSet rs = executeQuery("SELECT firstName FROM users WHERE username='" + username + "'");
+
+            while (rs.next()) {
+                firstName = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return firstName;
+    }
+
+    /**
+     * Return the first name of the user by his username
+     *
+     * @param username The username of the user
+     * @return The first name of the user as a String
+     */
+    public static String getLastName(String username) {
+        String lastName = "";
+        try {
+            ResultSet rs = executeQuery("SELECT lastName FROM users WHERE username='" + username + "'");
+
+            while (rs.next()) {
+                lastName = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lastName;
     }
 }

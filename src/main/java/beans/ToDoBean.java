@@ -17,7 +17,7 @@ public class ToDoBean {
      * @return If the to-do has been created successfully. If not, the user has to be informed!
      */
     public static boolean createTodo(String task, String userId, String wgId, Date dateDue) {
-        if (RegexHelper.checkUsername(task)) {
+        if (RegexHelper.checkString(task)) {
             return SQLDCTodo.createTodo(task, userId, wgId, dateDue);
         }
         return false;
