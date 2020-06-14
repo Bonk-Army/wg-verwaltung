@@ -108,7 +108,7 @@ public class MailSender {
      */
     public static enum Mailtypes {
         VERIFY("d-48e403a281cb4e9382351342188b786b"),
-        RESETPW("d-d6e6140c08c343fdb1c1136b07c36829")
+        RESETPW("d-d6e6140c08c343fdb1c1136b07c36829");
 
         private String templateID;
 
