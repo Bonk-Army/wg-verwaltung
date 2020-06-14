@@ -1,6 +1,7 @@
 package logic;
 
 import beans.LoginBean;
+import utilities.ErrorCodes;
 import view.parts.ContentSubparts.*;
 import view.servlets.Servlet;
 
@@ -48,15 +49,25 @@ public class Login extends Servlet {
             stayLoggedIn = Boolean.valueOf(request.getParameter("keepSignedIn"));
         }
 
-        String userId = isRegister ? bean.register(username, password, email) : bean.login(username, password);
+        ErrorCodes status = isRegister ? bean.register(username, password, email) : bean.login(username, password);
 
-        if(!userId.isEmpty()){
-            //Redirect user to home page
-            response.sendRedirect("/de/home/");
-        } else {
-            System.out.println("error");
-            // Show error page via forward
-            request.getServletContext().getRequestDispatcher("/de/login/error.jsp").forward(request, response);
+        //UserId required for session cookie
+        String userId = "";
+        switch (status) {
+            case SUCCESS:
+                // Log the user in, save a cookie and redirect him to the home page
+                userId = bean.getUserId(username);
+                response.sendRedirect("/de/home/");
+                //TODO Save cookie
+                break;
+            case WRONGENTRY:
+                // Return "wrong entry" error page
+                request.getServletContext().getRequestDispatcher("/de/login/error.jsp").forward(request, response);
+                break;
+            case FAILURE:
+                // Return "try again" error page
+                request.getServletContext().getRequestDispatcher("/de/login/error.jsp").forward(request, response);
+                break;
         }
     }
 }
