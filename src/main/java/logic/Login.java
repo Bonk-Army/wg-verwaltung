@@ -63,13 +63,13 @@ public class Login extends HttpServlet {
                 // Log the user in, save a cookie and redirect him to the home page
                 userId = bean.getUserId(username);
                 String sessionIdentifier = bean.getSessionIdentifier(username);
-                response.sendRedirect("/home/");
                 Cookie sessionCookie = new Cookie("session", (sessionIdentifier));
                 int cookieAge = stayLoggedIn ? 2592000 : -1;
                 // If user wants to stay logged in, make it live 30 days (2592000 seconds),
                 // otherwise let it be a session cookie
                 sessionCookie.setMaxAge(cookieAge);
                 response.addCookie(sessionCookie);
+                response.sendRedirect("/home/");
                 break;
             case WRONGENTRY:
                 // Return "wrong entry" error page
