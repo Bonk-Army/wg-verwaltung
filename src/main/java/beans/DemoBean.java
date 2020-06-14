@@ -1,3 +1,7 @@
+package beans;
+
+import utilities.ErrorCodes;
+
 import java.util.Date;
 
 public class DemoBean {
@@ -6,11 +10,15 @@ public class DemoBean {
     public int kontoguthaben = 100;
     public String vorname = "Max";
     public String nachname = "Mustermann";
-    Date date;
+    public Date date;
     public String todo;
 
     public DemoBean(){
         date = new Date();
          todo = "Wisch raus du Alpaka!;Nico;"+date.toString()+";";
+    }
+
+    public ErrorCodes getStatus (){
+        return ErrorCodes.FAILURE;
     }
 }

@@ -165,4 +165,17 @@
         <servlet-name>VerifyLogic</servlet-name>
         <url-pattern>/verify</url-pattern>
     </servlet-mapping>
+
+
+
+    <!-- EXPERIMENTAL -->
+    <servlet>
+        <servlet-name>ResponseLogin</servlet-name>
+        <jsp-file>/Pages/Login/ResponseLogin.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResponseLogin</servlet-name>
+        <url-pattern>/responseLogin</url-pattern>
+    </servlet-mapping>
+
 </web-app>
