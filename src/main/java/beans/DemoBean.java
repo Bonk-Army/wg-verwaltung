@@ -10,7 +10,7 @@ public class DemoBean {
     public int kontoguthaben = 100;
     public String vorname = "Max";
     public String nachname = "Mustermann";
-    Date date;
+    public Date date;
     public String todo;
 
     public DemoBean(){
