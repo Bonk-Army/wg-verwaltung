@@ -68,15 +68,16 @@ public class LoginBean {
         String hash = PasswordHasher.hashPassword(password, salt);
 
         //Call SQL to ask if username / email is unique. If unique, it continues registration process, else it stops
-        if(!RegexHelper.checkString(username) || !RegexHelper.checkString(firstName) ||!RegexHelper.checkString(lastName) ||!RegexHelper.checkEmail(email)){
+        if (!RegexHelper.checkString(username) || !RegexHelper.checkString(firstName) || !RegexHelper.checkString(lastName) || !RegexHelper.checkEmail(email)) {
             return ErrorCodes.WRONGENTRY;
         } else {
             if (isUsernameUnique(username) && isEmailUnique(email)) {
                 //Create new user. Generate random, 10-digit verification code for email verification.
                 String verificationCode = new RandomStringGenerator(10).nextString();
+                String cookiePostfix = new RandomStringGenerator(21).nextString();
 
                 // If the user creation was successful, send an email and continue registration
-                if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName)) {
+                if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfix)) {
                     // Now send an email to the user with the verification link
                     String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
                     String fullName = firstName + " " + lastName;
@@ -172,6 +173,25 @@ public class LoginBean {
      */
     public String getUserId(String username) {
         return SQLDCLogin.getUserId(username);
+    }
+
+    /**
+     * Returns the session identifier for the user
+     *
+     * @param username The username
+     * @return The session identifier
+     */
+    public String getSessionIdentifier(String username) {
+        if (RegexHelper.checkString(username)) {
+            String userId = SQLDCLogin.getUserId(username);
+            String cookiePostfix = SQLDCLogin.getCookiePostfix(username);
+
+            if (!userId.isEmpty() && !cookiePostfix.isEmpty()) {
+                return userId + "-" + cookiePostfix;
+            }
+        }
+
+        return "";
     }
 
     /**

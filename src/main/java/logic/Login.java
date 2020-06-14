@@ -4,6 +4,7 @@ import beans.LoginBean;
 import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,6 +45,7 @@ public class Login extends HttpServlet {
         // (false = session cookie, true = cookie that lasts 30 days or so)
 
         if (isRegister) {
+            // TODO Check for bad parsed characters (ÄÖÜ) (Ticket WGV-96)
             email = request.getParameter("email");
             firstName = request.getParameter("firstName");
             lastName = request.getParameter("lastName");
@@ -59,8 +61,10 @@ public class Login extends HttpServlet {
             case SUCCESS:
                 // Log the user in, save a cookie and redirect him to the home page
                 userId = bean.getUserId(username);
+                String sessionIdentifier = bean.getSessionIdentifier(username);
                 response.sendRedirect("/home/");
-                //TODO Save cookie
+                Cookie sessionCookie = new Cookie("session", (sessionIdentifier));
+                response.addCookie(sessionCookie);
                 break;
             case WRONGENTRY:
                 // Return "wrong entry" error page
@@ -68,7 +72,6 @@ public class Login extends HttpServlet {
                 break;
             case WRONGUNAME:
                 // Return "wrong entry" error page
-                // TODO Change to page that only says "wrong username"
                 request.getServletContext().getRequestDispatcher("/responseWrongUName").forward(request, response);
                 break;
             case FAILURE:

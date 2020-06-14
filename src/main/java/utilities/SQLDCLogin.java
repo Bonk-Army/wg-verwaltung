@@ -15,11 +15,12 @@ public class SQLDCLogin extends SQLDatabaseConnection {
      * @param verificationCode The randomly generated code that the user needs to verify his email
      * @return If the user has been created successful. If not, the user has to be informed!
      */
-    public static boolean createUser(String username, String email, String pwhash, String pwsalt, String verificationCode, String firstName, String lastName) {
+    public static boolean createUser(String username, String email, String pwhash, String pwsalt, String verificationCode, String firstName, String lastName, String cookiePostfix) {
         try {
-            ResultSet rs = executeQuery(("INSERT INTO users (username, email, pwhash, pwsalt, verificationCode, firstName, lastName)"
+            ResultSet rs = executeQuery(("INSERT INTO users (username, email, pwhash, pwsalt, verificationCode, firstName, lastName, cookiePostfix)"
                     + "VALUES ('" + username + "', '" + email + "', '" + pwhash + "', '"
-                    + pwsalt + "', '" + verificationCode + "', '" + firstName + "', '" + lastName + "')"));
+                    + pwsalt + "', '" + verificationCode + "', '" + firstName + "', '"
+                    + lastName + "', '" + cookiePostfix + "')"));
 
             return true;
         } catch (Exception e) {
@@ -319,5 +320,26 @@ public class SQLDCLogin extends SQLDatabaseConnection {
         }
 
         return lastName;
+    }
+
+    /**
+     * Return the cookie postfix required for the session identifier for a specific user
+     *
+     * @param username The username of the user
+     * @return The cookie postfix
+     */
+    public static String getCookiePostfix(String username) {
+        String postfix = "";
+        try {
+            ResultSet rs = executeQuery("SELECT cookiePostfix FROM users WHERE username='" + username + "'");
+
+            while (rs.next()) {
+                postfix = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return postfix;
     }
 }
