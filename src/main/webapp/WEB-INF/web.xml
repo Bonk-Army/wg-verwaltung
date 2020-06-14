@@ -52,6 +52,14 @@
         <servlet-name>Register</servlet-name>
         <jsp-file>/Pages/Register.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>Home</servlet-name>
+        <jsp-file>/Pages/Home.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ToDo</servlet-name>
+        <jsp-file>/Pages/Register.jsp</jsp-file>
+    </servlet>
     <!--
         dP                          oo
         88
@@ -114,6 +122,14 @@
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ToDo</servlet-name>
+        <url-pattern>/todo</url-pattern>
     </servlet-mapping>
     <!--
             dP                          oo
