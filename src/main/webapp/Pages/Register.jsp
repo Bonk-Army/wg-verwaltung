@@ -12,6 +12,7 @@
     <%@include file="../assets/Templates/Imports/Fonts.jsp" %>
     <title>Register mit JSP HURENSOHNTECHNOLOGIE</title>
     <%@include file="../assets/Templates/Imports/Bootstrap.jsp" %>
+    <script><%@include file="../assets/Scripts/register.js" %></script>
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Login.css">
 </head>
 <body>

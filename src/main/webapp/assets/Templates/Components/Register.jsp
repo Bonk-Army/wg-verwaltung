@@ -15,6 +15,7 @@
         <label for="email" class="sr-only">E-Mail</label>
         <input name="email" type="email" id="email" class="form-control" placeholder="E-Mail-Adresse" required>
         <input name="isRegister" type="checkbox" checked="checked" hidden="hidden" id="isRegister">
-        <button id="registerButton" class="btn btn-lg btn-primary btn-block inactive" type="submit">Registrieren</button>
+        <button id="visibleRegisterButton" class="btn btn-lg btn-primary btn-block" type="button">Registrieren</button>
+        <button id="registerButton" class="btn btn-lg btn-primary btn-block" type="submit" style="display: none;">Abschicken</button>
     </form>
 </div>
