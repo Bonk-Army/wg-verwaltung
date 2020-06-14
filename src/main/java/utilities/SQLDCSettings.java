@@ -48,6 +48,13 @@ public class SQLDCSettings extends SQLDatabaseConnection {
         return "";
     }
 
+    /**
+     * Set the wg ID of an user
+     *
+     * @param wgId   the new wg ID
+     * @param userId the user ID who changes the wg
+     * @return If the wg ID has been set successfully. If not, the user has to be informed!
+     */
     public static boolean setWgId(String wgId, String userId) {
         try {
             executeQuery(("UPDATE users SET wgId='" + wgId + "' WHERE userId=" + userId + "'"));
