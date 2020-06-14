@@ -18,6 +18,10 @@ public class LoginBean {
      * @return The user id or an empty String.
      */
     public String login(String username, String password) {
+        if (!RegexHelper.checkUsername(username)) {
+            return "";
+        }
+
         String salt = SQLDCLogin.getPasswordSalt(username);
         String hash = SQLDCLogin.getPasswordHash(username);
 
