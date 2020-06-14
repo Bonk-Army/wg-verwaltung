@@ -1,3 +1,5 @@
+import utilities.ErrorCodes;
+
 import java.util.Date;
 
 public class DemoBean {
@@ -12,5 +14,9 @@ public class DemoBean {
     public DemoBean(){
         date = new Date();
          todo = "Wisch raus du Alpaka!;Nico;"+date.toString()+";";
+    }
+
+    public ErrorCodes getStatus (){
+        return ErrorCodes.FAILURE;
     }
 }

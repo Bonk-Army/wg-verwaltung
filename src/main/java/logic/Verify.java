@@ -34,13 +34,13 @@ public class Verify extends HttpServlet {
 
         //If verification was successful, show success message. Otherwise show error.
         if (bean.verifyUser(username, verificationCode)) {
-            head.setPageName("Success!");
+            //head.setPageName("Success!");
             //TODO Change this
-            body.addContentPart(new Login());
+            //body.addContentPart(new Login());
         } else {
-            head.setPageName("Failure!");
+            //head.setPageName("Failure!");
             //TODO Change this
-            body.addContentPart(new Login());
+            //body.addContentPart(new Login());
         }
 
         //<head>
@@ -48,8 +48,8 @@ public class Verify extends HttpServlet {
         //</head>
 
         PrintWriter out = response.getWriter();
-        out.write(html.generateThisPart());
-        this.html.clear();
+        //out.write(html.generateThisPart());
+        //this.html.clear();
     }
 
     @Override
