@@ -3,17 +3,12 @@ package beans;
 // Imports
 
 import utilities.*;
-
 import java.util.List;
 
 /**
  * Bean that handles all backend logic and database callouts required for user login and registration.
  */
 public class LoginBean {
-    // Variables
-
-    // Public Methods
-
     /**
      * Called by LoginServlet upon login action from user. Returns user id in case of successfull login, otherwise
      * returns an empty String
@@ -166,8 +161,4 @@ public class LoginBean {
 
         return !usedEmails.contains(email);
     }
-
-    // Getter and Setter
-
-    // getUser() { return this.User; }
 }
