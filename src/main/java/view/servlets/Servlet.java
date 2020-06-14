@@ -1,6 +1,6 @@
 package view.servlets;
 
-import view.old.parts.HTMLSubparts.*;
+import view.parts.HTMLSubparts.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
