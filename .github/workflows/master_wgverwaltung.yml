@@ -37,3 +37,6 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ env.AZURE_WEBAPP_PUBLISH_PROFILE }}
         package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/target/*.war'
+
+    - name: 'Deploy to GitHub Packages'
+      run: mvn deploy -Dregistry=https://maven.pkg.github.com/Mueller-Patrick -Dtoken=GH_TOKEN
