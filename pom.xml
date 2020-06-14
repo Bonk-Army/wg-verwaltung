@@ -5,12 +5,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>de.dhbwka</groupId>
-  <artifactId>wgverwaltung</artifactId>
+  <artifactId>wg-verwaltung</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
 
   <name>wgverwaltung Maven Webapp</name>
-  <url>http://wgverwaltung.azurewebsites.net</url>
+  <url>https://wgverwaltung.azurewebsites.net</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
