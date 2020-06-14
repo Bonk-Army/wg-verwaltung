@@ -28,8 +28,8 @@ a:focus {
 }
 
 #sidebar.active {
-    min-width: 80px;
-    max-width: 80px;
+    min-width: 100px;
+    max-width: 100px;
     text-align: center;
 }
 
@@ -73,6 +73,11 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
+    background: #6d7fcc;
+}
+
+#sidebar.active .sidebar-header {
+    padding: 20px 5px 20px 5px;
     background: #6d7fcc;
 }
 
@@ -131,8 +136,8 @@ ul ul a {
 
 @media (max-width: 768px) {
     #sidebar {
-        min-width: 80px;
-        max-width: 80px;
+        min-width: 100px;
+        max-width: 100px;
         text-align: center;
         margin-left: 0px !important;
     }
@@ -146,6 +151,10 @@ ul ul a {
     }
     #sidebar.active {
         margin-left: 0 !important;
+    }
+    #sidebar .sidebar-header {
+        padding: 20px 5px 20px 5px;
+        background: #6d7fcc;
     }
     #sidebar .sidebar-header h3 {
         display: none;
@@ -179,7 +188,7 @@ ul ul a {
 
 #content {
     width: 100%;
-    padding: 20px;
+    padding: 40px 20px;
     min-height: 100vh;
     transition: all 0.3s;
 }
