@@ -4,6 +4,7 @@ import beans.LoginBean;
 import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,12 +45,14 @@ public class Login extends HttpServlet {
         // (false = session cookie, true = cookie that lasts 30 days or so)
 
         if (isRegister) {
+            // TODO Check for bad parsed characters (ÄÖÜ) (Ticket WGV-96)
             email = request.getParameter("email");
             firstName = request.getParameter("firstName");
             lastName = request.getParameter("lastName");
-        } else {
-            stayLoggedIn = Boolean.valueOf(request.getParameter("keepSignedIn"));
+            System.out.println(lastName);
         }
+
+        stayLoggedIn = Boolean.valueOf(request.getParameter("keepSignedIn"));
 
         ErrorCodes status = isRegister ? bean.register(username, password, email, firstName, lastName) : bean.login(username, password);
 
@@ -59,8 +62,14 @@ public class Login extends HttpServlet {
             case SUCCESS:
                 // Log the user in, save a cookie and redirect him to the home page
                 userId = bean.getUserId(username);
+                String sessionIdentifier = bean.getSessionIdentifier(username);
+                Cookie sessionCookie = new Cookie("session", (sessionIdentifier));
+                int cookieAge = stayLoggedIn ? 2592000 : -1;
+                // If user wants to stay logged in, make it live 30 days (2592000 seconds),
+                // otherwise let it be a session cookie
+                sessionCookie.setMaxAge(cookieAge);
+                response.addCookie(sessionCookie);
                 response.sendRedirect("/home/");
-                //TODO Save cookie
                 break;
             case WRONGENTRY:
                 // Return "wrong entry" error page
@@ -68,7 +77,6 @@ public class Login extends HttpServlet {
                 break;
             case WRONGUNAME:
                 // Return "wrong entry" error page
-                // TODO Change to page that only says "wrong username"
                 request.getServletContext().getRequestDispatcher("/responseWrongUName").forward(request, response);
                 break;
             case FAILURE:
