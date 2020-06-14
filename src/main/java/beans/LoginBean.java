@@ -10,7 +10,7 @@ import java.util.List;
  * Bean that handles all backend logic and database callouts required for user login and registration.
  */
 public class LoginBean {
-    public ErrorCodes status;
+    private ErrorCodes status;
 
     public LoginBean() {
 
@@ -184,5 +184,9 @@ public class LoginBean {
         List<String> usedEmails = SQLDCLogin.getAllEmails();
 
         return !usedEmails.contains(email);
+    }
+
+    public ErrorCodes getStatus(){
+        return this.status;
     }
 }
