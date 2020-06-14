@@ -19,6 +19,10 @@ public class LoginBean {
      * @return The status of the request
      */
     public ErrorCodes login(String username, String password) {
+        if (!RegexHelper.checkUsername(username)) {
+            return ErrorCodes.WRONGUNAME;
+        }
+
         String salt = SQLDCLogin.getPasswordSalt(username);
         String hash = SQLDCLogin.getPasswordHash(username);
 
