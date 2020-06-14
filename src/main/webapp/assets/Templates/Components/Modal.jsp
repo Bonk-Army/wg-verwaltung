@@ -16,7 +16,7 @@
                 <input type="email" id="eMail" class="form-control" placeholder="E-Mail-Adresse" name="email" required>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary odom-submit">Passwort zurücksetzen</button>
+                    <button type="submit" class="btn btn-primary odom-submit">Passwort zur&uuml;cksetzen</button>
                 </div>
             </form>
         </div>
