@@ -8,7 +8,7 @@ public class SQLDCSettings extends SQLDatabaseConnection {
      *
      * @param name      the name of the wg
      * @param accessKey the access key of the wg
-     * @return If the to-do has been created successfully. If not, the user has to be informed!
+     * @return If the wg has been created successfully. If not, the user has to be informed!
      */
     public static boolean createWg(String name, String accessKey) {
         try {
@@ -24,6 +24,12 @@ public class SQLDCSettings extends SQLDatabaseConnection {
         return false;
     }
 
+    /**
+     * Return the wg ID for an access key
+     *
+     * @param accessKey the access key of the wg
+     * @return the wg ID
+     */
     public static String getWgId(String accessKey) {
         String wgId = "";
 
@@ -35,12 +41,21 @@ public class SQLDCSettings extends SQLDatabaseConnection {
                 }
                 return wgId;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return "";
     }
 
+    public static boolean setWgId(String wgId, String userId) {
+        try {
+            executeQuery(("UPDATE users SET wgId='" + wgId + "' WHERE userId=" + userId + "'"));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 }
