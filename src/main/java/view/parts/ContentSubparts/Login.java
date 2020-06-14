@@ -34,5 +34,7 @@ public class Login extends ContentPart {
      */
     private void generateContent() {
         this.content = readComponentTemplate("Login", "html");
+        this.content += readComponentTemplate("Modal", "html");
+        this.content += readScriptTemplate("sidebar", "js");
     }
 }

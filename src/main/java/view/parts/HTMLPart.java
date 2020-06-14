@@ -22,6 +22,10 @@ public abstract class HTMLPart extends Part {
         this.components.add(p);
     }
 
+    public void resetPopUp() {
+
+    }
+
     /**
      * Reading out a template out of the "ressources/Templates/HTMLComponents" folder
      *
