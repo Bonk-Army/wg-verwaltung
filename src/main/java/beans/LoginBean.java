@@ -60,7 +60,7 @@ public class LoginBean {
      * @param email    The entered email (must not exist yet)
      * @return The status of the request
      */
-    public ErrorCodes register(String username, String password, String email) {
+    public ErrorCodes register(String username, String password, String email, String firstName, String lastName) {
         //Generate random salt
         String salt = PasswordHasher.generateSalt();
 
@@ -68,7 +68,7 @@ public class LoginBean {
         String hash = PasswordHasher.hashPassword(password, salt);
 
         //Call SQL to ask if username / email is unique. If unique, it continues registration process, else it stops
-        if (!RegexHelper.checkString(username) || !RegexHelper.checkEmail(email)) {
+        if(!RegexHelper.checkString(username) || !RegexHelper.checkString(firstName) ||!RegexHelper.checkString(lastName) ||!RegexHelper.checkEmail(email)){
             return ErrorCodes.WRONGENTRY;
         } else {
             if (isUsernameUnique(username) && isEmailUnique(email)) {
@@ -76,10 +76,11 @@ public class LoginBean {
                 String verificationCode = new RandomStringGenerator(10).nextString();
 
                 // If the user creation was successful, send an email and continue registration
-                if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode)) {
+                if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName)) {
                     // Now send an email to the user with the verification link
                     String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
-                    MailSender.sendVerificationMail(email, username, verifyLink);
+                    String fullName = firstName + " " + lastName;
+                    MailSender.sendVerificationMail(email, fullName, verifyLink);
 
                     // And return success
                     return ErrorCodes.SUCCESS;
@@ -128,7 +129,8 @@ public class LoginBean {
             if (SQLDCLogin.setPasswordKey(email, randomKey)) {
                 String username = SQLDCLogin.getUsernameByEmail(email);
                 String resetLink = "resetPassword?uname=" + username + "&key=" + randomKey;
-                MailSender.sendResetPasswordMail(email, username, resetLink);
+                String fullName = SQLDCLogin.getFirstName(username) + " " + SQLDCLogin.getLastName(username);
+                MailSender.sendResetPasswordMail(email, fullName, resetLink);
                 return ErrorCodes.SUCCESS;
             }
             return ErrorCodes.FAILURE;

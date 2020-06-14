@@ -38,16 +38,20 @@ public class Login extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = "";
+        String firstName = "";
+        String lastName = "";
         Boolean stayLoggedIn = false;   // This determines the lifetime of the cookie that we send to the user
         // (false = session cookie, true = cookie that lasts 30 days or so)
 
         if (isRegister) {
             email = request.getParameter("email");
+            firstName = request.getParameter("firstName");
+            lastName = request.getParameter("lastName");
         } else {
             stayLoggedIn = Boolean.valueOf(request.getParameter("keepSignedIn"));
         }
 
-        ErrorCodes status = isRegister ? bean.register(username, password, email) : bean.login(username, password);
+        ErrorCodes status = isRegister ? bean.register(username, password, email, firstName, lastName) : bean.login(username, password);
 
         //UserId required for session cookie
         String userId = "";
