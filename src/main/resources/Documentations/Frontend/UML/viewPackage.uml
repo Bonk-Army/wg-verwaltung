@@ -3,17 +3,17 @@
   <ID>JAVA</ID>
   <OriginalElement>view</OriginalElement>
   <nodes>
-    <node x="603.0" y="498.0">view.parts.ContentSubparts.SideBar</node>
     <node x="761.25" y="0.0">view.parts.Part</node>
+    <node x="603.0" y="498.0">view.parts.ContentSubparts.SideBar</node>
     <node x="1424.0" y="990.0">view.servlets.subservlets.Shopping</node>
     <node x="795.0" y="498.0">view.parts.ContentSubparts.TemplateFromPath</node>
     <node x="1068.0" y="990.0">view.servlets.subservlets.Financial</node>
+    <node x="1291.0" y="519.0">view.parts.HTMLSubparts.Body</node>
     <node x="356.0" y="969.0">view.servlets.subservlets.Login</node>
     <node x="1398.0" y="422.0">view.parts.HTMLSubparts.Head</node>
-    <node x="1291.0" y="519.0">view.parts.HTMLSubparts.Body</node>
     <node x="1092.0" y="466.0">view.parts.HTMLSubparts.HTML</node>
-    <node x="411.0" y="498.0">view.parts.ContentSubparts.Register</node>
     <node x="712.0" y="990.0">view.servlets.subservlets.ToDo</node>
+    <node x="411.0" y="498.0">view.parts.ContentSubparts.Register</node>
     <node x="192.0" y="498.0">view.parts.ContentSubparts.TemplateFromString</node>
     <node x="349.5" y="146.0">view.parts.ContentPart</node>
     <node x="1214.6439393939393" y="157.0">view.parts.HTMLPart</node>
@@ -47,12 +47,6 @@
       <point x="1258.4772727272725" y="402.0" />
       <point x="-87.66666666666667" y="102.0" />
     </edge>
-    <edge source="view.parts.ContentSubparts.TemplateFromPath" target="view.parts.ContentPart">
-      <point x="0.0" y="-48.0" />
-      <point x="933.5" y="392.0" />
-      <point x="615.0" y="392.0" />
-      <point x="118.0" y="113.0" />
-    </edge>
     <edge source="view.servlets.subservlets.Shopping" target="view.servlets.Servlet">
       <point x="0.0" y="-38.0" />
       <point x="1592.0" y="939.0" />
@@ -64,6 +58,12 @@
       <point x="1334.5" y="402.0" />
       <point x="1346.1439393939393" y="402.0" />
       <point x="0.0" y="102.0" />
+    </edge>
+    <edge source="view.parts.ContentSubparts.TemplateFromPath" target="view.parts.ContentPart">
+      <point x="0.0" y="-48.0" />
+      <point x="933.5" y="392.0" />
+      <point x="615.0" y="392.0" />
+      <point x="118.0" y="113.0" />
     </edge>
     <edge source="view.servlets.subservlets.ToDo" target="view.servlets.Servlet">
       <point x="0.0" y="-38.0" />
@@ -99,18 +99,18 @@
       <point x="947.1999999999999" y="949.0" />
       <point x="67.19999999999993" y="102.0" />
     </edge>
-    <edge source="view.parts.ContentSubparts.Register" target="view.parts.ContentPart">
-      <point x="0.0" y="-48.0" />
-      <point x="0.0" y="113.0" />
-    </edge>
     <edge source="view.parts.ContentSubparts.Login" target="view.parts.ContentPart">
       <point x="0.0" y="-91.0" />
       <point x="86.0" y="392.0" />
       <point x="379.0" y="392.0" />
       <point x="-118.0" y="113.0" />
     </edge>
+    <edge source="view.parts.ContentSubparts.Register" target="view.parts.ContentPart">
+      <point x="0.0" y="-48.0" />
+      <point x="0.0" y="113.0" />
+    </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.5546522131887985" x="880.0" y="543.5" />
+  <settings layout="Hierarchic Group" zoom="0.574585635359116" x="898.0" y="533.0" />
   <SelectedNodes>
     <node>view.parts.ContentSubparts.SideBar</node>
   </SelectedNodes>
