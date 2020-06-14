@@ -11,7 +11,7 @@
         <label for="password" class="sr-only">Passwort</label>
         <input name="password" type="password" id="password" class="form-control" placeholder="Passwort" required>
         <label for="password2" class="sr-only">Passwort wiederholen</label>
-        <input name="password2" type="password" id="password2" class="form-control" placeholder="Passwort wiederholen" required>
+        <input type="password" id="password2" class="form-control" placeholder="Passwort wiederholen" required>
         <label for="email" class="sr-only">E-Mail</label>
         <input name="email" type="email" id="email" class="form-control" placeholder="E-Mail-Adresse" required>
         <input name="isRegister" type="checkbox" checked="checked" hidden="hidden" id="isRegister">
