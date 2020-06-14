@@ -11,6 +11,6 @@
     <title>Fehler</title>
 </head>
 <body>
-    Dein eingegebener Username oder das Passwort sind nicht korrekt. Bitte versuche es erneut.
+    Dein eingegebener Username oder das Passwort sind nicht korrekt. Bitte überprüfe deine Eingaben und versuche es nochmal.
 </body>
 </html>

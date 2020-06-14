@@ -1,6 +1,7 @@
 package logic;
 
 import beans.LoginBean;
+import utilities.ErrorCodes;
 import view.servlets.Servlet;
 
 import javax.servlet.RequestDispatcher;
@@ -20,8 +21,6 @@ public class Reset extends Servlet {
         //RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/changePassword");
         //dispatcher.forward(request, response);
         //DEPRECATED???
-
-        //TODO: @GUI-TEAM create page for changing password
     }
 
     @Override
@@ -30,10 +29,21 @@ public class Reset extends Servlet {
 
         String email = request.getParameter("email");
 
-        if (bean.sendPasswordResetLink(email)) {
-            //TODO show success page
-        } else {
-            //TODO show error page
+        ErrorCodes status = bean.sendPasswordResetLink(email);
+
+        switch(status){
+            case SUCCESS:
+                // Show success page
+                request.getServletContext().getRequestDispatcher("/de/login/reset-success.jsp").forward(request, response);
+                break;
+            case WRONGEMAIL:
+                // Show wrong email page
+                request.getServletContext().getRequestDispatcher("/de/login/reset-wrong-credentials.jsp").forward(request, response);
+                break;
+            case FAILURE:
+                // Show server error page
+                request.getServletContext().getRequestDispatcher("/de/login/reset-server-error.jsp").forward(request, response);
+                break;
         }
     }
 }
