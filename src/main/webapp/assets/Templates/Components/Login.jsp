@@ -1,7 +1,6 @@
 <div class="text-center">
-    <!--img src="/assets/Images/lama.png" style="width: 130px"-->
+    <img src="/assets/Images/lama.png" style="width: 130px">
     <form method="POST" action="loginLogic" class="form-signin">
-        <p style="font-size:100px">&#x1F999;</p>
         <h1 class="h3 mb-3 font-weight-normal">Bitte melde dich an</h1>
         <label for="username" class="sr-only">Benutzername</label>
         <input name="username" type="user" id="username" class="form-control" placeholder="Benutzername" required autofocus>

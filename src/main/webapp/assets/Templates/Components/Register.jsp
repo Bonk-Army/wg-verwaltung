@@ -1,8 +1,11 @@
 <div class="text-center">
-    <!--img src="/assets/Images/lama.png" style="width: 130px"-->
+    <img src="/assets/Images/lama.png" style="width: 130px">
     <form class="form-signin" method="POST" action="loginLogic">
-        <p style="font-size:100px">&#x1F999;</p>
         <h1 class="h3 mb-3 font-weight-normal">Bitte registriere dich</h1>
+        <label for="firstName" class="sr-only">Vorname</label>
+        <input name="firstName" type="user" id="firstName" class="form-control" placeholder="Vorname" required autofocus>
+        <label for="lastName" class="sr-only">Nachname</label>
+        <input name="lastName" type="user" id="lastName" class="form-control" placeholder="Nachname" required autofocus>
         <label for="username" class="sr-only">Benutzername</label>
         <input name="username" type="user" id="username" class="form-control" placeholder="Benutzername" required autofocus>
         <label for="password" class="sr-only">Passwort</label>
