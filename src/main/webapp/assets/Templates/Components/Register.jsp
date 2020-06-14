@@ -14,8 +14,14 @@
         <input type="password" id="password2" class="form-control" placeholder="Passwort wiederholen" required>
         <label for="email" class="sr-only">E-Mail</label>
         <input name="email" type="email" id="email" class="form-control" placeholder="E-Mail-Adresse" required>
+        <div class="checkbox mb-3">
+            <label>
+                <input name="keepSignedIn" type="checkbox" value="remember-me"> Eingeloggt bleiben
+            </label>
+        </div>
         <input name="isRegister" type="checkbox" checked="checked" hidden="hidden" id="isRegister">
         <button id="visibleRegisterButton" class="btn btn-lg btn-primary btn-block" type="button">Registrieren</button>
+        <a href="/" style="text-decoration: none"><button id="loginPage" class="btn btn-lg btn-primary btn-block" type="button" style="margin-top: 10px">zur&uuml;ck zur Login-Seite</button></a>
         <button id="registerButton" class="btn btn-lg btn-primary btn-block" type="submit" style="display: none;">Abschicken</button>
     </form>
 </div>
