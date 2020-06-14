@@ -1,17 +1,15 @@
 package logic;
 
 import beans.LoginBean;
-import view.parts.ContentSubparts.Login;
-import view.parts.ContentSubparts.TemplateFromPath;
-import view.servlets.Servlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class Verify extends Servlet {
+public class Verify extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     public Verify() {
@@ -33,8 +31,6 @@ public class Verify extends Servlet {
 
         String verificationCode = request.getParameter("key");
         String username = request.getParameter("uname");
-
-        head.addContentPart(new TemplateFromPath("CustomHTMLElements", "head", "html"));
 
         //If verification was successful, show success message. Otherwise show error.
         if (bean.verifyUser(username, verificationCode)) {

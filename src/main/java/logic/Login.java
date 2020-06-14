@@ -2,16 +2,14 @@ package logic;
 
 import beans.LoginBean;
 import utilities.ErrorCodes;
-import view.parts.ContentSubparts.*;
-import view.servlets.Servlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
-public class Login extends Servlet {
+public class Login extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     public Login() {

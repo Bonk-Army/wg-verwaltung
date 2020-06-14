@@ -10,6 +10,12 @@ import java.util.List;
  * Bean that handles all backend logic and database callouts required for user login and registration.
  */
 public class LoginBean {
+    public ErrorCodes status;
+
+    public LoginBean() {
+
+    }
+
     /**
      * Called by LoginServlet upon login action from user. Returns user id in case of successfull login, otherwise
      * returns an empty String
@@ -20,6 +26,7 @@ public class LoginBean {
      */
     public ErrorCodes login(String username, String password) {
         if (!RegexHelper.checkUsername(username)) {
+            this.status = ErrorCodes.WRONGUNAME;
             return ErrorCodes.WRONGUNAME;
         }
 
@@ -30,10 +37,17 @@ public class LoginBean {
             String newHash = PasswordHasher.hashPassword(password, salt);
 
             //Login was either successful or one of the entered params was wrong
-            return newHash.equals(hash) ? ErrorCodes.SUCCESS : ErrorCodes.WRONGENTRY;
+            if(newHash.equals(hash)){
+                this.status = ErrorCodes.SUCCESS;
+                return ErrorCodes.SUCCESS;
+            } else {
+                this.status = ErrorCodes.WRONGENTRY;
+                return ErrorCodes.WRONGENTRY;
+            }
         }
 
         //Something failed server-side, return FAILURE
+        this.status = ErrorCodes.FAILURE;
         return ErrorCodes.FAILURE;
     }
 
