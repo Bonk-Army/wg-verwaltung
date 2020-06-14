@@ -64,6 +64,11 @@ public class Login extends Servlet {
                 // Return "wrong entry" error page
                 request.getServletContext().getRequestDispatcher("/de/login/wrongcredentials.jsp").forward(request, response);
                 break;
+            case WRONGUNAME:
+                // Return "wrong entry" error page
+                // TODO Change to page that only says "wrong username"
+                request.getServletContext().getRequestDispatcher("/de/login/wrongcredentials.jsp").forward(request, response);
+                break;
             case FAILURE:
                 // Return "try again" error page
                 request.getServletContext().getRequestDispatcher("/de/login/error.jsp").forward(request, response);
