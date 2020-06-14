@@ -11,6 +11,8 @@
     <title>Home</title>
 </head>
 <body>
-Das ist die Home-Seite.
+<div id="content">
+    Das ist die Home-Seite.
+</div>
 </body>
 </html>

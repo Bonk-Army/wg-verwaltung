@@ -11,7 +11,7 @@ body {
 a,
 a:hover,
 a:focus {
-    color: inherit;
+    color: inherit !important;
     text-decoration: none;
     transition: all 0.3s;
 }
@@ -93,7 +93,7 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #7386D5;
+    color: #7386D5 !important;
     background: #fff;
 }
 
@@ -103,7 +103,7 @@ a:focus {
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
-    color: #fff;
+    color: #fff !important;
     background: #6d7fcc;
 }
 
