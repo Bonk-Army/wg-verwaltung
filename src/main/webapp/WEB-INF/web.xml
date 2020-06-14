@@ -58,7 +58,7 @@
     </servlet>
     <servlet>
         <servlet-name>ToDo</servlet-name>
-        <jsp-file>/Pages/Register.jsp</jsp-file>
+        <jsp-file>/Pages/ToDo.jsp</jsp-file>
     </servlet>
     <!--
         dP                          oo

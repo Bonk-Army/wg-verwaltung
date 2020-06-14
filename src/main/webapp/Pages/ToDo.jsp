@@ -13,8 +13,11 @@
     <title>ToDo</title>
     <%@include file="../assets/Templates/Imports/Bootstrap.jsp" %>
     <link rel="stylesheet" type="text/css" href="./assets/Styles/ToDo.css">
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
 </head>
 <body>
+<%@include file="../assets/Templates/Components/Sidebar.jsp" %>
 <%@include file="../assets/Contents/ToDo.jsp" %>
+<script><%@include file="../assets/Scripts/sidebar.js" %></script>
 </body>
 </html>
