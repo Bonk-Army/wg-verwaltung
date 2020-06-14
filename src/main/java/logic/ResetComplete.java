@@ -1,7 +1,8 @@
 package logic;
 
 import beans.LoginBean;
-import utilities.SQLDatabaseConnection;
+import utilities.ErrorCodes;
+import utilities.RegexHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,12 +26,18 @@ public class ResetComplete extends HttpServlet {
         String username = request.getParameter("username");
         String passwordResetKey =  request.getParameter("key");
 
-        if(bean.resetPassword(username, passwordResetKey, password)) {
-            System.out.println("Reset completed");
-            //TODO
-        } else {
-            System.out.println("Reset not completed");
-            //TODO
+        ErrorCodes status = bean.resetPassword(username, passwordResetKey, password);
+
+        switch(status){
+            case SUCCESS:
+                request.getServletContext().getRequestDispatcher("/de/login/reset-success.jsp").forward(request, response);
+                break;
+            case FAILURE:
+                request.getServletContext().getRequestDispatcher("/de/login/reset-success.jsp").forward(request, response);
+                break;
+            case WRONGENTRY:
+                request.getServletContext().getRequestDispatcher("/de/login/reset-success.jsp").forward(request, response);
+                break;
         }
     }
 }

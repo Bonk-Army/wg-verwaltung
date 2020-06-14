@@ -1,6 +1,6 @@
 package view.servlets.subservlets;
 
-import view.parts.ContentSubparts.TemplateFromPath;
+import view.old.parts.ContentSubparts.TemplateFromPath;
 import view.servlets.Servlet;
 
 import javax.servlet.ServletException;
@@ -21,7 +21,7 @@ public class ResetPassword extends Servlet {
         String username = request.getParameter("uname");
         String key = request.getParameter("key");
 
-        body.addContentPart(new view.parts.ContentSubparts.ResetPassword(username, key));
+        body.addContentPart(new view.old.parts.ContentSubparts.ResetPassword(username, key));
 
         PrintWriter out = response.getWriter();
         out.write(html.generateThisPart());

@@ -1,6 +1,6 @@
 package view.servlets.subservlets;
 
-import view.parts.ContentSubparts.TemplateFromPath;
+import view.old.parts.ContentSubparts.TemplateFromPath;
 import view.servlets.Servlet;
 
 import javax.servlet.ServletException;
@@ -22,7 +22,7 @@ public class Financial extends Servlet {
         head.addContentPart(new TemplateFromPath("Import", "Bootstrap", "html"));
         head.addContentPart(new TemplateFromPath("Import", "Fonts", "html"));
 
-        body.addContentPart(new view.parts.ContentSubparts.SideBar());
+        body.addContentPart(new view.old.parts.ContentSubparts.SideBar());
         body.addContentPart(new TemplateFromPath("Content", "Financial", "html"));
 
         PrintWriter out = response.getWriter();

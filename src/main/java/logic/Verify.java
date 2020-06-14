@@ -1,13 +1,14 @@
 package logic;
 
 import beans.LoginBean;
+import utilities.ErrorCodes;
+import utilities.RegexHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class Verify extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -33,23 +34,18 @@ public class Verify extends HttpServlet {
         String username = request.getParameter("uname");
 
         //If verification was successful, show success message. Otherwise show error.
-        if (bean.verifyUser(username, verificationCode)) {
-            head.setPageName("Success!");
-            //TODO Change this
-            body.addContentPart(new Login());
-        } else {
-            head.setPageName("Failure!");
-            //TODO Change this
-            body.addContentPart(new Login());
+        ErrorCodes status = bean.verifyUser(username, verificationCode);
+
+        switch(status){
+            case SUCCESS:
+                // Show success page
+                request.getServletContext().getRequestDispatcher("/de/login/reset-success.jsp").forward(request, response);
+                break;
+            case FAILURE:
+                // Show failure page
+                request.getServletContext().getRequestDispatcher("/de/login/reset-success.jsp").forward(request, response);
+                break;
         }
-
-        //<head>
-        //    <meta http-equiv="Refresh" content="0; URL=https://wgverwaltung.azurewebsites.net/login">
-        //</head>
-
-        PrintWriter out = response.getWriter();
-        out.write(html.generateThisPart());
-        this.html.clear();
     }
 
     @Override

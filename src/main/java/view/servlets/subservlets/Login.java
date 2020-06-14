@@ -1,7 +1,6 @@
 package view.servlets.subservlets;
 
-import config.globalConfig;
-import view.parts.ContentSubparts.TemplateFromPath;
+import view.old.parts.ContentSubparts.TemplateFromPath;
 import view.servlets.Servlet;
 
 import javax.servlet.ServletException;
@@ -20,7 +19,7 @@ public class Login extends Servlet {
         head.addContentPart(new TemplateFromPath("Import", "Global", "html"));
         head.addContentPart(new TemplateFromPath("Import", "Bootstrap", "html"));
 
-        body.addContentPart(new view.parts.ContentSubparts.Login());
+        body.addContentPart(new view.old.parts.ContentSubparts.Login());
 
         PrintWriter out = response.getWriter();
         out.write(html.generateThisPart());

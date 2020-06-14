@@ -25,7 +25,7 @@ public class LoginBean {
      * @return The status of the request
      */
     public ErrorCodes login(String username, String password) {
-        if (!RegexHelper.checkUsername(username)) {
+        if (!RegexHelper.checkString(username)) {
             this.status = ErrorCodes.WRONGUNAME;
             return ErrorCodes.WRONGUNAME;
         }
@@ -37,7 +37,7 @@ public class LoginBean {
             String newHash = PasswordHasher.hashPassword(password, salt);
 
             //Login was either successful or one of the entered params was wrong
-            if(newHash.equals(hash)){
+            if (newHash.equals(hash)) {
                 this.status = ErrorCodes.SUCCESS;
                 return ErrorCodes.SUCCESS;
             } else {
@@ -68,26 +68,29 @@ public class LoginBean {
         String hash = PasswordHasher.hashPassword(password, salt);
 
         //Call SQL to ask if username / email is unique. If unique, it continues registration process, else it stops
-        if (isUsernameUnique(username) && isEmailUnique(email) && RegexHelper.checkUsername(username) && RegexHelper.checkEmail(email)) {
-            //Create new user. Generate random, 10-digit verification code for email verification.
-            String verificationCode = new RandomStringGenerator(10).nextString();
-
-            // If the user creation was successful, send an email and continue registration
-            if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode)) {
-                // Now send an email to the user with the verification link
-                String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
-                MailSender.sendVerificationMail(email, username, verifyLink);
-
-                // And return success
-                return ErrorCodes.SUCCESS;
-            }
-            // If something failed server-side, return FAILURE
-            return ErrorCodes.FAILURE;
-        } else {
-            //If either already exists, WRONGENTRY
+        if (!RegexHelper.checkString(username) || !RegexHelper.checkEmail(email)) {
             return ErrorCodes.WRONGENTRY;
-        }
+        } else {
+            if (isUsernameUnique(username) && isEmailUnique(email)) {
+                //Create new user. Generate random, 10-digit verification code for email verification.
+                String verificationCode = new RandomStringGenerator(10).nextString();
 
+                // If the user creation was successful, send an email and continue registration
+                if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode)) {
+                    // Now send an email to the user with the verification link
+                    String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
+                    MailSender.sendVerificationMail(email, username, verifyLink);
+
+                    // And return success
+                    return ErrorCodes.SUCCESS;
+                }
+                // If something failed server-side, return FAILURE
+                return ErrorCodes.FAILURE;
+            } else {
+                //If either already exists, WRONGENTRY
+                return ErrorCodes.WRONGENTRY;
+            }
+        }
     }
 
     /**
@@ -95,19 +98,22 @@ public class LoginBean {
      *
      * @param username         The username of the user to be verified
      * @param verificationCode The verification code the user 'entered'
-     * @return If the verification was successful
+     * @return The status of the verification
      */
-    public boolean verifyUser(String username, String verificationCode) {
-        String savedVerificationCode = SQLDCLogin.getUserVerificationCode(username);
+    public ErrorCodes verifyUser(String username, String verificationCode) {
+        if (!RegexHelper.checkString(username) || !RegexHelper.checkString(verificationCode)) {
+            return ErrorCodes.WRONGENTRY;
+        } else {
+            String savedVerificationCode = SQLDCLogin.getUserVerificationCode(username);
 
-        // If the entered verification code matches the saved one, verify the user
-        if (verificationCode.equals(savedVerificationCode)) {
-            SQLDCLogin.verifyUser(username);
+            // If the entered verification code matches the saved one, verify the user
+            if (verificationCode.equals(savedVerificationCode)) {
+                SQLDCLogin.verifyUser(username);
 
-            return true;
+                return ErrorCodes.SUCCESS;
+            }
+            return ErrorCodes.FAILURE;
         }
-
-        return false;
     }
 
     /**
@@ -136,19 +142,23 @@ public class LoginBean {
      * @param username The username of the user
      * @param key      The reset key for the password reset
      * @param password The new password
-     * @return If it was successful
+     * @return The status of the reset action
      */
-    public boolean resetPassword(String username, String key, String password) {
-        String salt = SQLDCLogin.getPasswordSalt(username);
-        String savedKey = SQLDCLogin.getPasswordKey(username);
+    public ErrorCodes resetPassword(String username, String key, String password) {
+        if (!RegexHelper.checkString(username) || !RegexHelper.checkString(key)) {
+            return ErrorCodes.WRONGENTRY;
+        } else {
+            String salt = SQLDCLogin.getPasswordSalt(username);
+            String savedKey = SQLDCLogin.getPasswordKey(username);
 
-        String pwhash = PasswordHasher.hashPassword(password, salt);
+            String pwhash = PasswordHasher.hashPassword(password, salt);
 
-        if (key.equals(savedKey)) {
-            return SQLDCLogin.setPassword(username, pwhash);
+            if (key.equals(savedKey)) {
+                return SQLDCLogin.setPassword(username, pwhash) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            }
+
+            return ErrorCodes.WRONGENTRY;
         }
-
-        return false;
     }
 
     /**
@@ -186,7 +196,7 @@ public class LoginBean {
         return !usedEmails.contains(email);
     }
 
-    public ErrorCodes getStatus(){
+    public ErrorCodes getStatus() {
         return this.status;
     }
 }

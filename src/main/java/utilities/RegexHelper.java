@@ -12,7 +12,7 @@ public class RegexHelper {
      * @param username The username to be matched
      * @return If the username is allowed
      */
-    public static boolean checkUsername(String username) {
+    public static boolean checkString(String username) {
         return username.matches("^[^;?&%'\\s]*$");
     }
 
