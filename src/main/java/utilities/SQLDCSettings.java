@@ -12,11 +12,9 @@ public class SQLDCSettings extends SQLDatabaseConnection {
      */
     public static boolean createWg(String name, String accessKey) {
         try {
-            if (RegexHelper.checkUsername(name)) {
-                ResultSet rs = executeQuery(("INSERT INTO wgs (name, accessKey)"
-                        + "VALUES ('" + name + "', '" + accessKey + "')"));
-                return true;
-            }
+            ResultSet rs = executeQuery(("INSERT INTO wgs (name, accessKey)"
+                    + "VALUES ('" + name + "', '" + accessKey + "')"));
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,13 +32,11 @@ public class SQLDCSettings extends SQLDatabaseConnection {
         String wgId = "";
 
         try {
-            if (RegexHelper.checkUsername(accessKey)) {
-                ResultSet rs = executeQuery(("SELECT uniqueID FROM wgs WHERE accessKey='" + accessKey + "'"));
-                while (rs.next()) {
-                    wgId = rs.getString(1);
-                }
-                return wgId;
+            ResultSet rs = executeQuery(("SELECT uniqueID FROM wgs WHERE accessKey='" + accessKey + "'"));
+            while (rs.next()) {
+                wgId = rs.getString(1);
             }
+            return wgId;
         } catch (Exception e) {
             e.printStackTrace();
         }
