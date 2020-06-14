@@ -1,4 +1,5 @@
 <div class="text-center">
+    <!--img src="/assets/Images/lama.png" style="width: 130px"-->
     <form class="form-signin" method="POST" action="loginLogic">
         <p style="font-size:100px">&#x1F999;</p>
         <h1 class="h3 mb-3 font-weight-normal">Bitte registriere dich</h1>
