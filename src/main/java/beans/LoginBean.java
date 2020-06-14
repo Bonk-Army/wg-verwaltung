@@ -102,17 +102,18 @@ public class LoginBean {
      * @param email The email address that was entered by the user
      * @return If the email has been sent successfully
      */
-    public boolean sendPasswordResetLink(String email) {
+    public ErrorCodes sendPasswordResetLink(String email) {
         if (RegexHelper.checkEmail(email)) {
             String randomKey = new RandomStringGenerator(30).nextString();
             if (SQLDCLogin.setPasswordKey(email, randomKey)) {
                 String username = SQLDCLogin.getUsernameByEmail(email);
                 String resetLink = "resetPassword?uname=" + username + "&key=" + randomKey;
                 MailSender.sendResetPasswordMail(email, username, resetLink);
-                return true;
+                return ErrorCodes.SUCCESS;
             }
+            return ErrorCodes.FAILURE;
         }
-        return false;
+        return ErrorCodes.WRONGEMAIL;
     }
 
     /**

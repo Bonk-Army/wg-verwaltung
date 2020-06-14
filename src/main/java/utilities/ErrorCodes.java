@@ -6,6 +6,7 @@ public enum ErrorCodes {
     WRONGENTRY(""),     //Something that has been entered was wrong
     WRONGUNAME(""),     //The entered username was wrong
     WRONGPASSWORD(""),  //The entered password was wrong
+    WRONGEMAIL(""),     //The entered email address was wrong
     TRYAGAIN("");       //The user should simply try it again
 
     private String message;
