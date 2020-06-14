@@ -46,3 +46,12 @@ body {
 .mt-custom {
     margin-top: 10%;
 }
+
+.modal-content {
+    background-color: #272525;
+    color: aliceblue;
+}
+
+.close {
+    color: aliceblue;
+}
