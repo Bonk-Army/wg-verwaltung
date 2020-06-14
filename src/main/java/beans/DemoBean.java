@@ -1,3 +1,5 @@
+package beans;
+
 import utilities.ErrorCodes;
 
 import java.util.Date;

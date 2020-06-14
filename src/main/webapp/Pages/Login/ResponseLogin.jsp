@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Login.css">
 </head>
 <body>
-    <jsp:useBean id="login" class="beans.LoginBean"/>
+    <jsp:useBean id="login" class="beans.DemoBean"/>
     <c:if test="${login.getStatus() == ErrorCodes.SUCCESS}">
         <%@include file="../../assets/Contents/Response/Success.jsp" %>
     </c:if>
