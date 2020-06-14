@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Fehler</title>
 </head>
 <body>
-
+    Die eingegebene E-Mail-Adresse ist nicht bekannt. Bitte überprüfe deine Eingaben und versuche es nochmal.
 </body>
 </html>

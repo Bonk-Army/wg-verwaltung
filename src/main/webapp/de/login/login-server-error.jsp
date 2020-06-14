@@ -11,6 +11,6 @@
     <title>Fehler</title>
 </head>
 <body>
-Ein Fehler ist aufgetreten. Bitte versuche es erneut.
+    Ein Fehler ist aufgetreten. Bitte versuche es nochmal.
 </body>
 </html>

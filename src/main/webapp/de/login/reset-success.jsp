@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Erfolg</title>
 </head>
 <body>
-
+    Die E-Mail mit dem Link zum Zurücksetzen deines Passwortes wurde an dich versendet.
 </body>
 </html>
