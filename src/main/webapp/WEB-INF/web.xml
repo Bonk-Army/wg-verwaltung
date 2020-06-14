@@ -9,20 +9,23 @@
     * ___
         |
         |__ ^^-^^
-        |__ VIEW             | Package : "servlets.subservlets." | Zuständig : @NH | Mapped by @NH | Zuständig für Inhalt @KA | Initial
-        |__ /                | Servlet : Login                   | Zuständig : @KA | Mapped by @NH | Zuständig für Inhalt @KA | Initial
-        |__ /register        | Servlet : Register                | Zuständig : @KA | Mapped by @NH | Zuständig für Inhalt @KA | Initial
-        |__ /resetPassword   | Servlet : ResetPassword           | Zuständig : @KA | Mapped by @NH | Zuständig für Inhalt @KA | Initial
-        |__ /shopping        | Servlet : Shopping                | Zuständig : @DK | Mapped by @DK | Zuständig für Inhalt @DK | Initial
-        |__ /financial       | Servlet : Financial               | Zuständig : @DK | Mapped by @DK | Zuständig für Inhalt @DK | Initial
-        |__ /toDo            | Servlet : ToDo                    | Zuständig : @DK | Mapped by @DK | Zuständig für Inhalt @DK | Initial
+        |__ LOGIN            |                                   | Zuständig : @NH      | Mapped by @NH | Zuständig für Inhalt @KA | Initial
+        |__ /                | JSP Page : Login                  | Zuständig : @DK      | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /register        | JSP Page : Register               | Zuständig : @DK      | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ ^^-^^
         |
         |__ ^^-^^
-        |__ Logic            | Package : "logic."                | Zuständig : @PM | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /loginLogic      | Servlet : Login                   | Zuständig : @PM | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /reset           | Servlet : Reset                   | Zuständig : @PM | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /verify          | Servlet : Verify                  | Zuständig : @PM | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ LOGIC            | Package : "logic."                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /loginLogic      | Servlet : Login                   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /reset           | Servlet : Reset                   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /verify          | Servlet : Verify                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ ^^-^^
+        |__
+        |__ ^^-^^
+        |__ GUI              |                                   | Zuständig : @KA/LK   | Mapped by @NH                            | Initial
+        |__ /home            | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /todo            | JSP Page : ToDo                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /financial       | JSP Page : Financial              | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ ^^-^^
     -->
     <!--
@@ -43,27 +46,11 @@
     -->
     <servlet>
         <servlet-name>Login</servlet-name>
-        <jsp-file>/de/login/Login.jsp</jsp-file>
+        <jsp-file>/Pages/Login.jsp</jsp-file>
     </servlet>
     <servlet>
         <servlet-name>Register</servlet-name>
-        <jsp-file>/de/register/Register.jsp</jsp-file>
-    </servlet>
-    <servlet>
-        <servlet-name>ResetPassword</servlet-name>
-        <servlet-class>view.servlets.subservlets.ResetPassword</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Shopping</servlet-name>
-        <servlet-class>view.servlets.subservlets.Shopping</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Financial</servlet-name>
-        <servlet-class>view.servlets.subservlets.Financial</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ToDo</servlet-name>
-        <servlet-class>view.servlets.subservlets.ToDo</servlet-class>
+        <jsp-file>/Pages/Register.jsp</jsp-file>
     </servlet>
     <!--
         dP                          oo
@@ -127,22 +114,6 @@
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ResetPassword</servlet-name>
-        <url-pattern>/resetPassword</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Shopping</servlet-name>
-        <url-pattern>/shopping</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Financial</servlet-name>
-        <url-pattern>/financial</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ToDo</servlet-name>
-        <url-pattern>/todo</url-pattern>
     </servlet-mapping>
     <!--
             dP                          oo
