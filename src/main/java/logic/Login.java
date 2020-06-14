@@ -49,9 +49,10 @@ public class Login extends HttpServlet {
             email = request.getParameter("email");
             firstName = request.getParameter("firstName");
             lastName = request.getParameter("lastName");
-        } else {
-            stayLoggedIn = Boolean.valueOf(request.getParameter("keepSignedIn"));
+            System.out.println(lastName);
         }
+
+        stayLoggedIn = Boolean.valueOf(request.getParameter("keepSignedIn"));
 
         ErrorCodes status = isRegister ? bean.register(username, password, email, firstName, lastName) : bean.login(username, password);
 
@@ -64,6 +65,10 @@ public class Login extends HttpServlet {
                 String sessionIdentifier = bean.getSessionIdentifier(username);
                 response.sendRedirect("/home/");
                 Cookie sessionCookie = new Cookie("session", (sessionIdentifier));
+                int cookieAge = stayLoggedIn ? 2592000 : -1;
+                // If user wants to stay logged in, make it live 30 days (2592000 seconds),
+                // otherwise let it be a session cookie
+                sessionCookie.setMaxAge(cookieAge);
                 response.addCookie(sessionCookie);
                 break;
             case WRONGENTRY:
