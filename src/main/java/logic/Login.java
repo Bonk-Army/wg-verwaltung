@@ -62,7 +62,7 @@ public class Login extends Servlet {
                 break;
             case WRONGENTRY:
                 // Return "wrong entry" error page
-                request.getServletContext().getRequestDispatcher("/de/login/error.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/de/login/wrongcredentials.jsp").forward(request, response);
                 break;
             case FAILURE:
                 // Return "try again" error page
