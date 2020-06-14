@@ -10,7 +10,7 @@
 <head>
     <%@include file="../assets/Templates/Imports/Global.jsp" %>
     <%@include file="../assets/Templates/Imports/Fonts.jsp" %>
-    <title>Register mit JSP HURENSOHNTECHNOLOGIE</title>
+    <title>Registrierung</title>
     <%@include file="../assets/Templates/Imports/Bootstrap.jsp" %>
     <script><%@include file="../assets/Scripts/register.js" %></script>
     <script><%@include file="../assets/Scripts/password.js" %></script>
