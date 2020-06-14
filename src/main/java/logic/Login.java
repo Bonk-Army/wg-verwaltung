@@ -55,21 +55,21 @@ public class Login extends HttpServlet {
             case SUCCESS:
                 // Log the user in, save a cookie and redirect him to the home page
                 userId = bean.getUserId(username);
-                response.sendRedirect("/de/home/");
+                response.sendRedirect("/home/");
                 //TODO Save cookie
                 break;
             case WRONGENTRY:
                 // Return "wrong entry" error page
-                request.getServletContext().getRequestDispatcher("/de/login/login-wrong-credentials.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
                 break;
             case WRONGUNAME:
                 // Return "wrong entry" error page
                 // TODO Change to page that only says "wrong username"
-                request.getServletContext().getRequestDispatcher("/de/login/login-wrong-credentials.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseWrongUName").forward(request, response);
                 break;
             case FAILURE:
                 // Return "try again" error page
-                request.getServletContext().getRequestDispatcher("/de/login/login-server-error.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
                 break;
         }
     }

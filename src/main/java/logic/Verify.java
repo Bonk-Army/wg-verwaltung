@@ -39,11 +39,11 @@ public class Verify extends HttpServlet {
         switch(status){
             case SUCCESS:
                 // Show success page
-                request.getServletContext().getRequestDispatcher("/de/login/reset-success.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
                 break;
             case FAILURE:
                 // Show failure page
-                request.getServletContext().getRequestDispatcher("/de/login/reset-success.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
                 break;
         }
     }

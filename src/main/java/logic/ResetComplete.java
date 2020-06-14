@@ -30,13 +30,13 @@ public class ResetComplete extends HttpServlet {
 
         switch(status){
             case SUCCESS:
-                request.getServletContext().getRequestDispatcher("/de/login/reset-success.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
                 break;
             case FAILURE:
-                request.getServletContext().getRequestDispatcher("/de/login/reset-success.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
                 break;
             case WRONGENTRY:
-                request.getServletContext().getRequestDispatcher("/de/login/reset-success.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
                 break;
         }
     }

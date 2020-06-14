@@ -34,15 +34,15 @@ public class Reset extends HttpServlet {
         switch(status){
             case SUCCESS:
                 // Show success page
-                request.getServletContext().getRequestDispatcher("/de/login/reset-success.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
                 break;
             case WRONGEMAIL:
                 // Show wrong email page
-                request.getServletContext().getRequestDispatcher("/de/login/reset-wrong-credentials.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseWrongEMail").forward(request, response);
                 break;
             case FAILURE:
                 // Show server error page
-                request.getServletContext().getRequestDispatcher("/de/login/reset-server-error.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
                 break;
         }
     }
