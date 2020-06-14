@@ -1,7 +1,7 @@
 <div class="text-center">
     <form method="POST" action="loginLogic" class="form-signin">
         <p style="font-size:100px">&#x1F999;</p>
-        <h1 class="h3 mb-3 font-weight-normal">Bitte anmelden</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Bitte melde dich an</h1>
         <label for="username" class="sr-only">Benutzername</label>
         <input name="username" type="user" id="username" class="form-control" placeholder="Benutzername" required autofocus>
         <label for="password" class="sr-only">Passwort</label>
