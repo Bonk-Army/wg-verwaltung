@@ -207,7 +207,7 @@ public class LoginBean {
      * @return The user id as a String or an empty string in case of an error
      */
     public String getUserIdBySessionIdentifier(String sessionIdentifier) {
-        if (RegexHelper.checkString(sessionIdentifier)) {
+        if (RegexHelper.checkString(sessionIdentifier) && !sessionIdentifier.isEmpty()) {
             int splitIndex = sessionIdentifier.indexOf('-');
             String userId = sessionIdentifier.substring(0, splitIndex);
             String cookiePostfix = sessionIdentifier.substring(splitIndex+1, sessionIdentifier.length());
