@@ -16,6 +16,11 @@ body {
     justify-content: center;
 }
 
+a, a:hover{
+    color: aliceblue;
+    text-decoration: none
+}
+
 .form-signin, #backButton{
     width: 100%;
     max-width: 330px;
