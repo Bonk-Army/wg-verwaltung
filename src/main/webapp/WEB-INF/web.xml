@@ -82,6 +82,14 @@
         <servlet-name>ToDo</servlet-name>
         <url-pattern>/todo</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Impressum</servlet-name>
+        <jsp-file>/Pages/Impressum.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Impressum</servlet-name>
+        <url-pattern>/impressum</url-pattern>
+    </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--
          a88888b.                     dP                     dP dP
