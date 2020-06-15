@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class ToDo extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -53,7 +56,12 @@ public class ToDo extends HttpServlet {
         String userId = loginBean.getUserIdBySessionIdentifier(sessionIdentifier);
         String assigneeId = loginBean.getUserId(assignee);
         String wgId = toDoBean.getWgIdByUserId(userId);
-        Date dueDate = new Date(dueDateString);
+        Date dueDate = null;
+        try {
+            dueDate = new SimpleDateFormat("yyyy-mm-dd").parse(dueDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         toDoBean.createTodo(task, assigneeId, wgId, dueDate);
     }

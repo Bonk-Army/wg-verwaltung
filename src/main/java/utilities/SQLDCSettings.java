@@ -54,7 +54,7 @@ public class SQLDCSettings extends SQLDatabaseConnection {
      */
     public static boolean setWgId(String wgId, String userId) {
         try {
-            executeQuery(("UPDATE users SET wgId='" + wgId + "' WHERE uniqueID='" + userId + "'"));
+            executeQuery(("UPDATE users SET wgId=" + Integer.valueOf(wgId) + " WHERE uniqueID=" + Integer.valueOf(userId)));
             return true;
         } catch (Exception e) {
             e.printStackTrace();

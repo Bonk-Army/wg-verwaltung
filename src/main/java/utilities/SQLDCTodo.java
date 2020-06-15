@@ -3,6 +3,7 @@ package utilities;
 import models.TodoModel;
 
 import java.sql.Array;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.sql.ResultSet;
@@ -21,8 +22,12 @@ public class SQLDCTodo extends SQLDatabaseConnection {
     public static boolean createTodo(String task, String userId, String wgId, Date dateDue) {
         try {
             Date dateCreated = new Date();
+            // Convert dates to java.sql.Timestamp to save them to SQL
+            Timestamp createdStamp = new Timestamp(dateCreated.getTime());
+            Timestamp dueStamp = new Timestamp(dateDue.getTime());
+
             ResultSet rs = executeQuery(("INSERT INTO todo (task, userId, wgId, dateCreated, dateDue, isDone)"
-                    + "VALUES ('" + task + "', " + Integer.valueOf(userId) + ", '" + wgId + "', '" + dateCreated + "', '" + dateDue + "', '" + false + "')"));
+                    + "VALUES ('" + task + "', " + Integer.valueOf(userId) + ", " + Integer.valueOf(wgId) + ", '" + createdStamp + "', '" + dueStamp + "', " + false + ")"));
 
             return true;
         } catch (Exception e) {
@@ -41,7 +46,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
     public static List<TodoModel> getAllTodos(String wgId) {
         List<TodoModel> todoList = new ArrayList<>();
         try {
-            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone FROM todo WHERE wgId = '" + wgId + "'"));
+            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone FROM todo WHERE wgId = " + Integer.valueOf(wgId)));
             while (rs.next()) {
                 String task = rs.getString(1);
                 String userId = String.valueOf(rs.getInt(2));
@@ -68,7 +73,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
         List<String> users = new ArrayList<String>();
 
         try {
-            ResultSet rs = executeQuery(("SELECT username FROM users WHERE wgId=" + wgId));
+            ResultSet rs = executeQuery(("SELECT username FROM users WHERE wgId=" + Integer.valueOf(wgId)));
 
             while (rs.next()) {
                 users.add(rs.getString(1));
@@ -90,10 +95,10 @@ public class SQLDCTodo extends SQLDatabaseConnection {
         String wgId = "";
 
         try {
-            ResultSet rs = executeQuery("SELECT wgId FROM users WHERE uniqueID=" + userId);
+            ResultSet rs = executeQuery("SELECT wgId FROM users WHERE uniqueID=" + Integer.valueOf(userId));
 
             while (rs.next()) {
-                rs.getString(1);
+                wgId = rs.getString(1);
             }
         } catch (Exception e) {
             e.printStackTrace();
