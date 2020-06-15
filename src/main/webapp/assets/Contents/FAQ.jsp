@@ -42,7 +42,7 @@
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                 <div class="card-body">
-                    <a href="https://paul-wolf.de">Lama Hasser :(</a>
+                    <a href="http://paul-wolf.de">Lama Hasser :(</a>
                     &#129433; &#129433; &#129433; &#129433; &emsp;&emsp;&emsp;&emsp;
                     <img src="https://www.dreisamtal.de/eip/clips/lightbox_3-alpakas.jpg?fl=30553981" class="rounded-circle"/>
                     &emsp;&emsp;&emsp;&emsp; &#129433; &#129433; &#129433; &#129433;
