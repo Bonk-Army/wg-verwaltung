@@ -6,10 +6,11 @@ import java.util.Date;
 
 public class DemoBean {
 
-    public String username = "username";
+    public String username = "Alpakaflüsterer";
     public int kontoguthaben = 100;
     public String vorname = "Max";
     public String nachname = "Mustermann";
+    public String wg = "Alpakastall";
     public Date date;
     public String todo;
     public boolean check = true;
@@ -17,6 +18,10 @@ public class DemoBean {
     public DemoBean(){
         date = new Date();
         todo = "Wisch raus du Alpaka!;Nico;"+date.toString()+";";
+    }
+
+    public String getDate(){
+        return this.date.toString();
     }
 
     public ErrorCodes getStatus (){

@@ -10,15 +10,15 @@
 <head>
     <%@include file="../assets/Templates/Imports/Global.jsp" %>
     <%@include file="../assets/Templates/Imports/Fonts.jsp" %>
-    <title>ToDo</title>
+    <title>FAQ</title>
     <%@include file="../assets/Templates/Imports/Bootstrap.jsp" %>
-    <%@include file="../assets/Templates/Imports/ChartJS.jsp" %>
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Home.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/FAQ.css">
 </head>
 <body>
 <%@include file="../assets/Templates/Components/Sidebar.jsp" %>
-<%@include file="../assets/Contents/Home.jsp" %>
+<%@include file="../assets/Contents/FAQ.jsp" %>
 <script><%@include file="../assets/Scripts/sidebar.js" %></script>
 </body>
 </html>

@@ -121,7 +121,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>FAQ</servlet-name>
-        <jsp-file>/Pages/Home.jsp</jsp-file>
+        <jsp-file>/Pages/FAQ.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>FAQ</servlet-name>
