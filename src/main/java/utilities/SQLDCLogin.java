@@ -342,4 +342,23 @@ public class SQLDCLogin extends SQLDatabaseConnection {
 
         return postfix;
     }
+
+    /**
+     * Set the cookie postfix parameter for the given user
+     *
+     * @param username      The username of the user
+     * @param cookiePostfix The new cookie postfix
+     * @return If it was successful
+     */
+    public static boolean setCookiePostfix(String username, String cookiePostfix) {
+        try {
+            executeQuery("UPDATE users SET cookiePostfix='" + cookiePostfix + "' WHERE username = '" + username + "'");
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

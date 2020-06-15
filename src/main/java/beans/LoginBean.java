@@ -32,14 +32,20 @@ public class LoginBean {
 
         String salt = SQLDCLogin.getPasswordSalt(username);
         String hash = SQLDCLogin.getPasswordHash(username);
+        String cookiePostfix = new RandomStringGenerator(21).nextString();
 
         if (!salt.isEmpty() && !hash.isEmpty()) {
             String newHash = PasswordHasher.hashPassword(password, salt);
 
             //Login was either successful or one of the entered params was wrong
             if (newHash.equals(hash)) {
-                this.status = ErrorCodes.SUCCESS;
-                return ErrorCodes.SUCCESS;
+                if (SQLDCLogin.setCookiePostfix(username, cookiePostfix)) {
+                    this.status = ErrorCodes.SUCCESS;
+                    return ErrorCodes.SUCCESS;
+                } else {
+                    this.status = ErrorCodes.FAILURE;
+                    return ErrorCodes.FAILURE;
+                }
             } else {
                 this.status = ErrorCodes.WRONGENTRY;
                 return ErrorCodes.WRONGENTRY;
