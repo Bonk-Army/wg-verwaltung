@@ -1,5 +1,5 @@
 <div class="text-center">
-    <img src="/assets/Images/lama.png" style="width: 130px">
+    <img src="/assets/Images/lama.png" style="height: 220px">
     <form class="form-signin" method="POST" action="loginLogic">
         <h1 class="h3 mb-3 font-weight-normal">Bitte registriere dich</h1>
         <label for="firstName" class="sr-only">Vorname</label>

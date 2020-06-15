@@ -19,5 +19,7 @@
 <%@include file="../assets/Templates/Components/Sidebar.jsp" %>
 <%@include file="../assets/Contents/ToDo.jsp" %>
 <script><%@include file="../assets/Scripts/sidebar.js" %></script>
+<%@include file="../assets/Templates/Components/ToDoModal.jsp" %>
+<script><%@include file="../assets/Scripts/ToDomodal.js" %></script>
 </body>
 </html>

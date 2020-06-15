@@ -1,5 +1,8 @@
 <div id="content">
     <jsp:useBean id="fail" class="beans.DemoBean"></jsp:useBean>
+    <button title="ToDo hinzuf&uuml;gen" id="addToDo" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal" data-target="#exampleModal">
+        +
+    </button>
     <table class="table">
         <thead class="thead-dark">
         <tr>

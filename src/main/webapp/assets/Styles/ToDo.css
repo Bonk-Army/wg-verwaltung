@@ -13,6 +13,11 @@ body {
     justify-content: center;
 }
 
+#addToDo{
+    margin-bottom: 10px;
+    max-width: 62px;
+}
+
 .form-signin {
     width: 100%;
     max-width: 330px;
@@ -42,4 +47,17 @@ body {
 }
 .mt-custom {
     margin-top: 10%;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+.modal-content {
+    background-color: #272525;
+    color: aliceblue;
+}
+
+.close {
+    color: aliceblue;
 }
