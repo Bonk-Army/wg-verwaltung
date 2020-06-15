@@ -8,14 +8,14 @@
 
 Bei Fragen zum Frontend an @NH TODO Nico Holzhäuser
 ------------|
-            |---- Contents              -
-            |---- Images                -
-            |---- Scripts               -
-            |---- Styles                -
-            |---- Templates             -
-                |---- Components        -
-                |---- Imports           -
-                |---- Modal             -
+            |---- Contents              - Der ganze Inhalt der Seiten
+            |---- Images                - Alle Images
+            |---- Scripts               - Alle Scriptdateien
+            |---- Styles                - Die CSS Sytles
+            |---- Templates             - Ordner für Component Templates
+                |---- Components        - Komponenten
+                |---- Imports           - Script Importe wie bsp. Bootstrap
+                |---- Modal             - Modal Dialoge
 
 
 ###################################################################################################################################################
