@@ -13,7 +13,6 @@
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Anmelden</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
     </form>
     <form class="form-signin" type="GET" action="register">
         <button class="btn btn-lg btn-primary btn-block" type="submit">Registrieren</button>
@@ -23,4 +22,5 @@
             Passwort vergessen?
         </button>
     </form>
+    <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
 </div>
