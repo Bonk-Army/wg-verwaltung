@@ -57,7 +57,7 @@
     -->
     <servlet>
         <servlet-name>Login</servlet-name>
-        <jsp-file>/Pages/Login.jsp</jsp-file>
+        <jsp-file>/Pages/Public/Login.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -65,7 +65,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Register</servlet-name>
-        <jsp-file>/Pages/Register.jsp</jsp-file>
+        <jsp-file>/Pages/Public/Register.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -73,7 +73,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>WG-Verwaltung</servlet-name>
-        <jsp-file>/Pages/WGVerwaltung.jsp</jsp-file>
+        <jsp-file>/Pages/Protected/WGVerwaltung.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>WG-Verwaltung</servlet-name>
@@ -81,7 +81,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Home</servlet-name>
-        <jsp-file>/Pages/Home.jsp</jsp-file>
+        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
@@ -89,7 +89,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Financial</servlet-name>
-        <jsp-file>/Pages/Home.jsp</jsp-file>
+        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Financial</servlet-name>
@@ -97,7 +97,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ToDo</servlet-name>
-        <jsp-file>/Pages/ToDo.jsp</jsp-file>
+        <jsp-file>/Pages/Protected/ToDo.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>ToDo</servlet-name>
@@ -105,7 +105,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Cleaning</servlet-name>
-        <jsp-file>/Pages/Home.jsp</jsp-file>
+        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Cleaning</servlet-name>
@@ -113,7 +113,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Shopping</servlet-name>
-        <jsp-file>/Pages/Home.jsp</jsp-file>
+        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Shopping</servlet-name>
@@ -121,7 +121,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>FAQ</servlet-name>
-        <jsp-file>/Pages/FAQ.jsp</jsp-file>
+        <jsp-file>/Pages/Protected/FAQ.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>FAQ</servlet-name>
@@ -129,7 +129,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Contact</servlet-name>
-        <jsp-file>/Pages/Contact.jsp</jsp-file>
+        <jsp-file>/Pages/Public/Contact.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Contact</servlet-name>
@@ -137,19 +137,11 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Impressum</servlet-name>
-        <jsp-file>/Pages/Impressum.jsp</jsp-file>
+        <jsp-file>/Pages/Public/Impressum.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Impressum</servlet-name>
         <url-pattern>/impressum</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>CreateWG</servlet-name>
-        <jsp-file>/Pages/WGVerwaltung.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>CreateWG</servlet-name>
-        <url-pattern>/createWG</url-pattern>
     </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--
