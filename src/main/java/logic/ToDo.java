@@ -63,6 +63,18 @@ public class ToDo extends HttpServlet {
             e.printStackTrace();
         }
 
-        toDoBean.createTodo(task, assigneeId, wgId, dueDate);
+        ErrorCodes status = toDoBean.createTodo(task, assigneeId, wgId, dueDate);
+
+        switch(status){
+            case SUCCESS:
+                response.sendRedirect("/todo");
+                break;
+            case FAILURE:
+                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+                break;
+            case WRONGENTRY:
+                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
+                break;
+        }
     }
 }
