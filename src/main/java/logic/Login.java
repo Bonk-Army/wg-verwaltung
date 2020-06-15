@@ -69,7 +69,7 @@ public class Login extends HttpServlet {
                 // otherwise let it be a session cookie
                 sessionCookie.setMaxAge(cookieAge);
                 response.addCookie(sessionCookie);
-                response.sendRedirect("/home/");
+                response.sendRedirect("/home");
                 break;
             case WRONGENTRY:
                 // Return "wrong entry" error page

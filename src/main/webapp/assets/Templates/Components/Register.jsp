@@ -17,7 +17,7 @@
         <input name="email" type="email" id="email" class="form-control" placeholder="E-Mail-Adresse" required>
         <div class="checkbox mb-3">
             <label>
-                <input name="keepSignedIn" type="checkbox" value="remember-me"> Eingeloggt bleiben
+                <input name="keepSignedIn" type="checkbox" value="true"> Eingeloggt bleiben
             </label>
         </div>
         <input name="isRegister" type="checkbox" checked="checked" hidden="hidden" id="isRegister">
