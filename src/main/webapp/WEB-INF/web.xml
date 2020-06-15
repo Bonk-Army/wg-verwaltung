@@ -212,6 +212,14 @@
         <servlet-name>CreateWGLogic</servlet-name>
         <url-pattern>/createWGLogic</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AddTodoLogic</servlet-name>
+        <servlet-class>logic.ToDo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddTodoLogic</servlet-name>
+        <url-pattern>/addTodoLogic</url-pattern>
+    </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--
      888888ba                                                                     888888ba
