@@ -11,7 +11,7 @@ body {
 a,
 a:hover,
 a:focus {
-    color: inherit !important;
+    color: inherit;
     text-decoration: none;
     transition: all 0.3s;
 }
@@ -23,7 +23,7 @@ a:focus {
     min-width: 250px;
     max-width: 250px;
     background: #3c415e;
-    color: #fff;
+    color: aliceblue;
     transition: all 0.3s;
 }
 
@@ -31,6 +31,10 @@ a:focus {
     min-width: 100px;
     max-width: 100px;
     text-align: center;
+}
+
+#sidebar button {
+    background: #272525;
 }
 
 #sidebar.active .sidebar-header h3 {
@@ -88,7 +92,7 @@ a:focus {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #272525;
 }
 
 #sidebar ul li a {
@@ -98,8 +102,8 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #3c415e !important;
-    background: #fff;
+    color: #3c415e;
+    background: aliceblue;
 }
 
 #sidebar ul li a i {
@@ -108,7 +112,7 @@ a:focus {
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
-    color: #fff !important;
+    color: #fff;
     background: #3c415e;
 }
 
