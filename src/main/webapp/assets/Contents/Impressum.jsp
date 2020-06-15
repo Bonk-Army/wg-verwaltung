@@ -6,7 +6,7 @@
         75031 Eppingen<br>
     </p>
     <p><strong>Kontakt:</strong> <br>
-        E-Mail: <a href='mailto:patrick@mueller-patrick.tech'>patrick@muelelr-patrick.tech</a><br></p>
+        E-Mail: <a href='mailto:patrick@mueller-patrick.tech'>patrick@mueller-patrick.tech</a><br></p>
     <p><strong>Haftungsausschluss: </strong><br><br><strong>Haftung für Inhalte</strong><br><br>
         Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und
         Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1
