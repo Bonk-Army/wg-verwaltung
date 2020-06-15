@@ -4,6 +4,7 @@ package beans;
 import models.TodoModel;
 import utilities.DateFormatter;
 import utilities.RegexHelper;
+import utilities.SQLDCLogin;
 import utilities.SQLDCTodo;
 
 import java.util.ArrayList;
@@ -32,5 +33,9 @@ public class ToDoBean {
 
     public static ArrayList<TodoModel> getAllTodos(String wgId) {
         return SQLDCTodo.getAllTodos(wgId);
+    }
+
+    public static String getUsername(String userId) {
+        return SQLDCLogin.getUsername(userId);
     }
 }
