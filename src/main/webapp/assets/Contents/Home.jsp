@@ -3,14 +3,18 @@
     <h1>Willkommen <%= fail.vorname%> <%= fail.nachname%>, oder besser bekannt als "<%= fail.username%>" aus der WG "<%=fail.wg%>"	&#129433;</h1>
     <hr>
     <h4>Guthaben</h4>
-    <canvas id="myChart" width="auto" height="50"></canvas>
+    <canvas id="myChart" width="auto" height="40"></canvas>
     <script>
         <%@include file="../../assets/Scripts/ChartJS_Guthaben.js" %>
     </script>
     <br>
     <hr>
     <br>
-    <h4>Offene ToDos: 2 </h4>
+    <h4>ToDo's</h4>
+    <canvas id="myChartTodo" width="auto" height="40"></canvas>
+    <script>
+        <%@include file="../../assets/Scripts/ChartJS_ToDo.js" %>
+    </script>
     <br>
     <hr>
     <br>
