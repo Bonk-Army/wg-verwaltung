@@ -26,6 +26,8 @@
         |__ /home                  | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /todo                  | JSP Page : ToDo                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /financial             | JSP Page : Financial              | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /impressum             | JSP Page : Impressum              | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /wgverwaltung          | JSP Page : WGVerwaltung           | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -65,6 +67,14 @@
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>WG-Verwaltung</servlet-name>
+        <jsp-file>/Pages/WGVerwaltung.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WG-Verwaltung</servlet-name>
+        <url-pattern>/wgverwaltung</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Home</servlet-name>
