@@ -99,6 +99,14 @@
         <servlet-name>Impressum</servlet-name>
         <url-pattern>/impressum</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>CreateWG</servlet-name>
+        <jsp-file>/Pages/WGVerwaltung.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateWG</servlet-name>
+        <url-pattern>/createWG</url-pattern>
+    </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--
          a88888b.                     dP                     dP dP
