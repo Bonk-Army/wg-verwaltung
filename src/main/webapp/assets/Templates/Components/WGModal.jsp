@@ -9,11 +9,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                WG Name eingeben
+                WG-Namen eingeben
             </div>
-            <form action="reset" method="POST">
+            <form action="createWGLogic" method="POST">
                 <label for="wgname" class="sr-only">WGName</label>
-                <input id="wgname" class="form-control" placeholder="WG Name" name="email" required>
+                <input id="wgname" class="form-control" placeholder="WG-Name" name="wgname" required>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary odom-submit">WG erstellen</button>
