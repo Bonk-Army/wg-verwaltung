@@ -11,6 +11,7 @@
         |__ LOGIN                  |                                   | Zuständig : @NH      | Mapped by @NH | Zuständig für Inhalt @KA | Initial
         |__ /                      | JSP Page : Login                  | Zuständig : @DK      | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /register              | JSP Page : Register               | Zuständig : @DK      | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /wgverwaltung          | JSP Page : WGVerwaltung           | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ ^^-^^
         |
         |__ ^^-^^
@@ -23,10 +24,13 @@
         |__ ^^-^^
         |__ GUI                    |                                   | Zuständig : @KA/LK   | Mapped by @NH                            | Initial
         |__ /home                  | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /financial             | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /todo                  | JSP Page : ToDo                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /financial             | JSP Page : Financial              | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /clean                 | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /shopping              | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /faq                   | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /contact               | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /impressum             | JSP Page : Impressum              | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /wgverwaltung          | JSP Page : WGVerwaltung           | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -84,12 +88,52 @@
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>Financial</servlet-name>
+        <jsp-file>/Pages/Home.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Financial</servlet-name>
+        <url-pattern>/financial</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>ToDo</servlet-name>
         <jsp-file>/Pages/ToDo.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>ToDo</servlet-name>
         <url-pattern>/todo</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Cleaning</servlet-name>
+        <jsp-file>/Pages/Home.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Cleaning</servlet-name>
+        <url-pattern>/clean</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Shopping</servlet-name>
+        <jsp-file>/Pages/Home.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Shopping</servlet-name>
+        <url-pattern>/shopping</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>FAQ</servlet-name>
+        <jsp-file>/Pages/Home.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FAQ</servlet-name>
+        <url-pattern>/faq</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Contact</servlet-name>
+        <jsp-file>/Pages/Contact.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Contact</servlet-name>
+        <url-pattern>/contact</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Impressum</servlet-name>
