@@ -26,6 +26,7 @@ public class Reset extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean bean = new LoginBean();
+        request.setCharacterEncoding("UTF-8");
 
         String email = request.getParameter("email");
 

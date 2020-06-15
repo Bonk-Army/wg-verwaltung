@@ -27,8 +27,8 @@ public class Verify extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         LoginBean bean = new LoginBean();
+        request.setCharacterEncoding("UTF-8");
 
         String verificationCode = request.getParameter("key");
         String username = request.getParameter("uname");

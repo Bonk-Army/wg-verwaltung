@@ -21,6 +21,7 @@ public class ResetComplete extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean bean = new LoginBean();
+        request.setCharacterEncoding("UTF-8");
 
         String password = request.getParameter("password");
         String username = request.getParameter("username");
