@@ -1,6 +1,6 @@
 <div id="content">
 <div class='impressum'><h1>Impressum</h1>
-    <p>Angaben gemäß § 5 TMG</p>
+    <p>Angaben gem&auml;&szlig; &sect; 5 TMG</p>
     <p>Patrick Müller<br>
         Schachtstr. 8<br>
         75031 Eppingen<br>

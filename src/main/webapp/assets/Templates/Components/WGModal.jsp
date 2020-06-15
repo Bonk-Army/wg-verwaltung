@@ -11,7 +11,7 @@
             <div class="modal-body">
                 WG Name eingeben
             </div>
-            <form action="/reset" method="POST">
+            <form action="reset" method="POST">
                 <label for="wgname" class="sr-only">WGName</label>
                 <input id="wgname" class="form-control" placeholder="WG Name" name="email" required>
                 <div class="modal-footer">
