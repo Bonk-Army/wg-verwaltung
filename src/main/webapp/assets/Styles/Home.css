@@ -9,7 +9,6 @@ body {
     display: flex;
     -ms-flex-align: center;
     align-items: center;
-    background-color: #f5f5f5;
     justify-content: center;
 }
 
