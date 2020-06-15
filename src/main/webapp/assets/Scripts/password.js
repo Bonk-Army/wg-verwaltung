@@ -17,8 +17,8 @@ function checkPassword() {
     if (pw.match(/[!"§$%&/()=?@#'+*~^°\-_,;.:<>´`{}\[\]]+/)){
         strength++;
     }
-    // Prüfung min. Länge 5
-    if (pw.length >=5){
+    // Prüfung min. Länge 8
+    if (pw.length >=8){
         strength++;
     }
     document.querySelector('#bar').className = 'bar' + strength;
