@@ -201,6 +201,29 @@ public class LoginBean {
     }
 
     /**
+     * Extract the user id from the session identifier and check the validity of the session identifier.
+     *
+     * @param sessionIdentifier The session identifier
+     * @return The user id as a String or an empty string in case of an error
+     */
+    public String getUserIdBySessionIdentifier(String sessionIdentifier) {
+        if (RegexHelper.checkString(sessionIdentifier)) {
+            int splitIndex = sessionIdentifier.indexOf('-');
+            String userId = sessionIdentifier.substring(0, splitIndex);
+            String cookiePostfix = sessionIdentifier.substring(splitIndex, sessionIdentifier.length() - 1);
+
+            String username = SQLDCLogin.getUsername(userId);
+            String savedCookiePostfix = SQLDCLogin.getCookiePostfix(username);
+
+            if (savedCookiePostfix.equals(cookiePostfix)) {
+                return userId;
+            }
+        }
+
+        return "";
+    }
+
+    /**
      * Checks if the username is not already in use
      *
      * @param username The username to be checked

@@ -152,6 +152,22 @@
         <servlet-name>VerifyLogic</servlet-name>
         <url-pattern>/verify</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>JoinWGLogic</servlet-name>
+        <servlet-class>logic.JoinWG</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JoinWGLogic</servlet-name>
+        <url-pattern>/joinWGLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CreateWGLogic</servlet-name>
+        <servlet-class>logic.CreateWG</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateWGLogic</servlet-name>
+        <url-pattern>/createWGLogic</url-pattern>
+    </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--
      888888ba                                                                     888888ba

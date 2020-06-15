@@ -11,7 +11,7 @@
             <div class="modal-body">
                 E-mail Adresse eingeben!
             </div>
-            <form action="/reset" method="POST">
+            <form action="reset" method="POST">
                 <label for="eMail" class="sr-only">E-Mail</label>
                 <input type="email" id="eMail" class="form-control" placeholder="E-Mail-Adresse" name="email" required>
                 <div class="modal-footer">
