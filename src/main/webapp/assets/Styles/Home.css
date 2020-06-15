@@ -43,3 +43,8 @@ body {
 .mt-custom {
     margin-top: 10%;
 }
+
+.chart-container{
+    width: 100px;
+    height: 100px;
+}
