@@ -1,5 +1,5 @@
 <div id="content">
-    <h2>Frequently Asked Questions </h2>
+    <h2>Frequently Asked Questions</h2>
     <hr>
     <div id="accordion">
         <div class="card">
