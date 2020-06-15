@@ -9,7 +9,7 @@
         <input name="isRegister" type="checkbox" hidden="hidden" id="isRegister">
         <div class="checkbox mb-3">
             <label>
-                <input name="keepSignedIn" type="checkbox" value="remember-me"> Eingeloggt bleiben
+                <input name="keepSignedIn" type="checkbox" value="true"> Eingeloggt bleiben
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Anmelden</button>
