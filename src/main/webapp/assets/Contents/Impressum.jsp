@@ -1,3 +1,4 @@
+<div id="content">
 <div class='impressum'><h1>Impressum</h1>
     <p>Angaben gemäß § 5 TMG</p>
     <p>Patrick Müller<br>
@@ -43,4 +44,11 @@
         Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von
         Werbeinformationen, etwa durch Spam-Mails, vor.<br>
     </p>
+</div>
+    <div class="center">
+        <hr>
+    </div>
+    <div class="text-center">
+        <a href="./">Back to Login</a>
+    </div>
 </div>

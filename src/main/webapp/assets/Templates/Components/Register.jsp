@@ -24,8 +24,22 @@
         <button id="visibleRegisterButton" class="btn btn-lg btn-primary btn-block" type="button">Registrieren</button>
         <button id="registerButton" class="btn btn-lg btn-primary btn-block" type="submit" style="display: none;">Abschicken</button>
     </form>
-    <div id="backButton"><a href="/" style="text-decoration: none">
-        <button id="loginPage" class="btn btn-lg btn-primary btn-block" type="button">zur&uuml;ck zur Login-Seite
-        </button>
-    </a></div>
+    <div class="center">
+        <hr>
+    </div>
+    <div class="text-center">
+        <a href="./">Back to Login</a>
+    </div>
+    <div class="center">
+        <hr>
+    </div>
+    <div class="text-center">
+        <a href="./contact">Contact</a>  &emsp; <a href="./impressum">Impressum </a><br>
+    </div>
+    <div class="center">
+        <hr>
+    </div>
+    <div class="text-center">
+        Team Lama &copy; 2020
+    </div>
 </div>
