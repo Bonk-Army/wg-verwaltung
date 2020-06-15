@@ -8,14 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%@include file="../assets/Templates/Imports/Global.jsp" %>
-    <%@include file="../assets/Templates/Imports/Fonts.jsp" %>
+    <%@include file="../../assets/Templates/Imports/Global.jsp" %>
+    <%@include file="../../assets/Templates/Imports/Fonts.jsp" %>
+    <%@include file="../../assets/Templates/Imports/Bootstrap.jsp" %>
+
     <title>Contact</title>
-    <%@include file="../assets/Templates/Imports/Bootstrap.jsp" %>
+
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Home.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
 </head>
 <body>
-<%@include file="../assets/Templates/Components/Contact.jsp" %>
+<%@include file="../../assets/Templates/Components/Contact.jsp" %>
 </body>
 </html>
