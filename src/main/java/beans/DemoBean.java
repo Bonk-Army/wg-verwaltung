@@ -7,7 +7,7 @@ import java.util.Date;
 public class DemoBean {
 
     public String username = "Alpakaflüsterer";
-    public int kontoguthaben = 100;
+    public int kontoguthaben = 450;
     public String vorname = "Max";
     public String nachname = "Mustermann";
     public String wg = "Alpakastall";

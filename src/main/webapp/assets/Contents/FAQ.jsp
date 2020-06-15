@@ -21,7 +21,7 @@
             <div class="card-header" id="headingTwo">
                 <h5 class="mb-0">
                     <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Mag ich sie noch mehr ?
+                        Mag ich sie noch mehr?
                     </button>
                 </h5>
             </div>
@@ -36,7 +36,7 @@
             <div class="card-header" id="headingThree">
                 <h5 class="mb-0">
                     <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Mag ich sie ganz ganz doll ?
+                        Mag ich sie ganz ganz doll?
                     </button>
                 </h5>
             </div>
