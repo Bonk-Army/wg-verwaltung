@@ -42,7 +42,7 @@ public class CreateWG extends HttpServlet {
         String sessionIdentifier = "";
 
         for (Cookie cookie : cookies) {
-            if (cookie.getName() == "session") {
+            if (cookie.getName().equals("session")) {
                 sessionIdentifier = cookie.getValue();
             }
         }
