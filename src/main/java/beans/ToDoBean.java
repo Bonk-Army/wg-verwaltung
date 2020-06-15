@@ -1,10 +1,12 @@
 package beans;
 
 
+import models.TodoModel;
 import utilities.DateFormatter;
 import utilities.RegexHelper;
 import utilities.SQLDCTodo;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ToDoBean {
@@ -26,5 +28,9 @@ public class ToDoBean {
 
     public static String dateToString(Date date) {
         return DateFormatter.dateToString(date);
+    }
+
+    public static ArrayList<TodoModel> getAllTodos(String wgId) {
+        return SQLDCTodo.getAllTodos(wgId);
     }
 }
