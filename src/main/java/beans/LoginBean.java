@@ -210,7 +210,7 @@ public class LoginBean {
         if (RegexHelper.checkString(sessionIdentifier)) {
             int splitIndex = sessionIdentifier.indexOf('-');
             String userId = sessionIdentifier.substring(0, splitIndex);
-            String cookiePostfix = sessionIdentifier.substring(splitIndex, sessionIdentifier.length() - 1);
+            String cookiePostfix = sessionIdentifier.substring(splitIndex+1, sessionIdentifier.length());
 
             String username = SQLDCLogin.getUsername(userId);
             String savedCookiePostfix = SQLDCLogin.getCookiePostfix(username);
