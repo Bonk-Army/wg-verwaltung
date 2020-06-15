@@ -15,10 +15,12 @@ public class SQLDCLogin extends SQLDatabaseConnection {
      * @param verificationCode The randomly generated code that the user needs to verify his email
      * @return If the user has been created successful. If not, the user has to be informed!
      */
-    public static boolean createUser(String username, String email, String pwhash, String pwsalt, String verificationCode) {
+    public static boolean createUser(String username, String email, String pwhash, String pwsalt, String verificationCode, String firstName, String lastName, String cookiePostfix) {
         try {
-            ResultSet rs = executeQuery(("INSERT INTO users (username, email, pwhash, pwsalt, verificationCode)"
-                    + "VALUES ('" + username + "', '" + email + "', '" + pwhash + "', '" + pwsalt + "', '" + verificationCode + "')"));
+            ResultSet rs = executeQuery(("INSERT INTO users (username, email, pwhash, pwsalt, verificationCode, firstName, lastName, cookiePostfix)"
+                    + "VALUES ('" + username + "', '" + email + "', '" + pwhash + "', '"
+                    + pwsalt + "', '" + verificationCode + "', '" + firstName + "', '"
+                    + lastName + "', '" + cookiePostfix + "')"));
 
             return true;
         } catch (Exception e) {
@@ -270,6 +272,88 @@ public class SQLDCLogin extends SQLDatabaseConnection {
     public static boolean setPassword(String username, String pwhash) {
         try {
             executeQuery("UPDATE users SET pwhash='" + pwhash + "', passwordResetKey=NULL WHERE username='" + username + "'");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * Return the first name of the user by his username
+     *
+     * @param username The username of the user
+     * @return The first name of the user as a String
+     */
+    public static String getFirstName(String username) {
+        String firstName = "";
+        try {
+            ResultSet rs = executeQuery("SELECT firstName FROM users WHERE username='" + username + "'");
+
+            while (rs.next()) {
+                firstName = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return firstName;
+    }
+
+    /**
+     * Return the first name of the user by his username
+     *
+     * @param username The username of the user
+     * @return The first name of the user as a String
+     */
+    public static String getLastName(String username) {
+        String lastName = "";
+        try {
+            ResultSet rs = executeQuery("SELECT lastName FROM users WHERE username='" + username + "'");
+
+            while (rs.next()) {
+                lastName = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lastName;
+    }
+
+    /**
+     * Return the cookie postfix required for the session identifier for a specific user
+     *
+     * @param username The username of the user
+     * @return The cookie postfix
+     */
+    public static String getCookiePostfix(String username) {
+        String postfix = "";
+        try {
+            ResultSet rs = executeQuery("SELECT cookiePostfix FROM users WHERE username='" + username + "'");
+
+            while (rs.next()) {
+                postfix = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return postfix;
+    }
+
+    /**
+     * Set the cookie postfix parameter for the given user
+     *
+     * @param username      The username of the user
+     * @param cookiePostfix The new cookie postfix
+     * @return If it was successful
+     */
+    public static boolean setCookiePostfix(String username, String cookiePostfix) {
+        try {
+            executeQuery("UPDATE users SET cookiePostfix='" + cookiePostfix + "' WHERE username = '" + username + "'");
+
             return true;
         } catch (Exception e) {
             e.printStackTrace();

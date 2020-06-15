@@ -1,6 +1,7 @@
 package utilities;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class SQLDCSettings extends SQLDatabaseConnection {
     /**
@@ -59,6 +60,21 @@ public class SQLDCSettings extends SQLDatabaseConnection {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static ArrayList<String> getAccessKeyList() {
+        ArrayList<String> stringList = new ArrayList<>();
+
+        try {
+            ResultSet rs = executeQuery(("SELECT accessKey FROM wgs"));
+            while (rs.next()) {
+                stringList.add(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return stringList;
     }
 
 }

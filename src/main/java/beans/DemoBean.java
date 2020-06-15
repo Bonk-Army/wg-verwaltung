@@ -16,7 +16,7 @@ public class DemoBean {
 
     public DemoBean(){
         date = new Date();
-         todo = "Wisch raus du Alpaka!;Nico;"+date.toString()+";";
+        todo = "Wisch raus du Alpaka!;Nico;"+date.toString()+";";
     }
 
     public ErrorCodes getStatus (){

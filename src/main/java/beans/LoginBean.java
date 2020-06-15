@@ -32,14 +32,20 @@ public class LoginBean {
 
         String salt = SQLDCLogin.getPasswordSalt(username);
         String hash = SQLDCLogin.getPasswordHash(username);
+        String cookiePostfix = new RandomStringGenerator(21).nextString();
 
         if (!salt.isEmpty() && !hash.isEmpty()) {
             String newHash = PasswordHasher.hashPassword(password, salt);
 
             //Login was either successful or one of the entered params was wrong
             if (newHash.equals(hash)) {
-                this.status = ErrorCodes.SUCCESS;
-                return ErrorCodes.SUCCESS;
+                if (SQLDCLogin.setCookiePostfix(username, cookiePostfix)) {
+                    this.status = ErrorCodes.SUCCESS;
+                    return ErrorCodes.SUCCESS;
+                } else {
+                    this.status = ErrorCodes.FAILURE;
+                    return ErrorCodes.FAILURE;
+                }
             } else {
                 this.status = ErrorCodes.WRONGENTRY;
                 return ErrorCodes.WRONGENTRY;
@@ -60,7 +66,7 @@ public class LoginBean {
      * @param email    The entered email (must not exist yet)
      * @return The status of the request
      */
-    public ErrorCodes register(String username, String password, String email) {
+    public ErrorCodes register(String username, String password, String email, String firstName, String lastName) {
         //Generate random salt
         String salt = PasswordHasher.generateSalt();
 
@@ -68,18 +74,20 @@ public class LoginBean {
         String hash = PasswordHasher.hashPassword(password, salt);
 
         //Call SQL to ask if username / email is unique. If unique, it continues registration process, else it stops
-        if (!RegexHelper.checkString(username) || !RegexHelper.checkEmail(email)) {
+        if (!RegexHelper.checkString(username) || !RegexHelper.checkString(firstName) || !RegexHelper.checkString(lastName) || !RegexHelper.checkEmail(email)) {
             return ErrorCodes.WRONGENTRY;
         } else {
             if (isUsernameUnique(username) && isEmailUnique(email)) {
                 //Create new user. Generate random, 10-digit verification code for email verification.
                 String verificationCode = new RandomStringGenerator(10).nextString();
+                String cookiePostfix = new RandomStringGenerator(21).nextString();
 
                 // If the user creation was successful, send an email and continue registration
-                if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode)) {
+                if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfix)) {
                     // Now send an email to the user with the verification link
                     String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
-                    MailSender.sendVerificationMail(email, username, verifyLink);
+                    String fullName = firstName + " " + lastName;
+                    MailSender.sendVerificationMail(email, fullName, verifyLink);
 
                     // And return success
                     return ErrorCodes.SUCCESS;
@@ -128,7 +136,8 @@ public class LoginBean {
             if (SQLDCLogin.setPasswordKey(email, randomKey)) {
                 String username = SQLDCLogin.getUsernameByEmail(email);
                 String resetLink = "resetPassword?uname=" + username + "&key=" + randomKey;
-                MailSender.sendResetPasswordMail(email, username, resetLink);
+                String fullName = SQLDCLogin.getFirstName(username) + " " + SQLDCLogin.getLastName(username);
+                MailSender.sendResetPasswordMail(email, fullName, resetLink);
                 return ErrorCodes.SUCCESS;
             }
             return ErrorCodes.FAILURE;
@@ -170,6 +179,25 @@ public class LoginBean {
      */
     public String getUserId(String username) {
         return SQLDCLogin.getUserId(username);
+    }
+
+    /**
+     * Returns the session identifier for the user
+     *
+     * @param username The username
+     * @return The session identifier
+     */
+    public String getSessionIdentifier(String username) {
+        if (RegexHelper.checkString(username)) {
+            String userId = SQLDCLogin.getUserId(username);
+            String cookiePostfix = SQLDCLogin.getCookiePostfix(username);
+
+            if (!userId.isEmpty() && !cookiePostfix.isEmpty()) {
+                return userId + "-" + cookiePostfix;
+            }
+        }
+
+        return "";
     }
 
     /**

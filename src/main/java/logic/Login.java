@@ -4,6 +4,7 @@ import beans.LoginBean;
 import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,16 +39,22 @@ public class Login extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String email = "";
+        String firstName = "";
+        String lastName = "";
         Boolean stayLoggedIn = false;   // This determines the lifetime of the cookie that we send to the user
         // (false = session cookie, true = cookie that lasts 30 days or so)
 
         if (isRegister) {
+            // TODO Check for bad parsed characters (ÄÖÜ) (Ticket WGV-96)
             email = request.getParameter("email");
-        } else {
-            stayLoggedIn = Boolean.valueOf(request.getParameter("keepSignedIn"));
+            firstName = request.getParameter("firstName");
+            lastName = request.getParameter("lastName");
+            System.out.println(lastName);
         }
 
-        ErrorCodes status = isRegister ? bean.register(username, password, email) : bean.login(username, password);
+        stayLoggedIn = Boolean.valueOf(request.getParameter("keepSignedIn"));
+
+        ErrorCodes status = isRegister ? bean.register(username, password, email, firstName, lastName) : bean.login(username, password);
 
         //UserId required for session cookie
         String userId = "";
@@ -55,8 +62,14 @@ public class Login extends HttpServlet {
             case SUCCESS:
                 // Log the user in, save a cookie and redirect him to the home page
                 userId = bean.getUserId(username);
-                response.sendRedirect("/home/");
-                //TODO Save cookie
+                String sessionIdentifier = bean.getSessionIdentifier(username);
+                Cookie sessionCookie = new Cookie("session", (sessionIdentifier));
+                int cookieAge = stayLoggedIn ? 2592000 : -1;
+                // If user wants to stay logged in, make it live 30 days (2592000 seconds),
+                // otherwise let it be a session cookie
+                sessionCookie.setMaxAge(cookieAge);
+                response.addCookie(sessionCookie);
+                response.sendRedirect("/home");
                 break;
             case WRONGENTRY:
                 // Return "wrong entry" error page
@@ -64,7 +77,6 @@ public class Login extends HttpServlet {
                 break;
             case WRONGUNAME:
                 // Return "wrong entry" error page
-                // TODO Change to page that only says "wrong username"
                 request.getServletContext().getRequestDispatcher("/responseWrongUName").forward(request, response);
                 break;
             case FAILURE:

@@ -1,6 +1,7 @@
 package beans;
 
 
+import utilities.DateFormatter;
 import utilities.RegexHelper;
 import utilities.SQLDCTodo;
 
@@ -21,5 +22,9 @@ public class ToDoBean {
             return SQLDCTodo.createTodo(task, userId, wgId, dateDue);
         }
         return false;
+    }
+
+    public static String dateToString(Date date) {
+        return DateFormatter.dateToString(date);
     }
 }
