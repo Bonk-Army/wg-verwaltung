@@ -4,6 +4,8 @@ import utilities.RandomStringGenerator;
 import utilities.RegexHelper;
 import utilities.SQLDCSettings;
 
+import java.util.ArrayList;
+
 public class SettingsBean {
     /**
      * Create a wg
@@ -15,7 +17,11 @@ public class SettingsBean {
      */
     public static boolean createWg(String userId, String nameWg) {
         if (RegexHelper.checkString(nameWg)) {
+            ArrayList<String> stringList = SQLDCSettings.getAccessKeyList();
             String accessKey = new RandomStringGenerator(20).nextString();
+            while (stringList.contains(accessKey)) {
+                accessKey = new RandomStringGenerator(20).nextString();
+            }
             if (SQLDCSettings.createWg(nameWg, accessKey)) {
                 String wgId = SQLDCSettings.getWgId(accessKey);
                 if (!wgId.equals("")) {
