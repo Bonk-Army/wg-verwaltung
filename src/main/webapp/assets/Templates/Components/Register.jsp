@@ -22,7 +22,10 @@
         </div>
         <input name="isRegister" type="checkbox" checked="checked" hidden="hidden" id="isRegister">
         <button id="visibleRegisterButton" class="btn btn-lg btn-primary btn-block" type="button">Registrieren</button>
-        <a href="/" style="text-decoration: none"><button id="loginPage" class="btn btn-lg btn-primary btn-block" type="button" style="margin-top: 10px">zur&uuml;ck zur Login-Seite</button></a>
         <button id="registerButton" class="btn btn-lg btn-primary btn-block" type="submit" style="display: none;">Abschicken</button>
     </form>
+    <div id="backButton"><a href="/" style="text-decoration: none">
+        <button id="loginPage" class="btn btn-lg btn-primary btn-block" type="button">zur&uuml;ck zur Login-Seite
+        </button>
+    </a></div>
 </div>
