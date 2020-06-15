@@ -12,6 +12,7 @@ public class DemoBean {
     public String nachname = "Mustermann";
     public Date date;
     public String todo;
+    public boolean check = true;
 
     public DemoBean(){
         date = new Date();
