@@ -65,14 +65,17 @@ public class ToDo extends HttpServlet {
 
         ErrorCodes status = toDoBean.createTodo(task, assigneeId, wgId, dueDate);
 
-        switch(status){
+        switch (status) {
             case SUCCESS:
+                //Redirect back to the todo page
                 response.sendRedirect("/todo");
                 break;
             case FAILURE:
+                //Forward to failure page
                 request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
                 break;
             case WRONGENTRY:
+                //Forward to wrong entry page
                 request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
                 break;
         }
