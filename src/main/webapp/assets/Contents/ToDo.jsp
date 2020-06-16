@@ -1,27 +1,52 @@
+<%@ page import="models.TodoModel" %>
+<%@ page import="java.util.ArrayList" %>
 <div id="content">
-    <jsp:useBean id="fail" class="beans.DemoBean"></jsp:useBean>
+    <jsp:useBean id="fail" class="beans.ToDoBean"></jsp:useBean>
     <button title="ToDo hinzuf&uuml;gen" id="addToDo" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal" data-target="#exampleModal">
         +
     </button>
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">Aufgabe</th>
-            <th scope="col">Name</th>
-            <th scope="col">Datum</th>
-            <th scope="col">Check?</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row"><%= fail.todo %></th>
-            <td><%= fail.username %></td>
-            <td><%= fail.date %></td>
-            <% if (fail.check) {%>
-            <td>juppp</td>
-            <% } else { %>
-            <td>nope</td>
-            <% } %>
-        </tr>
-    </table>
+            <%
+                Cookie cookie = null;
+                Cookie[] cookies = null;
+                String value = "";
+                // Get an array of Cookies associated with the this domain
+                cookies = request.getCookies();
+                ArrayList<TodoModel> ToDo = new ArrayList<TodoModel>();
+
+                out.print("<table class=\"table\">");
+                out.print("<thead class=\"thead-dark\">");
+                out.print("<tr>");
+                out.print("<th scope=\"col\">Aufgabe</th>");
+                out.print("<th scope=\"col\">Zu erledigen bis:</th>");
+                out.print("<th scope=\"col\">Erstellt von:</th>");
+                out.print("<th scope=\"col\">Wird Erledigt von:</th>");
+                out.print("<th scope=\"col\">Check</th>");
+                out.print("</tr>");
+                out.print("</thead>");
+                out.print("<tbody>");
+
+                if( cookies != null ) {
+                    for (int i = 0; i < cookies.length; i++) {
+                        cookie = cookies[i];
+                        if ((cookies[i].getName().compareTo("session")) == 0){
+                            value = cookies[i].getValue();
+                            ToDo = (ArrayList<TodoModel>) fail.getAllTodosBySessionIdentifier(value);
+                            for (TodoModel item : ToDo)
+                            {
+                                out.print("<tr>");
+                                out.print("<td>"+ item.getTask() + " </td>");
+                                out.print("<td>"+ item.getDateDue() + " </td>");
+                                out.print("<td>"+ item.getCreatorUsername() + " </td>");
+                                out.print("<td>"+ item.getAssigneeUsername() + " </td>");
+                                out.print("<td>"+ item.getDone() + " </td>");
+                                out.print("</tr>");
+                            }
+                        }
+                    }
+                } else {
+                    out.println("<h2>No cookies founds</h2>");
+                }
+                out.println("</tbody>");
+                out.println("</table>");
+            %>
 </div>

@@ -1,9 +1,6 @@
 package beans;
 
-import utilities.ErrorCodes;
-import utilities.RandomStringGenerator;
-import utilities.RegexHelper;
-import utilities.SQLDCSettings;
+import utilities.*;
 
 import java.util.ArrayList;
 
@@ -26,7 +23,10 @@ public class SettingsBean {
             if (SQLDCSettings.createWg(nameWg, accessKey)) {
                 String wgId = SQLDCSettings.getWgId(accessKey);
                 if (!wgId.equals("")) {
-                    return SQLDCSettings.setWgId(wgId, userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                    if (SQLDCSettings.setWgId(wgId, userId) && SQLDCSettings.setUserRights(userId, UserRights.WG_ADMIN.getSqlKey())) {
+                        return ErrorCodes.SUCCESS;
+                    }
+                    return ErrorCodes.FAILURE;
                 }
             }
         }

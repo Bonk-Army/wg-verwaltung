@@ -18,6 +18,9 @@ public class ResetComplete extends HttpServlet {
 
     }
 
+    /**
+     * Called when the user sends his new password and therefore completes the password reset process
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean bean = new LoginBean();
@@ -25,11 +28,11 @@ public class ResetComplete extends HttpServlet {
 
         String password = request.getParameter("password");
         String username = request.getParameter("username");
-        String passwordResetKey =  request.getParameter("key");
+        String passwordResetKey = request.getParameter("key");
 
         ErrorCodes status = bean.resetPassword(username, passwordResetKey, password);
 
-        switch(status){
+        switch (status) {
             case SUCCESS:
                 request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
                 break;

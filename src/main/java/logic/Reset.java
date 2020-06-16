@@ -23,6 +23,9 @@ public class Reset extends HttpServlet {
         //DEPRECATED???
     }
 
+    /**
+     * Called when the user enters his email address to receive a link to reset his password
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean bean = new LoginBean();
@@ -32,7 +35,7 @@ public class Reset extends HttpServlet {
 
         ErrorCodes status = bean.sendPasswordResetLink(email);
 
-        switch(status){
+        switch (status) {
             case SUCCESS:
                 // Show success page
                 request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
