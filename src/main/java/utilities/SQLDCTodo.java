@@ -47,7 +47,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
     public static List<TodoModel> getAllTodos(String wgId) {
         List<TodoModel> todoList = new ArrayList<TodoModel>();
         try {
-            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, createdBy, uniqueID FROM todo WHERE wgId = " + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, createdBy, uniqueID FROM todo WHERE wgId = " + Integer.valueOf(wgId) + " ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
                 String task = rs.getString(1);
                 String userId = String.valueOf(rs.getInt(2));
@@ -112,12 +112,13 @@ public class SQLDCTodo extends SQLDatabaseConnection {
 
     /**
      * Set an issue to status done
+     *
      * @param todoId The id of the todo
      * @return If it was successful
      */
     public static boolean setTodoDone(String todoId) {
         try {
-            executeQuery(("UPDATE todo SET isDone=true WHERE unqiueID=" + Integer.valueOf(todoId)));
+            executeQuery(("UPDATE todo SET isDone=true WHERE uniqueID=" + Integer.valueOf(todoId)));
 
             return true;
         } catch (Exception e) {
@@ -125,5 +126,24 @@ public class SQLDCTodo extends SQLDatabaseConnection {
         }
 
         return false;
+    }
+
+    /**
+     * Concatenates First name and the first letter of the last name
+     *
+     * @param userId The ID of the User
+     * @return Full Name
+     */
+    public static String getNameString(String username) {
+        String firstName;
+        String lastName;
+        try {
+            firstName = SQLDCLogin.getFirstName(username);
+            lastName = SQLDCLogin.getLastName(username);
+            return firstName + " " + lastName.substring(0, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

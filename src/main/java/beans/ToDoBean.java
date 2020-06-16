@@ -58,6 +58,16 @@ public class ToDoBean {
         return new ArrayList<TodoModel>();
     }
 
+    public List<String> getAllUsersOfWgBySessionIdentifier(String sessionIdentifier) {
+        if (RegexHelper.checkString(sessionIdentifier) && !sessionIdentifier.isEmpty()) {
+            int splitIndex = sessionIdentifier.indexOf('-');
+            String userId = sessionIdentifier.substring(0, splitIndex);
+            return getAllUsersOfWgByUserId(userId);
+        }
+
+        return new ArrayList<String>();
+    }
+
     public String getUsername(String userId) {
         return SQLDCLogin.getUsername(userId);
     }
@@ -82,6 +92,20 @@ public class ToDoBean {
         String wgId = SQLDCTodo.getWgIdByUser(userId);
 
         return SQLDCTodo.getAllUsersOfWG(wgId);
+    }
+
+    /**
+     * Returns the first name and the first letter of the last name of a user as one string
+     *
+     * @param username The username of the user
+     * @return The String, e.g. Patrick M
+     */
+    public String getNameString(String username) {
+        if(RegexHelper.checkString(username)) {
+            return SQLDCTodo.getNameString(username);
+        }
+
+        return "";
     }
 
     /**
