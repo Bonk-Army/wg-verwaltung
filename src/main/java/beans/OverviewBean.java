@@ -40,6 +40,28 @@ public class OverviewBean {
      * @return Number of done To-Do's for given User
      */
     public int getNumberofDoneUser(String userId) {return SQLDCOverview.countDoneUser(userId); }
+
+    /**
+     * Gets First Name for User ID
+     * @param userId The ID of the User
+     * @return First Name of User
+     */
+    public String getFirstName(String userId) {return SQLDCOverview.getFirstName(userId); }
+
+    /**
+     * Gets Last Name for User ID
+     * @param userId The ID of the User
+     * @return Last Name of User
+     */
+    public String getLastName(String userId) {return SQLDCOverview.getLastName(userId); }
+
+    /**
+     * Gets Full Name for User ID
+     * @param userId The ID of the User
+     * @return Full Name of User
+     */
+    public String getFullName(String userId) {return SQLDCOverview.getFullName(userId); }
+
     }
 
     // Private Methods

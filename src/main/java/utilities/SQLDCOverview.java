@@ -75,4 +75,56 @@ public class SQLDCOverview extends SQLDatabaseConnection {
         }
         return -1;
     }
+
+    /**
+     * Sends SQL Query to fetch first Name
+     * @param userId The ID of the User
+     * @return First Name of User
+     */
+    public static String getFirstName(String userId) {
+        String firstName = "";
+        try {
+            ResultSet rs = executeQuery("SELECT firstName FROM users WHERE uniqueID=" + userId + ";");
+            firstName = rs.getString(1);
+            return firstName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
+     * Sends SQL Query to fetch Last Name
+     * @param userId The ID of the User
+     * @return Last Name of User
+     */
+    public static String getLastName(String userId) {
+        String lastName = "";
+        try {
+            ResultSet rs = executeQuery("SELECT lastName FROM users WHERE uniqueID=" + userId + ";");
+            lastName = rs.getString(1);
+            return lastName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
+     * Concatenates First and Last Name
+     * @param userId The ID of the User
+     * @return Full Name
+     */
+    public static String getFullName(String userId) {
+        String firstName;
+        String lastName;
+        try {
+            firstName = getFirstName(userId);
+            lastName = getLastName(userId);
+            return firstName + lastName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 }
