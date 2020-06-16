@@ -21,7 +21,7 @@
 <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
 <%@include file="../../assets/Templates/Modal/ToDo.jsp" %>
 
-<%@include file="../../assets/Contents/Shopping.jsp" %>
+<%@include file="../../assets/Contents/ToDo.jsp" %>
 
 <script><%@include file="../../assets/Scripts/Sidebar.js" %></script>
 <script><%@include file="../../assets/Scripts/Modal.js" %></script>
