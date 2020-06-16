@@ -121,7 +121,7 @@ public class SQLDCOverview extends SQLDatabaseConnection {
         try {
             firstName = getFirstName(userId);
             lastName = getLastName(userId);
-            return firstName + lastName;
+            return firstName + " " +  lastName;
         } catch (Exception e) {
             e.printStackTrace();
         }
