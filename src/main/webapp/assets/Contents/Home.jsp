@@ -1,6 +1,7 @@
 <div id="content">
     <jsp:useBean id="fail" class="beans.DemoBean"></jsp:useBean>
     <jsp:useBean id="overview" class="beans.OverviewBean"></jsp:useBean>
+    <jsp:useBean id="login" class="beans.LoginBean"></jsp:useBean>
     <%
         Cookie cookie = null;
         Cookie[] cookies = null;
@@ -13,8 +14,8 @@
                 cookie = cookies[i];
                 if ((cookies[i].getName().compareTo("session")) == 0) {
                     value = cookies[i].getValue();
-                    overview.
-                    out.print("<h1>Willkommen"+overview.getFullName()+", oder besser bekannt als "+overview.+"aus der WG "+overview.+"&#129433;</h1>");
+                    String id = login.getUserIdBySessionIdentifier(value);
+                    out.print("<h1>Willkommen "+overview.getFullName(id)+", oder besser bekannt als "+overview.getUsernameById(id)+" aus der WG "+overview.getWgNameByUserId(id)+ "&#129433;</h1>");
                 }
             }
         } else {
