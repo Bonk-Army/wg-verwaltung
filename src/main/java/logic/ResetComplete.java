@@ -1,15 +1,16 @@
 package logic;
 
 import beans.LoginBean;
-import utilities.SQLDatabaseConnection;
-import view.servlets.Servlet;
+import utilities.ErrorCodes;
+import utilities.RegexHelper;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ResetComplete extends Servlet {
+public class ResetComplete extends HttpServlet {
 
 
     @Override
@@ -20,17 +21,24 @@ public class ResetComplete extends Servlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean bean = new LoginBean();
+        request.setCharacterEncoding("UTF-8");
 
         String password = request.getParameter("password");
         String username = request.getParameter("username");
         String passwordResetKey =  request.getParameter("key");
 
-        if(bean.resetPassword(username, passwordResetKey, password)) {
-            System.out.println("Reset completed");
-            //TODO
-        } else {
-            System.out.println("Reset not completed");
-            //TODO
+        ErrorCodes status = bean.resetPassword(username, passwordResetKey, password);
+
+        switch(status){
+            case SUCCESS:
+                request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
+                break;
+            case FAILURE:
+                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+                break;
+            case WRONGENTRY:
+                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
+                break;
         }
     }
 }

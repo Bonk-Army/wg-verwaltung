@@ -31,6 +31,7 @@ public class MailSender {
 
             // Create the email object and set basic params
             Email from = new Email("no-reply@wgverwaltung.azurewebsites.net");
+            from.setName("WG-Verwaltung");
             Email to = new Email(receiver);
             Mail mail = new Mail();
             mail.setFrom(from);

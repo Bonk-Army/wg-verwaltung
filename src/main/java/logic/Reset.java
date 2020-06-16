@@ -2,15 +2,15 @@ package logic;
 
 import beans.LoginBean;
 import utilities.ErrorCodes;
-import view.servlets.Servlet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class Reset extends Servlet {
+public class Reset extends HttpServlet {
     public Reset() {
         super();
     }
@@ -26,6 +26,7 @@ public class Reset extends Servlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean bean = new LoginBean();
+        request.setCharacterEncoding("UTF-8");
 
         String email = request.getParameter("email");
 
@@ -34,15 +35,15 @@ public class Reset extends Servlet {
         switch(status){
             case SUCCESS:
                 // Show success page
-                request.getServletContext().getRequestDispatcher("/de/login/reset-success.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
                 break;
             case WRONGEMAIL:
                 // Show wrong email page
-                request.getServletContext().getRequestDispatcher("/de/login/reset-wrong-credentials.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseWrongEMail").forward(request, response);
                 break;
             case FAILURE:
                 // Show server error page
-                request.getServletContext().getRequestDispatcher("/de/login/reset-server-error.jsp").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
                 break;
         }
     }

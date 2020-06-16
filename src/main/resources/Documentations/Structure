@@ -1,0 +1,31 @@
+
+                            .d88888b    dP                                dP
+                            88.    "'   88                                88
+                            `Y88888b. d8888P 88d888b. dP    dP .d8888b. d8888P dP    dP 88d888b. .d8888b.
+                                  `8b   88   88'  `88 88    88 88'  `""   88   88    88 88'  `88 88ooood8
+                            d8'   .8P   88   88       88.  .88 88.  ...   88   88.  .88 88       88.  ...
+                             Y88888P    dP   dP       `88888P' `88888P'   dP   `88888P' dP       `88888P'
+
+Bei Fragen zum Frontend an @NH TODO Nico Holzhäuser
+------------|
+            |---- Contents              - Der ganze Inhalt der Seiten
+            |---- Images                - Alle Images
+            |---- Scripts               - Alle Scriptdateien
+            |---- Styles                - Die CSS Sytles
+            |---- Templates             - Ordner für Component Templates
+                |---- Components        - Komponenten
+                |---- Imports           - Script Importe wie bsp. Bootstrap
+                |---- Modal             - Modal Dialoge
+
+
+###################################################################################################################################################
+
+Bei Fragen zum Backend an @PM TODO Patrick Müller
+------------|
+            |---- Bean                  -
+            |---- config                -
+            |---- logic                 -
+            |---- models                -
+            |---- utilities             -
+
+###################################################################################################################################################
