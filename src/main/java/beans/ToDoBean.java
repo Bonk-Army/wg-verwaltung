@@ -1,5 +1,6 @@
 package beans;
 
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import models.TodoModel;
 import utilities.*;
 
@@ -18,8 +19,10 @@ public class ToDoBean {
      * @return If the to-do has been created successfully. If not, the user has to be informed!
      */
     public ErrorCodes createTodo(String task, String userId, String wgId, Date dateDue, String createdById) {
-        if (RegexHelper.checkString(task)) {
-            return SQLDCTodo.createTodo(task, userId, wgId, dateDue, createdById) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+        if (RegexHelper.checkText(task)) {
+            if (RegexHelper.checkString(userId) && RegexHelper.checkString(wgId) && RegexHelper.checkString(createdById)) {
+                return SQLDCTodo.createTodo(task, userId, wgId, dateDue, createdById) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            }
         }
         return ErrorCodes.WRONGENTRY;
     }
