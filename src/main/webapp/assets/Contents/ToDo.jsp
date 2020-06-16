@@ -42,15 +42,12 @@
                                 String klasse;
                                 String done;
                                 String hidden;
-                                /*Date currentDate = new Date();
+                                Date currentDate = new Date();
                                 Calendar c = Calendar.getInstance();
                                 c.setTime(currentDate);
-                                c.add(Calendar.DATE,3);
-                                Date threeDaysDate = c.getTime();*/
+                                c.add(Calendar.DATE, 3);
+                                Date threeDaysDate = c.getTime();
 
-                                LocalDate currentDate = LocalDate.now();
-                                LocalDate date = item.getDateDue().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                                Period period = Period.between(currentDate, date);
 
                                 if(item.getDone()){
                                     klasse = "done";
@@ -59,9 +56,9 @@
                                 } else{
                                     done = "nein";
                                     hidden = "";
-                                    if(period.getDays() <= 0){
+                                    if(currentDate.after(item.getDateDue())){
                                         klasse = "notDone tooLate";
-                                    } else if(period.getDays() <= 3){
+                                    } else if(threeDaysDate.after(item.getDateDue())){
                                         klasse = "notDone late";
                                     } else{
                                         klasse = "notDone";
