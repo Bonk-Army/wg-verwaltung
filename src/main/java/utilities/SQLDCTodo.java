@@ -47,7 +47,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
     public static List<TodoModel> getAllTodos(String wgId) {
         List<TodoModel> todoList = new ArrayList<TodoModel>();
         try {
-            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, createdBy, uniqueID FROM todo WHERE wgId = " + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, createdBy, uniqueID FROM todo WHERE wgId = " + Integer.valueOf(wgId)) + " SORT BY isDone ASCENDING");
             while (rs.next()) {
                 String task = rs.getString(1);
                 String userId = String.valueOf(rs.getInt(2));
