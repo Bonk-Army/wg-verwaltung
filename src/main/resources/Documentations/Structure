@@ -22,10 +22,10 @@ Bei Fragen zum Frontend an @NH TODO Nico Holzhäuser
 
 Bei Fragen zum Backend an @PM TODO Patrick Müller
 ------------|
-            |---- Bean                  -
-            |---- config                -
-            |---- logic                 -
-            |---- models                -
-            |---- utilities             -
+            |---- Bean                  - Die Java Beans, die die Geschäftslogik ausführen
+            |---- config                - Config-Files zum checken von Umgebungsparametern o.ä.
+            |---- logic                 - Die Request-Endpoint-Servlets, an die POST und GET geschickt werden
+            |---- models                - Datenmodelle einzelner Objekte z.B. für Shopping und Todo
+            |---- utilities             - Utility-Klassen wie SQL Connection und Mail Sender
 
 ###################################################################################################################################################
