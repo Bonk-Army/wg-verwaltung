@@ -20,6 +20,7 @@
                 out.print("<th scope=\"col\">Zu erledigen bis:</th>");
                 out.print("<th scope=\"col\">Erstellt von:</th>");
                 out.print("<th scope=\"col\">Wird Erledigt von:</th>");
+                out.print("<th scope=\"col\">Erledigt?</th>");
                 out.print("<th scope=\"col\">Check</th>");
                 out.print("</tr>");
                 out.print("</thead>");
@@ -33,15 +34,28 @@
                             ToDo = (ArrayList<TodoModel>) fail.getAllTodosBySessionIdentifier(value);
                             for (TodoModel item : ToDo)
                             {
-                                out.print("<tr>");
+                                String classe;
+                                String done;
+                                String hidden;
+                                if(item.getDone()){
+                                    classe = "done";
+                                    done = "ja";
+                                    hidden = "hidden=\"hidden\"";
+                                } else{
+                                    classe = "notDone";
+                                    done = "nein";
+                                    hidden = "";
+                                }
+                                out.print("<tr class=\""+classe+"\">");
                                 out.print("<td>"+ item.getTask() + " </td>");
                                 out.print("<td>"+ item.getDateDue() + " </td>");
                                 out.print("<td>"+ item.getCreatorUsername() + " </td>");
                                 out.print("<td>"+ item.getAssigneeUsername() + " </td>");
+                                out.print("<td >"+done+"</td>");
                                 out.print("<td>");
                                 out.print("<form action=\"setDoneLogic\" method=\"POST\">");
                                 out.print("<input type=\"text\" name=\"todoId\" hidden=\"hidden\" value=\""+item.getUniqueID()+"\">");
-                                out.print("<button title=\"ToDo check\" onclick=\"doneTodo("+item.getUniqueID()+")\" class=\"btn btn-lg btn-primary btn-block\" type=\"button\" data-toggle=\"modal\" data-target=\"#todoModal\">erledigt</button>");
+                                out.print("<button title=\"ToDo check\" onclick=\"doneTodo("+item.getUniqueID()+")\" class=\"btn btn-lg btn-primary btn-block\" type=\"button\" data-toggle=\"modal\" data-target=\"#todoModal\" "+hidden+">erledigt</button>");
                                 out.print("<button title=\"ToDo check\" id=\""+item.getUniqueID()+"\" type=\"submit\" style=\"display: none;\"</button>");
                                 out.print("</form>");
                                 out.print("</td>");
