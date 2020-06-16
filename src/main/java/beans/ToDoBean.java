@@ -93,4 +93,8 @@ public class ToDoBean {
     public String getWgIdByUserId(String userId) {
         return SQLDCTodo.getWgIdByUser(userId);
     }
+
+    public ErrorCodes setTodoDone(String todoId) {
+        return SQLDCTodo.setTodoDone(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+    }
 }
