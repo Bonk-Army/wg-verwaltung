@@ -85,13 +85,14 @@ public class SQLDCOverview extends SQLDatabaseConnection {
     public static String getFirstName(String userId) {
         String firstName = "";
         try {
-            ResultSet rs = executeQuery("SELECT firstName FROM users WHERE uniqueID=" + userId + ";");
-            firstName = rs.getString(1);
-            return firstName;
+            ResultSet rs = executeQuery("SELECT firstName FROM users WHERE uniqueID=" + Integer.valueOf(userId) + ";");
+            while (rs.next()) {
+                firstName = rs.getString(1);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        return firstName;
     }
 
     /**
@@ -103,13 +104,14 @@ public class SQLDCOverview extends SQLDatabaseConnection {
     public static String getLastName(String userId) {
         String lastName = "";
         try {
-            ResultSet rs = executeQuery("SELECT lastName FROM users WHERE uniqueID=" + userId + ";");
-            lastName = rs.getString(1);
-            return lastName;
+            ResultSet rs = executeQuery("SELECT lastName FROM users WHERE uniqueID=" + Integer.valueOf(userId) + ";");
+            while (rs.next()) {
+                lastName = rs.getString(1);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        return lastName;
     }
 
     /**
@@ -133,6 +135,7 @@ public class SQLDCOverview extends SQLDatabaseConnection {
 
     /**
      * Return the wg name of the wg of the passed user
+     *
      * @param userId The user id of the user
      * @return The wg name
      */
@@ -147,7 +150,7 @@ public class SQLDCOverview extends SQLDatabaseConnection {
             }
 
             ResultSet forWgName = executeQuery("SELECT name FROM wgs WHERE uniqueID=" + wgId);
-            while(forWgName.next()){
+            while (forWgName.next()) {
                 wgName = forWgName.getString(1);
             }
         } catch (Exception e) {

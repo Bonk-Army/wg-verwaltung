@@ -101,6 +101,12 @@ public class OverviewBean {
         return "";
     }
 
+    /**
+     * Get the total number of todos for the passed wg
+     *
+     * @param wgID The wgId of the wg
+     * @return The total number of todos
+     */
     public int getNumberofTodos(String wgID) {
         if (RegexHelper.checkString(wgID) && !wgID.isEmpty()) {
             return SQLDCOverview.countTodo(wgID);
@@ -108,6 +114,12 @@ public class OverviewBean {
         return -1;
     }
 
+    /**
+     * Get the number of finished todos for the passed wg
+     *
+     * @param wgID The wgId of the wg
+     * @return The number of finished todos
+     */
     public int getNumberofDone(String wgID) {
         if (RegexHelper.checkString(wgID) && !wgID.isEmpty()) {
             return SQLDCOverview.countDone(wgID);
@@ -129,8 +141,14 @@ public class OverviewBean {
         return "";
     }
 
+    /**
+     * Get the name of the wg of the passed user
+     *
+     * @param userId The userId of the user
+     * @return The wg name
+     */
     public String getWgNameByUserId(String userId) {
-        if(RegexHelper.checkString(userId)){
+        if (RegexHelper.checkString(userId)) {
             return SQLDCOverview.getWgName(userId);
         }
 
