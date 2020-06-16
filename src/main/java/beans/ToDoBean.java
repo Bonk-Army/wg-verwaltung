@@ -101,9 +101,13 @@ public class ToDoBean {
      * @return The String, e.g. Patrick M
      */
     public String getNameString(String username) {
-        String userId = SQLDCLogin.getUserId(username);
+        if(RegexHelper.checkString(username)) {
+            String userId = SQLDCLogin.getUserId(username);
 
-        return SQLDCTodo.getNameString(userId);
+            return SQLDCTodo.getNameString(userId);
+        }
+
+        return "";
     }
 
     /**
