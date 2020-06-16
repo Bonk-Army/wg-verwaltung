@@ -26,22 +26,18 @@
                 out.print("<tr>");
 
                 if( cookies != null ) {
-                    out.println("<h2> Found Cookies Name and Value</h2>");
                     for (int i = 0; i < cookies.length; i++) {
                         cookie = cookies[i];
                         if ((cookies[i].getName().compareTo("session")) == 0){
                             value = cookies[i].getValue();
                             ToDo = (ArrayList<TodoModel>) fail.getAllTodosBySessionIdentifier(value);
-                            out.print("Name : " + cookie.getName( ) + ", ");
-                            out.print("Value: " + cookie.getValue( )+" <br/>");
-
-                            for (TodoModel item : ToDo
-                                 ) {
-                                out.print("<tr>"+ item.getTask() + " </tr>");
-                                out.print("<tr>"+ item.getDateDue()+ " </tr>");
-                                out.print("<tr>"+ item.getDateDue() + " </tr>");
-                                out.print("<tr>"+ item.getDone() + " </tr>");
-                                out.print("<tr>"+ item.getDone() + " </tr>");
+                            for (TodoModel item : ToDo)
+                            {
+                                out.print("<td>"+ item.getTask() + " </td");
+                                out.print("<td>"+ item.getDateDue()+ " </td>");
+                                out.print("<td>"+ item.getDateDue() + " </td>");
+                                out.print("<td>"+ item.getDone() + " </td>");
+                                out.print("<td"+ item.getDone() + " </td>");
                             }
                         }
                     }
