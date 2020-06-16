@@ -117,7 +117,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      */
     public static boolean setTodoDone(String todoId) {
         try {
-            executeQuery(("UPDATE todo SET isDone=true WHERE unqiueID=" + Integer.valueOf(todoId)));
+            executeQuery(("UPDATE todo SET isDone=true WHERE uniqueID=" + Integer.valueOf(todoId)));
 
             return true;
         } catch (Exception e) {
