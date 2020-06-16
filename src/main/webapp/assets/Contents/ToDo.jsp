@@ -2,9 +2,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.Calendar" %>
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="java.time.Period" %>
-<%@ page import="java.time.ZoneId" %>
 <div id="content">
     <jsp:useBean id="fail" class="beans.ToDoBean"></jsp:useBean>
     <button title="ToDo hinzuf&uuml;gen" id="addToDo" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal" data-target="#exampleModal">
@@ -47,7 +44,6 @@
                                 c.setTime(currentDate);
                                 c.add(Calendar.DATE, 3);
                                 Date threeDaysDate = c.getTime();
-
 
                                 if(item.getDone()){
                                     klasse = "done";

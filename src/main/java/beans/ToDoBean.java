@@ -58,6 +58,16 @@ public class ToDoBean {
         return new ArrayList<TodoModel>();
     }
 
+    public List<String> getAllUsersOfWgBySessionIdentifier(String sessionIdentifier) {
+        if (RegexHelper.checkString(sessionIdentifier) && !sessionIdentifier.isEmpty()) {
+            int splitIndex = sessionIdentifier.indexOf('-');
+            String userId = sessionIdentifier.substring(0, splitIndex);
+            return getAllUsersOfWgByUserId(userId);
+        }
+
+        return new ArrayList<String>();
+    }
+
     public String getUsername(String userId) {
         return SQLDCLogin.getUsername(userId);
     }
