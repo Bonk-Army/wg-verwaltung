@@ -45,6 +45,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      * @return ArrayList<TodoModel>
      */
     public static List<TodoModel> getAllTodos(String wgId) {
+        deactivateOldToDos();
         List<TodoModel> todoList = new ArrayList<TodoModel>();
         try {
             ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, createdBy, uniqueID FROM todo WHERE wgId = " + Integer.valueOf(wgId) + " ORDER BY isDone, dateDue ASC"));
@@ -131,8 +132,8 @@ public class SQLDCTodo extends SQLDatabaseConnection {
     /**
      * Concatenates First name and the first letter of the last name
      *
-     * @param userId The ID of the User
-     * @return Full Name
+     * @param username The username of the user
+     * @return The name string
      */
     public static String getNameString(String username) {
         String firstName;
@@ -145,5 +146,14 @@ public class SQLDCTodo extends SQLDatabaseConnection {
             e.printStackTrace();
         }
         return "";
+    }
+
+    /**
+     * WGV-115
+     * Deactivates done ToDos older than 30 days
+     *
+     */
+    public static void deactivateOldToDos () {
+        executeQuery("UPDATE todo SET isActive=0 WHERE isDone=1 AND dateDue < DATE_ADD(CURDATE(), INTERVAL -30 DAY);");
     }
 }
