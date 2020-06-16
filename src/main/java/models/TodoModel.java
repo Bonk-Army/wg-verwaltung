@@ -13,13 +13,16 @@ public class TodoModel {
     private Date dateDue;
     private Boolean isDone;
 
-    public TodoModel(String task, String userId, String wgId, Date dateCreated, Date dateDue, Boolean isDone) {
+    private String createdBy;
+
+    public TodoModel(String task, String userId, String wgId, Date dateCreated, Date dateDue, Boolean isDone, String createdBy) {
         this.task = task;
         this.userId = userId;
         this.wgId = wgId;
         this.dateCreated = dateCreated;
         this.dateDue = dateDue;
         this.isDone = isDone;
+        this.createdBy = createdBy;
     }
 
     public String getTask() {
@@ -44,5 +47,9 @@ public class TodoModel {
 
     public Boolean getDone() {
         return isDone;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
     }
 }

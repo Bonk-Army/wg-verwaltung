@@ -47,14 +47,15 @@ public class SQLDCTodo extends SQLDatabaseConnection {
     public static List<TodoModel> getAllTodos(String wgId) {
         List<TodoModel> todoList = new ArrayList<TodoModel>();
         try {
-            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone FROM todo WHERE wgId = " + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, createdBy FROM todo WHERE wgId = " + Integer.valueOf(wgId)));
             while (rs.next()) {
                 String task = rs.getString(1);
                 String userId = String.valueOf(rs.getInt(2));
                 Date dateCreated = rs.getDate(3);
                 Date dateDue = rs.getDate(4);
                 Boolean isDone = rs.getBoolean(5);
-                TodoModel todoModel = new TodoModel(task, userId, wgId, dateCreated, dateDue, isDone);
+                String createdBy = rs.getString(6);
+                TodoModel todoModel = new TodoModel(task, userId, wgId, dateCreated, dateDue, isDone, createdBy);
                 todoList.add(todoModel);
             }
             return todoList;
