@@ -117,7 +117,6 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      *
      */
     public static void deactivateOldToDos () {
-        //Stolen from https://stackoverflow.com/questions/4364913/sql-delete-statement-where-date-is-greater-than-30-days
-        executeQuery("UPDATE todo SET isActive=0 WHERE dateDue < DATEADD(day, -30, GETDATE() AND isDone=1;");
+        executeQuery("UPDATE todo SET isActive=0 WHERE isDone=1 AND dateDue < DATE_ADD(CURDATE(), INTERVAL -30 DAY);");
     }
 }
