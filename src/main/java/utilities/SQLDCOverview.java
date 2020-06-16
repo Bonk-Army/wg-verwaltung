@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class SQLDCOverview extends SQLDatabaseConnection{
 
-    public static int countTodo(int wg_id) {
+    public static int countTodo(String wgId) {
         int numberofTodo;
         try {
-            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE wgID=" + wg_id +";");
+            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE wgID=" + wgId +";");
             numberofTodo = rs.getInt(1);
             return numberofTodo;
         } catch (Exception e) {
@@ -16,10 +16,10 @@ public class SQLDCOverview extends SQLDatabaseConnection{
         }
         return -1;
     }
-    public static int countDone(int wg_id) {
+    public static int countDone(String wgId) {
         int numberofDone;
         try {
-            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE wgID=" + wg_id + " AND isDone=1;");
+            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE wgID=" + wgId + " AND isDone=1;");
             numberofDone = rs.getInt(1);
             return numberofDone;
         } catch (Exception e) {
