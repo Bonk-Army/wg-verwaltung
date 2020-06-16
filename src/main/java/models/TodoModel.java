@@ -27,6 +27,7 @@ public class TodoModel {
         this.dateDue = dateDue;
         this.isDone = isDone;
         this.createdBy = createdBy;
+        this.uniqueID = uniqueID;
         this.assigneeUsername = SQLDCLogin.getUsername(userId);
         this.creatorUsername = SQLDCLogin.getUsername(createdBy);
     }
