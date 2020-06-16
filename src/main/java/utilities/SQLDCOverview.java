@@ -78,6 +78,7 @@ public class SQLDCOverview extends SQLDatabaseConnection {
 
     /**
      * Sends SQL Query to fetch first Name
+     *
      * @param userId The ID of the User
      * @return First Name of User
      */
@@ -95,6 +96,7 @@ public class SQLDCOverview extends SQLDatabaseConnection {
 
     /**
      * Sends SQL Query to fetch Last Name
+     *
      * @param userId The ID of the User
      * @return Last Name of User
      */
@@ -112,6 +114,7 @@ public class SQLDCOverview extends SQLDatabaseConnection {
 
     /**
      * Concatenates First and Last Name
+     *
      * @param userId The ID of the User
      * @return Full Name
      */
@@ -121,10 +124,36 @@ public class SQLDCOverview extends SQLDatabaseConnection {
         try {
             firstName = getFirstName(userId);
             lastName = getLastName(userId);
-            return firstName + " " +  lastName;
+            return firstName + " " + lastName;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
+    }
+
+    /**
+     * Return the wg name of the wg of the passed user
+     * @param userId The user id of the user
+     * @return The wg name
+     */
+    public static String getWgName(String userId) {
+        String wgName = "";
+
+        try {
+            ResultSet forWGID = executeQuery("SELECT wgID FROM users WHERE uniqueID=" + Integer.valueOf(userId));
+            int wgId = 0;
+            while (forWGID.next()) {
+                wgId = forWGID.getInt(1);
+            }
+
+            ResultSet forWgName = executeQuery("SELECT name FROM wgs WHERE uniqueID=" + wgId);
+            while(forWgName.next()){
+                wgName = forWgName.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return wgName;
     }
 }
