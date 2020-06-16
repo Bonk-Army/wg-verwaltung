@@ -18,7 +18,12 @@
         |__ LOGIC                  | Package : "logic."                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /loginLogic            | Servlet : Login                   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /reset                 | Servlet : Reset                   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /resetComplete         | Servlet : ResetComplete           | Zuständig:  @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /verify                | Servlet : Verify                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /joinWGLogic           | Servlet : JoinWG                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /createWGLogic         | Servlet : CreateWG                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addTodoLogic          | Servlet : ToDo                    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /setDoneLogic          | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
