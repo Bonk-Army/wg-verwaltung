@@ -89,7 +89,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Financial</servlet-name>
-        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
+        <jsp-file>/Pages/Protected/Financial.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Financial</servlet-name>
@@ -113,7 +113,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Shopping</servlet-name>
-        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
+        <jsp-file>/Pages/Protected/Shopping.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Shopping</servlet-name>
