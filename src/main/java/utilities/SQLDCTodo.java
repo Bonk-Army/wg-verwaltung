@@ -19,15 +19,16 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      * @param dateDue The date til the task should be done
      * @return If the to-do has been created successfully. If not, the user has to be informed!
      */
-    public static boolean createTodo(String task, String userId, String wgId, Date dateDue) {
+    public static boolean createTodo(String task, String userId, String wgId, Date dateDue, String createdById) {
         try {
             Date dateCreated = new Date();
             // Convert dates to java.sql.Timestamp to save them to SQL
             Timestamp createdStamp = new Timestamp(dateCreated.getTime());
             Timestamp dueStamp = new Timestamp(dateDue.getTime());
 
-            ResultSet rs = executeQuery(("INSERT INTO todo (task, userId, wgId, dateCreated, dateDue, isDone)"
-                    + "VALUES ('" + task + "', " + Integer.valueOf(userId) + ", " + Integer.valueOf(wgId) + ", '" + createdStamp + "', '" + dueStamp + "', " + false + ")"));
+            ResultSet rs = executeQuery(("INSERT INTO todo (task, userId, wgId, dateCreated, dateDue, isDone, createdBy)"
+                    + "VALUES ('" + task + "', " + Integer.valueOf(userId) + ", " + Integer.valueOf(wgId) + ", '"
+                    + createdStamp + "', '" + dueStamp + "', " + false + ", " + Integer.valueOf(createdById) + ")"));
 
             return true;
         } catch (Exception e) {
@@ -44,16 +45,17 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      * @return ArrayList<TodoModel>
      */
     public static List<TodoModel> getAllTodos(String wgId) {
-        List<TodoModel> todoList = new ArrayList<>();
+        List<TodoModel> todoList = new ArrayList<TodoModel>();
         try {
-            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone FROM todo WHERE wgId = " + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, createdBy FROM todo WHERE wgId = " + Integer.valueOf(wgId)));
             while (rs.next()) {
                 String task = rs.getString(1);
                 String userId = String.valueOf(rs.getInt(2));
                 Date dateCreated = rs.getDate(3);
                 Date dateDue = rs.getDate(4);
                 Boolean isDone = rs.getBoolean(5);
-                TodoModel todoModel = new TodoModel(task, userId, wgId, dateCreated, dateDue, isDone);
+                String createdBy = rs.getString(6);
+                TodoModel todoModel = new TodoModel(task, userId, wgId, dateCreated, dateDue, isDone, createdBy);
                 todoList.add(todoModel);
             }
             return todoList;

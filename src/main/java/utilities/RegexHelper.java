@@ -3,13 +3,13 @@ package utilities;
 public class RegexHelper {
     /**
      * Checks if the entered String matches the rules we have for usernames.
-     * Not allowed are whitespaces and ;?&%' (; because we dont want SQLi)
+     * Not allowed are whitespaces and ;?&%/\' (; because we dont want SQLi)
      *
      * @param toCheck The username to be matched
      * @return If the username is allowed
      */
     public static boolean checkString(String toCheck) {
-        return toCheck.matches("^[^;?&%'\\s]*$");
+        return toCheck.matches("^[^\\\\;?&%/'\\s]*$");
     }
 
     /**
@@ -21,7 +21,7 @@ public class RegexHelper {
      */
     public static boolean checkEmail(String email) {
         //Check for illegal characters
-        if (email.matches("^[^;?&%'\\s]*$")) {
+        if (email.matches("^[^\\\\;?&%/'\\s]*$")) {
             //Check for correct email address format
             if (email.matches(".+@.+\\..+")) {
                 return true;
