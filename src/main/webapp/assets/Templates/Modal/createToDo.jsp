@@ -17,7 +17,7 @@
                 <label for="todo" class="sr-only">Aufgabe</label>
                 <input id="todo" class="form-control" placeholder="Neue Aufgabe erstellen" name="todo" type="text" required>
                 <label for="name" class="sr-only">Name</label>
-                <select id="name" class="form-control" placeholder="jemandem zuweisen" name="name" required>
+                <select id="name" class="form-control" name="name" required>
                     <%
                         Cookie cookiez = null;
                         Cookie[] cookiesz = null;
@@ -34,7 +34,7 @@
                                     allMember = (ArrayList<String>) test.getAllUsersOfWgBySessionIdentifier(valuez);
                                     for (String item : allMember)
                                     {
-                                        out.print("<option value=\""+item+"\">"+item+"</option>");
+                                        out.print("<option value=\""+item+"\">"+test.getNameString(item)+"</option>");
                                     }
                                 }
                             }
