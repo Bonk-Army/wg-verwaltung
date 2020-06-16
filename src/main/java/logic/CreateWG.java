@@ -18,18 +18,18 @@ public class CreateWG extends HttpServlet {
         super();
     }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
+
     /**
-     * Called when the user tries to join a WG via settings page or invite link
+     * Called when the user tries to create a WG via settings page or invite link
      *
      * @param request  The http GET request
      * @param response The http response
      * @throws ServletException
      * @throws IOException
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean loginBean = new LoginBean();

@@ -36,7 +36,7 @@ public class Verify extends HttpServlet {
         //If verification was successful, show success message. Otherwise show error.
         ErrorCodes status = bean.verifyUser(username, verificationCode);
 
-        switch(status){
+        switch (status) {
             case SUCCESS:
                 // Show success page
                 request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);

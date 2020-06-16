@@ -12,10 +12,10 @@ public class TodoModel {
     private Date dateCreated;
     private Date dateDue;
     private Boolean isDone;
-
     private String createdBy;
+    private String uniqueID;
 
-    public TodoModel(String task, String userId, String wgId, Date dateCreated, Date dateDue, Boolean isDone, String createdBy) {
+    public TodoModel(String task, String userId, String wgId, Date dateCreated, Date dateDue, Boolean isDone, String createdBy, String uniqueID) {
         this.task = task;
         this.userId = userId;
         this.wgId = wgId;
@@ -51,5 +51,9 @@ public class TodoModel {
 
     public String getCreatedBy() {
         return createdBy;
+    }
+
+    public String getUniqueID() {
+        return uniqueID;
     }
 }
