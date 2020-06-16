@@ -1,5 +1,5 @@
-function openModal(id) {
-    $( "#addToDo" ).click(function() {
+function doneTodo(id) {
+    $( "#doneToDo" ).click(function() {
         $('#'+id).click();
     });
 }
