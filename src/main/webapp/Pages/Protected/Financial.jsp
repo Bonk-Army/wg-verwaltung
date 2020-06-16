@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: kristin.agne
+  User: krissi
   Date: 16.06.2020
   Time: 14:51
   To change this template use File | Settings | File Templates.
@@ -19,11 +19,9 @@
 </head>
 <body>
 <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
-<%@include file="../../assets/Templates/Modal/ToDo.jsp" %>
 
 <%@include file="../../assets/Contents/Financial.jsp" %>
 
 <script><%@include file="../../assets/Scripts/Sidebar.js" %></script>
-<script><%@include file="../../assets/Scripts/Modal.js" %></script>
 </body>
 </html>
