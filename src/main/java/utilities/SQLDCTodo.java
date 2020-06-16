@@ -19,15 +19,16 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      * @param dateDue The date til the task should be done
      * @return If the to-do has been created successfully. If not, the user has to be informed!
      */
-    public static boolean createTodo(String task, String userId, String wgId, Date dateDue) {
+    public static boolean createTodo(String task, String userId, String wgId, Date dateDue, String createdById) {
         try {
             Date dateCreated = new Date();
             // Convert dates to java.sql.Timestamp to save them to SQL
             Timestamp createdStamp = new Timestamp(dateCreated.getTime());
             Timestamp dueStamp = new Timestamp(dateDue.getTime());
 
-            ResultSet rs = executeQuery(("INSERT INTO todo (task, userId, wgId, dateCreated, dateDue, isDone)"
-                    + "VALUES ('" + task + "', " + Integer.valueOf(userId) + ", " + Integer.valueOf(wgId) + ", '" + createdStamp + "', '" + dueStamp + "', " + false + ")"));
+            ResultSet rs = executeQuery(("INSERT INTO todo (task, userId, wgId, dateCreated, dateDue, isDone, createdBy)"
+                    + "VALUES ('" + task + "', " + Integer.valueOf(userId) + ", " + Integer.valueOf(wgId) + ", '"
+                    + createdStamp + "', '" + dueStamp + "', " + false + ", " + Integer.valueOf(createdById) + ")"));
 
             return true;
         } catch (Exception e) {

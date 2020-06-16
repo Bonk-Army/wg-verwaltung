@@ -63,7 +63,7 @@ public class ToDo extends HttpServlet {
             e.printStackTrace();
         }
 
-        ErrorCodes status = toDoBean.createTodo(task, assigneeId, wgId, dueDate);
+        ErrorCodes status = toDoBean.createTodo(task, assigneeId, wgId, dueDate, userId);
 
         switch (status) {
             case SUCCESS:

@@ -31,10 +31,10 @@
                     out.println("<h2> Found Cookies Name and Value</h2>");
                     for (int i = 0; i < cookies.length; i++) {
                         cookie = cookies[i];
-                        if ((cookies[i].getName().compareTo("JSESSIONID")) == 0){
+                        if ((cookies[i].getName().compareTo("session")) == 0){
                             value = cookies[i].getValue();
                             out.print(value);
-//                            ToDo = (ArrayList<TodoModel>) fail.getAllTodosBySessionIdentifier(value);
+                            ToDo = (ArrayList<TodoModel>) fail.getAllTodosBySessionIdentifier(value);
                             out.print("Name : " + cookie.getName( ) + ", ");
                             out.print("Value: " + cookie.getValue( )+" <br/>");
                         }
