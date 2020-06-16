@@ -21,6 +21,7 @@
 <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
 <%@include file="../../assets/Templates/Modal/createToDo.jsp" %>
 <%@include file="../../assets/Templates/Modal/doneToDo.jsp" %>
+<%@include file="../../assets/Templates/Modal/removeToDo.jsp" %>
 
 <%@include file="../../assets/Contents/ToDo.jsp" %>
 
