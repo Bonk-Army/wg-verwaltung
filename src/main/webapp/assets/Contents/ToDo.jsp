@@ -39,7 +39,7 @@
                                 out.print("<td>"+ item.getCreatedBy() + " </td>");
                                 out.print("<td>"+ item.getUserId() + " </td>");
                                 out.print("<td>"+ item.getDone() + " </td>");
-                                out.println("</tr>");
+                                out.print("</tr>");
                             }
                         }
                     }
