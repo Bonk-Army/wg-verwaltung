@@ -69,7 +69,7 @@
                                 out.print("<td>");
                                 out.print("<form action=\"setDoneLogic\" method=\"POST\">");
                                 out.print("<input type=\"text\" name=\"todoId\" hidden=\"hidden\" value=\""+item.getUniqueID()+"\">");
-                                out.print("<button title=\"ToDo check\" onclick=\"doneTodo("+item.getUniqueID()+")\" class=\"btn btn-lg btn-primary btn-block\" type=\"button\" data-toggle=\"modal\" data-target=\"#todoModal\" "+hidden+">erledigt</button>");
+                                out.print("<button title=\"ToDo check\" onclick=\"doneTodo("+item.getUniqueID()+")\" class=\"btn btn-lg btn-primary btn-block\" type=\"button\" data-toggle=\"modal\" data-target=\"#todoModal\" "+hidden+">erledigt?</button>");
                                 out.print("<button title=\"ToDo check\" id=\""+item.getUniqueID()+"\" type=\"submit\" style=\"display: none;\"</button>");
                                 out.print("</form>");
                                 out.print("</td>");
