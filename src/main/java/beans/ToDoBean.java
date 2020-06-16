@@ -102,9 +102,7 @@ public class ToDoBean {
      */
     public String getNameString(String username) {
         if(RegexHelper.checkString(username)) {
-            String userId = SQLDCLogin.getUserId(username);
-
-            return SQLDCTodo.getNameString(userId);
+            return SQLDCTodo.getNameString(username);
         }
 
         return "";
