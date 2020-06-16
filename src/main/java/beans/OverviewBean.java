@@ -1,9 +1,12 @@
 package beans;
 
 // Imports
+
 import utilities.*;
 
 public class OverviewBean {
+    public OverviewBean() {
+    }
     // Variables
 
     // Public Methods
@@ -62,8 +65,16 @@ public class OverviewBean {
      */
     public String getFullName(String userId) {return SQLDCOverview.getFullName(userId); }
 
+    public static int getNumberofTodos(String wgID) {
+        return SQLDCOverview.countTodo(wgID);
     }
 
-    // Private Methods
+    public static int getNumberofDone(String wgID) {
+        return SQLDCOverview.countDone(wgID);
+    }
+}
+
+// Private Methods
 
     // Getter and Setter
+// Getter and Setter
