@@ -34,8 +34,8 @@
                             for (TodoModel item : ToDo)
                             {
                                 out.print("<tr>");
-                                out.print("<td>"+ item.getTask() + " </td");
-                                out.print("<td>"+ item.getDateDue()+ " </td>");
+                                out.print("<td>"+ item.getTask() + " </td>");
+                                out.print("<td>"+ item.getDateDue() + " </td>");
                                 out.print("<td>"+ item.getCreatorUsername() + " </td>");
                                 out.print("<td>"+ item.getAssigneeUsername() + " </td>");
                                 out.print("<td>"+ item.getDone() + " </td>");
