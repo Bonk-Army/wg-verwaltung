@@ -12,7 +12,7 @@
     <%@include file="../../assets/Templates/Imports/Fonts.jsp" %>
     <%@include file="../../assets/Templates/Imports/Bootstrap.jsp" %>
 
-    <title>ToDo</title>
+    <title>Finanzielles</title>
 
     <link rel="stylesheet" type="text/css" href="./assets/Styles/ToDo.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
