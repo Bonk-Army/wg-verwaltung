@@ -10,6 +10,12 @@ import java.util.List;
  * Bean that handles all backend logic and database callouts required for user login and registration.
  */
 public class LoginBean {
+    private ErrorCodes status;
+
+    public LoginBean() {
+
+    }
+
     /**
      * Called by LoginServlet upon login action from user. Returns user id in case of successfull login, otherwise
      * returns an empty String
@@ -20,20 +26,34 @@ public class LoginBean {
      */
     public ErrorCodes login(String username, String password) {
         if (!RegexHelper.checkString(username)) {
+            this.status = ErrorCodes.WRONGUNAME;
             return ErrorCodes.WRONGUNAME;
         }
 
         String salt = SQLDCLogin.getPasswordSalt(username);
         String hash = SQLDCLogin.getPasswordHash(username);
+        String cookiePostfix = new RandomStringGenerator(21).nextString();
 
         if (!salt.isEmpty() && !hash.isEmpty()) {
             String newHash = PasswordHasher.hashPassword(password, salt);
 
             //Login was either successful or one of the entered params was wrong
-            return newHash.equals(hash) ? ErrorCodes.SUCCESS : ErrorCodes.WRONGENTRY;
+            if (newHash.equals(hash)) {
+                if (SQLDCLogin.setCookiePostfix(username, cookiePostfix)) {
+                    this.status = ErrorCodes.SUCCESS;
+                    return ErrorCodes.SUCCESS;
+                } else {
+                    this.status = ErrorCodes.FAILURE;
+                    return ErrorCodes.FAILURE;
+                }
+            } else {
+                this.status = ErrorCodes.WRONGENTRY;
+                return ErrorCodes.WRONGENTRY;
+            }
         }
 
         //Something failed server-side, return FAILURE
+        this.status = ErrorCodes.FAILURE;
         return ErrorCodes.FAILURE;
     }
 
@@ -54,15 +74,16 @@ public class LoginBean {
         String hash = PasswordHasher.hashPassword(password, salt);
 
         //Call SQL to ask if username / email is unique. If unique, it continues registration process, else it stops
-        if(!RegexHelper.checkString(username) || !RegexHelper.checkString(firstName) ||!RegexHelper.checkString(lastName) ||!RegexHelper.checkEmail(email)){
+        if (!RegexHelper.checkString(username) || !RegexHelper.checkString(firstName) || !RegexHelper.checkString(lastName) || !RegexHelper.checkEmail(email)) {
             return ErrorCodes.WRONGENTRY;
         } else {
             if (isUsernameUnique(username) && isEmailUnique(email)) {
                 //Create new user. Generate random, 10-digit verification code for email verification.
                 String verificationCode = new RandomStringGenerator(10).nextString();
+                String cookiePostfix = new RandomStringGenerator(21).nextString();
 
                 // If the user creation was successful, send an email and continue registration
-                if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName)) {
+                if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfix)) {
                     // Now send an email to the user with the verification link
                     String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
                     String fullName = firstName + " " + lastName;
@@ -85,19 +106,22 @@ public class LoginBean {
      *
      * @param username         The username of the user to be verified
      * @param verificationCode The verification code the user 'entered'
-     * @return If the verification was successful
+     * @return The status of the verification
      */
-    public boolean verifyUser(String username, String verificationCode) {
-        String savedVerificationCode = SQLDCLogin.getUserVerificationCode(username);
+    public ErrorCodes verifyUser(String username, String verificationCode) {
+        if (!RegexHelper.checkString(username) || !RegexHelper.checkString(verificationCode)) {
+            return ErrorCodes.WRONGENTRY;
+        } else {
+            String savedVerificationCode = SQLDCLogin.getUserVerificationCode(username);
 
-        // If the entered verification code matches the saved one, verify the user
-        if (verificationCode.equals(savedVerificationCode)) {
-            SQLDCLogin.verifyUser(username);
+            // If the entered verification code matches the saved one, verify the user
+            if (verificationCode.equals(savedVerificationCode)) {
+                SQLDCLogin.verifyUser(username);
 
-            return true;
+                return ErrorCodes.SUCCESS;
+            }
+            return ErrorCodes.FAILURE;
         }
-
-        return false;
     }
 
     /**
@@ -127,19 +151,23 @@ public class LoginBean {
      * @param username The username of the user
      * @param key      The reset key for the password reset
      * @param password The new password
-     * @return If it was successful
+     * @return The status of the reset action
      */
-    public boolean resetPassword(String username, String key, String password) {
-        String salt = SQLDCLogin.getPasswordSalt(username);
-        String savedKey = SQLDCLogin.getPasswordKey(username);
+    public ErrorCodes resetPassword(String username, String key, String password) {
+        if (!RegexHelper.checkString(username) || !RegexHelper.checkString(key)) {
+            return ErrorCodes.WRONGENTRY;
+        } else {
+            String salt = SQLDCLogin.getPasswordSalt(username);
+            String savedKey = SQLDCLogin.getPasswordKey(username);
 
-        String pwhash = PasswordHasher.hashPassword(password, salt);
+            String pwhash = PasswordHasher.hashPassword(password, salt);
 
-        if (key.equals(savedKey)) {
-            return SQLDCLogin.setPassword(username, pwhash);
+            if (key.equals(savedKey)) {
+                return SQLDCLogin.setPassword(username, pwhash) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            }
+
+            return ErrorCodes.WRONGENTRY;
         }
-
-        return false;
     }
 
     /**
@@ -151,6 +179,48 @@ public class LoginBean {
      */
     public String getUserId(String username) {
         return SQLDCLogin.getUserId(username);
+    }
+
+    /**
+     * Returns the session identifier for the user
+     *
+     * @param username The username
+     * @return The session identifier
+     */
+    public String getSessionIdentifier(String username) {
+        if (RegexHelper.checkString(username)) {
+            String userId = SQLDCLogin.getUserId(username);
+            String cookiePostfix = SQLDCLogin.getCookiePostfix(username);
+
+            if (!userId.isEmpty() && !cookiePostfix.isEmpty()) {
+                return userId + "-" + cookiePostfix;
+            }
+        }
+
+        return "";
+    }
+
+    /**
+     * Extract the user id from the session identifier and check the validity of the session identifier.
+     *
+     * @param sessionIdentifier The session identifier
+     * @return The user id as a String or an empty string in case of an error
+     */
+    public String getUserIdBySessionIdentifier(String sessionIdentifier) {
+        if (RegexHelper.checkString(sessionIdentifier) && !sessionIdentifier.isEmpty()) {
+            int splitIndex = sessionIdentifier.indexOf('-');
+            String userId = sessionIdentifier.substring(0, splitIndex);
+            String cookiePostfix = sessionIdentifier.substring(splitIndex+1, sessionIdentifier.length());
+
+            String username = SQLDCLogin.getUsername(userId);
+            String savedCookiePostfix = SQLDCLogin.getCookiePostfix(username);
+
+            if (savedCookiePostfix.equals(cookiePostfix)) {
+                return userId;
+            }
+        }
+
+        return "";
     }
 
     /**
@@ -175,5 +245,9 @@ public class LoginBean {
         List<String> usedEmails = SQLDCLogin.getAllEmails();
 
         return !usedEmails.contains(email);
+    }
+
+    public ErrorCodes getStatus() {
+        return this.status;
     }
 }

@@ -1,8 +1,11 @@
 package beans;
 
+import utilities.ErrorCodes;
 import utilities.RandomStringGenerator;
 import utilities.RegexHelper;
 import utilities.SQLDCSettings;
+
+import java.util.ArrayList;
 
 public class SettingsBean {
     /**
@@ -11,19 +14,23 @@ public class SettingsBean {
      *
      * @param userId the ID of the user who creates a wg
      * @param nameWg the name of the wg
-     * @return If created successfully -> true
+     * @return If created successfully
      */
-    public static boolean createWg(String userId, String nameWg) {
+    public static ErrorCodes createWg(String userId, String nameWg) {
         if (RegexHelper.checkString(nameWg)) {
+            ArrayList<String> stringList = SQLDCSettings.getAccessKeyList();
             String accessKey = new RandomStringGenerator(20).nextString();
+            while (stringList.contains(accessKey)) {
+                accessKey = new RandomStringGenerator(20).nextString();
+            }
             if (SQLDCSettings.createWg(nameWg, accessKey)) {
                 String wgId = SQLDCSettings.getWgId(accessKey);
                 if (!wgId.equals("")) {
-                    return SQLDCSettings.setWgId(wgId, userId);
+                    return SQLDCSettings.setWgId(wgId, userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
                 }
             }
         }
-        return false;
+        return ErrorCodes.WRONGENTRY;
     }
 
     /**
@@ -42,17 +49,17 @@ public class SettingsBean {
     /**
      * Set the ID of the wg for a user
      *
-     * @param userId the user who changes wg
+     * @param userId    the user who changes wg
      * @param accessKey the access key of the wg
-     * @return If set was successful -> true
+     * @return If set was successful
      */
-    public static boolean setWgId(String userId, String accessKey) {
+    public static ErrorCodes setWgId(String userId, String accessKey) {
         if (RegexHelper.checkString(accessKey)) {
             String wgId = SQLDCSettings.getWgId(accessKey);
             if (!wgId.equals("")) {
-                return SQLDCSettings.setWgId(wgId, userId);
+                return SQLDCSettings.setWgId(wgId, userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
             }
         }
-        return false;
+        return ErrorCodes.WRONGENTRY;
     }
 }

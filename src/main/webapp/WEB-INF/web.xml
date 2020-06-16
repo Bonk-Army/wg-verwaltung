@@ -4,178 +4,279 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 		  http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-
     <!--
     * ___
         |
         |__ ^^-^^
-        |__ VIEW             | Package : "servlets.subservlets." | Zuständig : @NH | Mapped by @NH | Zuständig für Inhalt @KA | Initial
-        |__ /                | Servlet : Login                   | Zuständig : @KA | Mapped by @NH | Zuständig für Inhalt @KA | Initial
-        |__ /register        | Servlet : Register                | Zuständig : @KA | Mapped by @NH | Zuständig für Inhalt @KA | Initial
-        |__ /resetPassword   | Servlet : ResetPassword           | Zuständig : @KA | Mapped by @NH | Zuständig für Inhalt @KA | Initial
-        |__ /shopping        | Servlet : Shopping                | Zuständig : @DK | Mapped by @DK | Zuständig für Inhalt @DK | Initial
-        |__ /financial       | Servlet : Financial               | Zuständig : @DK | Mapped by @DK | Zuständig für Inhalt @DK | Initial
-        |__ /toDo            | Servlet : ToDo                    | Zuständig : @DK | Mapped by @DK | Zuständig für Inhalt @DK | Initial
+        |__ LOGIN                  |                                   | Zuständig : @NH      | Mapped by @NH | Zuständig für Inhalt @KA | Initial
+        |__ /                      | JSP Page : Login                  | Zuständig : @DK      | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /register              | JSP Page : Register               | Zuständig : @DK      | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /wgverwaltung          | JSP Page : WGVerwaltung           | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ ^^-^^
         |
         |__ ^^-^^
-        |__ Logic            | Package : "logic."                | Zuständig : @PM | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /loginLogic      | Servlet : Login                   | Zuständig : @PM | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /reset           | Servlet : Reset                   | Zuständig : @PM | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /verify          | Servlet : Verify                  | Zuständig : @PM | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ LOGIC                  | Package : "logic."                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /loginLogic            | Servlet : Login                   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /reset                 | Servlet : Reset                   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /verify                | Servlet : Verify                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ ^^-^^
+        |__
+        |__ ^^-^^
+        |__ GUI                    |                                   | Zuständig : @KA/LK   | Mapped by @NH                            | Initial
+        |__ /home                  | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /financial             | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /todo                  | JSP Page : ToDo                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /clean                 | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /shopping              | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /faq                   | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /contact               | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /impressum             | JSP Page : Impressum              | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ ^^-^^
+        |__
+        |__ ^^-^^
+        |__ Response               |                                   | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /responseSuccess       | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /responseFailure       | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /responseWrongEntry    | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /responseWrongUName    | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /responseWrongPassword | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /responseWrongEMail    | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /responseWrongTryAgain | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
         |__ ^^-^^
     -->
+    <!-- ############################################################################################################ -->
     <!--
-        dP     dP oo
-        88     88
-        88    .8P dP .d8888b. dP  dP  dP
-        88    d8' 88 88ooood8 88  88  88
-        88  .d8P  88 88.  ... 88.88b.88'
-        888888'   dP `88888P' 8888P Y8P
-
-
-        .d88888b                             dP            dP
-        88.    "'                            88            88
-        `Y88888b. .d8888b. 88d888b. dP   .dP 88 .d8888b. d8888P .d8888b.
-              `8b 88ooood8 88'  `88 88   d8' 88 88ooood8   88   Y8ooooo.
-        d8'   .8P 88.  ... 88       88 .88'  88 88.  ...   88         88
-         Y88888P  `88888P' dP       8888P'   dP `88888P'   dP   `88888P'
+        dP     dP oo                         888888ba
+        88     88                            88    `8b
+        88    .8P dP .d8888b. dP  dP  dP    a88aaaa8P' .d8888b. .d8888b. .d8888b. .d8888b.
+        88    d8' 88 88ooood8 88  88  88     88        88'  `88 88'  `88 88ooood8 Y8ooooo.
+        88  .d8P  88 88.  ... 88.88b.88'     88        88.  .88 88.  .88 88.  ...       88
+        888888'   dP `88888P' 8888P Y8P      dP        `88888P8 `8888P88 `88888P' `88888P'
+                                                                     .88
+                                                                 d8888P
     -->
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>view.servlets.subservlets.Login</servlet-class>
+        <jsp-file>/Pages/Public/Login.jsp</jsp-file>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern></url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>Register</servlet-name>
-        <servlet-class>view.servlets.subservlets.Register</servlet-class>
+        <jsp-file>/Pages/Public/Register.jsp</jsp-file>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
     <servlet>
-        <servlet-name>ResetPassword</servlet-name>
-        <servlet-class>view.servlets.subservlets.ResetPassword</servlet-class>
+        <servlet-name>WG-Verwaltung</servlet-name>
+        <jsp-file>/Pages/Protected/WGVerwaltung.jsp</jsp-file>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>WG-Verwaltung</servlet-name>
+        <url-pattern>/wgverwaltung</url-pattern>
+    </servlet-mapping>
     <servlet>
-        <servlet-name>Shopping</servlet-name>
-        <servlet-class>view.servlets.subservlets.Shopping</servlet-class>
+        <servlet-name>Home</servlet-name>
+        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>Financial</servlet-name>
-        <servlet-class>view.servlets.subservlets.Financial</servlet-class>
+        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>Financial</servlet-name>
+        <url-pattern>/financial</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>ToDo</servlet-name>
-        <servlet-class>view.servlets.subservlets.ToDo</servlet-class>
+        <jsp-file>/Pages/Protected/ToDo.jsp</jsp-file>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>ToDo</servlet-name>
+        <url-pattern>/todo</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Cleaning</servlet-name>
+        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Cleaning</servlet-name>
+        <url-pattern>/clean</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Shopping</servlet-name>
+        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Shopping</servlet-name>
+        <url-pattern>/shopping</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>FAQ</servlet-name>
+        <jsp-file>/Pages/Protected/FAQ.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FAQ</servlet-name>
+        <url-pattern>/faq</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Contact</servlet-name>
+        <jsp-file>/Pages/Public/Contact.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Contact</servlet-name>
+        <url-pattern>/contact</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Impressum</servlet-name>
+        <jsp-file>/Pages/Public/Impressum.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Impressum</servlet-name>
+        <url-pattern>/impressum</url-pattern>
+    </servlet-mapping>
+    <!-- ############################################################################################################ -->
     <!--
-        dP                          oo
-        88
-        88        .d8888b. .d8888b. dP .d8888b.
-        88        88'  `88 88'  `88 88 88'  `""
-        88        88.  .88 88.  .88 88 88.  ...
-        88888888P `88888P' `8888P88 dP `88888P'
-                                .88
-                            d8888P
-        .d88888b                             dP            dP
-        88.    "'                            88            88
-        `Y88888b. .d8888b. 88d888b. dP   .dP 88 .d8888b. d8888P .d8888b.
-              `8b 88ooood8 88'  `88 88   d8' 88 88ooood8   88   Y8ooooo.
-        d8'   .8P 88.  ... 88       88 .88'  88 88.  ...   88         88
-         Y88888P  `88888P' dP       8888P'   dP `88888P'   dP   `88888P'
+         a88888b.                     dP                     dP dP
+        d8'   `88                     88                     88 88
+        88        .d8888b. 88d888b. d8888P 88d888b. .d8888b. 88 88 .d8888b. 88d888b.
+        88        88'  `88 88'  `88   88   88'  `88 88'  `88 88 88 88ooood8 88'  `88
+        Y8.   .88 88.  .88 88    88   88   88       88.  .88 88 88 88.  ... 88
+         Y88888P' `88888P' dP    dP   dP   dP       `88888P' dP dP `88888P' dP
     -->
     <servlet>
         <servlet-name>LoginLogic</servlet-name>
         <servlet-class>logic.Login</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginLogic</servlet-name>
+        <url-pattern>/loginLogic</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>ResetLogic</servlet-name>
         <servlet-class>logic.Reset</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>ResetLogic</servlet-name>
+        <url-pattern>/reset</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>ResetCompleteLogic</servlet-name>
         <servlet-class>logic.ResetComplete</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>ResetCompleteLogic</servlet-name>
+        <url-pattern>/resetComplete</url-pattern>
+    </servlet-mapping>
     <servlet>
         <servlet-name>VerifyLogic</servlet-name>
         <servlet-class>logic.Verify</servlet-class>
         <load-on-startup>-1</load-on-startup>
     </servlet>
-    <!-- ############################################################################################################ -->
-    <!--
-        dP     dP oo
-        88     88
-        88    .8P dP .d8888b. dP  dP  dP
-        88    d8' 88 88ooood8 88  88  88
-        88  .d8P  88 88.  ... 88.88b.88'
-        888888'   dP `88888P' 8888P Y8P
-
-
-        8888ba.88ba                             oo
-        88  `8b  `8b
-        88   88   88 .d8888b. 88d888b. 88d888b. dP 88d888b. .d8888b.
-        88   88   88 88'  `88 88'  `88 88'  `88 88 88'  `88 88'  `88
-        88   88   88 88.  .88 88.  .88 88.  .88 88 88    88 88.  .88
-        dP   dP   dP `88888P8 88Y888P' 88Y888P' dP dP    dP `8888P88
-                              88       88                        .88
-                              dP       dP                    d8888P
-    -->
-    <servlet-mapping>
-        <servlet-name>Login</servlet-name>
-        <url-pattern></url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Register</servlet-name>
-        <url-pattern>/register</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ResetPassword</servlet-name>
-        <url-pattern>/resetPassword</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Shopping</servlet-name>
-        <url-pattern>/shopping</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Financial</servlet-name>
-        <url-pattern>/financial</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ToDo</servlet-name>
-        <url-pattern>/todo</url-pattern>
-    </servlet-mapping>
-    <!--
-            dP                          oo
-            88
-            88        .d8888b. .d8888b. dP .d8888b.
-            88        88'  `88 88'  `88 88 88'  `""
-            88        88.  .88 88.  .88 88 88.  ...
-            88888888P `88888P' `8888P88 dP `88888P'
-                                    .88
-                                d8888P
-            8888ba.88ba                             oo
-            88  `8b  `8b
-            88   88   88 .d8888b. 88d888b. 88d888b. dP 88d888b. .d8888b.
-            88   88   88 88'  `88 88'  `88 88'  `88 88 88'  `88 88'  `88
-            88   88   88 88.  .88 88.  .88 88.  .88 88 88    88 88.  .88
-            dP   dP   dP `88888P8 88Y888P' 88Y888P' dP dP    dP `8888P88
-                                  88       88                        .88
-                                  dP       dP                    d8888P
-    -->
-    <servlet-mapping>
-        <servlet-name>LoginLogic</servlet-name>
-        <url-pattern>/loginLogic</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ResetLogic</servlet-name>
-        <url-pattern>/reset</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ResetCompleteLogic</servlet-name>
-        <url-pattern>/resetComplete</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>VerifyLogic</servlet-name>
         <url-pattern>/verify</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>JoinWGLogic</servlet-name>
+        <servlet-class>logic.JoinWG</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JoinWGLogic</servlet-name>
+        <url-pattern>/joinWGLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CreateWGLogic</servlet-name>
+        <servlet-class>logic.CreateWG</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateWGLogic</servlet-name>
+        <url-pattern>/createWGLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddTodoLogic</servlet-name>
+        <servlet-class>logic.ToDo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddTodoLogic</servlet-name>
+        <url-pattern>/addTodoLogic</url-pattern>
+    </servlet-mapping>
+    <!-- ############################################################################################################ -->
+    <!--
+     888888ba                                                                     888888ba
+     88    `8b                                                                    88    `8b
+     a88aaaa8P' .d8888b. .d8888b. 88d888b. .d8888b. 88d888b. .d8888b. .d8888b.    a88aaaa8P' .d8888b. .d8888b. .d8888b. .d8888b.
+     88   `8b. 88ooood8 Y8ooooo. 88'  `88 88'  `88 88'  `88 Y8ooooo. 88ooood8     88        88'  `88 88'  `88 88ooood8 Y8ooooo.
+     88     88 88.  ...       88 88.  .88 88.  .88 88    88       88 88.  ...     88        88.  .88 88.  .88 88.  ...       88
+     dP     dP `88888P' `88888P' 88Y888P' `88888P' dP    dP `88888P' `88888P'     dP        `88888P8 `8888P88 `88888P' `88888P'
+                                 88                                                                       .88
+                                 dP                                                                   d8888P
+    -->
+    <servlet>
+        <servlet-name>ResponseSuccess</servlet-name>
+        <jsp-file>/Pages/Response/Success.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResponseSuccess</servlet-name>
+        <url-pattern>/responseSuccess</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ResponseFailure</servlet-name>
+        <jsp-file>/Pages/Response/Failure.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResponseFailure</servlet-name>
+        <url-pattern>/responseFailure</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ResponseWrongEntry</servlet-name>
+        <jsp-file>/Pages/Response/WrongEntry.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResponseWrongEntry</servlet-name>
+        <url-pattern>/responseWrongEntry</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ResponseWrongUName</servlet-name>
+        <jsp-file>/Pages/Response/WrongUName.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResponseWrongUName</servlet-name>
+        <url-pattern>/responseWrongUName</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ResponseWrongPassword</servlet-name>
+        <jsp-file>/Pages/Response/WrongPassword.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResponseWrongPassword</servlet-name>
+        <url-pattern>/responseWrongPassword</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ResponseWrongEMail</servlet-name>
+        <jsp-file>/Pages/Response/WrongEMail.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResponseWrongEMail</servlet-name>
+        <url-pattern>/responseWrongEMail</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ResponseTryAgain</servlet-name>
+        <jsp-file>/Pages/Response/TryAgain.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResponseTryAgain</servlet-name>
+        <url-pattern>/responseTryAgain</url-pattern>
     </servlet-mapping>
 </web-app>

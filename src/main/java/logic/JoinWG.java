@@ -1,24 +1,26 @@
 package logic;
 
 import beans.LoginBean;
+import beans.SettingsBean;
 import utilities.ErrorCodes;
-import utilities.RegexHelper;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-public class Verify extends HttpServlet {
+public class JoinWG extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public Verify() {
+    public JoinWG() {
         super();
     }
 
     /**
-     * Called when the user opens the link to verify his email address
+     * Called when the user tries to join a WG via settings page or invite link
      *
      * @param request  The http GET request
      * @param response The http response
@@ -27,23 +29,36 @@ public class Verify extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LoginBean bean = new LoginBean();
+        LoginBean loginBean = new LoginBean();
+        SettingsBean settingsBean = new SettingsBean();
         request.setCharacterEncoding("UTF-8");
 
-        String verificationCode = request.getParameter("key");
-        String username = request.getParameter("uname");
+        String wgCode = request.getParameter("wgcode");
+        Cookie[] cookies = request.getCookies();
+        String sessionIdentifier = "";
 
-        //If verification was successful, show success message. Otherwise show error.
-        ErrorCodes status = bean.verifyUser(username, verificationCode);
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("session")) {
+                sessionIdentifier = cookie.getValue();
+            }
+        }
 
-        switch(status){
+        String userId = loginBean.getUserIdBySessionIdentifier(sessionIdentifier);
+
+        ErrorCodes status = settingsBean.setWgId(userId, wgCode);
+
+        switch (status) {
             case SUCCESS:
-                // Show success page
+                //Show success
                 request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
                 break;
             case FAILURE:
-                // Show failure page
+                //Show failure
                 request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+                break;
+            case WRONGENTRY:
+                //Show wrongentry
+                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
                 break;
         }
     }
