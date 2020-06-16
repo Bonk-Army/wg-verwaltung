@@ -10,6 +10,22 @@ body {
     justify-content: center;
 }
 
+.table{
+    color: aliceblue;
+}
+
+tr.done {
+    background-color: darkgreen;
+}
+
+tr.tooLate {
+    background-color: #9a0000;
+}
+
+tr.late {
+    background-color: #ffc000;
+}
+
 #addToDo{
     margin-bottom: 10px;
     max-width: 62px;

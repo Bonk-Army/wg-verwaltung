@@ -23,18 +23,18 @@ public class ToDo extends HttpServlet {
         super();
     }
 
-    /**
-     * Called when the user tries to join a WG via settings page or invite link
-     *
-     * @param request  The http GET request
-     * @param response The http response
-     * @throws ServletException
-     * @throws IOException
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
+    /**
+     * Called when the user wants to add a new todo
+     *
+     * @param request  The POST request
+     * @param response The http response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean loginBean = new LoginBean();
@@ -58,12 +58,12 @@ public class ToDo extends HttpServlet {
         String wgId = toDoBean.getWgIdByUserId(userId);
         Date dueDate = null;
         try {
-            dueDate = new SimpleDateFormat("yyyy-mm-dd").parse(dueDateString);
+            dueDate = new SimpleDateFormat("yyyy-MM-dd").parse(dueDateString);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        ErrorCodes status = toDoBean.createTodo(task, assigneeId, wgId, dueDate);
+        ErrorCodes status = toDoBean.createTodo(task, assigneeId, wgId, dueDate, userId);
 
         switch (status) {
             case SUCCESS:

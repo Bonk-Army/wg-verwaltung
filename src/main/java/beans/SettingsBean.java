@@ -1,13 +1,13 @@
 package beans;
 
-import utilities.ErrorCodes;
-import utilities.RandomStringGenerator;
-import utilities.RegexHelper;
-import utilities.SQLDCSettings;
+import utilities.*;
 
 import java.util.ArrayList;
 
 public class SettingsBean {
+    public SettingsBean() {
+    }
+
     /**
      * Create a wg
      * Automatically set wgId of user to created wgId
@@ -16,7 +16,7 @@ public class SettingsBean {
      * @param nameWg the name of the wg
      * @return If created successfully
      */
-    public static ErrorCodes createWg(String userId, String nameWg) {
+    public ErrorCodes createWg(String userId, String nameWg) {
         if (RegexHelper.checkString(nameWg)) {
             ArrayList<String> stringList = SQLDCSettings.getAccessKeyList();
             String accessKey = new RandomStringGenerator(20).nextString();
@@ -26,7 +26,10 @@ public class SettingsBean {
             if (SQLDCSettings.createWg(nameWg, accessKey)) {
                 String wgId = SQLDCSettings.getWgId(accessKey);
                 if (!wgId.equals("")) {
-                    return SQLDCSettings.setWgId(wgId, userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                    if (SQLDCSettings.setWgId(wgId, userId) && SQLDCSettings.setUserRights(userId, UserRights.WG_ADMIN.getSqlKey())) {
+                        return ErrorCodes.SUCCESS;
+                    }
+                    return ErrorCodes.FAILURE;
                 }
             }
         }
@@ -39,7 +42,7 @@ public class SettingsBean {
      * @param accessKey the access key for the wg
      * @return the wgId
      */
-    public static String getWgId(String accessKey) {
+    public String getWgId(String accessKey) {
         if (RegexHelper.checkString(accessKey)) {
             return SQLDCSettings.getWgId(accessKey);
         }
@@ -53,7 +56,7 @@ public class SettingsBean {
      * @param accessKey the access key of the wg
      * @return If set was successful
      */
-    public static ErrorCodes setWgId(String userId, String accessKey) {
+    public ErrorCodes setWgId(String userId, String accessKey) {
         if (RegexHelper.checkString(accessKey)) {
             String wgId = SQLDCSettings.getWgId(accessKey);
             if (!wgId.equals("")) {

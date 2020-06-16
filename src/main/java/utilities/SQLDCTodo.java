@@ -19,15 +19,16 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      * @param dateDue The date til the task should be done
      * @return If the to-do has been created successfully. If not, the user has to be informed!
      */
-    public static boolean createTodo(String task, String userId, String wgId, Date dateDue) {
+    public static boolean createTodo(String task, String userId, String wgId, Date dateDue, String createdById) {
         try {
             Date dateCreated = new Date();
             // Convert dates to java.sql.Timestamp to save them to SQL
             Timestamp createdStamp = new Timestamp(dateCreated.getTime());
             Timestamp dueStamp = new Timestamp(dateDue.getTime());
 
-            ResultSet rs = executeQuery(("INSERT INTO todo (task, userId, wgId, dateCreated, dateDue, isDone)"
-                    + "VALUES ('" + task + "', " + Integer.valueOf(userId) + ", " + Integer.valueOf(wgId) + ", '" + createdStamp + "', '" + dueStamp + "', " + false + ")"));
+            ResultSet rs = executeQuery(("INSERT INTO todo (task, userId, wgId, dateCreated, dateDue, isDone, createdBy)"
+                    + "VALUES ('" + task + "', " + Integer.valueOf(userId) + ", " + Integer.valueOf(wgId) + ", '"
+                    + createdStamp + "', '" + dueStamp + "', " + false + ", " + Integer.valueOf(createdById) + ")"));
 
             return true;
         } catch (Exception e) {
@@ -44,16 +45,19 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      * @return ArrayList<TodoModel>
      */
     public static List<TodoModel> getAllTodos(String wgId) {
-        List<TodoModel> todoList = new ArrayList<>();
+        deactivateOldToDos();
+        List<TodoModel> todoList = new ArrayList<TodoModel>();
         try {
-            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone FROM todo WHERE wgId = " + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, createdBy, uniqueID FROM todo WHERE wgId = " + Integer.valueOf(wgId) + " ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
                 String task = rs.getString(1);
                 String userId = String.valueOf(rs.getInt(2));
                 Date dateCreated = rs.getDate(3);
                 Date dateDue = rs.getDate(4);
                 Boolean isDone = rs.getBoolean(5);
-                TodoModel todoModel = new TodoModel(task, userId, wgId, dateCreated, dateDue, isDone);
+                String createdBy = rs.getString(6);
+                String uniqueID = String.valueOf(rs.getInt(7));
+                TodoModel todoModel = new TodoModel(task, userId, wgId, dateCreated, dateDue, isDone, createdBy, uniqueID);
                 todoList.add(todoModel);
             }
             return todoList;
@@ -105,5 +109,51 @@ public class SQLDCTodo extends SQLDatabaseConnection {
         }
 
         return wgId;
+    }
+
+    /**
+     * Set an issue to status done
+     *
+     * @param todoId The id of the todo
+     * @return If it was successful
+     */
+    public static boolean setTodoDone(String todoId) {
+        try {
+            executeQuery(("UPDATE todo SET isDone=true WHERE uniqueID=" + Integer.valueOf(todoId)));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * Concatenates First name and the first letter of the last name
+     *
+     * @param username The username of the user
+     * @return The name string
+     */
+    public static String getNameString(String username) {
+        String firstName;
+        String lastName;
+        try {
+            firstName = SQLDCLogin.getFirstName(username);
+            lastName = SQLDCLogin.getLastName(username);
+            return firstName + " " + lastName.substring(0, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
+     * WGV-115
+     * Deactivates done ToDos older than 30 days
+     *
+     */
+    public static void deactivateOldToDos () {
+        executeQuery("UPDATE todo SET isActive=0 WHERE isDone=1 AND dateDue < DATE_ADD(CURDATE(), INTERVAL -30 DAY);");
     }
 }

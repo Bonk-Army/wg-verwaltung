@@ -18,7 +18,12 @@
         |__ LOGIC                  | Package : "logic."                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /loginLogic            | Servlet : Login                   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /reset                 | Servlet : Reset                   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /resetComplete         | Servlet : ResetComplete           | Zuständig:  @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /verify                | Servlet : Verify                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /joinWGLogic           | Servlet : JoinWG                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /createWGLogic         | Servlet : CreateWG                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addTodoLogic          | Servlet : ToDo                    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /setDoneLogic          | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -89,7 +94,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Financial</servlet-name>
-        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
+        <jsp-file>/Pages/Protected/Financial.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Financial</servlet-name>
@@ -113,7 +118,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Shopping</servlet-name>
-        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
+        <jsp-file>/Pages/Protected/Shopping.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Shopping</servlet-name>
@@ -212,6 +217,14 @@
         <servlet-name>AddTodoLogic</servlet-name>
         <url-pattern>/addTodoLogic</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SetTodoDoneLogic</servlet-name>
+        <servlet-class>logic.SetTodoDone</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SetTodoDoneLogic</servlet-name>
+        <url-pattern>/setDoneLogic</url-pattern>
+    </servlet-mapping>v
     <!-- ############################################################################################################ -->
     <!--
      888888ba                                                                     888888ba

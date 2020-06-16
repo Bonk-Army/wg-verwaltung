@@ -1,5 +1,7 @@
 package models;
 
+import utilities.SQLDCLogin;
+
 import java.util.Date;
 
 /**
@@ -12,14 +14,22 @@ public class TodoModel {
     private Date dateCreated;
     private Date dateDue;
     private Boolean isDone;
+    private String createdBy;
+    private String uniqueID;
+    private String assigneeUsername;
+    private String creatorUsername;
 
-    public TodoModel(String task, String userId, String wgId, Date dateCreated, Date dateDue, Boolean isDone) {
+    public TodoModel(String task, String userId, String wgId, Date dateCreated, Date dateDue, Boolean isDone, String createdBy, String uniqueID) {
         this.task = task;
         this.userId = userId;
         this.wgId = wgId;
         this.dateCreated = dateCreated;
         this.dateDue = dateDue;
         this.isDone = isDone;
+        this.createdBy = createdBy;
+        this.uniqueID = uniqueID;
+        this.assigneeUsername = SQLDCLogin.getUsername(userId);
+        this.creatorUsername = SQLDCLogin.getUsername(createdBy);
     }
 
     public String getTask() {
@@ -44,5 +54,21 @@ public class TodoModel {
 
     public Boolean getDone() {
         return isDone;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public String getUniqueID() {
+        return uniqueID;
+    }
+
+    public String getAssigneeUsername() {
+        return assigneeUsername;
+    }
+
+    public String getCreatorUsername() {
+        return creatorUsername;
     }
 }

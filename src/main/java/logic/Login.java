@@ -22,13 +22,14 @@ public class Login extends HttpServlet {
     }
 
     /**
-     * Called when the html login form from index.jsp is sent to the url for this servlet.
+     * Called when the html login form is sent to the url for this servlet.
      *
      * @param request  The http POST request
      * @param response The http response
      * @throws ServletException
      * @throws IOException
      */
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean bean = new LoginBean();
         request.setCharacterEncoding("UTF-8");
@@ -50,7 +51,6 @@ public class Login extends HttpServlet {
             email = request.getParameter("email");
             firstName = request.getParameter("firstName");
             lastName = request.getParameter("lastName");
-            System.out.println(lastName);
         }
 
         stayLoggedIn = Boolean.valueOf(request.getParameter("keepSignedIn"));

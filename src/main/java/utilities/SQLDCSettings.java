@@ -62,6 +62,23 @@ public class SQLDCSettings extends SQLDatabaseConnection {
         return false;
     }
 
+    /**
+     * Set the passed right for the specified user
+     * @param userID The userId of the user
+     * @param right The right to be set for the user
+     * @return If it was successful
+     */
+    public static boolean setUserRights(String userID, String right) {
+        try {
+            executeQuery(("UPDATE users SET rights='" + right + "' WHERE uniqueID=" + Integer.valueOf(userID)));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     public static ArrayList<String> getAccessKeyList() {
         ArrayList<String> stringList = new ArrayList<>();
 

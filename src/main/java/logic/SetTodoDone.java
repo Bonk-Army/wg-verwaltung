@@ -1,46 +1,45 @@
 package logic;
 
 import beans.LoginBean;
+import beans.SettingsBean;
+import beans.ToDoBean;
 import utilities.ErrorCodes;
-import utilities.RegexHelper;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ResetComplete extends HttpServlet {
+public class SetTodoDone extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
+    public SetTodoDone() {
+        super();
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
-    /**
-     * Called when the user sends his new password and therefore completes the password reset process
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LoginBean bean = new LoginBean();
+        ToDoBean toDoBean = new ToDoBean();
         request.setCharacterEncoding("UTF-8");
 
-        String password = request.getParameter("password");
-        String username = request.getParameter("username");
-        String passwordResetKey = request.getParameter("key");
+        String todoId = request.getParameter("todoId");
 
-        ErrorCodes status = bean.resetPassword(username, passwordResetKey, password);
+        ErrorCodes status = toDoBean.setTodoDone(todoId);
 
         switch (status) {
             case SUCCESS:
-                request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
+                //Show success
+                response.sendRedirect("/todo");
                 break;
             case FAILURE:
+                //Show failure
                 request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-                break;
-            case WRONGENTRY:
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
                 break;
         }
     }
