@@ -38,7 +38,12 @@
                                 out.print("<td>"+ item.getDateDue() + " </td>");
                                 out.print("<td>"+ item.getCreatorUsername() + " </td>");
                                 out.print("<td>"+ item.getAssigneeUsername() + " </td>");
-                                out.print("<td>"+ item.getDone() + " </td>");
+                                out.print("<td>");
+                                out.print("<form action=\"setDoneLogic\" method=\"POST\">");
+                                out.print("<button title=\"ToDo check\" id=\"addToDo"+item.getUniqueID()+"\" class=\"btn btn-lg btn-primary btn-block\" type=\"button\" data-toggle=\"modal\" data-target=\"#todoModal\">erledigt</button>");
+                                out.print("<button title=\"ToDo check\" id=\"addToDo\" type=\"submit\" style=\"display: none;</button>");
+                                out.print("</form>");
+                                out.print("</td>");
                                 out.print("</tr>");
                             }
                         }
