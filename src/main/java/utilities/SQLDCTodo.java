@@ -9,6 +9,9 @@ import java.util.Date;
 import java.sql.ResultSet;
 import java.util.List;
 
+import static utilities.SQLDCLogin.getFirstName;
+import static utilities.SQLDCLogin.getLastName;
+
 public class SQLDCTodo extends SQLDatabaseConnection {
     /**
      * Create a to-do in the database
@@ -112,6 +115,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
 
     /**
      * Set an issue to status done
+     *
      * @param todoId The id of the todo
      * @return If it was successful
      */
@@ -125,5 +129,24 @@ public class SQLDCTodo extends SQLDatabaseConnection {
         }
 
         return false;
+    }
+
+    /**
+     * Concatenates First name and the first letter of the last name
+     *
+     * @param userId The ID of the User
+     * @return Full Name
+     */
+    public static String getNameString(String userId) {
+        String firstName;
+        String lastName;
+        try {
+            firstName = getFirstName(userId);
+            lastName = getLastName(userId);
+            return firstName + lastName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

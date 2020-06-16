@@ -95,6 +95,18 @@ public class ToDoBean {
     }
 
     /**
+     * Returns the first name and the first letter of the last name of a user as one string
+     *
+     * @param username The username of the user
+     * @return The String, e.g. Patrick M
+     */
+    public String getNameString(String username) {
+        String userId = SQLDCLogin.getUserId(username);
+
+        return SQLDCTodo.getNameString(userId);
+    }
+
+    /**
      * Return the wgId of the specified user
      *
      * @param userId The userId of the user
