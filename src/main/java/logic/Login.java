@@ -50,7 +50,6 @@ public class Login extends HttpServlet {
             email = request.getParameter("email");
             firstName = request.getParameter("firstName");
             lastName = request.getParameter("lastName");
-            System.out.println(lastName);
         }
 
         stayLoggedIn = Boolean.valueOf(request.getParameter("keepSignedIn"));
