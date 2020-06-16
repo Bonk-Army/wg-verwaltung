@@ -45,6 +45,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      * @return ArrayList<TodoModel>
      */
     public static List<TodoModel> getAllTodos(String wgId) {
+        deactivateOldToDos();
         List<TodoModel> todoList = new ArrayList<TodoModel>();
         try {
             ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, createdBy, uniqueID FROM todo WHERE wgId = " + Integer.valueOf(wgId)));
@@ -108,5 +109,15 @@ public class SQLDCTodo extends SQLDatabaseConnection {
         }
 
         return wgId;
+    }
+
+    /**
+     * WGV-115
+     * Deactivates done ToDos older than 30 days
+     *
+     */
+    public static void deactivateOldToDos () {
+        //Stolen from https://stackoverflow.com/questions/4364913/sql-delete-statement-where-date-is-greater-than-30-days
+        executeQuery("UPDATE todo SET isActive=0 WHERE dateDue < DATEADD(day, -30, GETDATE() AND isDone=1;");
     }
 }
