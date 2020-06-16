@@ -26,5 +26,6 @@
 
 <script><%@include file="../../assets/Scripts/Sidebar.js" %></script>
 <script><%@include file="../../assets/Scripts/Modal.js" %></script>
+<script><%@include file="../../assets/Scripts/ToDo.js" %></script>
 </body>
 </html>
