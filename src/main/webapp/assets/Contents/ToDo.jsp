@@ -63,8 +63,8 @@
                                 out.print("<tr class=\""+klasse+"\">");
                                 out.print("<td>"+ item.getTask() + " </td>");
                                 out.print("<td>"+ item.getDateDue() + " </td>");
-                                out.print("<td>"+ item.getCreatorUsername() + " </td>");
-                                out.print("<td>"+ item.getAssigneeUsername() + " </td>");
+                                out.print("<td>"+ fail.getNameString(item.getCreatorUsername()) + " </td>");
+                                out.print("<td>"+ fail.getNameString(item.getAssigneeUsername()) + " </td>");
                                 out.print("<td >"+done+"</td>");
                                 out.print("<td>");
                                 out.print("<form action=\"setDoneLogic\" method=\"POST\">");
