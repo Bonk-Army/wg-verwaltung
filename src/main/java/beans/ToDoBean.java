@@ -24,10 +24,22 @@ public class ToDoBean {
         return ErrorCodes.WRONGENTRY;
     }
 
+    /**
+     * Convert a Date object to a String
+     *
+     * @param date The Date object
+     * @return The String
+     */
     public String dateToString(Date date) {
         return DateFormatter.dateToString(date);
     }
 
+    /**
+     * Get all todos for the passed wg
+     *
+     * @param wgId The whId of the wg
+     * @return The list of Todo Objects
+     */
     public List<TodoModel> getAllTodos(String wgId) {
         return SQLDCTodo.getAllTodos(wgId);
     }
@@ -58,6 +70,28 @@ public class ToDoBean {
         return new ArrayList<TodoModel>();
     }
 
+    /**
+     * Return a List of the usernames of all users in the same wg as the user whos session identifier is passed
+     *
+     * @param sessionIdentifier The session identifier of the current user
+     * @return The list of all usernames
+     */
+    public List<String> getAllUsersOfWgBySessionIdentifier(String sessionIdentifier) {
+        if (RegexHelper.checkString(sessionIdentifier) && !sessionIdentifier.isEmpty()) {
+            int splitIndex = sessionIdentifier.indexOf('-');
+            String userId = sessionIdentifier.substring(0, splitIndex);
+            return getAllUsersOfWgByUserId(userId);
+        }
+
+        return new ArrayList<String>();
+    }
+
+    /**
+     * Get the username of a user by his userId
+     *
+     * @param userId The userId of the user
+     * @return The username of the user
+     */
     public String getUsername(String userId) {
         return SQLDCLogin.getUsername(userId);
     }
@@ -85,6 +119,20 @@ public class ToDoBean {
     }
 
     /**
+     * Returns the first name and the first letter of the last name of a user as one string
+     *
+     * @param username The username of the user
+     * @return The String, e.g. Patrick M
+     */
+    public String getNameString(String username) {
+        if (RegexHelper.checkString(username)) {
+            return SQLDCTodo.getNameString(username);
+        }
+
+        return "";
+    }
+
+    /**
      * Return the wgId of the specified user
      *
      * @param userId The userId of the user
@@ -94,6 +142,12 @@ public class ToDoBean {
         return SQLDCTodo.getWgIdByUser(userId);
     }
 
+    /**
+     * Set a todo to done
+     *
+     * @param todoId The todo to be set
+     * @return If it was successful
+     */
     public ErrorCodes setTodoDone(String todoId) {
         return SQLDCTodo.setTodoDone(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
     }
