@@ -9,14 +9,10 @@
                 </button>
             </div>
 
-            <form action="setDoneLogic" method="POST">
-                <label for="todo" class="sr-only">Aufgabe</label>
-                <input id="todo" class="form-control" placeholder="here" name="todo" type="text" required>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary odom-submit">ToDo erledigt</button>
+                    <button type="submit" id="addToDo" class="btn btn-primary odom-submit">ToDo erledigt</button>
                 </div>
-            </form>
         </div>
     </div>
 </div>
