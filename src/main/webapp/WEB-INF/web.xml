@@ -212,6 +212,14 @@
         <servlet-name>AddTodoLogic</servlet-name>
         <url-pattern>/addTodoLogic</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SetTodoDoneLogic</servlet-name>
+        <servlet-class>logic.SetTodoDone</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SetTodoDoneLogic</servlet-name>
+        <url-pattern>/setDoneLogic</url-pattern>
+    </servlet-mapping>v
     <!-- ############################################################################################################ -->
     <!--
      888888ba                                                                     888888ba
