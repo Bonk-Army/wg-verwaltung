@@ -23,7 +23,6 @@
                 out.print("</tr>");
                 out.print("</thead>");
                 out.print("<tbody>");
-                out.print("<tr>");
 
                 if( cookies != null ) {
                     for (int i = 0; i < cookies.length; i++) {
@@ -33,18 +32,19 @@
                             ToDo = (ArrayList<TodoModel>) fail.getAllTodosBySessionIdentifier(value);
                             for (TodoModel item : ToDo)
                             {
+                                out.print("<tr>");
                                 out.print("<td>"+ item.getTask() + " </td");
                                 out.print("<td>"+ item.getDateDue()+ " </td>");
-                                out.print("<td>"+ item.getDateDue() + " </td>");
+                                out.print("<td>"+ item.getCreatedBy() + " </td>");
+                                out.print("<td>"+ item.getUserId() + " </td>");
                                 out.print("<td>"+ item.getDone() + " </td>");
-                                out.print("<td"+ item.getDone() + " </td>");
+                                out.println("</tr>");
                             }
                         }
                     }
                 } else {
                     out.println("<h2>No cookies founds</h2>");
                 }
-                out.println("</tr>");
                 out.println("</table>");
             %>
 </div>
