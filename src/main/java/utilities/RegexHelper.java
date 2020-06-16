@@ -5,11 +5,22 @@ public class RegexHelper {
      * Checks if the entered String matches the rules we have for usernames.
      * Not allowed are whitespaces and ;?&%/\' (; because we dont want SQLi)
      *
-     * @param toCheck The username to be matched
-     * @return If the username is allowed
+     * @param toCheck The String to be matched
+     * @return If the string is allowed
      */
     public static boolean checkString(String toCheck) {
         return toCheck.matches("^[^\\\\;?&%/'\\s]*$");
+    }
+
+    /**
+     * Checks if the entered String matches the rules we have for usernames.
+     * Not allowed are ;\' (; because we dont want SQLi)
+     *
+     * @param toCheck The Text to be matched
+     * @return If the text is allowed
+     */
+    public static boolean checkText(String toCheck) {
+        return toCheck.matches("^[^\\\\;']*$");
     }
 
     /**
