@@ -55,7 +55,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
                 Date dateDue = rs.getDate(4);
                 Boolean isDone = rs.getBoolean(5);
                 String createdBy = rs.getString(6);
-                String uniqueID = rs.getString(7);
+                String uniqueID = String.valueOf(rs.getInt(7));
                 TodoModel todoModel = new TodoModel(task, userId, wgId, dateCreated, dateDue, isDone, createdBy, uniqueID);
                 todoList.add(todoModel);
             }
