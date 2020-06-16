@@ -20,6 +20,7 @@
                 out.print("<th scope=\"col\">Zu erledigen bis:</th>");
                 out.print("<th scope=\"col\">Erstellt von:</th>");
                 out.print("<th scope=\"col\">Wird Erledigt von:</th>");
+                out.print("<th scope=\"col\">Check</th>");
                 out.print("</tr>");
                 out.print("</thead>");
                 out.print("<tbody>");
