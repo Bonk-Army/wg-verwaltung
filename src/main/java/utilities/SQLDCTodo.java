@@ -109,4 +109,21 @@ public class SQLDCTodo extends SQLDatabaseConnection {
 
         return wgId;
     }
+
+    /**
+     * Set an issue to status done
+     * @param todoId The id of the todo
+     * @return If it was successful
+     */
+    public static boolean setTodoDone(String todoId) {
+        try {
+            executeQuery(("UPDATE todo SET isDone=true WHERE unqiueID=" + Integer.valueOf(todoId)));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }
