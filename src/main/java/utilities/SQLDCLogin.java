@@ -1,7 +1,9 @@
 package utilities;
 
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SQLDCLogin extends SQLDatabaseConnection {
@@ -17,10 +19,13 @@ public class SQLDCLogin extends SQLDatabaseConnection {
      */
     public static boolean createUser(String username, String email, String pwhash, String pwsalt, String verificationCode, String firstName, String lastName, String cookiePostfix) {
         try {
-            ResultSet rs = executeQuery(("INSERT INTO users (username, email, pwhash, pwsalt, verificationCode, firstName, lastName, cookiePostfix)"
+            Date registrationDate = new Date();
+            // Convert dates to java.sql.Timestamp to save them to SQL
+            Timestamp registrationStamp = new Timestamp(registrationDate.getTime());
+            ResultSet rs = executeQuery(("INSERT INTO users (username, email, pwhash, pwsalt, verificationCode, firstName, lastName, cookiePostfix, registrationDate)"
                     + "VALUES ('" + username + "', '" + email + "', '" + pwhash + "', '"
                     + pwsalt + "', '" + verificationCode + "', '" + firstName + "', '"
-                    + lastName + "', '" + cookiePostfix + "')"));
+                    + lastName + "', '" + cookiePostfix + "', '" + registrationStamp + "')"));
 
             return true;
         } catch (Exception e) {

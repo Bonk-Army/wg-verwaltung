@@ -1,6 +1,5 @@
 package beans;
 
-
 import models.TodoModel;
 import utilities.*;
 
@@ -31,6 +30,32 @@ public class ToDoBean {
 
     public List<TodoModel> getAllTodos(String wgId) {
         return SQLDCTodo.getAllTodos(wgId);
+    }
+
+    /**
+     * Get all todos for a specific wg based on the currently logged in user
+     *
+     * @param sessionIdentifier The session identifier of the logged in user
+     * @return The List of Todos
+     */
+    public List<TodoModel> getAllTodosBySessionIdentifier(String sessionIdentifier) {
+        if (RegexHelper.checkString(sessionIdentifier) && !sessionIdentifier.isEmpty()) {
+            int splitIndex = sessionIdentifier.indexOf('-');
+            String userId = sessionIdentifier.substring(0, splitIndex);
+            String cookiePostfix = sessionIdentifier.substring(splitIndex + 1, sessionIdentifier.length());
+
+            String username = SQLDCLogin.getUsername(userId);
+            String savedCookiePostfix = SQLDCLogin.getCookiePostfix(username);
+
+            // If the passed postfix matches the saved one, fetch the todos and return them
+            if (savedCookiePostfix.equals(cookiePostfix)) {
+                String wgId = SQLDCTodo.getWgIdByUser(userId);
+
+                return SQLDCTodo.getAllTodos(wgId);
+            }
+        }
+
+        return new ArrayList<TodoModel>();
     }
 
     public String getUsername(String userId) {
