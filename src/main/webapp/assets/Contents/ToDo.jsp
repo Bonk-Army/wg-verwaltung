@@ -36,8 +36,8 @@
                                 out.print("<tr>");
                                 out.print("<td>"+ item.getTask() + " </td");
                                 out.print("<td>"+ item.getDateDue()+ " </td>");
-                                out.print("<td>"+ item.getCreatedBy() + " </td>");
-                                out.print("<td>"+ item.getUserId() + " </td>");
+                                out.print("<td>"+ item.getCreatorUsername() + " </td>");
+                                out.print("<td>"+ item.getAssigneeUsername() + " </td>");
                                 out.print("<td>"+ item.getDone() + " </td>");
                                 out.print("</tr>");
                             }
@@ -46,6 +46,7 @@
                 } else {
                     out.println("<h2>No cookies founds</h2>");
                 }
+                out.println("</tbody>");
                 out.println("</table>");
             %>
 </div>
