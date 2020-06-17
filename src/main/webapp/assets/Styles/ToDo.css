@@ -15,15 +15,19 @@ body {
 }
 
 tr.done {
-    background-color: darkgreen;
+    background-color: #71bf71;
 }
 
 tr.tooLate {
-    background-color: #9a0000;
+    background-color: #d75a5a;
 }
 
 tr.late {
-    background-color: #ffc000;
+    background-color: #ffc658;
+}
+
+tr.inactive {
+    display: none;
 }
 
 #addToDo{
