@@ -24,6 +24,7 @@
         |__ /createWGLogic         | Servlet : CreateWG                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /addTodoLogic          | Servlet : ToDo                    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /setDoneLogic          | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /sendContactRequestLogic | Servlet: ContactRequest         | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /removeLogic           | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
         |__ ^^-^^
         |__
@@ -225,6 +226,15 @@
     <servlet-mapping>
         <servlet-name>SetTodoDoneLogic</servlet-name>
         <url-pattern>/setDoneLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ContactRequestLogic</servlet-name>
+        <servlet-class>logic.ContactRequest</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ContactRequestLogic</servlet-name>
+        <url-pattern>/sendContactRequestLogic</url-pattern>
+    </servlet-mapping>t
     </servlet-mapping>
     <servlet>
         <servlet-name>RemoveTodoLogic</servlet-name>
