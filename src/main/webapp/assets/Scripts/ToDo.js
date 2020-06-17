@@ -3,3 +3,9 @@ function doneTodo(id) {
         $('#'+id).click();
     });
 }
+
+function removeTodo(id) {
+    $( "#removeToDo" ).click(function() {
+        $('#remove'+id).click();
+    });
+}

@@ -44,21 +44,24 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      * @param wgId the ID of the wg
      * @return ArrayList<TodoModel>
      */
-    public static List<TodoModel> getAllTodos(String wgId) {
+    public static List<TodoModel> getAllActiveTodos(String wgId) {
         deactivateOldToDos();
         List<TodoModel> todoList = new ArrayList<TodoModel>();
         try {
-            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, createdBy, uniqueID FROM todo WHERE wgId = " + Integer.valueOf(wgId) + " ORDER BY isDone, dateDue ASC"));
+            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE wgId = " + Integer.valueOf(wgId) + " ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
                 String task = rs.getString(1);
                 String userId = String.valueOf(rs.getInt(2));
                 Date dateCreated = rs.getDate(3);
                 Date dateDue = rs.getDate(4);
                 Boolean isDone = rs.getBoolean(5);
-                String createdBy = rs.getString(6);
-                String uniqueID = String.valueOf(rs.getInt(7));
-                TodoModel todoModel = new TodoModel(task, userId, wgId, dateCreated, dateDue, isDone, createdBy, uniqueID);
-                todoList.add(todoModel);
+                Boolean isActive = rs.getBoolean(6);
+                String createdBy = rs.getString(7);
+                String uniqueID = String.valueOf(rs.getInt(8));
+                TodoModel todoModel = new TodoModel(task, userId, wgId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID);
+                if(isActive){
+                    todoList.add(todoModel);
+                }
             }
             return todoList;
         } catch (Exception e) {
@@ -77,7 +80,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
         List<String> users = new ArrayList<String>();
 
         try {
-            ResultSet rs = executeQuery(("SELECT username FROM users WHERE wgId=" + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT username FROM users WHERE wgId=" + Integer.valueOf(wgId) + " ORDER BY firstName ASC"));
 
             while (rs.next()) {
                 users.add(rs.getString(1));
@@ -120,6 +123,24 @@ public class SQLDCTodo extends SQLDatabaseConnection {
     public static boolean setTodoDone(String todoId) {
         try {
             executeQuery(("UPDATE todo SET isDone=true WHERE uniqueID=" + Integer.valueOf(todoId)));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * Set an issue to status inactive
+     *
+     * @param todoId The id of the todo
+     * @return If it was successful
+     */
+    public static boolean removeTodo(String todoId) {
+        try {
+            executeQuery(("UPDATE todo SET isActive=false WHERE uniqueID=" + Integer.valueOf(todoId)));
 
             return true;
         } catch (Exception e) {
