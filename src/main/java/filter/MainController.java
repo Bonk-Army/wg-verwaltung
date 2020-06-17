@@ -1,6 +1,10 @@
 package filter;
 
+import beans.LoginBean;
+import beans.SessionBean;
+
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +17,20 @@ public class MainController extends HttpServlet {
         String url = req.getRequestURL().toString();
 
         //AUTHENTIFIZIERUNG
+        Cookie[] cookies = req.getCookies();
+        String sessionIdentifier = "";
 
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("session")) {
+                sessionIdentifier = cookie.getValue();
+            }
+        }
+
+        String userId = new LoginBean().getUserIdBySessionIdentifier(sessionIdentifier);
+
+        SessionBean sessionBean = new SessionBean(userId);
+
+        req.getSession().setAttribute("sessionBean", sessionBean);
 
         resp.sendRedirect(url+"Page");
     }
