@@ -2,6 +2,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.Calendar" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <div id="content">
     <jsp:useBean id="fail" class="beans.ToDoBean"></jsp:useBean>
     <button title="ToDo hinzuf&uuml;gen" id="addToDo" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal" data-target="#exampleModal">
@@ -44,6 +45,7 @@
                                 c.setTime(currentDate);
                                 c.add(Calendar.DATE, 3);
                                 Date threeDaysDate = c.getTime();
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd. MMMM yyyy");
 
                                 if(item.getDone()){
                                     klasse = "done";
@@ -62,7 +64,7 @@
                                 }
                                 out.print("<tr class=\""+klasse+"\">");
                                 out.print("<td>"+ item.getTask() + " </td>");
-                                out.print("<td>"+ item.getDateDue() + " </td>");
+                                out.print("<td>"+ simpleDateFormat.format(item.getDateDue()) + " </td>");
                                 out.print("<td>"+ fail.getNameString(item.getCreatorUsername()) + " </td>");
                                 out.print("<td>"+ fail.getNameString(item.getAssigneeUsername()) + " </td>");
                                 out.print("<td >"+done+"</td>");
