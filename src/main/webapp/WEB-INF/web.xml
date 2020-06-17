@@ -25,6 +25,7 @@
         |__ /addTodoLogic          | Servlet : ToDo                    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /setDoneLogic          | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /sendContactRequestLogic | Servlet: ContactRequest         | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /removeLogic           | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -241,7 +242,15 @@
     <servlet-mapping>
         <servlet-name>ContactRequestLogic</servlet-name>
         <url-pattern>/sendContactRequestLogic</url-pattern>
-    </servlet-mapping>t
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RemoveTodoLogic</servlet-name>
+        <servlet-class>logic.RemoveTodo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveTodoLogic</servlet-name>
+        <url-pattern>/removeLogic</url-pattern>
+    </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--
      888888ba                                                                     888888ba

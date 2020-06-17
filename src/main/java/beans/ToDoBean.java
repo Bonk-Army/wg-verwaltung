@@ -153,4 +153,14 @@ public class ToDoBean {
     public ErrorCodes setTodoDone(String todoId) {
         return SQLDCTodo.setTodoDone(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
     }
+
+    /**
+     * Set a todo to inactive
+     *
+     * @param todoId The todo to be set
+     * @return If it was successful
+     */
+    public ErrorCodes removeTodo(String todoId) {
+        return SQLDCTodo.removeTodo(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+    }
 }

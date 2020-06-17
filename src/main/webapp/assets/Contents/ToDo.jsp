@@ -18,6 +18,7 @@
                 out.print("<table class=\"table\">");
                 out.print("<thead class=\"thead-dark\">");
                 out.print("<tr>");
+                out.print("<th/>");
                 out.print("<th scope=\"col\">Aufgabe</th>");
                 out.print("<th scope=\"col\">Zu erledigen bis:</th>");
                 out.print("<th scope=\"col\">Erstellt von:</th>");
@@ -28,15 +29,14 @@
                 out.print("</thead>");
                 out.print("<tbody>");
 
-                if( cookies != null ) {
+                if (cookies != null) {
                     for (int i = 0; i < cookies.length; i++) {
                         cookie = cookies[i];
-                        if ((cookies[i].getName().compareTo("session")) == 0){
+                        if ((cookies[i].getName().compareTo("session")) == 0) {
                             value = cookies[i].getValue();
                             ToDo = (ArrayList<TodoModel>) fail.getAllTodosBySessionIdentifier(value);
-                            for (TodoModel item : ToDo)
-                            {
-                                String klasse;
+                            for (TodoModel item : ToDo) {
+                                String addClass;
                                 String done;
                                 String hidden;
                                 Date currentDate = new Date();
@@ -45,25 +45,35 @@
                                 c.add(Calendar.DATE, 3);
                                 Date threeDaysDate = c.getTime();
 
-                                if(item.getDone()){
-                                    klasse = "done";
+                                if (item.getDone()) {
+                                    addClass = (item.getIsActive())? "done" : "done inactive";
                                     done = "ja";
                                     hidden = "hidden=\"hidden\"";
-                                } else{
+                                } else {
                                     done = "nein";
                                     hidden = "";
-                                    if(currentDate.after(item.getDateDue())){
-                                        klasse = "notDone tooLate";
-                                    } else if(threeDaysDate.after(item.getDateDue())){
-                                        klasse = "notDone late";
-                                    } else{
-                                        klasse = "notDone";
+                                    if (currentDate.after(item.getDateDue())) {
+                                        addClass = (item.getIsActive())? "notDone tooLate" : "notDone tooLate inactive";
+                                    } else if (threeDaysDate.after(item.getDateDue())) {
+                                        addClass = (item.getIsActive())? "notDone late" : "notDone late inactive";
+                                    } else {
+                                        addClass = (item.getIsActive())? "notDone" : "notDone inactive";
                                     }
                                 }
-                                out.print("<tr class=\""+klasse+"\">");
-                                out.print("<td>"+ item.getTask() + " </td>");
-                                out.print("<td>"+ item.getDateDue() + " </td>");
-                                out.print("<td>"+ fail.getNameString(item.getCreatorUsername()) + " </td>");
+                                out.print("<tr class=\"" + addClass + "\">");
+                                out.print("<td>");
+                                out.print("<form action=\"removeLogic\" method=\"POST\">");
+                                out.print("<input type=\"text\" name=\"todoId\" hidden=\"hidden\" value=\"" + item.getUniqueID() + "\">");
+                                out.print("<button title=\"ToDo remove check\" onclick=\"removeTodo(" + item.getUniqueID()
+                                        + ")\" class=\"btn btn-lg btn-primary btn-block remove\" type=\"button\" data-toggle=\"modal\" data-target=\"#removeModal\" "
+                                        + hidden + ">&times;</button>");
+                                out.print("<button title=\"ToDo remove check\" id=\"remove" + item.getUniqueID()
+                                        + "\" type=\"submit\" style=\"display: none;\"</button>");
+                                out.print("</form>");
+                                out.print("</td>");
+                                out.print("<td>" + item.getTask() + " </td>");
+                                out.print("<td>" + item.getDateDue() + " </td>");
+                                out.print("<td>" + fail.getNameString(item.getCreatorUsername()) + " </td>");
                                 out.print("<td>"+ fail.getNameString(item.getAssigneeUsername()) + " </td>");
                                 out.print("<td >"+done+"</td>");
                                 out.print("<td>");
