@@ -10,12 +10,15 @@ public class MainController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String url = req.getRequestURL().toString();
+
+        String part = url.substring(url.lastIndexOf('/'));
 
         //AUTHENTIFIZIERUNG
 
+        req.getServletContext().getRequestDispatcher(part+"Page").forward(req, resp);
 
-        resp.sendRedirect(url+"Page");
     }
 
     @Override
