@@ -80,7 +80,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
         List<String> users = new ArrayList<String>();
 
         try {
-            ResultSet rs = executeQuery(("SELECT username FROM users WHERE wgId=" + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT username FROM users WHERE wgId=" + Integer.valueOf(wgId) + " ORDER BY firstName ASC"));
 
             while (rs.next()) {
                 users.add(rs.getString(1));
