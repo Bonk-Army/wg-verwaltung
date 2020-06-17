@@ -44,7 +44,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      * @param wgId the ID of the wg
      * @return ArrayList<TodoModel>
      */
-    public static List<TodoModel> getAllTodos(String wgId) {
+    public static List<TodoModel> getAllActiveTodos(String wgId) {
         deactivateOldToDos();
         List<TodoModel> todoList = new ArrayList<TodoModel>();
         try {
@@ -59,7 +59,9 @@ public class SQLDCTodo extends SQLDatabaseConnection {
                 String createdBy = rs.getString(7);
                 String uniqueID = String.valueOf(rs.getInt(8));
                 TodoModel todoModel = new TodoModel(task, userId, wgId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID);
-                todoList.add(todoModel);
+                if(isActive){
+                    todoList.add(todoModel);
+                }
             }
             return todoList;
         } catch (Exception e) {
