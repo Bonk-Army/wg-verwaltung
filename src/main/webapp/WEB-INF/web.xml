@@ -234,7 +234,6 @@
     <servlet-mapping>
         <servlet-name>ContactRequestLogic</servlet-name>
         <url-pattern>/sendContactRequestLogic</url-pattern>
-    </servlet-mapping>t
     </servlet-mapping>
     <servlet>
         <servlet-name>RemoveTodoLogic</servlet-name>
