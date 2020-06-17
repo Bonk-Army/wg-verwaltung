@@ -65,4 +65,16 @@ public class SettingsBean {
         }
         return ErrorCodes.WRONGENTRY;
     }
+
+    /**
+     * Send a mail concerning the contact request from the contact form
+     * @param name The entered name
+     * @param email The entered email address
+     * @param subject The entered subject
+     * @param message The entered message
+     * @return If it was successful
+     */
+    public ErrorCodes sendContactMail(String name, String email, String subject, String message){
+        return MailSender.sendContactRequestMail(name, email, subject, message) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+    }
 }
