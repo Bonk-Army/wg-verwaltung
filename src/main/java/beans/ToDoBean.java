@@ -1,6 +1,5 @@
 package beans;
 
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import models.TodoModel;
 import utilities.*;
 
@@ -44,7 +43,7 @@ public class ToDoBean {
      * @return The list of Todo Objects
      */
     public List<TodoModel> getAllTodos(String wgId) {
-        return SQLDCTodo.getAllTodos(wgId);
+        return SQLDCTodo.getAllActiveTodos(wgId);
     }
 
     /**
@@ -66,7 +65,7 @@ public class ToDoBean {
             if (savedCookiePostfix.equals(cookiePostfix)) {
                 String wgId = SQLDCTodo.getWgIdByUser(userId);
 
-                return SQLDCTodo.getAllTodos(wgId);
+                return SQLDCTodo.getAllActiveTodos(wgId);
             }
         }
 
