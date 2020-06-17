@@ -14,18 +14,20 @@ public class TodoModel {
     private Date dateCreated;
     private Date dateDue;
     private Boolean isDone;
+    private Boolean isActive;
     private String createdBy;
     private String uniqueID;
     private String assigneeUsername;
     private String creatorUsername;
 
-    public TodoModel(String task, String userId, String wgId, Date dateCreated, Date dateDue, Boolean isDone, String createdBy, String uniqueID) {
+    public TodoModel(String task, String userId, String wgId, Date dateCreated, Date dateDue, Boolean isDone, Boolean isActive, String createdBy, String uniqueID) {
         this.task = task;
         this.userId = userId;
         this.wgId = wgId;
         this.dateCreated = dateCreated;
         this.dateDue = dateDue;
         this.isDone = isDone;
+        this.isActive = isActive;
         this.createdBy = createdBy;
         this.uniqueID = uniqueID;
         this.assigneeUsername = SQLDCLogin.getUsername(userId);
@@ -54,6 +56,10 @@ public class TodoModel {
 
     public Boolean getDone() {
         return isDone;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
     }
 
     public String getCreatedBy() {

@@ -8,7 +8,7 @@
     <div class="row">
         <!--Grid column-->
         <div class="offset-md-4 col-md-4">
-            <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+            <form id="contact-form" name="contact-form" action="sendContactRequestLogic" method="POST">
                 <!--Grid row-->
                 <div class="row">
                     <!--Grid column-->
