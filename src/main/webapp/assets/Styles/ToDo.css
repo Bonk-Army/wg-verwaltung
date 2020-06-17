@@ -26,6 +26,10 @@ tr.late {
     background-color: #ffc000;
 }
 
+tr.inactive {
+    display: none;
+}
+
 #addToDo{
     margin-bottom: 10px;
     max-width: 62px;
