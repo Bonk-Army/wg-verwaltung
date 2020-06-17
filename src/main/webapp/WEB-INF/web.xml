@@ -91,6 +91,14 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
+        <url-pattern>/homePage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>HomeTest</servlet-name>
+        <servlet-class>filter.MainController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomeTest</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet>
