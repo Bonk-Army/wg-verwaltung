@@ -20,7 +20,7 @@ public class MainController extends HttpServlet {
         String part = url.substring(url.lastIndexOf('/'));
 
         // Check if session bean already exists
-        SessionBean sessionBean = (SessionBean) req.getAttribute("sessionBean");
+        SessionBean sessionBean = (SessionBean) req.getSession().getAttribute("sessionBean");
 
         // If no session bean has been detected, continue with the logic. If there is a session bean, just forward the request
         if(sessionBean == null){
