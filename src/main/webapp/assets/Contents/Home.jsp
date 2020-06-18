@@ -1,4 +1,3 @@
-<%@ page import="beans.SessionBean" %>
 <div id="content">
     <jsp:useBean id="fail" class="beans.DemoBean"></jsp:useBean>
     <jsp:useBean id="overview" class="beans.OverviewBean"></jsp:useBean>
