@@ -106,7 +106,7 @@
     <!-- Filter Servlet -->
     <servlet>
         <servlet-name>HomeTest</servlet-name>
-        <servlet-class>filter.MainController</servlet-class>
+        <servlet-class>filter.MainFilter</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeTest</servlet-name>

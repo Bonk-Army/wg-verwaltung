@@ -47,7 +47,6 @@ public class Login extends HttpServlet {
         // (false = session cookie, true = cookie that lasts 30 days or so)
 
         if (isRegister) {
-            // TODO Check for bad parsed characters (ÄÖÜ) (Ticket WGV-96)
             email = request.getParameter("email");
             firstName = request.getParameter("firstName");
             lastName = request.getParameter("lastName");

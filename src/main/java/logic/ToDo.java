@@ -1,6 +1,7 @@
 package logic;
 
 import beans.LoginBean;
+import beans.SessionBean;
 import beans.SettingsBean;
 import beans.ToDoBean;
 import utilities.ErrorCodes;
@@ -39,21 +40,15 @@ public class ToDo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean loginBean = new LoginBean();
         ToDoBean toDoBean = new ToDoBean();
+        SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
         String task = request.getParameter("todo");
         String assignee = request.getParameter("name");
         String dueDateString = request.getParameter("deadline");
-        Cookie[] cookies = request.getCookies();
-        String sessionIdentifier = "";
 
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("session")) {
-                sessionIdentifier = cookie.getValue();
-            }
-        }
+        String userId = sessionBean.getUserId();
 
-        String userId = loginBean.getUserIdBySessionIdentifier(sessionIdentifier);
         String assigneeId = loginBean.getUserId(assignee);
         String wgId = toDoBean.getWgIdByUserId(userId);
         Date dueDate = null;

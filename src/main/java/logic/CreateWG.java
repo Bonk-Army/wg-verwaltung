@@ -1,6 +1,7 @@
 package logic;
 
 import beans.LoginBean;
+import beans.SessionBean;
 import beans.SettingsBean;
 import utilities.ErrorCodes;
 
@@ -34,20 +35,12 @@ public class CreateWG extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean loginBean = new LoginBean();
         SettingsBean settingsBean = new SettingsBean();
+        SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
         String wgName = request.getParameter("wgname");
 
-        Cookie[] cookies = request.getCookies();
-        String sessionIdentifier = "";
-
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("session")) {
-                sessionIdentifier = cookie.getValue();
-            }
-        }
-
-        String userId = loginBean.getUserIdBySessionIdentifier(sessionIdentifier);
+        String userId = sessionBean.getUserId();
 
         ErrorCodes status = settingsBean.createWg(userId, wgName);
 

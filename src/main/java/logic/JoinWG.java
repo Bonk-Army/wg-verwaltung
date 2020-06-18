@@ -1,6 +1,7 @@
 package logic;
 
 import beans.LoginBean;
+import beans.SessionBean;
 import beans.SettingsBean;
 import utilities.ErrorCodes;
 
@@ -31,19 +32,12 @@ public class JoinWG extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean loginBean = new LoginBean();
         SettingsBean settingsBean = new SettingsBean();
+        SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
         String wgCode = request.getParameter("wgcode");
-        Cookie[] cookies = request.getCookies();
-        String sessionIdentifier = "";
 
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("session")) {
-                sessionIdentifier = cookie.getValue();
-            }
-        }
-
-        String userId = loginBean.getUserIdBySessionIdentifier(sessionIdentifier);
+        String userId = sessionBean.getUserId();
 
         ErrorCodes status = settingsBean.setWgId(userId, wgCode);
 
