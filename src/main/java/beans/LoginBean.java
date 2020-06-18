@@ -224,6 +224,70 @@ public class LoginBean {
     }
 
     /**
+     * Return the username of a user by his userId
+     *
+     * @param userId The userId of the user
+     * @return The username of the user
+     */
+    public String getUsernameById(String userId) {
+        if (RegexHelper.checkString(userId)) {
+            return SQLDCLogin.getUsername(userId);
+        }
+
+        return "";
+    }
+
+    /**
+     * Gets First Name for User ID
+     *
+     * @param userId The ID of the User
+     * @return First Name of User
+     */
+    public String getFirstName(String userId) {
+        if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
+            return SQLDCOverview.getFirstName(userId);
+        }
+        return "";
+    }
+
+    /**
+     * Gets Last Name for User ID
+     *
+     * @param userId The ID of the User
+     * @return Last Name of User
+     */
+    public String getLastName(String userId) {
+        if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
+            return SQLDCOverview.getLastName(userId);
+        }
+        return "";
+    }
+
+    /**
+     * Get the name of the wg of the passed user
+     *
+     * @param userId The userId of the user
+     * @return The wg name
+     */
+    public String getWgNameByUserId(String userId) {
+        if (RegexHelper.checkString(userId)) {
+            return SQLDCOverview.getWgName(userId);
+        }
+
+        return "";
+    }
+
+    /**
+     * Return the wgId of the specified user
+     *
+     * @param userId The userId of the user
+     * @return The wgId
+     */
+    public String getWgIdByUserId(String userId) {
+        return SQLDCTodo.getWgIdByUser(userId);
+    }
+
+    /**
      * Checks if the username is not already in use
      *
      * @param username The username to be checked
