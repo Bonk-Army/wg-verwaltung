@@ -23,7 +23,7 @@ public class MainController extends HttpServlet {
         SessionBean sessionBean = (SessionBean) req.getSession().getAttribute("sessionBean");
 
         // If no session bean has been detected, continue with the logic. If there is a session bean, just forward the request
-        if(sessionBean == null){
+        if(sessionBean == null || sessionBean.getUserId().equals("")){
             // Authentication via session cookie
             Cookie[] cookies = req.getCookies();
             String sessionIdentifier = "";

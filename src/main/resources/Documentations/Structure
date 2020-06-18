@@ -24,6 +24,7 @@ Bei Fragen zum Backend an @PM TODO Patrick Müller
 ------------|
             |---- Bean                  - Die Java Beans, die die Geschäftslogik ausführen
             |---- config                - Config-Files zum checken von Umgebungsparametern o.ä.
+            |---- filter                - Das "Filter"-Servlet, das zur Authentifizierung des Users vor jeden Request geschaltet ist
             |---- logic                 - Die Request-Endpoint-Servlets, an die POST und GET geschickt werden
             |---- models                - Datenmodelle einzelner Objekte z.B. für Shopping und Todo
             |---- utilities             - Utility-Klassen wie SQL Connection und Mail Sender
