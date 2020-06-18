@@ -1,7 +1,5 @@
 package beans;
 
-import javax.enterprise.context.SessionScoped;
-import java.beans.JavaBean;
 
 /**
  * Session bean declared as SessionScoped by default because we need it during the whole session.
