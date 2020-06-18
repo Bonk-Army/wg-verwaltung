@@ -1,31 +1,17 @@
 <div id="content">
     <jsp:useBean id="fail" class="beans.DemoBean"></jsp:useBean>
     <jsp:useBean id="overview" class="beans.OverviewBean"></jsp:useBean>
-    <jsp:useBean id="login" class="beans.LoginBean"></jsp:useBean>
     <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"></jsp:useBean>
-    <%
 
-        Cookie cookie = null;
-        Cookie[] cookies = null;
-        String value = "";
-        // Get an array of Cookies associated with the this domain
-        cookies = request.getCookies();
-
-        if (cookies != null) {
-            for (int i = 0; i < cookies.length; i++) {
-                cookie = cookies[i];
-                if ((cookies[i].getName().compareTo("session")) == 0) {
-                    value = cookies[i].getValue();
-                    String id = login.getUserIdBySessionIdentifier(value);
-                    out.print("<h1>Willkommen "+overview.getFullName(id)+", oder besser bekannt als "+overview.getUsernameById(id)+" aus der WG "+overview.getWgNameByUserId(id)+ "&#129433;</h1>");
-                }
-            }
-        } else {
-            out.println("<h2>No cookies founds</h2>");
-        }
-    %>
+    <h1>Willkommen
+        <jsp:getProperty name="sessionBean" property="firstName"/>
+        <jsp:getProperty name="sessionBean" property="lastName"/>
+        , oder besser bekannt als
+        <jsp:getProperty name="sessionBean" property="username"/>
+        aus der WG
+        <jsp:getProperty name="sessionBean" property="wgName"/>
+        &#129433;</h1>
     <hr>
-    <h1>User: <jsp:getProperty name="sessionBean" property="userId"/></h1>
     <h4>Aktuelles Guthaben: <%= fail.kontoguthaben%>&euro;</h4>
     <canvas id="myChart" width="auto" height="40"></canvas>
     <script>
