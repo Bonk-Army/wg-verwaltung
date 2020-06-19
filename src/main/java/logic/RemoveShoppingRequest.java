@@ -1,5 +1,6 @@
 package logic;
 
+import beans.ShoppingBean;
 import beans.ToDoBean;
 import utilities.ErrorCodes;
 
@@ -10,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Set todo done servlet that is called when the user tries to set a todo to done for their wg
+ * Remove shopping request servlet that is called when a shopping request is set to done
  */
-public class SetTodoDone extends HttpServlet {
+public class RemoveShoppingRequest extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public SetTodoDone() {
+    public RemoveShoppingRequest() {
         super();
     }
 
@@ -25,21 +26,24 @@ public class SetTodoDone extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ToDoBean toDoBean = new ToDoBean();
+        ShoppingBean shoppingBean = new ShoppingBean();
         request.setCharacterEncoding("UTF-8");
 
-        String todoId = request.getParameter("todoId");
+        String requestId = request.getParameter("requestId");
 
-        ErrorCodes status = toDoBean.setTodoDone(todoId);
+        ErrorCodes status = shoppingBean.setRequestDone(requestId);
 
         switch (status) {
             case SUCCESS:
                 //Show success
-                response.sendRedirect("/todo");
+                response.sendRedirect("/shopping");
                 break;
             case FAILURE:
                 //Show failure
                 request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+                break;
+            case WRONGENTRY:
+                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
                 break;
         }
     }

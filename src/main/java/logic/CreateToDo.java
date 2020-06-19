@@ -1,12 +1,12 @@
 package logic;
 
 import beans.LoginBean;
-import beans.SettingsBean;
+import beans.SessionBean;
 import beans.ToDoBean;
 import utilities.ErrorCodes;
+import utilities.RegexHelper;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,12 +14,14 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
-public class ToDo extends HttpServlet {
+/**
+ * Create Todo servlet that is called when the user tries to create a new todo for his wg
+ */
+public class CreateToDo extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public ToDo() {
+    public CreateToDo() {
         super();
     }
 
@@ -39,22 +41,19 @@ public class ToDo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean loginBean = new LoginBean();
         ToDoBean toDoBean = new ToDoBean();
+        SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
         String task = request.getParameter("todo");
-        String assignee = request.getParameter("name");
+        String assignee = request.getParameter("username");
         String dueDateString = request.getParameter("deadline");
-        Cookie[] cookies = request.getCookies();
-        String sessionIdentifier = "";
 
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("session")) {
-                sessionIdentifier = cookie.getValue();
-            }
+        String userId = sessionBean.getUserId();
+
+        String assigneeId = "";
+        if(RegexHelper.checkString(assignee)) {
+            assigneeId = loginBean.getUserId(assignee);
         }
-
-        String userId = loginBean.getUserIdBySessionIdentifier(sessionIdentifier);
-        String assigneeId = loginBean.getUserId(assignee);
         String wgId = toDoBean.getWgIdByUserId(userId);
         Date dueDate = null;
         try {

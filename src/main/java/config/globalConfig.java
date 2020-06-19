@@ -1,5 +1,8 @@
 package config;
 
+/**
+ * Global config file for stuff like detecting environment and operating system
+ */
 public class globalConfig {
 
     //Bitte vorsichtig mit den Configurationen! Sparsam!!

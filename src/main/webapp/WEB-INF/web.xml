@@ -26,6 +26,8 @@
         |__ /setDoneLogic          | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /sendContactRequestLogic | Servlet: ContactRequest         | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /removeLogic           | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
+        |__ /removeShoppingRequestLogic | Servlet: RemoveShoppingRequest | Zuständig: @PM     | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addShoppingRequestLogic | Servlet: AddShoppingRequest     | Zuständig:  @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -62,6 +64,7 @@
                                                                      .88
                                                                  d8888P
     -->
+    <!-- Always accessible -->
     <servlet>
         <servlet-name>Login</servlet-name>
         <jsp-file>/Pages/Public/Login.jsp</jsp-file>
@@ -79,56 +82,8 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>WG-Verwaltung</servlet-name>
-        <jsp-file>/Pages/Protected/WGVerwaltung.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>WG-Verwaltung</servlet-name>
-        <url-pattern>/wgverwaltung</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>Home</servlet-name>
-        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Home</servlet-name>
-        <url-pattern>/home</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>Financial</servlet-name>
-        <jsp-file>/Pages/Protected/Financial.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Financial</servlet-name>
-        <url-pattern>/financial</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ToDo</servlet-name>
-        <jsp-file>/Pages/Protected/ToDo.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ToDo</servlet-name>
-        <url-pattern>/todo</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>Cleaning</servlet-name>
-        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Cleaning</servlet-name>
-        <url-pattern>/clean</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>Shopping</servlet-name>
-        <jsp-file>/Pages/Protected/Shopping.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Shopping</servlet-name>
-        <url-pattern>/shopping</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>FAQ</servlet-name>
-        <jsp-file>/Pages/Protected/FAQ.jsp</jsp-file>
+        <jsp-file>/Pages/Public/FAQ.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>FAQ</servlet-name>
@@ -149,6 +104,69 @@
     <servlet-mapping>
         <servlet-name>Impressum</servlet-name>
         <url-pattern>/impressum</url-pattern>
+    </servlet-mapping>
+    <!-- Filter Servlet -->
+    <servlet>
+        <servlet-name>HomeTest</servlet-name>
+        <servlet-class>filter.MainFilter</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HomeTest</servlet-name>
+        <url-pattern>/home</url-pattern>
+        <url-pattern>/todo</url-pattern>
+        <url-pattern>/wgverwaltung</url-pattern>
+        <url-pattern>/financial</url-pattern>
+        <url-pattern>/clean</url-pattern>
+        <url-pattern>/shopping</url-pattern>
+    </servlet-mapping>
+    <!-- Protected via Filter Servlet -->
+    <servlet>
+        <servlet-name>WG-Verwaltung</servlet-name>
+        <jsp-file>/Pages/Protected/WGVerwaltung.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WG-Verwaltung</servlet-name>
+        <url-pattern>/wgverwaltungPage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Home</servlet-name>
+        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/homePage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Financial</servlet-name>
+        <jsp-file>/Pages/Protected/Financial.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Financial</servlet-name>
+        <url-pattern>/financialPage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ToDo</servlet-name>
+        <jsp-file>/Pages/Protected/ToDo.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ToDo</servlet-name>
+        <url-pattern>/todoPage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Cleaning</servlet-name>
+        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Cleaning</servlet-name>
+        <url-pattern>/cleanPage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Shopping</servlet-name>
+        <jsp-file>/Pages/Protected/Shopping.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Shopping</servlet-name>
+        <url-pattern>/shoppingPage</url-pattern>
     </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--
@@ -213,7 +231,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>AddTodoLogic</servlet-name>
-        <servlet-class>logic.ToDo</servlet-class>
+        <servlet-class>logic.CreateToDo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddTodoLogic</servlet-name>
@@ -242,6 +260,22 @@
     <servlet-mapping>
         <servlet-name>RemoveTodoLogic</servlet-name>
         <url-pattern>/removeLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RemoveShoppingRequestLogic</servlet-name>
+        <servlet-class>logic.RemoveShoppingRequest</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveShoppingRequestLogic</servlet-name>
+        <url-pattern>/removeShoppingRequestLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddShoppingRequestLogic</servlet-name>
+        <servlet-class>logic.AddShoppingRequest</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddShoppingRequestLogic</servlet-name>
+        <url-pattern>/addShoppingRequestLogic</url-pattern>
     </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--

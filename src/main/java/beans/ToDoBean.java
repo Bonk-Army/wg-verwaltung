@@ -1,13 +1,29 @@
 package beans;
 
-import models.TodoModel;
 import utilities.*;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+/**
+ * Bean used for the To Do Page
+ */
 public class ToDoBean {
+    private String userId = "";
+
+    public ToDoBean() {
+    }
+
+    /*
+      /$$$$$$                                 /$$             /$$
+     /$$__  $$                               | $$            | $$
+    | $$  \__/  /$$$$$$   /$$$$$$  /$$    /$$| $$  /$$$$$$  /$$$$$$
+    |  $$$$$$  /$$__  $$ /$$__  $$|  $$  /$$/| $$ /$$__  $$|_  $$_/
+     \____  $$| $$$$$$$$| $$  \__/ \  $$/$$/ | $$| $$$$$$$$  | $$
+     /$$  \ $$| $$_____/| $$        \  $$$/  | $$| $$_____/  | $$ /$$
+    |  $$$$$$/|  $$$$$$$| $$         \  $/   | $$|  $$$$$$$  |  $$$$/
+     \______/  \_______/|__/          \_/    |__/ \_______/   \___/
+     */
+    // Methods used by servlets
+
     /**
      * Create a to-do
      *
@@ -33,69 +49,7 @@ public class ToDoBean {
      * @return The String
      */
     public String dateToString(Date date) {
-        return DateFormatter.dateToString(date);
-    }
-
-    /**
-     * Get all todos for the passed wg
-     *
-     * @param wgId The whId of the wg
-     * @return The list of Todo Objects
-     */
-    public List<TodoModel> getAllTodos(String wgId) {
-        return SQLDCTodo.getAllActiveTodos(wgId);
-    }
-
-    /**
-     * Get all todos for a specific wg based on the currently logged in user
-     *
-     * @param sessionIdentifier The session identifier of the logged in user
-     * @return The List of Todos
-     */
-    public List<TodoModel> getAllTodosBySessionIdentifier(String sessionIdentifier) {
-        if (RegexHelper.checkString(sessionIdentifier) && !sessionIdentifier.isEmpty()) {
-            int splitIndex = sessionIdentifier.indexOf('-');
-            String userId = sessionIdentifier.substring(0, splitIndex);
-            String cookiePostfix = sessionIdentifier.substring(splitIndex + 1, sessionIdentifier.length());
-
-            String username = SQLDCLogin.getUsername(userId);
-            String savedCookiePostfix = SQLDCLogin.getCookiePostfix(username);
-
-            // If the passed postfix matches the saved one, fetch the todos and return them
-            if (savedCookiePostfix.equals(cookiePostfix)) {
-                String wgId = SQLDCTodo.getWgIdByUser(userId);
-
-                return SQLDCTodo.getAllActiveTodos(wgId);
-            }
-        }
-
-        return new ArrayList<TodoModel>();
-    }
-
-    /**
-     * Return a List of the usernames of all users in the same wg as the user whos session identifier is passed
-     *
-     * @param sessionIdentifier The session identifier of the current user
-     * @return The list of all usernames
-     */
-    public List<String> getAllUsersOfWgBySessionIdentifier(String sessionIdentifier) {
-        if (RegexHelper.checkString(sessionIdentifier) && !sessionIdentifier.isEmpty()) {
-            int splitIndex = sessionIdentifier.indexOf('-');
-            String userId = sessionIdentifier.substring(0, splitIndex);
-            return getAllUsersOfWgByUserId(userId);
-        }
-
-        return new ArrayList<String>();
-    }
-
-    /**
-     * Get the username of a user by his userId
-     *
-     * @param userId The userId of the user
-     * @return The username of the user
-     */
-    public String getUsername(String userId) {
-        return SQLDCLogin.getUsername(userId);
+        return DateFormatter.dateTimeToString(date);
     }
 
     /**
@@ -109,22 +63,10 @@ public class ToDoBean {
     }
 
     /**
-     * Return a List of all usernames of the users in the wg of the specified user
-     *
-     * @param userId The user to return the other usernames for
-     * @return The list with usernames
-     */
-    public List<String> getAllUsersOfWgByUserId(String userId) {
-        String wgId = SQLDCTodo.getWgIdByUser(userId);
-
-        return SQLDCTodo.getAllUsersOfWG(wgId);
-    }
-
-    /**
      * Returns the first name and the first letter of the last name of a user as one string
      *
      * @param username The username of the user
-     * @return The String, e.g. Patrick M
+     * @return The String, e.g. Max M
      */
     public String getNameString(String username) {
         if (RegexHelper.checkString(username)) {
@@ -162,5 +104,69 @@ public class ToDoBean {
      */
     public ErrorCodes removeTodo(String todoId) {
         return SQLDCTodo.removeTodo(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+    }
+
+    /*
+      /$$$$$$              /$$     /$$                                               /$$        /$$$$$$              /$$     /$$
+     /$$__  $$            | $$    | $$                                              /$$/       /$$__  $$            | $$    | $$
+    | $$  \__/  /$$$$$$  /$$$$$$ /$$$$$$    /$$$$$$   /$$$$$$   /$$$$$$$           /$$/       | $$  \__/  /$$$$$$  /$$$$$$ /$$$$$$    /$$$$$$   /$$$$$$   /$$$$$$$
+    | $$ /$$$$ /$$__  $$|_  $$_/|_  $$_/   /$$__  $$ /$$__  $$ /$$_____/          /$$/        |  $$$$$$  /$$__  $$|_  $$_/|_  $$_/   /$$__  $$ /$$__  $$ /$$_____/
+    | $$|_  $$| $$$$$$$$  | $$    | $$    | $$$$$$$$| $$  \__/|  $$$$$$          /$$/          \____  $$| $$$$$$$$  | $$    | $$    | $$$$$$$$| $$  \__/|  $$$$$$
+    | $$  \ $$| $$_____/  | $$ /$$| $$ /$$| $$_____/| $$       \____  $$        /$$/           /$$  \ $$| $$_____/  | $$ /$$| $$ /$$| $$_____/| $$       \____  $$
+    |  $$$$$$/|  $$$$$$$  |  $$$$/|  $$$$/|  $$$$$$$| $$       /$$$$$$$/       /$$/           |  $$$$$$/|  $$$$$$$  |  $$$$/|  $$$$/|  $$$$$$$| $$       /$$$$$$$/
+     \______/  \_______/   \___/   \___/   \_______/|__/      |_______/       |__/             \______/  \_______/   \___/   \___/   \_______/|__/      |_______/
+    */
+
+    // Getters and Setters for use with JSPs
+
+    /**
+     * Set the user id parameter
+     *
+     * @param userId The user id of the user that is currently logged in
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * Get the username of a user by his userId
+     *
+     * @return The username of the user
+     */
+    public String getUsername() {
+        return SQLDCLogin.getUsername(this.userId);
+    }
+
+    /**
+     * Get all todos for a specific wg based on the currently logged in user
+     *
+     * @return The List of Todos
+     */
+    public List<Map<String, String>> getTodos() {
+        String wgId = SQLDCTodo.getWgIdByUser(userId);
+
+        return SQLDCTodo.getAllActiveTodos(wgId);
+    }
+
+    /**
+     * Return a List of the names (Format: Max M for Max Mustermann) of the users in the wg of the specified user
+     *
+     * @return A List of Maps of which each contains the username and the formatted name string
+     */
+    public List<Map<String, String>> getUsersOfWg() {
+        String wgId = SQLDCTodo.getWgIdByUser(userId);
+
+        List<String> usernames = SQLDCTodo.getAllUsersOfWG(wgId);
+        List<Map<String, String>> formattedNames = new ArrayList<Map<String, String>>();
+
+        for (String username : usernames) {
+            Map<String, String> userMap = new HashMap<String, String>();
+            userMap.put("username", username);
+            userMap.put("nameString", getNameString(username));
+
+            formattedNames.add(userMap);
+        }
+
+        return formattedNames;
     }
 }

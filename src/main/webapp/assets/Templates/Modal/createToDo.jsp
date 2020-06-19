@@ -1,5 +1,6 @@
-<%@ page import="java.util.ArrayList" %>
-<jsp:useBean id="test" class="beans.ToDoBean"></jsp:useBean>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="createTodoBean" class="beans.ToDoBean" scope="request"/>
+<jsp:setProperty name="createTodoBean" property="userId" value="${sessionBean.userId}"/>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -14,41 +15,22 @@
                 Aufgabe eingeben
             </div>
             <form action="addTodoLogic" method="POST">
-                <label for="todo" class="sr-only">Aufgabe</label>
-                <input id="todo" class="form-control" placeholder="Neue Aufgabe erstellen" name="todo" type="text" required>
+                <label for="article" class="sr-only">Aufgabe</label>
+                <input id="article" class="form-control" placeholder="Neue Aufgabe erstellen" name="todo" type="text" required>
+                <h6>Wem möchtest du diese Aufgabe zuteilen?</h6>
                 <label for="name" class="sr-only">Name</label>
-                <select id="name" class="form-control" name="name" required>
-                    <%
-                        Cookie cookiez = null;
-                        Cookie[] cookiesz = null;
-                        String valuez = "";
-                        // Get an array of Cookies associated with the this domain
-                        cookiesz = request.getCookies();
-                        ArrayList<String> allMember = new ArrayList<String>();
-
-                        if( cookiesz != null ) {
-                            for (int i = 0; i < cookiesz.length; i++) {
-                                cookiez = cookiesz[i];
-                                if ((cookiesz[i].getName().compareTo("session")) == 0){
-                                    valuez = cookiesz[i].getValue();
-                                    allMember = (ArrayList<String>) test.getAllUsersOfWgBySessionIdentifier(valuez);
-                                    for (String item : allMember)
-                                    {
-                                        out.print("<option value=\""+item+"\">"+test.getNameString(item)+"</option>");
-                                    }
-                                }
-                            }
-                        } else {
-                            out.println("<h2>No cookies founds</h2>");
-                        }
-                    %>
+                <select id="name" class="form-control" name="username" required>
+                    <c:forEach items="${createTodoBean.usersOfWg}" var="user">
+                    <option value="${user.username}">${user.nameString}</option>
+                    </c:forEach>
                 </select>
-                <label for="deadline" class="sr-only">Deadline</label>
-                <input id="deadline" class="form-control" placeholder="Deadline" name="deadline" type="date" required>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary odom-submit">ToDo erstellen</button>
-                </div>
+                        <h6>Bis wann soll die Aufgabe erledigt sein?</h6>
+                    <label for="deadline" class="sr-only">Deadline</label>
+                    <input id="deadline" class="form-control" placeholder="Deadline" name="deadline" type="date" required>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary odom-submit">ToDo erstellen</button>
+                    </div>
             </form>
         </div>
     </div>

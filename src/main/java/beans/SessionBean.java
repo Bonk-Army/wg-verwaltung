@@ -1,36 +1,29 @@
 package beans;
 
 /**
- * Bean used for the financial status page
+ * Session bean that keeps relevant user data to authenticate the user and fetch data more quickly
  */
-public class FinancialBean {
-    // Variables
-        // private UserFinancial userFinancial;
-        // private WgFinancial wgFinancial;
+public class SessionBean {
+    private String userId = "";
+    private String username = "";
+    private String firstName = "";
+    private String lastName = "";
+    private String wgId = "";
+    private String wgName = "";
 
-    /*
-      /$$$$$$                                 /$$             /$$
-     /$$__  $$                               | $$            | $$
-    | $$  \__/  /$$$$$$   /$$$$$$  /$$    /$$| $$  /$$$$$$  /$$$$$$
-    |  $$$$$$  /$$__  $$ /$$__  $$|  $$  /$$/| $$ /$$__  $$|_  $$_/
-     \____  $$| $$$$$$$$| $$  \__/ \  $$/$$/ | $$| $$$$$$$$  | $$
-     /$$  \ $$| $$_____/| $$        \  $$$/  | $$| $$_____/  | $$ /$$
-    |  $$$$$$/|  $$$$$$$| $$         \  $/   | $$|  $$$$$$$  |  $$$$/
-     \______/  \_______/|__/          \_/    |__/ \_______/   \___/
-     */
-    // Methods used by servlets
+    public SessionBean(String userId) {
+        LoginBean loginBean = new LoginBean();
 
-    // Public Methods
+        this.userId = userId;
+        this.username = loginBean.getUsernameById(userId);
+        this.firstName = loginBean.getFirstName(userId);
+        this.lastName = loginBean.getLastName(userId);
+        this.wgId = loginBean.getWgIdByUserId(userId);
+        this.wgName = loginBean.getWgNameByUserId(userId);
+    }
 
-        // public void init() { receive status of user and wg }
-            // set status for userFinancial and wgFinancial
-
-    // Private Methods
-
-        // private void receiveStatus1();
-        // private void receiveStatus2();
-        // private void receiveStatus3();
-        // private void receiveStatus4();
+    public SessionBean() {
+    }
 
     /*
       /$$$$$$              /$$     /$$                                               /$$        /$$$$$$              /$$     /$$
@@ -44,4 +37,28 @@ public class FinancialBean {
     */
 
     // Getters and Setters for use with JSPs
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getWgId() {
+        return wgId;
+    }
+
+    public String getWgName() {
+        return wgName;
+    }
 }
