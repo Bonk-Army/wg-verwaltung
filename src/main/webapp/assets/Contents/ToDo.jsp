@@ -13,8 +13,6 @@
             <th scope="col">Aufgabe</th>
             <th scope="col">zu erledigen bis</th>
             <th scope="col">wird erledigt von</th>
-            <th scope="col">erstellt am</th>
-            <th scope="col">erstellt von</th>
             <th scope="col">Erledigt?</th>
             <th scope="col">Check</th>
         </tr>
@@ -33,11 +31,9 @@
                     <button title="ToDo remove check" id="remove${todo.todoId}" type="submit" style="display: none;"></button>
                 </form>
             </td>
-            <td>${todo.task}</td>
+            <td title="erstellt am ${todo.dateCreated} von ${todo.creator}">${todo.task}</td>
             <td>${todo.dateDue}</td>
             <td>${todo.assignee}</td>
-            <td>${todo.dateCreated}</td>
-            <td>${todo.creator}</td>
             <td>${todo.doneMessage}</td>
             <td>
                 <form action="setDoneLogic" method="POST">
