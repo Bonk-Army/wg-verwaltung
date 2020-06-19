@@ -57,6 +57,32 @@ public class SQLDCTodo extends SQLDatabaseConnection {
                 currentTodo.put("createdBy", rs.getString(7));
                 currentTodo.put("todoId", rs.getString(8));
 
+                // Parameters for better visualization of the status of every todo
+                Date dateDue = rs.getDate(4);
+                Boolean isDone = rs.getBoolean(5);
+                Date currentDate = new Date();
+                Calendar c = Calendar.getInstance();
+                c.setTime(currentDate);
+                c.add(Calendar.DATE, 3);
+                Date threeDaysDate = c.getTime();
+
+                if (isDone) {
+                    currentTodo.put("doneMessage", "Ja");
+                    currentTodo.put("buttonHideStatus", "hidden=\"hidden\"");
+                    currentTodo.put("colorClass", "done");
+                } else {
+                    currentTodo.put("doneMessage", "Nein");
+                    currentTodo.put("buttonHideStatus", "");
+                    if (currentDate.after(dateDue)) {
+                        currentTodo.put("colorClass", "notDone tooLate");
+                    } else if (threeDaysDate.after(dateDue)) {
+                        currentTodo.put("colorClass", "notDone late");
+                    } else {
+                        currentTodo.put("colorClass", "notDone");
+                    }
+                }
+
+
                 Boolean isActive = rs.getBoolean(6);
                 if(isActive){
                     todoList.add(currentTodo);
