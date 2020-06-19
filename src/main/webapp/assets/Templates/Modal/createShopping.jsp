@@ -19,9 +19,16 @@
                 <input id="todo" class="form-control" placeholder="Artikel" name="todo" type="text" required>
                 <label for="amount" class="sr-only">Menge</label>
                 <input id="amount" class="form-control" placeholder="Wie viel brauchst du?" name="menge" type="text" required>
+                <h6>Bis wann brauchst du den Arikel?</h6>
                 <label for="deadline" class="sr-only">Deadline</label>
                 <input id="deadline" class="form-control" placeholder="Bis wann brauchst du den Artikel?" name="deadline" type="date"
                        required>
+                <label for="name" class="sr-only">Name</label>
+                <h6>Wer m&ouml;chte diesen Artikel?</h6>
+                <select id="name" class="form-control" name="username" required>
+                    <c:forEach items="${createArticleBean.usersOfWg}" var="user">
+                    <option value="${user.username}">${user.nameString}</option>
+                    </c:forEach>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary odom-submit">Artikel hinzuf&uuml;gen</button>

@@ -2,7 +2,7 @@
 <div id="content">
     <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
     <jsp:useBean id="shoppingBean" class="beans.ShoppingBean" scope="request"/>
-    <jsp:setProperty name="article" property="userId" value="${sessionBean.userId}"/>
+    <jsp:setProperty name="shoppingBean" property="userId" value="${sessionBean.userId}"/>
     <button title="Artikel hinzuf&uuml;gen" id="addShopping" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal"
             data-target="#exampleModal">+
     </button>
@@ -19,10 +19,10 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${shopping.article}" var="article">
+        <c:forEach items="${shoppingBean.article}" var="article">
         <tr class="${article.colorClass}">
             <td>
-                <form action="removeLogic" method="POST">
+                <form action="removeArticleLogic" method="POST">
                     <input type="text" name="articleId" hidden="hidden" value="${article.articleId}">
 
                     <button title="ToDo remove check" onclick="removeArticle(${article.articleId})"
@@ -37,7 +37,7 @@
             <td>${article.assignee}</td>
             <td>${article.doneMessage}</td>
             <td>
-                <form action="setDoneLogic" method="POST">
+                <form action="setBoughtLogic" method="POST">
                     <input type="text" name="todoId" hidden="hidden" value="${article.articleId}">
                     <button title="Shopping check" onclick="boughtArticle(${article.articleId})" class="btn btn-lg btn-primary btn-block" type="button"
                             data-toggle="modal" data-target="#todoModal" ${article.buttonHideStatus}>erledigt?
