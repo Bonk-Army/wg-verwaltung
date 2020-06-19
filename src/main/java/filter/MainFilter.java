@@ -39,7 +39,7 @@ public class MainFilter extends HttpServlet {
             // If the user has been authenticated via cookie, forward the request. Otherwise redirect to login page
             if(!userId.isEmpty()) {
                 sessionBean = new SessionBean(userId);
-                req.setAttribute("sessionBean", sessionBean);
+                req.getSession().setAttribute("sessionBean", sessionBean);
                 req.getServletContext().getRequestDispatcher((part + "Page")).forward(req, resp);
             } else {
                 resp.sendRedirect("/");
