@@ -11,37 +11,39 @@
         <tr>
             <th/>
             <th scope="col">Aufgabe</th>
-            <th scope="col">Zu erledigen bis:</th>
-            <th scope="col">Erstellt von:</th>
-            <th scope="col">Wird Erledigt von:</th>
+            <th scope="col">zu erledigen bis</th>
+            <th scope="col">wird erledigt von</th>
+            <th scope="col">erstellt am</th>
+            <th scope="col">erstellt von</th>
             <th scope="col">Erledigt?</th>
             <th scope="col">Check</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${todos}" var="todo">
-        <tr class="${todo.addClass}">
+        <c:forEach items="${todoBean.todos}" var="todo">
+        <tr class="${todo.colorClass}">
             <td>
                 <form action="removeLogic" method="POST">
                     <input type="text" name="todoId" hidden="hidden" value="${todo.todoId}">
 
                     <button title="ToDo remove check" onclick="removeTodo(${todo.todoId})"
                             class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
-                            data-target="#removeModal" ${todo.hidden}>&times;
+                            data-target="#removeModal" ${todo.buttonHideStatus}>&times;
                     </button>
                     <button title="ToDo remove check" id="remove${todo.todoId}" type="submit" style="display: none;"></button>
                 </form>
             </td>
             <td>${todo.task}</td>
-            <td>${todo.date}</td>
-            <td>${todo.creatorUsername}</td>
-            <td>${todo.assigneeUsername}</td>
-            <td>${todo.done}</td>
+            <td>${todo.dateDue}</td>
+            <td>${todo.assignee}</td>
+            <td>${todo.dateCreated}</td>
+            <td>${todo.creator}</td>
+            <td>${todo.doneMessage}</td>
             <td>
                 <form action="setDoneLogic" method="POST">
                     <input type="text" name="todoId" hidden="hidden" value="${todo.todoId}">
                     <button title="ToDo check" onclick="doneTodo(${todo.todoId})" class="btn btn-lg btn-primary btn-block" type="button"
-                            data-toggle="modal" data-target="#todoModal" ${todo.hidden}>erledigt?
+                            data-toggle="modal" data-target="#todoModal" ${todo.buttonHideStatus}>erledigt?
                     </button>
                     <button title="ToDo check" id="${todo.todoId}" type="submit" style="display: none;"></button>
                 </form>
