@@ -2,6 +2,7 @@
 <div id="content">
     <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"></jsp:useBean>
     <jsp:useBean id="todoBean" class="beans.ToDoBean"></jsp:useBean>
+    <jsp:setProperty name="todoBean" property="userId" value="${sessionBean.userId}"/>
     <button title="ToDo hinzuf&uuml;gen" id="addToDo" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal"
             data-target="#exampleModal">+
     </button>
@@ -35,7 +36,7 @@
                 </form>
             </td>
             <td>
-                <jsp:getProperty name="sessionBean" property="userId"/>
+                <jsp:getProperty name="todoBean" property="username"/>
             </td>
             <td>
                 <jsp:getProperty name="sessionBean" property="userId"/>

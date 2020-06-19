@@ -9,13 +9,11 @@ import java.util.List;
 
 public class ToDoBean {
     private String userId = "";
-    private String username = "";
 
-    public ToDoBean(){}
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public ToDoBean(){
     }
+
+    // Methods used by servlets
 
     /**
      * Create a to-do
@@ -104,8 +102,7 @@ public class ToDoBean {
      * @return The username of the user
      */
     public String getUsername() {
-        this.username = SQLDCLogin.getUsername(this.userId);
-        return this.username;
+        return SQLDCLogin.getUsername(this.userId);
     }
 
     /**
@@ -201,4 +198,9 @@ public class ToDoBean {
 //                addClass = (item.getIsActive()) ? "notDone" : "notDone inactive";
 //            }
 //        }
+
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }
