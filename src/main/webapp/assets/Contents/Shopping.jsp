@@ -13,7 +13,7 @@
             <th scope="col">Artikel</th>
             <th scope="col">Menge</th>
             <th scope="col">zu kaufen bis</th>
-            <th scope="col">gewünscht von</th>
+            <th scope="col">gew&uuml;nscht von</th>
             <th scope="col">Check</th>
         </tr>
         </thead>
@@ -37,11 +37,11 @@
             <td>${article.requestedBy}</td>
             <td>
                 <form action="removeShoppingRequestLogic" method="POST">
-                    <input type="text" name="requestId" hidden="hidden" value="${article.articleId}">
-                    <button title="Shopping check" onclick="boughtArticle(${article.articleId})" class="btn btn-lg btn-primary btn-block" type="button"
+                    <input type="text" name="requestId" hidden="hidden" value="${article.requestId}">
+                    <button title="Shopping check" onclick="boughtArticle(${article.requestId})" class="btn btn-lg btn-primary btn-block" type="button"
                             data-toggle="modal" data-target="#todoModal" ${article.buttonHideStatus}>erledigt?
                     </button>
-                    <button title="Shopping check" id="${article.articleId}" type="submit" style="display: none;"></button>
+                    <button title="Shopping check" id="${article.requestId}" type="submit" style="display: none;"></button>
                 </form>
             </td>
         </tr>
