@@ -4,6 +4,7 @@ import models.TodoModel;
 
 import java.sql.Array;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.sql.ResultSet;
 
@@ -50,22 +51,25 @@ public class SQLDCTodo extends SQLDatabaseConnection {
             while (rs.next()) {
                 Map<String, String> currentTodo = new HashMap<String, String>();
                 currentTodo.put("task", rs.getString(1));
-                currentTodo.put("userId", String.valueOf(rs.getInt(2)));
-                currentTodo.put("dateCreated", rs.getDate(3).toString());
-                currentTodo.put("dateDue", rs.getDate(4).toString());
                 currentTodo.put("isDone", String.valueOf(rs.getBoolean(5)));
-                currentTodo.put("createdBy", rs.getString(7));
                 currentTodo.put("todoId", rs.getString(8));
 
                 // Parameters for better visualization of the status of every todo
+
+                // Dates for colors
                 Date dateDue = rs.getDate(4);
-                Boolean isDone = rs.getBoolean(5);
+                Date dateCreated = rs.getDate(3);
                 Date currentDate = new Date();
                 Calendar c = Calendar.getInstance();
                 c.setTime(currentDate);
                 c.add(Calendar.DATE, 3);
                 Date threeDaysDate = c.getTime();
 
+                SimpleDateFormat fancyFormatter = new SimpleDateFormat("dd. MMMM yyyy");
+                currentTodo.put("dateDue", fancyFormatter.format(dateDue));
+                currentTodo.put("dateCreated", fancyFormatter.format(dateCreated));
+
+                Boolean isDone = rs.getBoolean(5);
                 if (isDone) {
                     currentTodo.put("doneMessage", "Ja");
                     currentTodo.put("buttonHideStatus", "hidden=\"hidden\"");
@@ -81,6 +85,15 @@ public class SQLDCTodo extends SQLDatabaseConnection {
                         currentTodo.put("colorClass", "notDone");
                     }
                 }
+
+                // Text formatting
+                String userId = rs.getString(2);
+                String creatorId = rs.getString(7);
+                String assignee = SQLDCLogin.getUsername(userId);
+                String creator = SQLDCLogin.getUsername(creatorId);
+
+                currentTodo.put("assignee", getNameString(assignee));
+                currentTodo.put("creator", getNameString(creator));
 
 
                 Boolean isActive = rs.getBoolean(6);
