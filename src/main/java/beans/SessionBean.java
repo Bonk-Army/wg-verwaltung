@@ -1,6 +1,5 @@
 package beans;
 
-
 /**
  * Session bean that keeps relevant user data to authenticate the user and fetch data more quickly
  */

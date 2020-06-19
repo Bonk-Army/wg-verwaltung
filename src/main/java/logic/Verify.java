@@ -2,7 +2,6 @@ package logic;
 
 import beans.LoginBean;
 import utilities.ErrorCodes;
-import utilities.RegexHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

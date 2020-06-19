@@ -1,14 +1,13 @@
 package logic;
 
-import java.io.IOException;
+import beans.ToDoBean;
+import utilities.ErrorCodes;
 
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.ToDoBean;
-import utilities.ErrorCodes;
 
 /**
  * Remove Todo servlet that is called when the users tries to delete a todo from his wg

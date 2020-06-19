@@ -1,7 +1,6 @@
 package beans;
 
 import utilities.*;
-
 import java.util.*;
 
 /**

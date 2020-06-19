@@ -1,9 +1,5 @@
 package beans;
 
-// Imports
-// import models.User;
-// import bean with current user
-
 /**
  * Bean used for the financial status page
  */

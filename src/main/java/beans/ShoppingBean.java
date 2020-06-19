@@ -1,7 +1,5 @@
 package beans;
 
-// Imports
-
 /**
  * Bean used for the shopping plan page
  */
