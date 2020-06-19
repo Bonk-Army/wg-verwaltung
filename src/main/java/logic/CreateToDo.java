@@ -17,10 +17,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class ToDo extends HttpServlet {
+/**
+ * Create Todo servlet that is called when the user tries to create a new todo for his wg
+ */
+public class CreateToDo extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public ToDo() {
+    public CreateToDo() {
         super();
     }
 

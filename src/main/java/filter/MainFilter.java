@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Servlet that is mapped before every content page to check if the user is already authenticated.
+ */
 public class MainFilter extends HttpServlet {
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -23,7 +25,7 @@ public class MainFilter extends HttpServlet {
         SessionBean sessionBean = (SessionBean) req.getSession().getAttribute("sessionBean");
 
         // If no session bean has been detected, continue with the logic. If there is a session bean, just forward the request
-        if(sessionBean == null || sessionBean.getUserId().equals("")){
+        if (sessionBean == null || sessionBean.getUserId().equals("")) {
             // Authentication via session cookie
             Cookie[] cookies = req.getCookies();
             String sessionIdentifier = "";
@@ -37,7 +39,7 @@ public class MainFilter extends HttpServlet {
             String userId = new LoginBean().getUserIdBySessionIdentifier(sessionIdentifier);
 
             // If the user has been authenticated via cookie, forward the request. Otherwise redirect to login page
-            if(!userId.isEmpty()) {
+            if (!userId.isEmpty()) {
                 sessionBean = new SessionBean(userId);
                 req.getSession().setAttribute("sessionBean", sessionBean);
                 req.getServletContext().getRequestDispatcher((part + "Page")).forward(req, resp);
@@ -45,6 +47,7 @@ public class MainFilter extends HttpServlet {
                 resp.sendRedirect("/");
             }
         } else {
+            // Session Bean
             req.getServletContext().getRequestDispatcher(part + "Page").forward(req, resp);
         }
 

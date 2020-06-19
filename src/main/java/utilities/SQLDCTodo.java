@@ -1,13 +1,13 @@
 package utilities;
 
-import models.TodoModel;
-
-import java.sql.Array;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.sql.ResultSet;
 
+/**
+ * Provides SQL accessor methods for the Todo Page
+ */
 public class SQLDCTodo extends SQLDatabaseConnection {
     /**
      * Create a to-do in the database

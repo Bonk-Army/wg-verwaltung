@@ -2,8 +2,7 @@ package beans;
 
 
 /**
- * Session bean declared as SessionScoped by default because we need it during the whole session.
- * Must implement java.io.Serializable.
+ * Session bean that keeps relevant user data to authenticate the user and fetch data more quickly
  */
 public class SessionBean {
     private String userId = "";
@@ -26,6 +25,19 @@ public class SessionBean {
 
     public SessionBean() {
     }
+
+    /*
+      /$$$$$$              /$$     /$$                                               /$$        /$$$$$$              /$$     /$$
+     /$$__  $$            | $$    | $$                                              /$$/       /$$__  $$            | $$    | $$
+    | $$  \__/  /$$$$$$  /$$$$$$ /$$$$$$    /$$$$$$   /$$$$$$   /$$$$$$$           /$$/       | $$  \__/  /$$$$$$  /$$$$$$ /$$$$$$    /$$$$$$   /$$$$$$   /$$$$$$$
+    | $$ /$$$$ /$$__  $$|_  $$_/|_  $$_/   /$$__  $$ /$$__  $$ /$$_____/          /$$/        |  $$$$$$  /$$__  $$|_  $$_/|_  $$_/   /$$__  $$ /$$__  $$ /$$_____/
+    | $$|_  $$| $$$$$$$$  | $$    | $$    | $$$$$$$$| $$  \__/|  $$$$$$          /$$/          \____  $$| $$$$$$$$  | $$    | $$    | $$$$$$$$| $$  \__/|  $$$$$$
+    | $$  \ $$| $$_____/  | $$ /$$| $$ /$$| $$_____/| $$       \____  $$        /$$/           /$$  \ $$| $$_____/  | $$ /$$| $$ /$$| $$_____/| $$       \____  $$
+    |  $$$$$$/|  $$$$$$$  |  $$$$/|  $$$$/|  $$$$$$$| $$       /$$$$$$$/       /$$/           |  $$$$$$/|  $$$$$$$  |  $$$$/|  $$$$/|  $$$$$$$| $$       /$$$$$$$/
+     \______/  \_______/   \___/   \___/   \_______/|__/      |_______/       |__/             \______/  \_______/   \___/   \___/   \_______/|__/      |_______/
+    */
+
+    // Getters and Setters for use with JSPs
 
     public String getUserId() {
         return userId;

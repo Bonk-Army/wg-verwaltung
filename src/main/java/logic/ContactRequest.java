@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Contact Request Servlet that is called when the user sends the contact form data
+ */
 public class ContactRequest extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

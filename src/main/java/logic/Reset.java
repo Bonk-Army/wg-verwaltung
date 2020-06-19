@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Reset servlet that is called  when the user wants to reset his password and therefore entered his email address
+ * to receive a link to reset his password
+ */
 public class Reset extends HttpServlet {
     public Reset() {
         super();

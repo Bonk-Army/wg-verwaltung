@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Verify servlet that is called when the user clicks the link to verify his email address that we sent him to the
+ * email address he entered
+ */
 public class Verify extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

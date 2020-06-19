@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Set todo done servlet that is called when the user tries to set a todo to done for their wg
+ */
 public class SetTodoDone extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
