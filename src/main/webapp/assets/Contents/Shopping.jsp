@@ -14,7 +14,6 @@
             <th scope="col">Menge</th>
             <th scope="col">zu kaufen bis</th>
             <th scope="col">gewünscht von</th>
-            <th scope="col">Gekauft?</th>
             <th scope="col">Check</th>
         </tr>
         </thead>
@@ -23,7 +22,7 @@
         <tr class="${article.colorClass}">
             <td>
                 <form action="removeShoppingRequestLogic" method="POST">
-                    <input type="text" name="articleId" hidden="hidden" value="${article.articleId}">
+                    <input type="text" name="requestId" hidden="hidden" value="${article.articleId}">
 
                     <button title="ToDo remove check" onclick="removeArticle(${article.articleId})"
                             class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
@@ -32,14 +31,13 @@
                     <button title="Shopping remove check" id="remove${article.articleId}" type="submit" style="display: none;"></button>
                 </form>
             </td>
-            <td title="erstellt am ${article.dateCreated} von ${article.creator}">${article.article}</td>
+            <td title="erstellt am ${article.dateCreated} von ${article.createdBy}">${article.article}</td>
             <td>${article.amount}</td>
             <td>${article.dateDue}</td>
-            <td>${article.assignee}</td>
-            <td>${article.boughtMessage}</td>
+            <td>${article.requestedBy}</td>
             <td>
                 <form action="removeShoppingRequestLogic" method="POST">
-                    <input type="text" name="todoId" hidden="hidden" value="${article.articleId}">
+                    <input type="text" name="requestId" hidden="hidden" value="${article.articleId}">
                     <button title="Shopping check" onclick="boughtArticle(${article.articleId})" class="btn btn-lg btn-primary btn-block" type="button"
                             data-toggle="modal" data-target="#todoModal" ${article.buttonHideStatus}>erledigt?
                     </button>
