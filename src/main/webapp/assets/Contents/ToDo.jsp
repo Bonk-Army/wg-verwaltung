@@ -31,7 +31,6 @@
             ArrayList<TodoModel> ToDo = new ArrayList<TodoModel>();
 
             for (int i = 0; i < cookies.length; i++) {
-                cookie = cookies[i];
                 if ((cookies[i].getName().compareTo("session")) == 0) {
                     value = cookies[i].getValue();
                     ToDo = (ArrayList<TodoModel>) fail.getAllTodosBySessionIdentifier(value);
@@ -84,13 +83,12 @@
                                 + hidden + ">erledigt?</button>");
                         out.print("<button title=\"ToDo check\" id=\"" + item.getUniqueID()
                                 + "\" type=\"submit\" style=\"display: none;\"</button>");
+                        out.print("</form>");
+                        out.print("</tr>");
+                        out.print("</tbody>");
                     }
                 }
             }
         %>
-        </form>
-        </td>
-        </tr>
-        </tbody>
     </table>
 </div>
