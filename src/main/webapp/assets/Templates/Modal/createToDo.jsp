@@ -23,6 +23,7 @@
                     <c:forEach items="${createTodoBean.usersOfWg}" var="user">
                     <option value="${user.username}">${user.nameString}</option>
                     </c:forEach>
+                </select>
                         <h6>Bis wann soll die Aufgabe erledigt sein?</h6>
                     <label for="deadline" class="sr-only">Deadline</label>
                     <input id="deadline" class="form-control" placeholder="Deadline" name="deadline" type="date" required>

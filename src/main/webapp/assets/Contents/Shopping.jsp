@@ -33,6 +33,7 @@
                 </form>
             </td>
             <td title="erstellt am ${article.dateCreated} von ${article.creator}">${article.article}</td>
+            <td>${article.amount}</td>
             <td>${article.dateDue}</td>
             <td>${article.assignee}</td>
             <td>${article.boughtMessage}</td>
