@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div id="content">
-    <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"></jsp:useBean>
-    <jsp:useBean id="todoBean" class="beans.ToDoBean" scope="request"></jsp:useBean>
+    <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
+    <jsp:useBean id="todoBean" class="beans.ToDoBean" scope="request"/>
     <jsp:setProperty name="todoBean" property="userId" value="${sessionBean.userId}"/>
     <button title="ToDo hinzuf&uuml;gen" id="addToDo" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal"
             data-target="#exampleModal">+
@@ -19,46 +19,31 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="i" begin="1" end="5">
-        <tr class="<jsp:getProperty name="sessionBean" property="userId"/>">
+        <c:forEach items="${todos}" var="todo">
+        <tr class="${todo.addClass}">
             <td>
                 <form action="removeLogic" method="POST">
-                    <input type="text" name="todoId" hidden="hidden" value="<jsp:getProperty name="sessionBean" property="userId"/>">
+                    <input type="text" name="todoId" hidden="hidden" value="${todo.todoId}">
 
-                    <button title="ToDo remove check" onclick="removeTodo(<jsp:getProperty name="sessionBean" property="userId"/>)"
-                            class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal" data-target="#removeModal"
-                            <jsp:getProperty name="sessionBean" property="userId"/>
-                    >&times;
+                    <button title="ToDo remove check" onclick="removeTodo(${todo.todoId})"
+                            class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
+                            data-target="#removeModal" ${todo.hidden}>&times;
                     </button>
-                    <button title="ToDo remove check" id="remove<jsp:getProperty name="sessionBean" property="userId"/>" type="submit"
-                            style="display: none;"></button>
+                    <button title="ToDo remove check" id="remove${todo.todoId}" type="submit" style="display: none;"></button>
                 </form>
             </td>
-            <td>
-                <jsp:getProperty name="todoBean" property="username"/>
-            </td>
-            <td>
-                <jsp:getProperty name="sessionBean" property="userId"/>
-            </td>
-            <td>
-                <jsp:getProperty name="sessionBean" property="userId"/>
-            </td>
-            <td>
-                <jsp:getProperty name="sessionBean" property="userId"/>
-            </td>
-            <td>
-                <jsp:getProperty name="sessionBean" property="userId"/>
-            </td>
+            <td>${todo.task}</td>
+            <td>${todo.date}</td>
+            <td>${todo.creatorUsername}</td>
+            <td>${todo.assigneeUsername}</td>
+            <td>${todo.done}</td>
             <td>
                 <form action="setDoneLogic" method="POST">
-                    <input type="text" name="todoId" hidden="hidden" value="<jsp:getProperty name="sessionBean" property="userId"/>">
-                    <button title="ToDo check" onclick="doneTodo(<jsp:getProperty name="sessionBean" property="userId"/>)"
-                            class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal" data-target="#todoModal"
-                            <jsp:getProperty name="sessionBean" property="userId"/>
-                    >erledigt?
+                    <input type="text" name="todoId" hidden="hidden" value="${todo.todoId}">
+                    <button title="ToDo check" onclick="doneTodo(${todo.todoId})" class="btn btn-lg btn-primary btn-block" type="button"
+                            data-toggle="modal" data-target="#todoModal" ${todo.hidden}>erledigt?
                     </button>
-                    <button title="ToDo check" id="<jsp:getProperty name="sessionBean" property="userId"/>" type="submit"
-                            style="display: none;"></button>
+                    <button title="ToDo check" id="${todo.todoId}" type="submit" style="display: none;"></button>
                 </form>
             </td>
         </tr>
