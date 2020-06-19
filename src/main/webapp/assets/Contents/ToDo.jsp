@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div id="content">
     <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"></jsp:useBean>
-    <jsp:useBean id="todoBean" class="beans.ToDoBean"></jsp:useBean>
+    <jsp:useBean id="todoBean" class="beans.ToDoBean" scope="request"></jsp:useBean>
     <jsp:setProperty name="todoBean" property="userId" value="${sessionBean.userId}"/>
     <button title="ToDo hinzuf&uuml;gen" id="addToDo" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal"
             data-target="#exampleModal">+
@@ -20,8 +20,7 @@
         </thead>
         <tbody>
         <c:forEach var="i" begin="1" end="5">
-        <tr class="<jsp:getProperty name="sessionBean" property="userId"/>
-        ">
+        <tr class="<jsp:getProperty name="sessionBean" property="userId"/>">
             <td>
                 <form action="removeLogic" method="POST">
                     <input type="text" name="todoId" hidden="hidden" value="<jsp:getProperty name="sessionBean" property="userId"/>">
