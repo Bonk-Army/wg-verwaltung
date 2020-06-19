@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Provides SQL accessor methods for the login page
+ */
 public class SQLDCLogin extends SQLDatabaseConnection {
     /**
      * Create a user in the database

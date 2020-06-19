@@ -3,6 +3,9 @@ package utilities;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+/**
+ * Provides SQL accessor methods for the settings page
+ */
 public class SQLDCSettings extends SQLDatabaseConnection {
     /**
      * Create a wg in the database

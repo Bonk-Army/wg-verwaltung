@@ -229,7 +229,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>AddTodoLogic</servlet-name>
-        <servlet-class>logic.ToDo</servlet-class>
+        <servlet-class>logic.CreateToDo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddTodoLogic</servlet-name>

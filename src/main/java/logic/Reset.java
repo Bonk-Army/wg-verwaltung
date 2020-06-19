@@ -3,13 +3,16 @@ package logic;
 import beans.LoginBean;
 import utilities.ErrorCodes;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Reset servlet that is called  when the user wants to reset his password and therefore entered his email address
+ * to receive a link to reset his password
+ */
 public class Reset extends HttpServlet {
     public Reset() {
         super();

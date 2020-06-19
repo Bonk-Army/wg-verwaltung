@@ -1,5 +1,9 @@
 package utilities;
 
+/**
+ * Enum that holds all error codes that may occur so we can give the user detailed Information about what exactly
+ * went wrong
+ */
 public enum ErrorCodes {
     SUCCESS(""),        //Something was done successfully
     FAILURE(""),        //Something failed server-side

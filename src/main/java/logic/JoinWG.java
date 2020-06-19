@@ -6,13 +6,14 @@ import beans.SettingsBean;
 import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
+/**
+ * Join wg servlet that is called when the user tries to join a wg via invite code or invite link
+ */
 public class JoinWG extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
