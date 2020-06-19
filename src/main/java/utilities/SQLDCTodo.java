@@ -16,6 +16,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      * @param userId  The ID of the user that is assigned to this task
      * @param wgId    The ID of the WG
      * @param dateDue The date til the task should be done
+     * @param createdById The id of the user that created the todo
      * @return If the to-do has been created successfully. If not, the user has to be informed!
      */
     public static boolean createTodo(String task, String userId, String wgId, Date dateDue, String createdById) {
