@@ -8,6 +8,15 @@ import java.util.Date;
 import java.util.List;
 
 public class ToDoBean {
+    private String userId = "";
+    private String username = "";
+
+    public ToDoBean(){}
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     /**
      * Create a to-do
      *
@@ -94,8 +103,9 @@ public class ToDoBean {
      * @param userId The userId of the user
      * @return The username of the user
      */
-    public String getUsername(String userId) {
-        return SQLDCLogin.getUsername(userId);
+    public String getUsername() {
+        this.username = SQLDCLogin.getUsername(this.userId);
+        return this.username;
     }
 
     /**
