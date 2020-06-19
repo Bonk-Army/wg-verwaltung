@@ -18,17 +18,17 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${shoppingBean.article}" var="article">
+        <c:forEach items="${shoppingBean.requests}" var="article">
         <tr class="${article.colorClass}">
             <td>
                 <form action="removeShoppingRequestLogic" method="POST">
-                    <input type="text" name="requestId" hidden="hidden" value="${article.articleId}">
+                    <input type="text" name="requestId" hidden="hidden" value="${article.requestId}">
 
-                    <button title="ToDo remove check" onclick="removeArticle(${article.articleId})"
+                    <button title="ToDo remove check" onclick="removeArticle(${article.requestId})"
                             class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
                             data-target="#removeModal" ${article.buttonHideStatus}>&times;
                     </button>
-                    <button title="Shopping remove check" id="remove${article.articleId}" type="submit" style="display: none;"></button>
+                    <button title="Shopping remove check" id="remove${article.requestId}" type="submit" style="display: none;"></button>
                 </form>
             </td>
             <td title="erstellt am ${article.dateCreated} von ${article.createdBy}">${article.article}</td>
