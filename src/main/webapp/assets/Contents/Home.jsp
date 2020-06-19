@@ -1,7 +1,7 @@
 <div id="content">
-    <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"></jsp:useBean>
-    <jsp:useBean id="fail" class="beans.DemoBean"></jsp:useBean>
-    <jsp:useBean id="overview" class="beans.OverviewBean"></jsp:useBean>
+    <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
+    <jsp:useBean id="fail" class="beans.DemoBean"/>
+    <jsp:useBean id="overview" class="beans.OverviewBean"/>
 
     <h1>Willkommen
         <jsp:getProperty name="sessionBean" property="firstName"/>
