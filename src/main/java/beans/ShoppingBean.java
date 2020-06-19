@@ -3,6 +3,11 @@ package beans;
 // Imports
 
 public class ShoppingBean {
+    String userId = "userId";
+
+
+
+
     // Variables
 
     // Public Methods
