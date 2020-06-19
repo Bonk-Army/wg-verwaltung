@@ -14,9 +14,9 @@
             <div class="modal-body">
                 Aufgabe eingeben
             </div>
-            <form action="addTodoLogic" method="POST">
-                <label for="todo" class="sr-only">Aufgabe</label>
-                <input id="todo" class="form-control" placeholder="Neue Aufgabe erstellen" name="todo" type="text" required>
+            <form action="addArticleLogic" method="POST">
+                <label for="article" class="sr-only">Aufgabe</label>
+                <input id="article" class="form-control" placeholder="Neue Aufgabe erstellen" name="todo" type="text" required>
                 <h6>Wem möchtest du diese Aufgabe zuteilen?</h6>
                 <label for="name" class="sr-only">Name</label>
                 <select id="name" class="form-control" name="username" required>

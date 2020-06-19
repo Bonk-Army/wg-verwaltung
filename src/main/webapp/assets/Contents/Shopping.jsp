@@ -37,7 +37,7 @@
             <td>${article.assignee}</td>
             <td>${article.boughtMessage}</td>
             <td>
-                <form action="setBoughtLogic" method="POST">
+                <form action="removeArticleLogic" method="POST">
                     <input type="text" name="todoId" hidden="hidden" value="${article.articleId}">
                     <button title="Shopping check" onclick="boughtArticle(${article.articleId})" class="btn btn-lg btn-primary btn-block" type="button"
                             data-toggle="modal" data-target="#todoModal" ${article.buttonHideStatus}>erledigt?
