@@ -49,7 +49,7 @@ public class ToDoBean {
      * @return The String
      */
     public String dateToString(Date date) {
-        return DateFormatter.dateToString(date);
+        return DateFormatter.dateTimeToString(date);
     }
 
     /**

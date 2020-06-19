@@ -26,6 +26,8 @@
         |__ /setDoneLogic          | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /sendContactRequestLogic | Servlet: ContactRequest         | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /removeLogic           | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
+        |__ /removeShoppingRequestLogic | Servlet: RemoveShoppingRequest | Zuständig: @PM     | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addShoppingRequestLogic | Servlet: AddShoppingRequest     | Zuständig:  @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -258,6 +260,22 @@
     <servlet-mapping>
         <servlet-name>RemoveTodoLogic</servlet-name>
         <url-pattern>/removeLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RemoveShoppingRequestLogic</servlet-name>
+        <servlet-class>logic.RemoveShoppingRequest</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveShoppingRequestLogic</servlet-name>
+        <url-pattern>/removeShoppingRequestLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddShoppingRequestLogic</servlet-name>
+        <servlet-class>logic.AddShoppingRequest</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddShoppingRequestLogic</servlet-name>
+        <url-pattern>/addShoppingRequestLogic</url-pattern>
     </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--
