@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Login Servlet that is called when the users tries to log in or register from the login page
+ */
 public class Login extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -47,7 +50,6 @@ public class Login extends HttpServlet {
         // (false = session cookie, true = cookie that lasts 30 days or so)
 
         if (isRegister) {
-            // TODO Check for bad parsed characters (ÄÖÜ) (Ticket WGV-96)
             email = request.getParameter("email");
             firstName = request.getParameter("firstName");
             lastName = request.getParameter("lastName");

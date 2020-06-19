@@ -3,6 +3,9 @@ package utilities;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+/**
+ * Provides SQL accessor methods for the overview page
+ */
 public class SQLDCOverview extends SQLDatabaseConnection {
     /**
      * Sends SQL Query in order to count number of To-Do's for specific WG

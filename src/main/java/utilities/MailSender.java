@@ -13,7 +13,7 @@ import com.sendgrid.helpers.mail.objects.Personalization;
 import config.globalConfig;
 
 /**
- * Used to send emails via SendGrid
+ * Used to send emails via SendGrid API
  */
 public class MailSender {
     /**

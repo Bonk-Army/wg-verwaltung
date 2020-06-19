@@ -1,5 +1,8 @@
 package utilities;
 
+/**
+ * Utility class used to check all user entries for illegal characters
+ */
 public class RegexHelper {
     /**
      * Checks if the entered String matches the rules we have for usernames.

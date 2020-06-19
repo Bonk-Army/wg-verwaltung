@@ -1,14 +1,13 @@
 package utilities;
 
-import models.TodoModel;
-
-import java.sql.Array;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.sql.ResultSet;
-import java.util.List;
 
+/**
+ * Provides SQL accessor methods for the Todo Page
+ */
 public class SQLDCTodo extends SQLDatabaseConnection {
     /**
      * Create a to-do in the database
@@ -44,23 +43,62 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      * @param wgId the ID of the wg
      * @return ArrayList<TodoModel>
      */
-    public static List<TodoModel> getAllActiveTodos(String wgId) {
+    public static List<Map<String, String>> getAllActiveTodos(String wgId) {
         deactivateOldToDos();
-        List<TodoModel> todoList = new ArrayList<TodoModel>();
+        List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
         try {
             ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE wgId = " + Integer.valueOf(wgId) + " ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
-                String task = rs.getString(1);
-                String userId = String.valueOf(rs.getInt(2));
-                Date dateCreated = rs.getDate(3);
+                Map<String, String> currentTodo = new HashMap<String, String>();
+                currentTodo.put("task", rs.getString(1));
+                currentTodo.put("isDone", String.valueOf(rs.getBoolean(5)));
+                currentTodo.put("todoId", rs.getString(8));
+
+                // Parameters for better visualization of the status of every todo
+
+                // Dates for colors
                 Date dateDue = rs.getDate(4);
+                Date dateCreated = rs.getDate(3);
+                Date currentDate = new Date();
+                Calendar c = Calendar.getInstance();
+                c.setTime(currentDate);
+                c.add(Calendar.DATE, 3);
+                Date threeDaysDate = c.getTime();
+
+                SimpleDateFormat fancyFormatter = new SimpleDateFormat("dd. MMMM yyyy");
+                currentTodo.put("dateDue", fancyFormatter.format(dateDue));
+                currentTodo.put("dateCreated", fancyFormatter.format(dateCreated));
+
                 Boolean isDone = rs.getBoolean(5);
+                if (isDone) {
+                    currentTodo.put("doneMessage", "Ja");
+                    currentTodo.put("buttonHideStatus", "hidden=\"hidden\"");
+                    currentTodo.put("colorClass", "done");
+                } else {
+                    currentTodo.put("doneMessage", "Nein");
+                    currentTodo.put("buttonHideStatus", "");
+                    if (currentDate.after(dateDue)) {
+                        currentTodo.put("colorClass", "notDone tooLate");
+                    } else if (threeDaysDate.after(dateDue)) {
+                        currentTodo.put("colorClass", "notDone late");
+                    } else {
+                        currentTodo.put("colorClass", "notDone");
+                    }
+                }
+
+                // Text formatting
+                String userId = rs.getString(2);
+                String creatorId = rs.getString(7);
+                String assignee = SQLDCLogin.getUsername(userId);
+                String creator = SQLDCLogin.getUsername(creatorId);
+
+                currentTodo.put("assignee", getNameString(assignee));
+                currentTodo.put("creator", getNameString(creator));
+
+
                 Boolean isActive = rs.getBoolean(6);
-                String createdBy = rs.getString(7);
-                String uniqueID = String.valueOf(rs.getInt(8));
-                TodoModel todoModel = new TodoModel(task, userId, wgId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID);
                 if(isActive){
-                    todoList.add(todoModel);
+                    todoList.add(currentTodo);
                 }
             }
             return todoList;

@@ -1,5 +1,9 @@
 package utilities;
 
+/**
+ * Enum that holds all error codes that may occur so we can give the user detailed Information about what exactly
+ * went wrong
+ */
 public enum ErrorCodes {
     SUCCESS(""),        //Something was done successfully
     FAILURE(""),        //Something failed server-side
@@ -7,7 +11,8 @@ public enum ErrorCodes {
     WRONGUNAME(""),     //The entered username was wrong
     WRONGPASSWORD(""),  //The entered password was wrong
     WRONGEMAIL(""),     //The entered email address was wrong
-    TRYAGAIN("");       //The user should simply try it again
+    TRYAGAIN(""),       //The user should simply try it again
+    AUTHFAIL("");       //Authentication error, must log in again
 
     private String message;
 

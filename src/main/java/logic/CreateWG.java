@@ -1,16 +1,19 @@
 package logic;
 
 import beans.LoginBean;
+import beans.SessionBean;
 import beans.SettingsBean;
 import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Create wg servlet that is called when the user creates a new wg via form
+ */
 public class CreateWG extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -34,20 +37,12 @@ public class CreateWG extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean loginBean = new LoginBean();
         SettingsBean settingsBean = new SettingsBean();
+        SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
         String wgName = request.getParameter("wgname");
 
-        Cookie[] cookies = request.getCookies();
-        String sessionIdentifier = "";
-
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("session")) {
-                sessionIdentifier = cookie.getValue();
-            }
-        }
-
-        String userId = loginBean.getUserIdBySessionIdentifier(sessionIdentifier);
+        String userId = sessionBean.getUserId();
 
         ErrorCodes status = settingsBean.createWg(userId, wgName);
 

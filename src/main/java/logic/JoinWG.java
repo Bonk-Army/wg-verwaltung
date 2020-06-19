@@ -1,17 +1,19 @@
 package logic;
 
 import beans.LoginBean;
+import beans.SessionBean;
 import beans.SettingsBean;
 import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
+/**
+ * Join wg servlet that is called when the user tries to join a wg via invite code or invite link
+ */
 public class JoinWG extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -31,19 +33,12 @@ public class JoinWG extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         LoginBean loginBean = new LoginBean();
         SettingsBean settingsBean = new SettingsBean();
+        SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
         String wgCode = request.getParameter("wgcode");
-        Cookie[] cookies = request.getCookies();
-        String sessionIdentifier = "";
 
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("session")) {
-                sessionIdentifier = cookie.getValue();
-            }
-        }
-
-        String userId = loginBean.getUserIdBySessionIdentifier(sessionIdentifier);
+        String userId = sessionBean.getUserId();
 
         ErrorCodes status = settingsBean.setWgId(userId, wgCode);
 
