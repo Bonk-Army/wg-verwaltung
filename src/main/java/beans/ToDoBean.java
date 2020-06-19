@@ -6,11 +6,12 @@ import utilities.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class ToDoBean {
     private String userId = "";
 
-    public ToDoBean(){
+    public ToDoBean() {
     }
 
     // Methods used by servlets
@@ -49,34 +50,8 @@ public class ToDoBean {
      * @param wgId The whId of the wg
      * @return The list of Todo Objects
      */
-    public List<TodoModel> getAllTodos(String wgId) {
+    public List<Map<String, String>> getAllTodos(String wgId) {
         return SQLDCTodo.getAllActiveTodos(wgId);
-    }
-
-    /**
-     * Get all todos for a specific wg based on the currently logged in user
-     *
-     * @param sessionIdentifier The session identifier of the logged in user
-     * @return The List of Todos
-     */
-    public List<TodoModel> getAllTodosBySessionIdentifier(String sessionIdentifier) {
-        if (RegexHelper.checkString(sessionIdentifier) && !sessionIdentifier.isEmpty()) {
-            int splitIndex = sessionIdentifier.indexOf('-');
-            String userId = sessionIdentifier.substring(0, splitIndex);
-            String cookiePostfix = sessionIdentifier.substring(splitIndex + 1, sessionIdentifier.length());
-
-            String username = SQLDCLogin.getUsername(userId);
-            String savedCookiePostfix = SQLDCLogin.getCookiePostfix(username);
-
-            // If the passed postfix matches the saved one, fetch the todos and return them
-            if (savedCookiePostfix.equals(cookiePostfix)) {
-                String wgId = SQLDCTodo.getWgIdByUser(userId);
-
-                return SQLDCTodo.getAllActiveTodos(wgId);
-            }
-        }
-
-        return new ArrayList<TodoModel>();
     }
 
     /**
@@ -98,7 +73,6 @@ public class ToDoBean {
     /**
      * Get the username of a user by his userId
      *
-     * @param userId The userId of the user
      * @return The username of the user
      */
     public String getUsername() {
@@ -200,7 +174,21 @@ public class ToDoBean {
 //        }
 
 
+    // Getters and setters for access from JSP
+
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    /**
+     * Get all todos for a specific wg based on the currently logged in user
+     *
+     * @return The List of Todos
+     */
+    public List<Map<String, String>> getTodos() {
+        String wgId = SQLDCTodo.getWgIdByUser(userId);
+
+        return SQLDCTodo.getAllActiveTodos(wgId);
+
     }
 }

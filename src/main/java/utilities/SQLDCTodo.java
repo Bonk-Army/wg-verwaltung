@@ -4,10 +4,8 @@ import models.TodoModel;
 
 import java.sql.Array;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.sql.ResultSet;
-import java.util.List;
 
 public class SQLDCTodo extends SQLDatabaseConnection {
     /**
@@ -44,23 +42,24 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      * @param wgId the ID of the wg
      * @return ArrayList<TodoModel>
      */
-    public static List<TodoModel> getAllActiveTodos(String wgId) {
+    public static List<Map<String, String>> getAllActiveTodos(String wgId) {
         deactivateOldToDos();
-        List<TodoModel> todoList = new ArrayList<TodoModel>();
+        List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
         try {
             ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE wgId = " + Integer.valueOf(wgId) + " ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
-                String task = rs.getString(1);
-                String userId = String.valueOf(rs.getInt(2));
-                Date dateCreated = rs.getDate(3);
-                Date dateDue = rs.getDate(4);
-                Boolean isDone = rs.getBoolean(5);
+                Map<String, String> currentTodo = new HashMap<String, String>();
+                currentTodo.put("task", rs.getString(1));
+                currentTodo.put("userId", String.valueOf(rs.getInt(2)));
+                currentTodo.put("dateCreated", rs.getDate(3).toString());
+                currentTodo.put("dateDue", rs.getDate(4).toString());
+                currentTodo.put("isDone", String.valueOf(rs.getBoolean(5)));
+                currentTodo.put("createdBy", rs.getString(7));
+                currentTodo.put("todoId", rs.getString(8));
+
                 Boolean isActive = rs.getBoolean(6);
-                String createdBy = rs.getString(7);
-                String uniqueID = String.valueOf(rs.getInt(8));
-                TodoModel todoModel = new TodoModel(task, userId, wgId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID);
                 if(isActive){
-                    todoList.add(todoModel);
+                    todoList.add(currentTodo);
                 }
             }
             return todoList;
