@@ -84,6 +84,24 @@ public class SQLDCShopping extends SQLDatabaseConnection {
                 currentArticle.put("requestedBy", getNameString(requestedBy));
                 currentArticle.put("createdBy", getNameString(createdBy));
 
+                // Color the requests based on their priority
+                Date currentDate = new Date();
+                Date dateDue = rs.getDate(5);
+                Calendar c = Calendar.getInstance();
+                c.setTime(currentDate);
+                c.add(Calendar.DATE, 1);
+                Date tomorrow = c.getTime();
+                currentArticle.put("doneMessage", "Nein");
+                currentArticle.put("buttonHideStatus", "");
+                if (currentDate.after(dateDue)) {
+                    currentArticle.put("colorClass", "tooLate");
+                } else if (tomorrow.after(dateDue)) {
+                    currentArticle.put("colorClass", "late");
+                } else {
+                    currentArticle.put("colorClass", "");
+                }
+
+
                 Boolean isDone = rs.getBoolean(7);
 
                 if(!isDone){
