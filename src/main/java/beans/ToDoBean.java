@@ -51,22 +51,6 @@ public class ToDoBean {
     }
 
     /**
-     * Return a List of the usernames of all users in the same wg as the user whos session identifier is passed
-     *
-     * @param sessionIdentifier The session identifier of the current user
-     * @return The list of all usernames
-     */
-    public List<String> getAllUsersOfWgBySessionIdentifier(String sessionIdentifier) {
-        if (RegexHelper.checkString(sessionIdentifier) && !sessionIdentifier.isEmpty()) {
-            int splitIndex = sessionIdentifier.indexOf('-');
-            String userId = sessionIdentifier.substring(0, splitIndex);
-            return getUsersOfWg(userId);
-        }
-
-        return new ArrayList<String>();
-    }
-
-    /**
      * Get the username of a user by his userId
      *
      * @return The username of the user
