@@ -29,6 +29,7 @@
                     <c:forEach items="${createArticleBean.usersOfWg}" var="user">
                     <option value="${user.username}">${user.nameString}</option>
                     </c:forEach>
+                </select>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary odom-submit">Artikel hinzuf&uuml;gen</button>

@@ -22,7 +22,7 @@
         <c:forEach items="${shoppingBean.article}" var="article">
         <tr class="${article.colorClass}">
             <td>
-                <form action="removeArticleLogic" method="POST">
+                <form action="removeShoppingRequestLogic" method="POST">
                     <input type="text" name="articleId" hidden="hidden" value="${article.articleId}">
 
                     <button title="ToDo remove check" onclick="removeArticle(${article.articleId})"
@@ -33,11 +33,12 @@
                 </form>
             </td>
             <td title="erstellt am ${article.dateCreated} von ${article.creator}">${article.article}</td>
+            <td>${article.amount}</td>
             <td>${article.dateDue}</td>
             <td>${article.assignee}</td>
             <td>${article.boughtMessage}</td>
             <td>
-                <form action="setBoughtLogic" method="POST">
+                <form action="removeShoppingRequestLogic" method="POST">
                     <input type="text" name="todoId" hidden="hidden" value="${article.articleId}">
                     <button title="Shopping check" onclick="boughtArticle(${article.articleId})" class="btn btn-lg btn-primary btn-block" type="button"
                             data-toggle="modal" data-target="#todoModal" ${article.buttonHideStatus}>erledigt?
