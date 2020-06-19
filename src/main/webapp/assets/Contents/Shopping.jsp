@@ -32,10 +32,10 @@
                     <button title="Shopping remove check" id="remove${article.articleId}" type="submit" style="display: none;"></button>
                 </form>
             </td>
-            <td title="erstellt am ${article.dateCreated} von ${article.creator}">${article.task}</td>
+            <td title="erstellt am ${article.dateCreated} von ${article.creator}">${article.article}</td>
             <td>${article.dateDue}</td>
             <td>${article.assignee}</td>
-            <td>${article.doneMessage}</td>
+            <td>${article.boughtMessage}</td>
             <td>
                 <form action="setBoughtLogic" method="POST">
                     <input type="text" name="todoId" hidden="hidden" value="${article.articleId}">
