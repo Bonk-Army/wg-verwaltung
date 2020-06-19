@@ -14,7 +14,7 @@
             <div class="modal-body">
                 Aufgabe eingeben
             </div>
-            <form action="addShoppingRequestLogic" method="POST">
+            <form action="addTodoLogic" method="POST">
                 <label for="article" class="sr-only">Aufgabe</label>
                 <input id="article" class="form-control" placeholder="Neue Aufgabe erstellen" name="todo" type="text" required>
                 <h6>Wem möchtest du diese Aufgabe zuteilen?</h6>
