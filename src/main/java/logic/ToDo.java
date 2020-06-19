@@ -44,7 +44,7 @@ public class ToDo extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String task = request.getParameter("todo");
-        String assignee = request.getParameter("name");
+        String assignee = request.getParameter("username");
         String dueDateString = request.getParameter("deadline");
 
         String userId = sessionBean.getUserId();

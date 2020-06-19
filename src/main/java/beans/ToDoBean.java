@@ -1,12 +1,8 @@
 package beans;
 
-import models.TodoModel;
 import utilities.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ToDoBean {
     private String userId = "";
@@ -64,7 +60,7 @@ public class ToDoBean {
         if (RegexHelper.checkString(sessionIdentifier) && !sessionIdentifier.isEmpty()) {
             int splitIndex = sessionIdentifier.indexOf('-');
             String userId = sessionIdentifier.substring(0, splitIndex);
-            return getAllUsersOfWgByUserId(userId);
+            return getUsersOfWg(userId);
         }
 
         return new ArrayList<String>();
@@ -92,13 +88,23 @@ public class ToDoBean {
     /**
      * Return a List of all usernames of the users in the wg of the specified user
      *
-     * @param userId The user to return the other usernames for
      * @return The list with usernames
      */
-    public List<String> getAllUsersOfWgByUserId(String userId) {
+    public List<Map<String, String>> getUsersOfWg() {
         String wgId = SQLDCTodo.getWgIdByUser(userId);
 
-        return SQLDCTodo.getAllUsersOfWG(wgId);
+        List<String> usernames = SQLDCTodo.getAllUsersOfWG(wgId);
+        List<Map<String, String>> formattedNames = new ArrayList<Map<String, String>>();
+
+        for(String username: usernames){
+            Map<String, String> userMap = new HashMap<String, String>();
+            userMap.put("username", username);
+            userMap.put("nameString", getNameString(username));
+
+            formattedNames.add(userMap);
+        }
+
+        return formattedNames;
     }
 
     /**
