@@ -163,4 +163,32 @@ public class ToDoBean {
     public ErrorCodes removeTodo(String todoId) {
         return SQLDCTodo.removeTodo(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
     }
+
+//    value = cookies[i].getValue();
+//    ToDo = (ArrayList<TodoModel>) fail.getAllTodosBySessionIdentifier(value);
+//                    for (TodoModel item : ToDo) {
+//        String addClass;
+//        String done;
+//        String hidden;
+//        Date currentDate = new Date();
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(currentDate);
+//        c.add(Calendar.DATE, 3);
+//        Date threeDaysDate = c.getTime();
+//
+//        if (item.getDone()) {
+//            addClass = (item.getIsActive()) ? "done" : "done inactive";
+//            done = "ja";
+//            hidden = "hidden=\"hidden\"";
+//        } else {
+//            done = "nein";
+//            hidden = "";
+//            if (currentDate.after(item.getDateDue())) {
+//                addClass = (item.getIsActive()) ? "notDone tooLate" : "notDone tooLate inactive";
+//            } else if (threeDaysDate.after(item.getDateDue())) {
+//                addClass = (item.getIsActive()) ? "notDone late" : "notDone late inactive";
+//            } else {
+//                addClass = (item.getIsActive()) ? "notDone" : "notDone inactive";
+//            }
+//        }
 }
