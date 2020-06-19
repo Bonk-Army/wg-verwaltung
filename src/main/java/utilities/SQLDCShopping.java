@@ -27,9 +27,9 @@ public class SQLDCShopping extends SQLDatabaseConnection {
             Timestamp createdStamp = new Timestamp(dateCreated.getTime());
             Timestamp dueStamp = new Timestamp(dateDue.getTime());
 
-            ResultSet rs = executeQuery(("INSERT INTO shopping (article, amount, createdBy, requestedBy, wgId, dateDue, dateCreated, isDone)"
+            ResultSet rs = executeQuery(("INSERT INTO shopping (article, amount, createdBy, requestedBy, wgId, dateDue, dateCreated, isDone) "
                     + "VALUES ('" + article + "', '" + amount + "', " + Integer.valueOf(createdBy) + ", " + Integer.valueOf(requestedBy)
-                    + ", " + Integer.valueOf(wgId) + ", '" + dueStamp + "', '" + createdStamp + "', 0"));
+                    + ", " + Integer.valueOf(wgId) + ", '" + dueStamp + "', '" + createdStamp + "', 0)"));
 
             return true;
         } catch (Exception e) {

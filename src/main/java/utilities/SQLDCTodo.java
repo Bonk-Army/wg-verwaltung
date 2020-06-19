@@ -26,7 +26,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
             Timestamp createdStamp = new Timestamp(dateCreated.getTime());
             Timestamp dueStamp = new Timestamp(dateDue.getTime());
 
-            ResultSet rs = executeQuery(("INSERT INTO todo (task, userId, wgId, dateCreated, dateDue, isDone, createdBy, isActive)"
+            ResultSet rs = executeQuery(("INSERT INTO todo (task, userId, wgId, dateCreated, dateDue, isDone, createdBy, isActive) "
                     + "VALUES ('" + task + "', " + Integer.valueOf(userId) + ", " + Integer.valueOf(wgId) + ", '"
                     + createdStamp + "', '" + dueStamp + "', " + false + ", " + Integer.valueOf(createdById) + ", 1)"));
 

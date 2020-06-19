@@ -8,7 +8,7 @@ import java.util.*;
  * Bean used for the shopping plan page
  */
 public class ShoppingBean {
-    String userId = "";
+    private String userId = "";
 
     public ShoppingBean() {
     }
