@@ -8,6 +8,8 @@ import java.util.ArrayList;
  * Bean used for the settings page
  */
 public class SettingsBean {
+    private String userId;
+
     public SettingsBean() {
     }
 
@@ -157,4 +159,9 @@ public class SettingsBean {
     */
 
     // Getters and Setters for use with JSPs
+
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }
