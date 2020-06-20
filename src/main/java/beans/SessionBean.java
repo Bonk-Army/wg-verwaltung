@@ -16,8 +16,8 @@ public class SessionBean {
 
         this.userId = userId;
         this.username = loginBean.getUsernameById(userId);
-        this.firstName = loginBean.getFirstName(userId);
-        this.lastName = loginBean.getLastName(userId);
+        this.firstName = loginBean.getFirstName(this.username);
+        this.lastName = loginBean.getLastName(this.username);
         this.wgId = loginBean.getWgIdByUserId(userId);
         this.wgName = loginBean.getWgNameByUserId(userId);
     }
