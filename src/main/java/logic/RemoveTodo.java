@@ -1,5 +1,6 @@
 package logic;
 
+import beans.SessionBean;
 import beans.ToDoBean;
 import utilities.ErrorCodes;
 
@@ -26,11 +27,13 @@ public class RemoveTodo extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ToDoBean toDoBean = new ToDoBean();
+        SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
         String todoId = request.getParameter("todoId");
+        String wgId = sessionBean.getWgId();
 
-        ErrorCodes status = toDoBean.removeTodo(todoId);
+        ErrorCodes status = toDoBean.removeTodo(todoId, wgId);
 
         switch (status) {
         case SUCCESS:

@@ -1,0 +1,11 @@
+.negative{
+    background-color: #d75a5a;
+}
+
+.positive{
+    background-color: #71bf71;
+}
+
+button.remove{
+    max-width: 62px;
+}
