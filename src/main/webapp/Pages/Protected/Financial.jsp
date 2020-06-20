@@ -15,6 +15,7 @@
     <title>Finanzielles</title>
 
     <link rel="stylesheet" type="text/css" href="./assets/Styles/ToDo.css">
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Financial.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
 </head>
 <body>

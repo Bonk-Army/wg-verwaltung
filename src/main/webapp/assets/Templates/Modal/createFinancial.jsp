@@ -24,12 +24,14 @@
             <form action="addFinancialEntryLogic" method="POST">
                 <label for="date" class="sr-only">Deadline</label>
                 <input id="date" class="form-control" placeholder="Datum" name="date" type="date" required>
-                <label for="title" class="sr-only">Titel</label>
-                <input id="title" class="form-control" placeholder="Titel" name="title" type="text" required>
                 <label for="reason" class="sr-only">Grund</label>
                 <input id="reason" class="form-control" placeholder="Grund" name="reason" type="text" required>
+                <select id="plusOrMinus" class="form-control" name="sign">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                </select>
                 <label for="expense" class="sr-only">Betrag</label>
-                <input id="expense" class="form-control" placeholder="Betrag" name="value" type="number" required>
+                <input id="expense" class="form-control" placeholder="Betrag" name="value" type="text" pattern="[0-9]+([,.][0-9][0-9]?)?" title="Deine Eingabe muss eine Zahl sein, wahlweise mit , und einer oder zwei folgemden Zahlen" required>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary odom-submit">Einnahme / Ausgabe hinzuf&uuml;gen</button>

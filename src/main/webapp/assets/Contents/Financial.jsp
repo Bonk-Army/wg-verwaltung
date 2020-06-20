@@ -3,6 +3,22 @@
     <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
     <jsp:useBean id="financialBean" class="beans.FinancialBean" scope="request"/>
     <jsp:setProperty name="financialBean" property="userId" value="${sessionBean.userId}"/>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <c:forEach items="${financialBean.totalPerUser}" var="user">
+                <th scope="col">${user.name}</th>
+            </c:forEach>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <c:forEach items="${financialBean.totalPerUser}" var="user">
+                <td>${user.sum}</td>
+            </c:forEach>
+        </tr>
+        </tbody>
+    </table>
     <button title="ToDo hinzuf&uuml;gen" id="addToDo" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal"
             data-target="#createFinancial">+
     </button>
@@ -11,7 +27,6 @@
         <tr>
             <th/>
             <th scope="col">Wann?</th>
-            <th scope="col">Titel</th>
             <th scope="col">Grund</th>
             <th scope="col">Betrag</th>
             <th scope="col">von wem?</th>
@@ -32,7 +47,6 @@
                 </form>
             </td>
             <td>${expense.dateCreated}</td>
-            <td>${expense.title}</td>
             <td>${expense.reason}</td>
             <td>${expense.value}</td>
             <td>${expense.createdBy}</td>
