@@ -54,7 +54,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
                 Map<String, String> currentTodo = new HashMap<String, String>();
                 currentTodo.put("task", rs.getString(1));
                 currentTodo.put("isDone", String.valueOf(rs.getBoolean(5)));
-                currentTodo.put("todoId", rs.getString(7));
+                currentTodo.put("todoId", rs.getString(8));
 
                 // Parameters for better visualization of the status of every todo
 
@@ -90,7 +90,7 @@ public class SQLDCTodo extends SQLDatabaseConnection {
 
                 // Text formatting
                 String userId = rs.getString(2);
-                String creatorId = rs.getString(6);
+                String creatorId = rs.getString(7);
                 String assignee = SQLDCLogin.getUsername(userId);
                 String creator = SQLDCLogin.getUsername(creatorId);
 
