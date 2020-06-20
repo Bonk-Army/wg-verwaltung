@@ -24,5 +24,8 @@
 <%@include file="../../assets/Contents/Home.jsp" %>
 
 <script><%@include file="../../assets/Scripts/Sidebar.js" %></script>
+
+<script><%@include file="../../assets/Scripts/ChartJS/ChartJS_Guthaben.js" %></script>
+<script><%@include file="../../assets/Scripts/ChartJS/ChartJS_ToDo.js" %></script>
 </body>
 </html>
