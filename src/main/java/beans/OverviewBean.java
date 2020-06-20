@@ -6,6 +6,8 @@ import utilities.*;
  * Bean used for the home page (overview page)
  */
 public class OverviewBean {
+    private String userId;
+
     public OverviewBean() {
     }
 
@@ -180,5 +182,17 @@ public class OverviewBean {
     */
 
     // Getters and Setters for use with JSPs
+
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getExpenseSum(){
+        int sumForUser = SQLDCFinancial.getTotalForUser(this.userId);
+        String sumString = String.format("%.2f", (sumForUser / 100d));
+
+        return sumString;
+    }
 }
 
