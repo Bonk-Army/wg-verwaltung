@@ -19,11 +19,14 @@
 </head>
 <body>
 <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
-<%@include file="../../assets/Templates/Modal/createToDo.jsp" %>
+<%@include file="../../assets/Templates/Modal/createShopping.jsp" %>
+<%@include file="../../assets/Templates/Modal/doneShopping.jsp" %>
+<%@include file="../../assets/Templates/Modal/removeShopping.jsp" %>
 
 <%@include file="../../assets/Contents/Shopping.jsp" %>
 
 <script><%@include file="../../assets/Scripts/Sidebar.js" %></script>
 <script><%@include file="../../assets/Scripts/Modal.js" %></script>
+<script><%@include file="../../assets/Scripts/Shopping.js" %></script>
 </body>
 </html>

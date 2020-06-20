@@ -4,6 +4,7 @@ import beans.LoginBean;
 import beans.SessionBean;
 import beans.ToDoBean;
 import utilities.ErrorCodes;
+import utilities.RegexHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -49,7 +50,10 @@ public class CreateToDo extends HttpServlet {
 
         String userId = sessionBean.getUserId();
 
-        String assigneeId = loginBean.getUserId(assignee);
+        String assigneeId = "";
+        if(RegexHelper.checkString(assignee)) {
+            assigneeId = loginBean.getUserId(assignee);
+        }
         String wgId = toDoBean.getWgIdByUserId(userId);
         Date dueDate = null;
         try {

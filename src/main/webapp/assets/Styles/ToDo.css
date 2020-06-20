@@ -30,7 +30,7 @@ tr.inactive {
     display: none;
 }
 
-#addToDo{
+#addToDo, #addShopping{
     margin-bottom: 10px;
     max-width: 62px;
 }
