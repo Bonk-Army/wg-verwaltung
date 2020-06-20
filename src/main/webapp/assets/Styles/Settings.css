@@ -21,4 +21,10 @@ label {
 
 button.leave {
     background-color: #cc0000;
+    border-color: #cc0000;
+}
+
+button.leave:hover {
+    background-color: #a10101;
+    border-color: #a10101;
 }
