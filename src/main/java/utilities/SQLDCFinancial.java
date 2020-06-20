@@ -149,7 +149,7 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
     }
 
     /**
-     * Returns a list of all the ids of every user in the given wg
+     * Returns a list of all the ids of every user in the given wg ordered by the first name of the user
      *
      * @param wgId The wgId of the wg to get the users for
      * @return The List of ids
@@ -158,7 +158,8 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
         List<String> ids = new ArrayList<String>();
 
         try {
-            ResultSet rs = executeQuery(("SELECT uniqueID FROM users WHERE wgID=" + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT uniqueID FROM users WHERE wgID="
+                    + Integer.valueOf(wgId) + " ORDER BY firstName"));
 
             while (rs.next()) {
                 ids.add(String.valueOf(rs.getInt(1)));
