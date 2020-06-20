@@ -21,7 +21,7 @@
         <c:forEach items="${financialBean.getEntries(5)}" var="expense">
         <tr class="${expense.colorClass}">
             <td>
-                <form action="removeLogic" method="POST">
+                <form action="removeFinancialEntryLogic" method="POST">
                     <input type="text" name="todoId" hidden="hidden" value="${expense.entryId}">
 
                     <button title="Expense remove check" onclick="removeExpense(${expense.entryId})"

@@ -21,9 +21,9 @@
             <div class="modal-body">
                 Aufgabe eingeben
             </div>
-            <form action="addTodoLogic" method="POST">
+            <form action="addFinancialEntryLogic" method="POST">
                 <label for="date" class="sr-only">Deadline</label>
-                <input id="date" class="form-control" placeholder="Datum" type="date" required>
+                <input id="date" class="form-control" placeholder="Datum" name="date" type="date" required>
                 <label for="title" class="sr-only">Titel</label>
                 <input id="title" class="form-control" placeholder="Titel" name="title" type="text" required>
                 <label for="reason" class="sr-only">Grund</label>
