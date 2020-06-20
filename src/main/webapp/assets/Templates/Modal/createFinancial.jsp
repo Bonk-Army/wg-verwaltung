@@ -23,21 +23,13 @@
             </div>
             <form action="addTodoLogic" method="POST">
                 <label for="date" class="sr-only">Deadline</label>
-                <input id="date" class="form-control" placeholder="Datum" name="date" type="date" required>
+                <input id="date" class="form-control" placeholder="Datum" type="date" required>
+                <label for="title" class="sr-only">Titel</label>
+                <input id="title" class="form-control" placeholder="Titel" name="title" type="text" required>
                 <label for="reason" class="sr-only">Grund</label>
                 <input id="reason" class="form-control" placeholder="Grund" name="reason" type="text" required>
-                <select id="plus" class="form-control" name="plus" required>
-                    <option value="+">+</option>
-                    <option value="-">-</option>
-                </select>
                 <label for="expense" class="sr-only">Betrag</label>
-                <input id="expense" class="form-control" placeholder="Betragh" name="expense" type="number" min="0,01" step="0,01" required>
-                <h6>Von wem?</h6>
-                <select id="name" class="form-control" name="username" required>
-                    <c:forEach items="${createFinancialBean.usersOfWg}" var="user">
-                        <option value="${user.username}">${user.nameString}</option>
-                    </c:forEach>
-                </select>
+                <input id="expense" class="form-control" placeholder="Betrag" name="value" type="number" required>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary odom-submit">Einnahme / Ausgabe hinzuf&uuml;gen</button>
