@@ -18,11 +18,11 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${financialBean.getEntries(5)}" var="expense">
+        <c:forEach items="${financialBean.getEntries(20)}" var="expense">
         <tr class="${expense.colorClass}">
             <td>
                 <form action="removeFinancialEntryLogic" method="POST">
-                    <input type="text" name="todoId" hidden="hidden" value="${expense.entryId}">
+                    <input type="text" name="entryId" hidden="hidden" value="${expense.entryId}">
 
                     <button title="Expense remove check" onclick="removeExpense(${expense.entryId})"
                             class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"

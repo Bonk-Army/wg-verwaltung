@@ -25,8 +25,10 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
             Timestamp dateStamp = new Timestamp(date.getTime());
 
             executeQuery(("INSERT INTO financial (title, reason, value, dateCreated, createdBy, isActive, wgId) "
-                    + "VALUES ('" + title + "', '" + reason + "', " + valueCents + ", " + dateStamp
-                    + ", " + Integer.valueOf(createdBy) + ", 1, " + Integer.valueOf(wgId) + ")"));
+                    + "VALUES ('" + title + "', '" + reason + "', " + valueCents + ", '" + dateStamp
+                    + "', " + Integer.valueOf(createdBy) + ", 1, " + Integer.valueOf(wgId) + ")"));
+
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,7 +55,7 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
                 currentEntry.put("title", rs.getString(1));
                 currentEntry.put("reason", rs.getString(2));
 
-                String valueString = String.valueOf(Math.round(100 * rs.getInt(3)));
+                String valueString = String.valueOf((rs.getInt(3) / 100));
                 String createdDateString = DateFormatter.dateToString(rs.getDate(4));
 
                 if (rs.getInt(3) < 0) {

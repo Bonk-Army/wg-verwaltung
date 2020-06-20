@@ -124,6 +124,27 @@ public class SettingsBean {
         return MailSender.sendContactRequestMail(name, email, subject, message) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
     }
 
+    /**
+     * Change the users password
+     * @param username The username of the user
+     * @param oldPassword The old password
+     * @param newPassword The new password
+     * @return If it was successful
+     */
+    public ErrorCodes changePassword(String username, String oldPassword, String newPassword) {
+        String oldPasswordSavedHash = SQLDCLogin.getPasswordHash(username);
+        String pwsalt = SQLDCLogin.getPasswordSalt(username);
+        String oldPasswordHash = PasswordHasher.hashPassword(oldPassword, pwsalt);
+
+        if(oldPasswordSavedHash.equals(oldPasswordHash)){
+            String newPasswordHash = PasswordHasher.hashPassword(newPassword, pwsalt);
+
+            return SQLDCLogin.setPassword(username, newPasswordHash) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+        }
+
+        return ErrorCodes.WRONGPASSWORD;
+    }
+
     /*
       /$$$$$$              /$$     /$$                                               /$$        /$$$$$$              /$$     /$$
      /$$__  $$            | $$    | $$                                              /$$/       /$$__  $$            | $$    | $$
