@@ -1,6 +1,7 @@
 package beans;
 
 import utilities.*;
+
 import java.util.ArrayList;
 
 /**
@@ -64,6 +65,36 @@ public class SettingsBean {
     }
 
     /**
+     * Returns the wgId of the user's wg
+     *
+     * @param userId The userId of the user
+     * @return The wgId
+     */
+    public String getWgIdFromUserId(String userId) {
+        if (RegexHelper.checkString(userId)) {
+            return SQLDCUtility.getWgIdFromUserId(userId);
+        }
+
+        return "";
+    }
+
+    /**
+     * Return the wg name of the user's wg
+     *
+     * @param userId The userId of the user
+     * @return The wg name
+     */
+    public String getWgNameFromUserID(String userId) {
+        if (RegexHelper.checkString(userId)) {
+            String wgId = SQLDCUtility.getWgIdFromUserId(userId);
+
+            return SQLDCUtility.getWgNameFromWgId(wgId);
+        }
+
+        return "";
+    }
+
+    /**
      * Set the ID of the wg for a user
      *
      * @param userId    the user who changes wg
@@ -82,13 +113,14 @@ public class SettingsBean {
 
     /**
      * Send a mail concerning the contact request from the contact form
-     * @param name The entered name
-     * @param email The entered email address
+     *
+     * @param name    The entered name
+     * @param email   The entered email address
      * @param subject The entered subject
      * @param message The entered message
      * @return If it was successful
      */
-    public ErrorCodes sendContactMail(String name, String email, String subject, String message){
+    public ErrorCodes sendContactMail(String name, String email, String subject, String message) {
         return MailSender.sendContactRequestMail(name, email, subject, message) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
     }
 

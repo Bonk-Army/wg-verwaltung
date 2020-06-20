@@ -53,9 +53,13 @@ public class ShoppingBean {
      * @param requestId The requestId of the request that has to be set to done
      * @return If it was successful
      */
-    public ErrorCodes setRequestDone(String requestId) {
+    public ErrorCodes setRequestDone(String requestId, String wgId) {
         if (RegexHelper.checkString(requestId)) {
-            return SQLDCShopping.setArticleRequestDone(requestId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            String savedWgId = SQLDCTodo.getWgIdOfTodo(requestId);
+
+            if (savedWgId.equals(wgId)) {
+                return SQLDCShopping.setArticleRequestDone(requestId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            }
         }
 
         return ErrorCodes.WRONGENTRY;

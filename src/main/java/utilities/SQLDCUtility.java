@@ -2,7 +2,7 @@ package utilities;
 
 import java.sql.ResultSet;
 
-public class SQLDCUtility extends SQLDatabaseConnection{
+public class SQLDCUtility extends SQLDatabaseConnection {
     /**
      * Return the first name of the user by his username
      *
@@ -80,6 +80,45 @@ public class SQLDCUtility extends SQLDatabaseConnection{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "";
+    }
+
+    /**
+     * Return the wgId of the given user
+     *
+     * @param userId The userId of the user
+     * @return The wgId
+     */
+    public static String getWgIdFromUserId(String userId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT wgId FROM users WHERE uniqueId=" + Integer.valueOf(userId)));
+
+            while (rs.next()) {
+                return String.valueOf(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+    /**
+     * Get the wg name by the wg Id
+     * @param wgId The wgId of the wg
+     * @return The name of the wg
+     */
+    public static String getWgNameFromWgId(String wgId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT name FROM wg WHERE uniqueID=" + Integer.valueOf(wgId)));
+
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return "";
     }
 }
