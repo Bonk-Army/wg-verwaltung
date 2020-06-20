@@ -1,8 +1,7 @@
 package logic;
 
+import beans.FinancialBean;
 import beans.SessionBean;
-import beans.ShoppingBean;
-import beans.ToDoBean;
 import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
@@ -10,14 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-/**
- * Remove shopping request servlet that is called when a shopping request is set to done
- */
-public class RemoveShoppingRequest extends HttpServlet {
+public class AddFinancialEntry extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public RemoveShoppingRequest() {
+    public AddFinancialEntry() {
         super();
     }
 
@@ -25,21 +23,44 @@ public class RemoveShoppingRequest extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
+    /**
+     * Called when the user wants to create a new financial entry
+     *
+     * @param request  The http POST request
+     * @param response The http response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ShoppingBean shoppingBean = new ShoppingBean();
+        FinancialBean financialBean = new FinancialBean();
         SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
-        String requestId = request.getParameter("requestId");
+        String userId = sessionBean.getUserId();
         String wgId = sessionBean.getWgId();
 
-        ErrorCodes status = shoppingBean.setRequestDone(requestId, wgId);
+        String title = request.getParameter("title");
+        String reason = request.getParameter("reason");
+        String value = request.getParameter("value");
+        String dateString = request.getParameter("date");
+        String sign = request.getParameter("sign"); //Vorzeichen
+        Date date = null;
+
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String valueWithSign = (sign + value).replace(",", ".");
+
+        ErrorCodes status = financialBean.addFinancialEntry(reason, valueWithSign, userId, wgId, date);
 
         switch (status) {
             case SUCCESS:
                 //Show success
-                response.sendRedirect("/shopping");
+                response.sendRedirect("/financial");
                 break;
             case FAILURE:
                 //Show failure

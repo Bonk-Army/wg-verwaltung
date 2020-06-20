@@ -80,63 +80,6 @@ public class SQLDCOverview extends SQLDatabaseConnection {
     }
 
     /**
-     * Sends SQL Query to fetch first Name
-     *
-     * @param userId The ID of the User
-     * @return First Name of User
-     */
-    public static String getFirstName(String userId) {
-        String firstName = "";
-        try {
-            ResultSet rs = executeQuery("SELECT firstName FROM users WHERE uniqueID=" + Integer.valueOf(userId) + ";");
-            while (rs.next()) {
-                firstName = rs.getString(1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return firstName;
-    }
-
-    /**
-     * Sends SQL Query to fetch Last Name
-     *
-     * @param userId The ID of the User
-     * @return Last Name of User
-     */
-    public static String getLastName(String userId) {
-        String lastName = "";
-        try {
-            ResultSet rs = executeQuery("SELECT lastName FROM users WHERE uniqueID=" + Integer.valueOf(userId) + ";");
-            while (rs.next()) {
-                lastName = rs.getString(1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return lastName;
-    }
-
-    /**
-     * Concatenates First and Last Name
-     *
-     * @param userId The ID of the User
-     * @return Full Name
-     */
-    public static String getFullName(String userId) {
-        String firstName;
-        String lastName;
-        try {
-            firstName = getFirstName(userId);
-            lastName = getLastName(userId);
-            return firstName + " " + lastName;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
-
-    /**
      * Return the wg name of the wg of the passed user
      *
      * @param userId The user id of the user

@@ -1,6 +1,7 @@
 package beans;
 
 import utilities.*;
+
 import java.util.*;
 
 /**
@@ -70,7 +71,7 @@ public class ToDoBean {
      */
     public String getNameString(String username) {
         if (RegexHelper.checkString(username)) {
-            return SQLDCTodo.getNameString(username);
+            return SQLDCUtility.getNameString(username);
         }
 
         return "";
@@ -92,18 +93,35 @@ public class ToDoBean {
      * @param todoId The todo to be set
      * @return If it was successful
      */
-    public ErrorCodes setTodoDone(String todoId) {
-        return SQLDCTodo.setTodoDone(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+    public ErrorCodes setTodoDone(String todoId, String wgId) {
+        if (RegexHelper.checkString(todoId)) {
+            String savedWgId = SQLDCTodo.getWgIdOfTodo(todoId);
+
+            if (savedWgId.equals(wgId)) {
+                return SQLDCTodo.setTodoDone(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            }
+        }
+
+        return ErrorCodes.WRONGENTRY;
     }
 
     /**
-     * Set a todo to inactive
+     * Set a todo to inactive if the user is allowed to
      *
      * @param todoId The todo to be set
+     * @param wgId   The wgId of the user to check if it matches the saved wgId for that user
      * @return If it was successful
      */
-    public ErrorCodes removeTodo(String todoId) {
-        return SQLDCTodo.removeTodo(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+    public ErrorCodes removeTodo(String todoId, String wgId) {
+        if (RegexHelper.checkString(todoId)) {
+            String savedWgId = SQLDCTodo.getWgIdOfTodo(todoId);
+
+            if (savedWgId.equals(wgId)) {
+                return SQLDCTodo.removeTodo(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            }
+        }
+
+        return ErrorCodes.WRONGENTRY;
     }
 
     /*

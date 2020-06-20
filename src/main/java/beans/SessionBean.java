@@ -61,4 +61,20 @@ public class SessionBean {
     public String getWgName() {
         return wgName;
     }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setWgId(String wgId) {
+        this.wgId = wgId;
+    }
+
+    public void setWgName(String wgName) {
+        this.wgName = wgName;
+    }
 }
