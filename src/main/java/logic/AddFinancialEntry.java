@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AddFinancialEntry extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -41,8 +43,16 @@ public class AddFinancialEntry extends HttpServlet {
         String title = request.getParameter("title");
         String reason = request.getParameter("reason");
         String value = request.getParameter("value");
+        String dateString = request.getParameter("date");
+        Date date = null;
 
-        ErrorCodes status = financialBean.addFinancialEntry(title, reason, value, userId, wgId);
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd").parse(dateString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ErrorCodes status = financialBean.addFinancialEntry(title, reason, value, userId, wgId, date);
 
         switch (status) {
             case SUCCESS:

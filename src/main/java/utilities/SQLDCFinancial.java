@@ -20,13 +20,12 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
      * @param wgId       The wgId of the wg in which the entry has to be issued
      * @return If it was successful
      */
-    public static boolean createEntry(String title, String reason, int valueCents, String createdBy, String wgId) {
+    public static boolean createEntry(String title, String reason, int valueCents, String createdBy, String wgId, Date date) {
         try {
-            Date createdAt = new Date();
-            Timestamp createdStamp = new Timestamp(createdAt.getTime());
+            Timestamp dateStamp = new Timestamp(date.getTime());
 
             executeQuery(("INSERT INTO financial (title, reason, value, dateCreated, createdBy, isActive, wgId) "
-                    + "VALUES ('" + title + "', '" + reason + "', " + valueCents + ", " + createdStamp
+                    + "VALUES ('" + title + "', '" + reason + "', " + valueCents + ", " + dateStamp
                     + ", " + Integer.valueOf(createdBy) + ", 1, " + Integer.valueOf(wgId) + ")"));
         } catch (Exception e) {
             e.printStackTrace();

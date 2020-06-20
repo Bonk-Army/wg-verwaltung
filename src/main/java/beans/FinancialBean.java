@@ -5,10 +5,7 @@ import utilities.RegexHelper;
 import utilities.SQLDCFinancial;
 import utilities.SQLDCLogin;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Bean used for the financial status page
@@ -41,11 +38,11 @@ public class FinancialBean {
      * @param wgId      The wgId of the wg of the user
      * @return If it was successful
      */
-    public ErrorCodes addFinancialEntry(String title, String reason, String value, String createdBy, String wgId) {
+    public ErrorCodes addFinancialEntry(String title, String reason, String value, String createdBy, String wgId, Date date) {
         int valueCents = (int) Math.round(100 * Double.parseDouble(value));
 
         if (RegexHelper.checkText(title) && RegexHelper.checkText(reason)) {
-            return SQLDCFinancial.createEntry(title, reason, valueCents, createdBy, wgId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            return SQLDCFinancial.createEntry(title, reason, valueCents, createdBy, wgId, date) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
         }
 
         return ErrorCodes.WRONGENTRY;
