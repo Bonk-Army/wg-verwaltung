@@ -12,6 +12,12 @@ h2 {
     padding: 10px;
     margin-bottom: 10px;
     font-size: 16px;
+    max-width: 500px;
+}
+
+.btn.btn-lg.btn-primary.btn-block {
+    max-width: 500px;
+    text-align: right;
 }
 
 label {
