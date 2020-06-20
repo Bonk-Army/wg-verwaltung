@@ -213,4 +213,44 @@ public class SQLDCTodo extends SQLDatabaseConnection {
 
         return "";
     }
+
+    /**
+     * Return the number of open todos for a user
+     *
+     * @param userId the userId of the user
+     * @return The number of open todos
+     */
+    public static int getOpenTodosPerUser(String userId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT COUNT(uniqueID) FROM todo WHERE userId=" + Integer.valueOf(userId)));
+
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    /**
+     * Return the number of open todos for a wg
+     *
+     * @param wgId the wgId of the wg
+     * @return The number of open todos
+     */
+    public static int getOpenTodosPerWg(String wgId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT COUNT(uniqueID) FROM todo WHERE wgId=" + Integer.valueOf(wgId)));
+
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 }

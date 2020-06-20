@@ -156,7 +156,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Cleaning</servlet-name>
-        <jsp-file>/Pages/Protected/Home.jsp</jsp-file>
+        <jsp-file>/Pages/Protected/Clean.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Cleaning</servlet-name>
