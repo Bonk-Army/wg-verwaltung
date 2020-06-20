@@ -52,7 +52,7 @@ public class AddFinancialEntry extends HttpServlet {
             e.printStackTrace();
         }
 
-        ErrorCodes status = financialBean.addFinancialEntry(title, reason, value, userId, wgId, date);
+        ErrorCodes status = financialBean.addFinancialEntry(reason, value, userId, wgId, date);
 
         switch (status) {
             case SUCCESS:

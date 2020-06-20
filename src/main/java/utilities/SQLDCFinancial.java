@@ -13,19 +13,18 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
     /**
      * Create a new financial record
      *
-     * @param title      The title of the entry
      * @param reason     The reason for the entry
      * @param valueCents The total value of the purchase (in cents)
      * @param createdBy  The user that created the entry
      * @param wgId       The wgId of the wg in which the entry has to be issued
      * @return If it was successful
      */
-    public static boolean createEntry(String title, String reason, int valueCents, String createdBy, String wgId, Date date) {
+    public static boolean createEntry(String reason, int valueCents, String createdBy, String wgId, Date date) {
         try {
             Timestamp dateStamp = new Timestamp(date.getTime());
 
-            executeQuery(("INSERT INTO financial (title, reason, value, dateCreated, createdBy, isActive, wgId) "
-                    + "VALUES ('" + title + "', '" + reason + "', " + valueCents + ", '" + dateStamp
+            executeQuery(("INSERT INTO financial (reason, value, dateCreated, createdBy, isActive, wgId) "
+                    + "VALUES ('" + reason + "', " + valueCents + ", '" + dateStamp
                     + "', " + Integer.valueOf(createdBy) + ", 1, " + Integer.valueOf(wgId) + ")"));
 
             return true;
@@ -46,19 +45,18 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
         List<Map<String, String>> entries = new ArrayList<Map<String, String>>();
 
         try {
-            ResultSet rs = executeQuery(("SELECT title, reason, value, dateCreated, createdBy, uniqueID FROM financial WHERE wgId="
+            ResultSet rs = executeQuery(("SELECT reason, value, dateCreated, createdBy, uniqueID FROM financial WHERE wgId="
                     + Integer.valueOf(wgId) + " AND isActive = 1 LIMIT " + limit));
 
             while (rs.next()) {
                 Map<String, String> currentEntry = new HashMap<String, String>();
 
-                currentEntry.put("title", rs.getString(1));
-                currentEntry.put("reason", rs.getString(2));
+                currentEntry.put("reason", rs.getString(1));
 
-                String valueString = String.valueOf((rs.getInt(3) / 100));
-                String createdDateString = DateFormatter.dateToString(rs.getDate(4));
+                String valueString = String.valueOf((rs.getInt(2) / 100));
+                String createdDateString = DateFormatter.dateToString(rs.getDate(3));
 
-                if (rs.getInt(3) < 0) {
+                if (rs.getInt(2) < 0) {
                     currentEntry.put("colorClass", "negative");
                 } else {
                     currentEntry.put("colorClass", "positive");
@@ -66,9 +64,9 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
 
                 currentEntry.put("value", valueString);
                 currentEntry.put("dateCreated", createdDateString);
-                String createdByUsername = SQLDCLogin.getUsername(String.valueOf(rs.getInt(5)));
+                String createdByUsername = SQLDCLogin.getUsername(String.valueOf(rs.getInt(4)));
                 currentEntry.put("createdBy", SQLDCUtility.getNameString(createdByUsername));
-                currentEntry.put("entryId", String.valueOf(rs.getInt(6)));
+                currentEntry.put("entryId", String.valueOf(rs.getInt(5)));
 
                 entries.add(currentEntry);
             }

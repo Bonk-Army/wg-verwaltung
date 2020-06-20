@@ -31,18 +31,17 @@ public class FinancialBean {
     /**
      * Add a new financial entry
      *
-     * @param title     The title of the entry
      * @param reason    The reason for the entry
      * @param value     The value of the entry in Euros
      * @param createdBy The userId of the user that created the entry
      * @param wgId      The wgId of the wg of the user
      * @return If it was successful
      */
-    public ErrorCodes addFinancialEntry(String title, String reason, String value, String createdBy, String wgId, Date date) {
+    public ErrorCodes addFinancialEntry(String reason, String value, String createdBy, String wgId, Date date) {
         int valueCents = (int) Math.round(100 * Double.parseDouble(value));
 
-        if (RegexHelper.checkText(title) && RegexHelper.checkText(reason)) {
-            return SQLDCFinancial.createEntry(title, reason, valueCents, createdBy, wgId, date) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+        if (RegexHelper.checkText(reason)) {
+            return SQLDCFinancial.createEntry(reason, valueCents, createdBy, wgId, date) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
         }
 
         return ErrorCodes.WRONGENTRY;
