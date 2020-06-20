@@ -100,7 +100,9 @@ public class FinancialBean {
             Map<String, String> user = new HashMap<String, String>();
 
             int sumForUser = SQLDCFinancial.getTotalForUser(userId);
-            String sumString = String.valueOf((sumForUser / 100));
+            String sumString = String.format("%.2f", (sumForUser / 100d));
+
+            System.out.println(sumString);
 
             String username = SQLDCLogin.getUsername(userId);
             user.put("name", SQLDCUtility.getNameString(username));
@@ -121,7 +123,7 @@ public class FinancialBean {
         String wgId = new LoginBean().getWgIdByUserId(this.userId);
 
         int sumForWg = SQLDCFinancial.getTotalForWg(wgId);
-        String sumString = String.valueOf((sumForWg / 100));
+        String sumString = String.format("%.2f", (sumForWg / 100d));
 
         return sumString;
     }

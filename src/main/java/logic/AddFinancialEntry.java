@@ -53,7 +53,7 @@ public class AddFinancialEntry extends HttpServlet {
             e.printStackTrace();
         }
 
-        String valueWithSign = (sign + value);
+        String valueWithSign = (sign + value).replace(",", ".");
 
         ErrorCodes status = financialBean.addFinancialEntry(reason, valueWithSign, userId, wgId, date);
 
