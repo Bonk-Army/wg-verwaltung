@@ -144,7 +144,7 @@ public class LoginBean {
             if (SQLDCLogin.setPasswordKey(email, randomKey)) {
                 String username = SQLDCLogin.getUsernameByEmail(email);
                 String resetLink = "resetPassword?uname=" + username + "&key=" + randomKey;
-                String fullName = SQLDCLogin.getFirstName(username) + " " + SQLDCLogin.getLastName(username);
+                String fullName = SQLDCUtility.getFirstName(username) + " " + SQLDCUtility.getLastName(username);
                 MailSender.sendResetPasswordMail(email, fullName, resetLink);
                 return ErrorCodes.SUCCESS;
             }
@@ -248,12 +248,12 @@ public class LoginBean {
     /**
      * Gets First Name for User ID
      *
-     * @param userId The ID of the User
+     * @param username The username of the User
      * @return First Name of User
      */
-    public String getFirstName(String userId) {
-        if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
-            return SQLDCOverview.getFirstName(userId);
+    public String getFirstName(String username) {
+        if (RegexHelper.checkString(username) && !username.isEmpty()) {
+            return SQLDCUtility.getFirstName(username);
         }
         return "";
     }
@@ -261,12 +261,12 @@ public class LoginBean {
     /**
      * Gets Last Name for User ID
      *
-     * @param userId The ID of the User
+     * @param username The username of the User
      * @return Last Name of User
      */
-    public String getLastName(String userId) {
-        if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
-            return SQLDCOverview.getLastName(userId);
+    public String getLastName(String username) {
+        if (RegexHelper.checkString(username) && !username.isEmpty()) {
+            return SQLDCUtility.getLastName(username);
         }
         return "";
     }

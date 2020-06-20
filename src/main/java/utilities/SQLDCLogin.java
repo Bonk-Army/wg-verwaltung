@@ -289,48 +289,6 @@ public class SQLDCLogin extends SQLDatabaseConnection {
     }
 
     /**
-     * Return the first name of the user by his username
-     *
-     * @param username The username of the user
-     * @return The first name of the user as a String
-     */
-    public static String getFirstName(String username) {
-        String firstName = "";
-        try {
-            ResultSet rs = executeQuery("SELECT firstName FROM users WHERE username='" + username + "'");
-
-            while (rs.next()) {
-                firstName = rs.getString(1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return firstName;
-    }
-
-    /**
-     * Return the first name of the user by his username
-     *
-     * @param username The username of the user
-     * @return The first name of the user as a String
-     */
-    public static String getLastName(String username) {
-        String lastName = "";
-        try {
-            ResultSet rs = executeQuery("SELECT lastName FROM users WHERE username='" + username + "'");
-
-            while (rs.next()) {
-                lastName = rs.getString(1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return lastName;
-    }
-
-    /**
      * Return the cookie postfix required for the session identifier for a specific user
      *
      * @param username The username of the user

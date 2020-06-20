@@ -4,7 +4,7 @@
     <jsp:useBean id="todoBean" class="beans.ToDoBean" scope="request"/>
     <jsp:setProperty name="todoBean" property="userId" value="${sessionBean.userId}"/>
     <button title="ToDo hinzuf&uuml;gen" id="addToDo" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal"
-            data-target="#exampleModal">+
+            data-target="#createToDo">+
     </button>
     <table class="table">
         <thead class="thead-dark">
@@ -39,7 +39,7 @@
                 <form action="setDoneLogic" method="POST">
                     <input type="text" name="todoId" hidden="hidden" value="${todo.todoId}">
                     <button title="ToDo check" onclick="doneTodo(${todo.todoId})" class="btn btn-lg btn-primary btn-block" type="button"
-                            data-toggle="modal" data-target="#todoModal" ${todo.buttonHideStatus}>erledigt?
+                            data-toggle="modal" data-target="#doneModal" ${todo.buttonHideStatus}>erledigt?
                     </button>
                     <button title="ToDo check" id="${todo.todoId}" type="submit" style="display: none;"></button>
                 </form>

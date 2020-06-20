@@ -6,6 +6,9 @@ import utilities.*;
  * Bean used for the home page (overview page)
  */
 public class OverviewBean {
+    private String userId;
+    private String wgId;
+
     public OverviewBean() {
     }
 
@@ -83,7 +86,7 @@ public class OverviewBean {
      */
     public String getFirstName(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
-            return SQLDCOverview.getFirstName(userId);
+            return SQLDCUtility.getFirstName(userId);
         }
         return "";
     }
@@ -96,7 +99,7 @@ public class OverviewBean {
      */
     public String getLastName(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
-            return SQLDCOverview.getLastName(userId);
+            return SQLDCUtility.getLastName(userId);
         }
         return "";
     }
@@ -109,7 +112,7 @@ public class OverviewBean {
      */
     public String getFullName(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
-            return SQLDCOverview.getFullName(userId);
+            return SQLDCUtility.getFullName(userId);
         }
         return "";
     }
@@ -180,5 +183,48 @@ public class OverviewBean {
     */
 
     // Getters and Setters for use with JSPs
+
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setWgId(String wgId) {
+        this.wgId = wgId;
+    }
+
+    /**
+     * Get the sum of all financial entry values for the current user
+     *
+     * @return The sum of all entry values
+     */
+    public String getExpenseSum() {
+        int sumForUser = SQLDCFinancial.getTotalForUser(this.userId);
+        String sumString = String.format("%.2f", (sumForUser / 100d));
+
+        return sumString;
+    }
+
+    /**
+     * Get all open todos for the current user
+     *
+     * @return The number of open todos
+     */
+    public String getOpenTodosUser() {
+        int openTodos = SQLDCTodo.getOpenTodosPerUser(this.userId);
+
+        return String.valueOf(openTodos);
+    }
+
+    /**
+     * Get all open todos for the current users wg
+     *
+     * @return The number of open todos
+     */
+    public String getOpenTodosWg() {
+        int openTodos = SQLDCTodo.getOpenTodosPerWg(this.wgId);
+
+        return String.valueOf(openTodos);
+    }
 }
 

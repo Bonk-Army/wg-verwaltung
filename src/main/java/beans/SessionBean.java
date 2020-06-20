@@ -16,8 +16,8 @@ public class SessionBean {
 
         this.userId = userId;
         this.username = loginBean.getUsernameById(userId);
-        this.firstName = loginBean.getFirstName(userId);
-        this.lastName = loginBean.getLastName(userId);
+        this.firstName = loginBean.getFirstName(this.username);
+        this.lastName = loginBean.getLastName(this.username);
         this.wgId = loginBean.getWgIdByUserId(userId);
         this.wgName = loginBean.getWgNameByUserId(userId);
     }
@@ -60,5 +60,21 @@ public class SessionBean {
 
     public String getWgName() {
         return wgName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setWgId(String wgId) {
+        this.wgId = wgId;
+    }
+
+    public void setWgName(String wgName) {
+        this.wgName = wgName;
     }
 }
