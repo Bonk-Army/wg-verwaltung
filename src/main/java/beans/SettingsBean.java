@@ -128,7 +128,8 @@ public class SettingsBean {
 
     /**
      * Change the users password
-     * @param username The username of the user
+     *
+     * @param username    The username of the user
      * @param oldPassword The old password
      * @param newPassword The new password
      * @return If it was successful
@@ -138,7 +139,7 @@ public class SettingsBean {
         String pwsalt = SQLDCLogin.getPasswordSalt(username);
         String oldPasswordHash = PasswordHasher.hashPassword(oldPassword, pwsalt);
 
-        if(oldPasswordSavedHash.equals(oldPasswordHash)){
+        if (oldPasswordSavedHash.equals(oldPasswordHash)) {
             String newPasswordHash = PasswordHasher.hashPassword(newPassword, pwsalt);
 
             return SQLDCLogin.setPassword(username, newPasswordHash) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
@@ -163,5 +164,16 @@ public class SettingsBean {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    /**
+     * Check if the user has a wg
+     *
+     * @return true if he has a wg, false if not
+     */
+    public boolean getUserHasWg() {
+        String wgId = new LoginBean().getWgIdByUserId(this.userId);
+
+        return !wgId.isEmpty();
     }
 }
