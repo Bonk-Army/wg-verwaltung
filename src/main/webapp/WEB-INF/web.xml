@@ -118,6 +118,7 @@
         <url-pattern>/financial</url-pattern>
         <url-pattern>/clean</url-pattern>
         <url-pattern>/shopping</url-pattern>
+        <url-pattern>/settings</url-pattern>
     </servlet-mapping>
     <!-- Protected via Filter Servlet -->
     <servlet>
@@ -167,6 +168,14 @@
     <servlet-mapping>
         <servlet-name>Shopping</servlet-name>
         <url-pattern>/shoppingPage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Settings</servlet-name>
+        <jsp-file>/Pages/Protected/Settings.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Settings</servlet-name>
+        <url-pattern>/settingsPage</url-pattern>
     </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--

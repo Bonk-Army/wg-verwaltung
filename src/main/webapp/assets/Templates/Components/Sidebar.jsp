@@ -56,5 +56,11 @@
                 Impressum
             </a>
         </li>
+        <li>
+            <a href="/settings">
+                <i class="fas fa-cog"></i>
+                Einstellungen
+            </a>
+        </li>
     </ul>
 </nav>

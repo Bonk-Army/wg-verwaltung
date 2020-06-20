@@ -12,16 +12,19 @@
     <%@include file="../../assets/Templates/Imports/Fonts.jsp" %>
     <%@include file="../../assets/Templates/Imports/Bootstrap.jsp" %>
 
-    <title>Registrierung</title>
+    <title>Einstellungen</title>
 
-    <link rel="stylesheet" type="text/css" href="./assets/Styles/FAQ.css">
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Settings.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
-    <link rel="stylesheet" type="text/css" href="./assets/Styles/password.css">
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Password.css">
 
-    <script><%@include file="../../assets/Scripts/Settings.js" %></script>
-    <script><%@include file="../../assets/Scripts/Password.js" %></script>
 </head>
 <body>
-<%@include file="../../assets/Templates/Components/Register.jsp" %>
+<%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
+<%@include file="../../assets/Contents/Settings.jsp" %>
+
+<script><%@include file="../../assets/Scripts/Sidebar.js"%></script>
+<script><%@include file="../../assets/Scripts/Settings.js" %></script>
+<script><%@include file="../../assets/Scripts/Password.js" %></script>
 </body>
 </html>
