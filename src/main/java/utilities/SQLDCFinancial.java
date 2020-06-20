@@ -179,7 +179,7 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
      */
     public static int getTotalForUser(String userId) {
         try {
-            ResultSet rs = executeQuery(("SELECT SUM(value) FROM financial WHERE userId = "
+            ResultSet rs = executeQuery(("SELECT SUM(value) FROM financial WHERE createdBy = "
                     + Integer.valueOf(userId) + " AND isActive = 1"));
 
             while (rs.next()) {

@@ -9,9 +9,6 @@ import java.util.*;
  */
 public class FinancialBean {
     private String userId = "";
-    // Variables
-    // private UserFinancial userFinancial;
-    // private WgFinancial wgFinancial;
 
     /*
       /$$$$$$                                 /$$             /$$
