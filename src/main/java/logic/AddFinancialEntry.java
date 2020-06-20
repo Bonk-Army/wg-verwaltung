@@ -44,6 +44,7 @@ public class AddFinancialEntry extends HttpServlet {
         String reason = request.getParameter("reason");
         String value = request.getParameter("value");
         String dateString = request.getParameter("date");
+        String sign = request.getParameter("sign"); //Vorzeichen
         Date date = null;
 
         try {
@@ -52,7 +53,9 @@ public class AddFinancialEntry extends HttpServlet {
             e.printStackTrace();
         }
 
-        ErrorCodes status = financialBean.addFinancialEntry(reason, value, userId, wgId, date);
+        String valueWithSign = (sign + value);
+
+        ErrorCodes status = financialBean.addFinancialEntry(reason, valueWithSign, userId, wgId, date);
 
         switch (status) {
             case SUCCESS:
