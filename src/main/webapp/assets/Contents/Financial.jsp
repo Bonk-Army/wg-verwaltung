@@ -11,6 +11,7 @@
         <tr>
             <th/>
             <th scope="col">Wann?</th>
+            <th scope="col">Titel</th>
             <th scope="col">Grund</th>
             <th scope="col">Betrag</th>
             <th scope="col">von wem?</th>
@@ -31,6 +32,7 @@
                 </form>
             </td>
             <td>${expense.dateCreated}</td>
+            <td>${expense.title}</td>
             <td>${expense.reason}</td>
             <td>${expense.value}</td>
             <td>${expense.createdBy}</td>
