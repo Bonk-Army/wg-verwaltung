@@ -18,7 +18,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${financialBean.entries}" var="expense">
+        <c:forEach items="${financialBean.getEntries(5)}" var="expense">
         <tr class="${expense.colorClass}">
             <td>
                 <form action="removeLogic" method="POST">
