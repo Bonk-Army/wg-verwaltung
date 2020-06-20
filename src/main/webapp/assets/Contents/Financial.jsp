@@ -14,7 +14,7 @@
         <tbody>
         <tr>
             <c:forEach items="${financialBean.totalPerUser}" var="user">
-                <td>${user.sum}</td>
+                <td>${user.sum}&euro;</td>
             </c:forEach>
         </tr>
         </tbody>
@@ -43,12 +43,12 @@
                             class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
                             data-target="#removeModal" ${expense.buttonHideStatus}>&times;
                     </button>
-                    <button title="Expense remove check" id="remove${expense.entryId}" type="submit" style="display: none;"></button>
+                    <button title="Expense remove check" id="remove${expense.entryId}" class="remove" type="submit" style="display: none;"></button>
                 </form>
             </td>
             <td>${expense.dateCreated}</td>
             <td>${expense.reason}</td>
-            <td>${expense.value}</td>
+            <td>${expense.value}&euro;</td>
             <td>${expense.createdBy}</td>
         </tr>
         </c:forEach>
