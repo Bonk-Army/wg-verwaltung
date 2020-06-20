@@ -22,16 +22,16 @@
         <tr class="${expense.colorClass}">
             <td>
                 <form action="removeLogic" method="POST">
-                    <input type="text" name="todoId" hidden="hidden" value="${expense.expenseId}">
+                    <input type="text" name="todoId" hidden="hidden" value="${expense.entryId}">
 
-                    <button title="Expense remove check" onclick="removeExpense(${expense.expenseId})"
+                    <button title="Expense remove check" onclick="removeExpense(${expense.entryId})"
                             class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
                             data-target="#removeModal" ${expense.buttonHideStatus}>&times;
                     </button>
-                    <button title="Expense remove check" id="remove${expense.expenseId}" type="submit" style="display: none;"></button>
+                    <button title="Expense remove check" id="remove${expense.entryId}" type="submit" style="display: none;"></button>
                 </form>
             </td>
-            <td title="hinzugef&uuml;gt am ${expense.dateCreated} von ${expense.creator}">${expense.date}</td>
+            <td title="hinzugef&uuml;gt am ${expense.dateCreated} von ${expense.createdBy}">${expense.date}</td>
             <td>${expense.reason}</td>
             <td>${expense.plus}</td>
             <td>${expense.sum}</td>

@@ -65,24 +65,25 @@ public class SQLDCShopping extends SQLDatabaseConnection {
         List<Map<String, String>> requestList = new ArrayList<Map<String, String>>();
 
         try {
-            ResultSet rs = executeQuery(("SELECT article, amount, createdBy, requestedBy, dateDue, dateCreated, isDone, uniqueID FROM shopping WHERE wgId=" + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT article, amount, createdBy, requestedBy, dateDue, dateCreated, uniqueID FROM shopping WHERE wgId="
+                    + Integer.valueOf(wgId) + " AND isActive = 1"));
 
-            while(rs.next()){
+            while (rs.next()) {
                 Map<String, String> currentArticle = new HashMap<String, String>();
 
                 currentArticle.put("article", rs.getString(1));
                 currentArticle.put("amount", rs.getString(2));
                 currentArticle.put("dateDue", DateFormatter.dateToString(rs.getDate(5)));
                 currentArticle.put("dateCreated", DateFormatter.dateToString(rs.getDate(6)));
-                currentArticle.put("requestId", String.valueOf(rs.getInt(8)));
+                currentArticle.put("requestId", String.valueOf(rs.getInt(7)));
 
                 String createdById = String.valueOf(rs.getInt(3));
                 String requestedById = String.valueOf(rs.getInt(4));
                 String createdBy = SQLDCLogin.getUsername(createdById);
                 String requestedBy = SQLDCLogin.getUsername(requestedById);
 
-                currentArticle.put("requestedBy", getNameString(requestedBy));
-                currentArticle.put("createdBy", getNameString(createdBy));
+                currentArticle.put("requestedBy", SQLDCUtility.getNameString(requestedBy));
+                currentArticle.put("createdBy", SQLDCUtility.getNameString(createdBy));
 
                 // Color the requests based on their priority
                 Date currentDate = new Date();
@@ -101,35 +102,12 @@ public class SQLDCShopping extends SQLDatabaseConnection {
                     currentArticle.put("colorClass", "");
                 }
 
-
-                Boolean isDone = rs.getBoolean(7);
-
-                if(!isDone){
-                    requestList.add(currentArticle);
-                }
+                requestList.add(currentArticle);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return requestList;
     }
 
-    /**
-     * Concatenates First name and the first letter of the last name
-     *
-     * @param username The username of the user
-     * @return The name string
-     */
-    public static String getNameString(String username) {
-        String firstName;
-        String lastName;
-        try {
-            firstName = SQLDCLogin.getFirstName(username);
-            lastName = SQLDCLogin.getLastName(username);
-            return firstName + " " + lastName.substring(0, 1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
 }

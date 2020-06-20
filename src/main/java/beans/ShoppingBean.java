@@ -69,7 +69,7 @@ public class ShoppingBean {
      */
     public String getNameString(String username) {
         if (RegexHelper.checkString(username)) {
-            return SQLDCTodo.getNameString(username);
+            return SQLDCUtility.getNameString(username);
         }
 
         return "";

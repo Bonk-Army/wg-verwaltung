@@ -12,10 +12,10 @@ public class SQLDCTodo extends SQLDatabaseConnection {
     /**
      * Create a to-do in the database
      *
-     * @param task    The task of the user
-     * @param userId  The ID of the user that is assigned to this task
-     * @param wgId    The ID of the WG
-     * @param dateDue The date til the task should be done
+     * @param task        The task of the user
+     * @param userId      The ID of the user that is assigned to this task
+     * @param wgId        The ID of the WG
+     * @param dateDue     The date til the task should be done
      * @param createdById The id of the user that created the todo
      * @return If the to-do has been created successfully. If not, the user has to be informed!
      */
@@ -48,12 +48,13 @@ public class SQLDCTodo extends SQLDatabaseConnection {
         deactivateOldToDos();
         List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
         try {
-            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE wgId = " + Integer.valueOf(wgId) + " ORDER BY isDone, dateDue ASC"));
+            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE wgId = "
+                    + Integer.valueOf(wgId) + " AND isActive = 1 ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
                 Map<String, String> currentTodo = new HashMap<String, String>();
                 currentTodo.put("task", rs.getString(1));
                 currentTodo.put("isDone", String.valueOf(rs.getBoolean(5)));
-                currentTodo.put("todoId", rs.getString(8));
+                currentTodo.put("todoId", rs.getString(7));
 
                 // Parameters for better visualization of the status of every todo
 
@@ -89,18 +90,14 @@ public class SQLDCTodo extends SQLDatabaseConnection {
 
                 // Text formatting
                 String userId = rs.getString(2);
-                String creatorId = rs.getString(7);
+                String creatorId = rs.getString(6);
                 String assignee = SQLDCLogin.getUsername(userId);
                 String creator = SQLDCLogin.getUsername(creatorId);
 
-                currentTodo.put("assignee", getNameString(assignee));
-                currentTodo.put("creator", getNameString(creator));
+                currentTodo.put("assignee", SQLDCUtility.getNameString(assignee));
+                currentTodo.put("creator", SQLDCUtility.getNameString(creator));
 
-
-                Boolean isActive = rs.getBoolean(6);
-                if(isActive){
-                    todoList.add(currentTodo);
-                }
+                todoList.add(currentTodo);
             }
             return todoList;
         } catch (Exception e) {
@@ -190,30 +187,30 @@ public class SQLDCTodo extends SQLDatabaseConnection {
     }
 
     /**
-     * Concatenates First name and the first letter of the last name
-     *
-     * @param username The username of the user
-     * @return The name string
+     * WGV-115
+     * Deactivates done ToDos older than 30 days
      */
-    public static String getNameString(String username) {
-        String firstName;
-        String lastName;
-        try {
-            firstName = SQLDCLogin.getFirstName(username);
-            lastName = SQLDCLogin.getLastName(username);
-            return firstName + " " + lastName.substring(0, 1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
+    public static void deactivateOldToDos() {
+        executeQuery("UPDATE todo SET isActive=0 WHERE isDone=1 AND dateDue < DATE_ADD(CURDATE(), INTERVAL -30 DAY);");
     }
 
     /**
-     * WGV-115
-     * Deactivates done ToDos older than 30 days
+     * Get the wgId of a todo
      *
+     * @param todoId The todoId of the todo
+     * @return The wgId associated to the todo
      */
-    public static void deactivateOldToDos () {
-        executeQuery("UPDATE todo SET isActive=0 WHERE isDone=1 AND dateDue < DATE_ADD(CURDATE(), INTERVAL -30 DAY);");
+    public static String getWgIdOfTodo(String todoId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT wgId FROM todo WHERE uniqueID = " + Integer.valueOf(todoId)));
+
+            while (rs.next()) {
+                return String.valueOf(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
     }
 }

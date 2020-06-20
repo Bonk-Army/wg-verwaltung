@@ -83,7 +83,7 @@ public class OverviewBean {
      */
     public String getFirstName(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
-            return SQLDCOverview.getFirstName(userId);
+            return SQLDCUtility.getFirstName(userId);
         }
         return "";
     }
@@ -96,7 +96,7 @@ public class OverviewBean {
      */
     public String getLastName(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
-            return SQLDCOverview.getLastName(userId);
+            return SQLDCUtility.getLastName(userId);
         }
         return "";
     }
@@ -109,7 +109,7 @@ public class OverviewBean {
      */
     public String getFullName(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
-            return SQLDCOverview.getFullName(userId);
+            return SQLDCUtility.getFullName(userId);
         }
         return "";
     }
