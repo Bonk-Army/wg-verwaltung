@@ -102,8 +102,6 @@ public class FinancialBean {
             int sumForUser = SQLDCFinancial.getTotalForUser(userId);
             String sumString = String.format("%.2f", (sumForUser / 100d));
 
-            System.out.println(sumString);
-
             String username = SQLDCLogin.getUsername(userId);
             user.put("name", SQLDCUtility.getNameString(username));
             user.put("sum", sumString);
