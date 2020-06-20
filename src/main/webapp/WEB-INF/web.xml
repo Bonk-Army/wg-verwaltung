@@ -27,7 +27,7 @@
         |__ /sendContactRequestLogic | Servlet: ContactRequest         | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /removeLogic           | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
         |__ /removeShoppingRequestLogic | Servlet: RemoveShoppingRequest | Zuständig: @PM     | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addShoppingRequestLogic | Servlet: AddShoppingRequest     | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addShoppingRequestLogic | Servlet: AddShoppingRequest     | Zuständig:  @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^

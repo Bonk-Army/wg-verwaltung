@@ -15,8 +15,8 @@
                 Artikel eingeben
             </div>
             <form action="addShoppingRequestLogic" method="POST">
-                <label for="todo" class="sr-only">Artikel</label>
-                <input id="todo" class="form-control" placeholder="Artikel" name="article" type="text" required>
+                <label for="article" class="sr-only">Artikel</label>
+                <input id="article" class="form-control" placeholder="Artikel" name="article" type="text" required>
                 <label for="amount" class="sr-only">Menge</label>
                 <label for="amount" class="sr-only">Menge</label>
                 <input id="amount" class="form-control" placeholder="Wie viel brauchst du?" name="amount" type="text" required>

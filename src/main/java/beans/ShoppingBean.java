@@ -8,7 +8,7 @@ import java.util.*;
  * Bean used for the shopping plan page
  */
 public class ShoppingBean {
-    String userId = "";
+    private String userId = "";
 
     public ShoppingBean() {
     }
@@ -88,6 +88,10 @@ public class ShoppingBean {
     */
 
     // Getters and Setters for use with JSPs
+
+    public void setUserId(String userId){
+        this.userId = userId;
+    }
 
     /**
      * Get all open shopping requests for the wg of the currently logged in user
