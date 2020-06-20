@@ -18,7 +18,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${financialBean.expense}" var="todo">
+        <c:forEach items="${financialBean.entries}" var="expense">
         <tr class="${expense.colorClass}">
             <td>
                 <form action="removeLogic" method="POST">
@@ -37,7 +37,7 @@
             <td>${expense.sum}</td>
             <td>${expense.assignee}</td>
         </tr>
-        </tbody>
         </c:forEach>
+        </tbody>
     </table>
 </div>
