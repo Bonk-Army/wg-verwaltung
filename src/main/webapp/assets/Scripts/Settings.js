@@ -1,9 +1,9 @@
 $(document).ready(function () {
-    $('#visibleSaveButton').on('click', function () {
+    $('#visibleSavePasswordButton').on('click', function () {
         let password = document.querySelector('#password').value;
         let repeatedPassword = document.querySelector('#password2').value;
         if(password === repeatedPassword){
-            $('#saveButton').click();
+            $('#savePasswordButton').click();
         } else {
             window.alert(unescape("Deine Passw%F6rter sind nicht identisch.%0A"));
         }

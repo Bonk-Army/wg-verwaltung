@@ -18,3 +18,7 @@ label {
     margin-top: 8px;
     margin-bottom: 4px;
 }
+
+button.leave {
+    background-color: #cc0000;
+}
