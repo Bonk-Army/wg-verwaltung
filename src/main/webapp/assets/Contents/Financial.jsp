@@ -12,7 +12,6 @@
             <th/>
             <th scope="col">Wann?</th>
             <th scope="col">Grund</th>
-            <th scope="col">+ / -</th>
             <th scope="col">Betrag</th>
             <th scope="col">von wem?</th>
         </tr>
@@ -31,11 +30,10 @@
                     <button title="Expense remove check" id="remove${expense.entryId}" type="submit" style="display: none;"></button>
                 </form>
             </td>
-            <td title="hinzugef&uuml;gt am ${expense.dateCreated} von ${expense.createdBy}">${expense.date}</td>
+            <td>${expense.dateCreated}</td>
             <td>${expense.reason}</td>
-            <td>${expense.plus}</td>
-            <td>${expense.sum}</td>
-            <td>${expense.assignee}</td>
+            <td>${expense.value}</td>
+            <td>${expense.createdBy}</td>
         </tr>
         </c:forEach>
         </tbody>
