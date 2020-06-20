@@ -1,9 +1,6 @@
 package beans;
 
-import utilities.ErrorCodes;
-import utilities.RegexHelper;
-import utilities.SQLDCFinancial;
-import utilities.SQLDCLogin;
+import utilities.*;
 
 import java.util.*;
 
@@ -108,7 +105,8 @@ public class FinancialBean {
             int sumForUser = SQLDCFinancial.getTotalForUser(userId);
             String sumString = String.valueOf((sumForUser / 100));
 
-            user.put("username", SQLDCLogin.getUsername(userId));
+            String username = SQLDCLogin.getUsername(userId);
+            user.put("name", SQLDCUtility.getNameString(username));
             user.put("sum", sumString);
         }
 
