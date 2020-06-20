@@ -105,6 +105,8 @@ public class FinancialBean {
             String username = SQLDCLogin.getUsername(userId);
             user.put("name", SQLDCUtility.getNameString(username));
             user.put("sum", sumString);
+
+            userList.add(user);
         }
 
         return userList;
