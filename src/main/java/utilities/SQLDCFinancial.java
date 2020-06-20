@@ -53,7 +53,7 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
 
                 currentEntry.put("reason", rs.getString(1));
 
-                String valueString = String.valueOf((rs.getInt(2) / 100));
+                String valueString = String.format("%.2f", (rs.getInt(2) / 100d));
                 String createdDateString = DateFormatter.dateToString(rs.getDate(3));
 
                 if (rs.getInt(2) < 0) {
