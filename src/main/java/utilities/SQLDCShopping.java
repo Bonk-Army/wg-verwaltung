@@ -66,7 +66,7 @@ public class SQLDCShopping extends SQLDatabaseConnection {
 
         try {
             ResultSet rs = executeQuery(("SELECT article, amount, createdBy, requestedBy, dateDue, dateCreated, uniqueID FROM shopping WHERE wgId="
-                    + Integer.valueOf(wgId) + " AND isActive = 1"));
+                    + Integer.valueOf(wgId) + " AND isDone = 0"));
 
             while (rs.next()) {
                 Map<String, String> currentArticle = new HashMap<String, String>();
