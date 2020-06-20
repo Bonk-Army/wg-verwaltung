@@ -1,6 +1,5 @@
 <div id="content">
     <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
-    <jsp:useBean id="fail" class="beans.DemoBean"/>
     <jsp:useBean id="overview" class="beans.OverviewBean"/>
     <jsp:setProperty name="overview" property="userId" value="${sessionBean.userId}"/>
     <jsp:setProperty name="overview" property="wgId" value="${sessionBean.wgId}"/>
@@ -22,8 +21,4 @@
     <h5>davon dir zugeordnet: ${overview.openTodosUser}</h5>
 
     <canvas id="myChartTodo" width="auto" height="40"></canvas>
-    <br>
-    <hr>
-    <br>
-    Letzter Login <%= fail.getDate() %>
 </div>
