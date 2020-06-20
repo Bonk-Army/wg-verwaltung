@@ -222,7 +222,8 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      */
     public static int getOpenTodosPerUser(String userId) {
         try {
-            ResultSet rs = executeQuery(("SELECT COUNT(uniqueID) FROM todo WHERE userId=" + Integer.valueOf(userId)));
+            ResultSet rs = executeQuery(("SELECT COUNT(uniqueID) FROM todo WHERE userId="
+                    + Integer.valueOf(userId) + " AND isDone = 0 AND isActive = 1"));
 
             while (rs.next()) {
                 return rs.getInt(1);
@@ -242,7 +243,8 @@ public class SQLDCTodo extends SQLDatabaseConnection {
      */
     public static int getOpenTodosPerWg(String wgId) {
         try {
-            ResultSet rs = executeQuery(("SELECT COUNT(uniqueID) FROM todo WHERE wgId=" + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT COUNT(uniqueID) FROM todo WHERE wgId="
+                    + Integer.valueOf(wgId) + " AND isDone = 0 AND isActive = 1"));
 
             while (rs.next()) {
                 return rs.getInt(1);
