@@ -10,6 +10,27 @@ body {
     justify-content: center;
 }
 
+.table{
+    color: aliceblue;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+tr.tooLate {
+    background-color: #d75a5a;
+}
+
+tr.late {
+    background-color: #ffc658;
+}
+
+#addShopping, button.remove{
+    margin-bottom: 10px;
+    max-width: 62px;
+}
+
+
 .form-signin {
     width: 100%;
     max-width: 330px;
@@ -18,11 +39,12 @@ body {
 .form-signin .checkbox {
     font-weight: 400;
 }
-.form-signin .form-control {
+.form-control {
     position: relative;
     box-sizing: border-box;
     height: auto;
     padding: 10px;
+    margin-bottom: 10px;
     font-size: 16px;
 }
 .form-signin .form-control:focus {
@@ -40,4 +62,13 @@ body {
 }
 .mt-custom {
     margin-top: 10%;
+}
+
+.modal-content {
+    background-color: #272525;
+    color: aliceblue;
+}
+
+.close {
+    color: aliceblue;
 }

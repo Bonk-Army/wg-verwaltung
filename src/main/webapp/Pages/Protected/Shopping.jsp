@@ -14,7 +14,7 @@
 
     <title>Einkaufsliste</title>
 
-    <link rel="stylesheet" type="text/css" href="./assets/Styles/ToDo.css">
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Shopping.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
 </head>
 <body>
