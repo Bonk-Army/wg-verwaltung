@@ -1,5 +1,6 @@
 package logic;
 
+import beans.SessionBean;
 import beans.ShoppingBean;
 import beans.ToDoBean;
 import utilities.ErrorCodes;
@@ -27,11 +28,13 @@ public class RemoveShoppingRequest extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ShoppingBean shoppingBean = new ShoppingBean();
+        SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
         String requestId = request.getParameter("requestId");
+        String wgId = sessionBean.getWgId();
 
-        ErrorCodes status = shoppingBean.setRequestDone(requestId);
+        ErrorCodes status = shoppingBean.setRequestDone(requestId, wgId);
 
         switch (status) {
             case SUCCESS:

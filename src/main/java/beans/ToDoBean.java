@@ -93,8 +93,16 @@ public class ToDoBean {
      * @param todoId The todo to be set
      * @return If it was successful
      */
-    public ErrorCodes setTodoDone(String todoId) {
-        return SQLDCTodo.setTodoDone(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+    public ErrorCodes setTodoDone(String todoId, String wgId) {
+        if (RegexHelper.checkString(todoId)) {
+            String savedWgId = SQLDCTodo.getWgIdOfTodo(todoId);
+
+            if (savedWgId.equals(wgId)) {
+                return SQLDCTodo.setTodoDone(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            }
+        }
+
+        return ErrorCodes.WRONGENTRY;
     }
 
     /**

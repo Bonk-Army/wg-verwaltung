@@ -45,6 +45,9 @@ public class JoinWG extends HttpServlet {
         switch (status) {
             case SUCCESS:
                 //Show success
+                // Change wgId and wgName in the Session Bean
+                sessionBean.setWgId(settingsBean.getWgIdFromUserId(userId));
+                sessionBean.setWgName(settingsBean.getWgNameFromUserID(userId));
                 request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
                 break;
             case FAILURE:

@@ -48,6 +48,9 @@ public class CreateWG extends HttpServlet {
 
         switch (status) {
             case SUCCESS:
+                // Change wgId and wgName in the Session Bean
+                sessionBean.setWgId(settingsBean.getWgIdFromUserId(userId));
+                sessionBean.setWgName(wgName);
                 //Show success
                 request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
                 break;
