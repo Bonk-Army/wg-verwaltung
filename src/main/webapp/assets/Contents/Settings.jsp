@@ -23,7 +23,7 @@
         </c:when>
         <c:otherwise>
             <form action="/wgverwaltung">
-                <button id="joinWg" class="btn btn-lg btn-primary btn-block" type="submit">WG beitreten oder neue WG erstellen</button>
+                <button id="joinWg" class="btn btn-lg btn-primary btn-block join" type="submit">WG beitreten oder neue WG erstellen</button>
             </form>
         </c:otherwise>
     </c:choose>
