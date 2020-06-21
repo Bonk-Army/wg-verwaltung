@@ -9,3 +9,9 @@ $(document).ready(function () {
         }
     });
 });
+
+function leaveWg() {
+    $( "#leaveWG" ).click(function() {
+        $('#leaveWgButton').click();
+    });
+}

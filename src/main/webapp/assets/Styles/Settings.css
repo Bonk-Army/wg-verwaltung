@@ -24,7 +24,7 @@ label {
     margin-bottom: 4px;
 }
 
-button.leave {
+button.leave, button.btn-primary:focus {
     background-color: #cc0000;
     border-color: #cc0000;
 }
@@ -42,4 +42,13 @@ button.join {
 button.join:hover {
     background-color: #0cad09;
     border-color: #0cad09;
+}
+
+.modal-content {
+    background-color: #272525;
+    color: aliceblue;
+}
+
+.close {
+    color: aliceblue;
 }

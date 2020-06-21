@@ -20,7 +20,10 @@
             <label for="wg">WG</label>
             <input id="wg" class="form-control" placeholder="${sessionBean.wgName}" readonly="readonly"/>
             <form action="leaveWgLogic" method="GET">
-                <button id="leaveWg" class="btn btn-lg btn-primary btn-block leave" type="submit">Aktuelle WG verlassen</button>
+                <button id="leaveWgButtonModal" onclick="leaveWg()" class="btn btn-lg btn-primary btn-block leave" type="button"
+                        data-toggle="modal" data-target="#leaveWgModal">Aktuelle WG verlassen
+                </button>
+                <button id="leaveWgButton" class="btn btn-lg btn-primary btn-block leave" type="submit" style="display: none">Abschicken</button>
             </form>
         </c:when>
         <c:otherwise>
