@@ -409,7 +409,7 @@ public class SQLDCLogin extends SQLDatabaseConnection {
         List<Map<String, String>> nameList = new ArrayList<Map<String, String>>();
 
         try {
-            ResultSet rs = executeQuery(("SELECT username, firstName, lastName FROM user WHERE wgId="
+            ResultSet rs = executeQuery(("SELECT username, firstName, lastName FROM users WHERE wgId="
                     + Integer.valueOf(wgId) + " ORDER BY firstName"));
 
             while (rs.next()) {
@@ -441,7 +441,7 @@ public class SQLDCLogin extends SQLDatabaseConnection {
         List<Map<String, String>> nameList = new ArrayList<Map<String, String>>();
 
         try {
-            ResultSet rs = executeQuery(("SELECT uniqueID, firstName, lastName FROM user WHERE wgId="
+            ResultSet rs = executeQuery(("SELECT uniqueID, firstName, lastName FROM users WHERE wgId="
                     + Integer.valueOf(wgId) + " ORDER BY firstName"));
 
             while (rs.next()) {
