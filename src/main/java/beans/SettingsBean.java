@@ -171,8 +171,6 @@ public class SettingsBean {
      * @return If it was successful
      */
     public ErrorCodes leaveWg(String userId) {
-        // TODO: Replace user data with dummy data in wg (Ticket WGV-133)
-
         return SQLDCLogin.clearWg(userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
     }
 

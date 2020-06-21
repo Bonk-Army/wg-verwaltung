@@ -199,7 +199,7 @@ public class OverviewBean {
      * @return The sum of all entry values
      */
     public String getExpenseSum() {
-        int sumForUser = SQLDCFinancial.getTotalForUser(this.userId);
+        int sumForUser = SQLDCFinancial.getTotalForUser(this.userId, this.wgId);
         String sumString = String.format("%.2f", (sumForUser / 100d));
 
         return sumString;
@@ -211,7 +211,7 @@ public class OverviewBean {
      * @return The number of open todos
      */
     public String getOpenTodosUser() {
-        int openTodos = SQLDCTodo.getOpenTodosPerUser(this.userId);
+        int openTodos = SQLDCTodo.getOpenTodosPerUser(this.userId, this.wgId);
 
         return String.valueOf(openTodos);
     }

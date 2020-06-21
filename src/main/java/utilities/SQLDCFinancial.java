@@ -172,15 +172,16 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
     }
 
     /**
-     * Return the sum of all entries of a user
+     * Return the sum of all entries of a user for the current wg
      *
      * @param userId The userId of the user
+     * @param wgId   The wgId of the current wg of the user
      * @return An integer with the sum or 0 in case of an error
      */
-    public static int getTotalForUser(String userId) {
+    public static int getTotalForUser(String userId, String wgId) {
         try {
             ResultSet rs = executeQuery(("SELECT SUM(value) FROM financial WHERE createdBy = "
-                    + Integer.valueOf(userId) + " AND isActive = 1"));
+                    + Integer.valueOf(userId) + " AND isActive = 1 AND wgId = " + Integer.valueOf(wgId)));
 
             while (rs.next()) {
                 return rs.getInt(1);
