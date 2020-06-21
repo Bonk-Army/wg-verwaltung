@@ -12,9 +12,25 @@ h2 {
     padding: 10px;
     margin-bottom: 10px;
     font-size: 16px;
+    max-width: 500px;
+}
+
+.btn.btn-lg.btn-primary.btn-block {
+    max-width: 500px;
+    text-align: right;
 }
 
 label {
     margin-top: 8px;
     margin-bottom: 4px;
+}
+
+button.leave {
+    background-color: #cc0000;
+    border-color: #cc0000;
+}
+
+button.leave:hover {
+    background-color: #a10101;
+    border-color: #a10101;
 }
