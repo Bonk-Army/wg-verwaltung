@@ -15,6 +15,19 @@ a:focus {
     text-decoration: none;
     transition: all 0.3s;
 }
+
+button#logout{
+    background-color: #272525;
+    border-color: #272525;
+    max-width: 240px;
+    margin-left: 5px;
+}
+
+button#logout:hover{
+    background-color: #1d1c1c;
+    border-color: #1d1c1c;
+}
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
