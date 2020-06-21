@@ -42,6 +42,9 @@ public class ChangeName extends HttpServlet {
 
         switch (status) {
             case SUCCESS:
+                // Update fields on sessionBean
+                sessionBean.setFirstName(firstName);
+                sessionBean.setLastName(lastName);
                 // Show success page
                 response.sendRedirect("/settings");
                 break;

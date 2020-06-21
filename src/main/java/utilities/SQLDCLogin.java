@@ -298,7 +298,7 @@ public class SQLDCLogin extends SQLDatabaseConnection {
      */
     public static boolean setName(String userId, String firstName, String lastName) {
         try {
-            executeQuery("UPDATE users SET firstName = '" + firstName + "' AND lastName = '" + lastName + "' WHERE uniqueID = " + Integer.valueOf(userId));
+            executeQuery("UPDATE users SET firstName = '" + firstName + "', lastName = '" + lastName + "' WHERE uniqueID = " + Integer.valueOf(userId));
 
             return true;
         } catch (Exception e) {
