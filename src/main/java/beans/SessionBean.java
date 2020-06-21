@@ -4,6 +4,8 @@ import models.User;
 import utilities.ErrorCodes;
 import utilities.SQLDCLogin;
 
+import java.util.concurrent.ScheduledExecutorService;
+
 /**
  * Session bean that keeps relevant user data to authenticate the user and fetch data more quickly
  */
@@ -40,16 +42,20 @@ public class SessionBean {
      * @return if it was successful
      */
     public ErrorCodes logout() {
-        this.loggedIn = false;
-        this.userId = "";
-        this.username = "";
-        this.firstName = "";
-        this.lastName = "";
-        this.wgId = "";
-        this.wgName = "";
-        this.email = "";
+        ErrorCodes status = SQLDCLogin.setCookiePostfix(this.username, "") ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
 
-        return SQLDCLogin.setCookiePostfix(this.username, "") ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+        if (status == ErrorCodes.SUCCESS) {
+            this.loggedIn = false;
+            this.userId = "";
+            this.username = "";
+            this.firstName = "";
+            this.lastName = "";
+            this.wgId = "";
+            this.wgName = "";
+            this.email = "";
+        }
+
+        return status;
     }
 
     /*
