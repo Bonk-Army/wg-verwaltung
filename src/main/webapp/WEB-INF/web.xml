@@ -31,6 +31,7 @@
         |__ /removeFinancialEntryLogic  | Servlet: RemoveFinancialEntry     | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /changePasswordLogic        | Servlet: ChangePassword           | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /changeNameLogic            | Servlet: ChangeName               | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /leaveWgLogic               | Servlet: LeaveWG                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -322,6 +323,14 @@
     <servlet-mapping>
         <servlet-name>ChangeNameLogic</servlet-name>
         <url-pattern>/changeNameLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LeaveWGLogic</servlet-name>
+        <servlet-class>logic.LeaveWG</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LeaveWGLogic</servlet-name>
+        <url-pattern>/leaveWgLogic</url-pattern>
     </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--
