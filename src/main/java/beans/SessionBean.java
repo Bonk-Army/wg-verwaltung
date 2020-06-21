@@ -1,6 +1,7 @@
 package beans;
 
 import models.User;
+import utilities.ErrorCodes;
 import utilities.SQLDCLogin;
 
 /**
@@ -31,6 +32,24 @@ public class SessionBean {
     }
 
     public SessionBean() {
+    }
+
+    /**
+     * Logs the user out
+     *
+     * @return if it was successful
+     */
+    public ErrorCodes logout() {
+        this.loggedIn = false;
+        this.userId = "";
+        this.username = "";
+        this.firstName = "";
+        this.lastName = "";
+        this.wgId = "";
+        this.wgName = "";
+        this.email = "";
+
+        return SQLDCLogin.setCookiePostfix(this.username, "") ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
     }
 
     /*
