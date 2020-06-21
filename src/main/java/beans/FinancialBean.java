@@ -114,10 +114,16 @@ public class FinancialBean {
 
             currentUser.put("nameString", user.get("nameString"));
 
-            int sum = sumPerUserById.get(user.get("userId"));
-            String sumString = String.format("%.2f", (sum / 100d));
+            // If the user has not had any expenses yet, he is not in the sumPerUserById map and
+            // the sum fetching would fail, hence checking if the user exists in the map
+            if(sumPerUserById.keySet().contains(user.get("userId"))){
+                int sum = sumPerUserById.get(user.get("userId"));
+                String sumString = String.format("%.2f", (sum / 100d));
 
-            currentUser.put("sum", sumString);
+                currentUser.put("sum", sumString);
+            } else {
+                currentUser.put("sum", "0.00");
+            }
 
             userList.add(currentUser);
         }
