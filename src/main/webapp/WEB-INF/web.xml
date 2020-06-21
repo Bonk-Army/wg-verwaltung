@@ -8,51 +8,52 @@
     * ___
         |
         |__ ^^-^^
-        |__ LOGIN                  |                                   | Zuständig : @NH      | Mapped by @NH | Zuständig für Inhalt @KA | Initial
-        |__ /                      | JSP Page : Login                  | Zuständig : @DK      | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /register              | JSP Page : Register               | Zuständig : @DK      | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /wgverwaltung          | JSP Page : WGVerwaltung           | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ LOGIN                       |                                   | Zuständig : @NH      | Mapped by @NH | Zuständig für Inhalt @KA | Initial
+        |__ /                           | JSP Page : Login                  | Zuständig : @DK      | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /register                   | JSP Page : Register               | Zuständig : @DK      | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ ^^-^^
         |
         |__ ^^-^^
-        |__ LOGIC                  | Package : "logic."                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /loginLogic            | Servlet : Login                   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /reset                 | Servlet : Reset                   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /resetComplete         | Servlet : ResetComplete           | Zuständig:  @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /verify                | Servlet : Verify                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /joinWGLogic           | Servlet : JoinWG                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /createWGLogic         | Servlet : CreateWG                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addTodoLogic          | Servlet : ToDo                    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /setDoneLogic          | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /sendContactRequestLogic | Servlet: ContactRequest         | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /removeLogic           | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
-        |__ /removeShoppingRequestLogic | Servlet: RemoveShoppingRequest |Zuständig: @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addShoppingRequestLogic | Servlet: AddShoppingRequest     | Zuständig:  @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addFinancialEntryLogic| Servlet: AddFinancialEntry        | Zuständig:  @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /removeFinancialEntryLogic| Servlet: RemoveFinancialEntry  | Zuständig:  @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ LOGIC                       | Package : "logic."                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /loginLogic                 | Servlet : Login                   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /reset                      | Servlet : Reset                   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /resetComplete              | Servlet : ResetComplete           | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /verify                     | Servlet : Verify                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /joinWGLogic                | Servlet : JoinWG                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /createWGLogic              | Servlet : CreateWG                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addTodoLogic               | Servlet : ToDo                    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /setDoneLogic               | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /sendContactRequestLogic    | Servlet: ContactRequest           | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /removeLogic                | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
+        |__ /removeShoppingRequestLogic | Servlet: RemoveShoppingRequest    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addShoppingRequestLogic    | Servlet: AddShoppingRequest       | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addFinancialEntryLogic     | Servlet: AddFinancialEntry        | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /removeFinancialEntryLogic  | Servlet: RemoveFinancialEntry     | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
-        |__ GUI                    |                                   | Zuständig : @KA/LK   | Mapped by @NH                            | Initial
-        |__ /home                  | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /financial             | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /todo                  | JSP Page : ToDo                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /clean                 | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /shopping              | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /faq                   | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /contact               | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /impressum             | JSP Page : Impressum              | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ GUI                         |                                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /home                       | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /financial                  | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @KA | Initial
+        |__ /todo                       | JSP Page : ToDo                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /clean                      | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /shopping                   | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @KA | Initial
+        |__ /faq                        | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /contact                    | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /impressum                  | JSP Page : Impressum              | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /settings                   | JSP Page : Settings               | Zuständig : @KA/LK   | Mapped by @KA | Zuständig für Inhalt @KA | Initial
+        |__ /wgverwaltung               | JSP Page : WGVerwaltung           | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
-        |__ Response               |                                   | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseSuccess       | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseFailure       | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongEntry    | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongUName    | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongPassword | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongEMail    | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongTryAgain | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ Response                    |                                   | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /responseSuccess            | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /responseFailure            | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /responseWrongEntry         | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /responseWrongUName         | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /responseWrongPassword      | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /responseWrongEMail         | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /responseWrongTryAgain      | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
         |__ ^^-^^
     -->
     <!-- ############################################################################################################ -->
