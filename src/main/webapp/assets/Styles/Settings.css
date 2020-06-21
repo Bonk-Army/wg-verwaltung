@@ -17,7 +17,6 @@ h2 {
 
 .btn.btn-lg.btn-primary.btn-block {
     max-width: 500px;
-    text-align: right;
 }
 
 label {
@@ -33,4 +32,14 @@ button.leave {
 button.leave:hover {
     background-color: #a10101;
     border-color: #a10101;
+}
+
+button.join {
+    background-color: #05ce00;
+    border-color: #05ce00;
+}
+
+button.join:hover {
+    background-color: #0cad09;
+    border-color: #0cad09;
 }
