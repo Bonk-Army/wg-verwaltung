@@ -6,7 +6,7 @@ import java.util.*;
 import java.sql.ResultSet;
 
 /**
- * Provides SQL accessor methods for the Todo Page
+ * Provides SQL accessor methods for everything that accesses the todo table
  */
 public class SQLDCTodo extends SQLDatabaseConnection {
     /**
@@ -215,15 +215,16 @@ public class SQLDCTodo extends SQLDatabaseConnection {
     }
 
     /**
-     * Return the number of open todos for a user
+     * Return the number of open todos for a user for his current wg
      *
      * @param userId the userId of the user
+     * @param wgId   The wgId of the current wg
      * @return The number of open todos
      */
-    public static int getOpenTodosPerUser(String userId) {
+    public static int getOpenTodosPerUser(String userId, String wgId) {
         try {
             ResultSet rs = executeQuery(("SELECT COUNT(uniqueID) FROM todo WHERE userId="
-                    + Integer.valueOf(userId) + " AND isDone = 0 AND isActive = 1"));
+                    + Integer.valueOf(userId) + " AND isDone = 0 AND isActive = 1 AND wgId = " + Integer.valueOf(wgId)));
 
             while (rs.next()) {
                 return rs.getInt(1);

@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Provides SQL accessor methods for the shopping page
+ * Provides SQL accessor methods for everything that accesses the shopping table
  */
 public class SQLDCShopping extends SQLDatabaseConnection {
     /**

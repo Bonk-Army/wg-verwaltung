@@ -15,6 +15,19 @@ a:focus {
     text-decoration: none;
     transition: all 0.3s;
 }
+
+button#logout{
+    background-color: #272525;
+    border-color: #272525;
+    max-width: 240px;
+    margin-left: 5px;
+}
+
+button#logout:hover{
+    background-color: #1d1c1c;
+    border-color: #1d1c1c;
+}
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -39,6 +52,15 @@ a:focus {
 
 #sidebar.active .sidebar-header h3 {
     display: none;
+}
+
+#sidebar.active button#logout bold{
+    display: none;
+}
+
+#sidebar.active button#logout{
+    max-width: 90px;
+    margin-left: 5px;
 }
 
 #sidebar.active .sidebar-header strong {
@@ -166,6 +188,16 @@ ul ul a {
     #sidebar .sidebar-header strong {
         display: block;
     }
+
+    #sidebar button#logout bold{
+        display: none;
+    }
+
+    #sidebar button#logout{
+        max-width: 90px;
+        margin-left: 5px;
+    }
+
     #sidebar ul li a {
         padding: 20px 10px;
         text-align: center;

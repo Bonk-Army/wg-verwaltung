@@ -2,6 +2,9 @@ package utilities;
 
 import java.sql.ResultSet;
 
+/**
+ * Provides SQL accessor methods that are used in many different places
+ */
 public class SQLDCUtility extends SQLDatabaseConnection {
     /**
      * Return the first name of the user by his username
@@ -110,7 +113,7 @@ public class SQLDCUtility extends SQLDatabaseConnection {
      */
     public static String getWgNameFromWgId(String wgId) {
         try {
-            ResultSet rs = executeQuery(("SELECT name FROM wg WHERE uniqueID=" + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT name FROM wgs WHERE uniqueID=" + Integer.valueOf(wgId)));
 
             while (rs.next()) {
                 return rs.getString(1);

@@ -9,6 +9,7 @@ import java.util.*;
  */
 public class ToDoBean {
     private String userId = "";
+    private String wgId = "";
 
     public ToDoBean() {
     }
@@ -146,6 +147,10 @@ public class ToDoBean {
         this.userId = userId;
     }
 
+    public void setWgId(String wgId) {
+        this.wgId = wgId;
+    }
+
     /**
      * Get the username of a user by his userId
      *
@@ -161,9 +166,7 @@ public class ToDoBean {
      * @return The List of Todos
      */
     public List<Map<String, String>> getTodos() {
-        String wgId = SQLDCTodo.getWgIdByUser(userId);
-
-        return SQLDCTodo.getAllActiveTodos(wgId);
+        return SQLDCTodo.getAllActiveTodos(this.wgId);
     }
 
     /**
@@ -172,19 +175,6 @@ public class ToDoBean {
      * @return A List of Maps of which each contains the username and the formatted name string
      */
     public List<Map<String, String>> getUsersOfWg() {
-        String wgId = SQLDCTodo.getWgIdByUser(userId);
-
-        List<String> usernames = SQLDCTodo.getAllUsersOfWG(wgId);
-        List<Map<String, String>> formattedNames = new ArrayList<Map<String, String>>();
-
-        for (String username : usernames) {
-            Map<String, String> userMap = new HashMap<String, String>();
-            userMap.put("username", username);
-            userMap.put("nameString", getNameString(username));
-
-            formattedNames.add(userMap);
-        }
-
-        return formattedNames;
+        return SQLDCLogin.getAllNameStringsForWg(this.wgId);
     }
 }
