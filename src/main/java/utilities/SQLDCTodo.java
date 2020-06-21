@@ -6,7 +6,7 @@ import java.util.*;
 import java.sql.ResultSet;
 
 /**
- * Provides SQL accessor methods for the Todo Page
+ * Provides SQL accessor methods for everything that accesses the todo table
  */
 public class SQLDCTodo extends SQLDatabaseConnection {
     /**

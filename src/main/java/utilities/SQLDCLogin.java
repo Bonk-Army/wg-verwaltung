@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Provides SQL accessor methods for the login page
+ * Provides SQL accessor methods for everything that accesses the users table
  */
 public class SQLDCLogin extends SQLDatabaseConnection {
     /**

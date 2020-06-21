@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 import java.util.*;
 
 /**
- * Provides SQL Accessor methods for the financial status page
+ * Provides SQL Accessor methods for everything that accesses the financial table
  */
 public class SQLDCFinancial extends SQLDatabaseConnection {
     /**

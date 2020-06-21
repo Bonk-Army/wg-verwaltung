@@ -2,6 +2,9 @@ package utilities;
 
 import java.sql.ResultSet;
 
+/**
+ * Provides SQL accessor methods that are used in many different places
+ */
 public class SQLDCUtility extends SQLDatabaseConnection {
     /**
      * Return the first name of the user by his username
