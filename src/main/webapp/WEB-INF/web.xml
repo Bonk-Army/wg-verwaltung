@@ -29,6 +29,8 @@
         |__ /addShoppingRequestLogic    | Servlet: AddShoppingRequest       | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /addFinancialEntryLogic     | Servlet: AddFinancialEntry        | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /removeFinancialEntryLogic  | Servlet: RemoveFinancialEntry     | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /changePasswordLogic        | Servlet: ChangePassword           | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /changeNameLogic            | Servlet: ChangeName               | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -304,6 +306,22 @@
     <servlet-mapping>
         <servlet-name>RemoveFinancialEntryLogic</servlet-name>
         <url-pattern>/removeFinancialEntryLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ChangePasswordLogic</servlet-name>
+        <servlet-class>logic.ChangePassword</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordLogic</servlet-name>
+        <url-pattern>/changePasswordLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ChangeNameLogic</servlet-name>
+        <servlet-class>logic.ChangeName</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeNameLogic</servlet-name>
+        <url-pattern>/changeNameLogic</url-pattern>
     </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--
