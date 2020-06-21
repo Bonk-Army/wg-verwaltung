@@ -289,6 +289,26 @@ public class SQLDCLogin extends SQLDatabaseConnection {
     }
 
     /**
+     * Set the new name for the given user
+     *
+     * @param userId    The userId of the user
+     * @param firstName The new first name
+     * @param lastName  The new last name
+     * @return If it was successful
+     */
+    public static boolean setName(String userId, String firstName, String lastName) {
+        try {
+            executeQuery("UPDATE users SET firstName = '" + firstName + "' AND lastName = '" + lastName + "' WHERE uniqueID = " + Integer.valueOf(userId));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
      * Return the cookie postfix required for the session identifier for a specific user
      *
      * @param username The username of the user

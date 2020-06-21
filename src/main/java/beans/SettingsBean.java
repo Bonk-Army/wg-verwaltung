@@ -148,6 +148,22 @@ public class SettingsBean {
         return ErrorCodes.WRONGPASSWORD;
     }
 
+    /**
+     * Change the name of the user
+     *
+     * @param userId    The userId of the user
+     * @param firstName The new first name
+     * @param lastName  The new last name
+     * @return If it was successful
+     */
+    public ErrorCodes changeName(String userId, String firstName, String lastName) {
+        if (RegexHelper.checkString(firstName) && RegexHelper.checkString(lastName)) {
+            return SQLDCLogin.setName(userId, firstName, lastName) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+        }
+
+        return ErrorCodes.WRONGENTRY;
+    }
+
     /*
       /$$$$$$              /$$     /$$                                               /$$        /$$$$$$              /$$     /$$
      /$$__  $$            | $$    | $$                                              /$$/       /$$__  $$            | $$    | $$

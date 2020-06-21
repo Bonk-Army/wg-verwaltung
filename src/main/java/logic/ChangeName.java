@@ -1,6 +1,8 @@
 package logic;
 
 import beans.LoginBean;
+import beans.SessionBean;
+import beans.SettingsBean;
 import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
@@ -10,13 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Reset servlet that is called  when the user wants to reset his password and therefore entered his email address
- * to receive a link to reset his password
+ * Called when the user tries to change his first and/or last name from the settings page
  */
-public class Reset extends HttpServlet {
+public class ChangeName extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public Reset() {
+    public ChangeName() {
         super();
     }
 
@@ -33,21 +34,24 @@ public class Reset extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LoginBean bean = new LoginBean();
+        SettingsBean settingsBean = new SettingsBean();
+        SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
-        String email = request.getParameter("email");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String userId = sessionBean.getUserId();
 
-        ErrorCodes status = bean.sendPasswordResetLink(email);
+        ErrorCodes status = settingsBean.changeName(userId, firstName, lastName);
 
         switch (status) {
             case SUCCESS:
                 // Show success page
-                request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
+                response.sendRedirect("/settings");
                 break;
-            case WRONGEMAIL:
+            case WRONGENTRY:
                 // Show wrong email page
-                request.getServletContext().getRequestDispatcher("/responseWrongEMail").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
                 break;
             case FAILURE:
                 // Show server error page
