@@ -122,7 +122,7 @@ public class FinancialBean {
 
                 currentUser.put("sum", sumString);
             } else {
-                currentUser.put("sum", "0.00");
+                currentUser.put("sum", "0,00");
             }
 
             userList.add(currentUser);

@@ -129,10 +129,12 @@ public class ShoppingBean {
             if (user.get("username").equals(this.username)) {
                 newList.add(user);
                 userList.remove(user);
+
+                newList.addAll(userList);
+
+                return newList;
             }
         }
-
-        newList.addAll(userList);
 
         return newList;
     }
