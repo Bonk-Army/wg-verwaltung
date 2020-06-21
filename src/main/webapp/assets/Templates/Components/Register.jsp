@@ -34,7 +34,7 @@
         <hr>
     </div>
     <div class="text-center">
-        <a href="./contact">Contact</a>  &emsp; <a href="./impressum">Impressum </a><br>
+        <a href="./contact">Kontakt</a>  &emsp; <a href="./impressum">FAQ's </a>  &emsp; <a href="./impressum">Impressum </a><br><br>
     </div>
     <div class="center">
         <hr>

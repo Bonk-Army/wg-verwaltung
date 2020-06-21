@@ -68,12 +68,14 @@
             <div class="text-center">
                 <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Senden</a>
             </div>
-            <div class="center">
-                <hr>
-            </div>
-            <div class="text-center">
-                <a href="./">Zur&uuml;ck zu Login</a>
-            </div>
+            <c:if test="${!sessionBean.loggedIn}">
+                <div class="center">
+                    <hr>
+                </div>
+                <div class="text-center">
+                    <a href="./">Zur&uuml;ck zu Login</a>
+                </div>
+            </c:if>
 
             <div class="status"></div>
         </div>

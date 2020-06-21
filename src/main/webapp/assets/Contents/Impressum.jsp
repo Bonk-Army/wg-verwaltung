@@ -4,18 +4,19 @@
     <%@include file="../Templates/Components/Sidebar.jsp" %>
 </c:if>
 <div id="content">
-<div class='impressum'><h1>Impressum</h1>
-    <p>Angaben gem&auml;&szlig; &sect; 5 TMG</p>
-    <p>Patrick M&uuml;ller<br>
-        Schachtstr. 8<br>
-        75031 Eppingen<br>
-    </p>
-    <p><strong>Kontakt:</strong> <br>
-        E-Mail: <a href='mailto:patrick@mueller-patrick.tech'>patrick@mueller-patrick.tech</a><br></p>
-    <p><strong>Haftungsausschluss: </strong><br><br><strong>Haftung f&uuml;r Inhalte</strong><br><br>
-        Die Inhalte unserer Seiten wurden mit gr&ouml;&szlig;ter Sorgfalt erstellt. F&uuml;r die Richtigkeit, Vollst&auml;ndigkeit und
-        Aktualit&auml;t der Inhalte k&ouml;nnen wir jedoch keine Gew&auml;hr &uuml;bernehmen. Als Diensteanbieter sind wir gem&auml;&szlig; &sect; 7 Abs.1
-        TMG f&uuml;r eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach &sect;&sect; 8 bis 10 TMG sind
+    <div class='impressum'><h1>Impressum</h1>
+        <p>Angaben gem&auml;&szlig; &sect; 5 TMG</p>
+        <p>Patrick M&uuml;ller<br>
+            Schachtstr. 8<br>
+            75031 Eppingen<br>
+        </p>
+        <p><strong>Kontakt:</strong> <br>
+            E-Mail: <a href='mailto:patrick@mueller-patrick.tech'>patrick@mueller-patrick.tech</a><br></p>
+        <p><strong>Haftungsausschluss: </strong><br><br><strong>Haftung f&uuml;r Inhalte</strong><br><br>
+            Die Inhalte unserer Seiten wurden mit gr&ouml;&szlig;ter Sorgfalt erstellt. F&uuml;r die Richtigkeit, Vollst&auml;ndigkeit und
+            Aktualit&auml;t der Inhalte k&ouml;nnen wir jedoch keine Gew&auml;hr &uuml;bernehmen. Als Diensteanbieter sind wir gem&auml;&szlig;
+            &sect; 7 Abs.1
+            TMG f&uuml;r eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach &sect;&sect; 8 bis 10 TMG sind
         wir als Diensteanbieter jedoch nicht verpflichtet, &uuml;bermittelte oder gespeicherte fremde Informationen zu
         &uuml;berwachen oder nach Umst&auml;nden zu forschen, die auf eine rechtswidrige T&auml;tigkeit hinweisen. Verpflichtungen zur
         Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unber&uuml;hrt.
@@ -44,16 +45,18 @@
         Wir weisen darauf hin, dass die Daten&uuml;bertragung im Internet (z.B. bei der Kommunikation per E-Mail)
         Sicherheitsl&uuml;cken aufweisen kann. Ein l&uuml;ckenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht
         m&ouml;glich. <br>
-        Der Nutzung von im Rahmen der Impressumspflicht ver&ouml;ffentlichten Kontaktdaten durch Dritte zur &uuml;bersendung von
-        nicht ausdr&uuml;cklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdr&uuml;cklich widersprochen.
-        Die Betreiber der Seiten behalten sich ausdr&uuml;cklich rechtliche Schritte im Falle der unverlangten Zusendung von
-        Werbeinformationen, etwa durch Spam-Mails, vor.<br>
-    </p>
-</div>
-    <div class="center">
-        <hr>
+            Der Nutzung von im Rahmen der Impressumspflicht ver&ouml;ffentlichten Kontaktdaten durch Dritte zur &uuml;bersendung von
+            nicht ausdr&uuml;cklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdr&uuml;cklich widersprochen.
+            Die Betreiber der Seiten behalten sich ausdr&uuml;cklich rechtliche Schritte im Falle der unverlangten Zusendung von
+            Werbeinformationen, etwa durch Spam-Mails, vor.<br>
+        </p>
     </div>
-    <div class="text-center">
-        <a href="./">Back to Login</a>
-    </div>
+    <c:if test="${!sessionBean.loggedIn}">
+        <div class="center">
+            <hr>
+        </div>
+        <div class="text-center">
+            <a href="./">Zur&uuml;ck zu Login</a>
+        </div>
+    </c:if>
 </div>
