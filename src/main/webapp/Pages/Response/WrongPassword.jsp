@@ -5,6 +5,6 @@
 </head>
 <body>
 <h1>Fehler</h1>
-Der von dir eingegebene Benutzername konnte nicht gefunden werden.
+Das von dir eingegebene Passwort ist nicht korrekt.
 </body>
 </html>

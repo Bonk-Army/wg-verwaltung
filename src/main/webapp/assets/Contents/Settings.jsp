@@ -12,24 +12,24 @@
         <label for="lastName">Nachname</label>
         <input id="lastName" name="lastName" class="form-control" type="text" value="${sessionBean.lastName}"/>
         <label for="email">E-Mail</label>
-        <input class="form-control" type="email" id="email" class="form-control" placeholder="${settingBean}" readonly="readonly" required>
+        <input class="form-control" type="email" id="email" placeholder="${sessionBean.email}" readonly="readonly" required>
         <button id="saveButton" class="btn btn-lg btn-primary btn-block" type="submit">&Auml;nderungen speichern</button>
     </form>
     <c:choose>
         <c:when test="${settingBean.userHasWg}">
             <label for="wg">WG</label>
             <input id="wg" class="form-control" placeholder="${sessionBean.wgName}" readonly="readonly"/>
-            <form action="leaveWgLogic">
+            <form action="leaveWgLogic" method="GET">
                 <button id="leaveWg" class="btn btn-lg btn-primary btn-block leave" type="submit">Aktuelle WG verlassen</button>
             </form>
         </c:when>
         <c:otherwise>
-            <form action="/wgverwaltung">
+            <a href="/wgverwaltung">
                 <button id="joinWg" class="btn btn-lg btn-primary btn-block join" type="submit">WG beitreten oder neue WG erstellen</button>
-            </form>
+            </a>
         </c:otherwise>
     </c:choose>
-    <form action="changePasswordLogic">
+    <form action="changePasswordLogic" method="POST">
         <label for="oldPassword">Altes Passwort</label>
         <input id="oldPassword" class="form-control" name="oldPassword" type="password"/>
         <label for="password">Neues Passwort</label>
