@@ -3,6 +3,7 @@
     <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
     <jsp:useBean id="financialBean" class="beans.FinancialBean" scope="request"/>
     <jsp:setProperty name="financialBean" property="userId" value="${sessionBean.userId}"/>
+    <jsp:setProperty name="financialBean" property="wgId" value="${sessionBean.wgId}"/>
     <table class="table">
         <thead class="thead-dark">
         <tr>
