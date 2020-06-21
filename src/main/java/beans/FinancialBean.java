@@ -9,6 +9,7 @@ import java.util.*;
  */
 public class FinancialBean {
     private String userId = "";
+    private String wgId = "";
 
     /*
       /$$$$$$                                 /$$             /$$
@@ -74,6 +75,19 @@ public class FinancialBean {
     // Getters and Setters for use with JSPs
 
     /**
+     * Set the user id
+     *
+     * @param userId The userId
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setWgId(String wgId) {
+        this.wgId = wgId;
+    }
+
+    /**
      * Get all financial record entries for the given wg
      *
      * @param viewLimit How many entries should be fetched
@@ -91,22 +105,21 @@ public class FinancialBean {
      * @return A List of maps of which each represents one user
      */
     public List<Map<String, String>> getTotalPerUser() {
-        String wgId = new LoginBean().getWgIdByUserId(this.userId);
-        List<String> userIds = SQLDCFinancial.getAllUserIdsOfWg(wgId);
-
+        List<Map<String, String>> userNameStringsWithId = SQLDCLogin.getAllNameStringsWithUserIdForWg(this.wgId);
+        Map<String, Integer> sumPerUserById = SQLDCFinancial.getSumForEveryUserOfWg(this.wgId);
         List<Map<String, String>> userList = new ArrayList<Map<String, String>>();
 
-        for (String userId : userIds) {
-            Map<String, String> user = new HashMap<String, String>();
+        for (Map<String, String> user : userNameStringsWithId) {
+            Map<String, String> currentUser = new HashMap<String, String>();
 
-            int sumForUser = SQLDCFinancial.getTotalForUser(userId);
-            String sumString = String.format("%.2f", (sumForUser / 100d));
+            currentUser.put("nameString", user.get("nameString"));
 
-            String username = SQLDCLogin.getUsername(userId);
-            user.put("name", SQLDCUtility.getNameString(username));
-            user.put("sum", sumString);
+            int sum = sumPerUserById.get(user.get("userId"));
+            String sumString = String.format("%.2f", (sum / 100d));
 
-            userList.add(user);
+            currentUser.put("sum", sumString);
+
+            userList.add(currentUser);
         }
 
         return userList;
@@ -118,20 +131,9 @@ public class FinancialBean {
      * @return The value as a formatted String
      */
     public String getTotalPerWg() {
-        String wgId = new LoginBean().getWgIdByUserId(this.userId);
-
-        int sumForWg = SQLDCFinancial.getTotalForWg(wgId);
+        int sumForWg = SQLDCFinancial.getTotalForWg(this.wgId);
         String sumString = String.format("%.2f", (sumForWg / 100d));
 
         return sumString;
-    }
-
-    /**
-     * Set the user id
-     *
-     * @param userId The userId
-     */
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 }

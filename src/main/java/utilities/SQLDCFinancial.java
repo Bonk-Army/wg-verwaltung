@@ -193,6 +193,31 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
     }
 
     /**
+     * Return a map with the sum of expenses as value and the userId as key for every user of the wg
+     *
+     * @param wgId The wgId of the wg
+     * @return A map with userId as key and sum as value
+     */
+    public static Map<String, Integer> getSumForEveryUserOfWg(String wgId) {
+        Map<String, Integer> resultMap = new HashMap<String, Integer>();
+
+        try {
+            ResultSet rs = executeQuery("SELECT SUM(value), createdBy FROM financial WHERE wgId = "
+                    + Integer.valueOf(wgId) + " AND isActive = 1 GROUP BY createdBy");
+
+            while (rs.next()) {
+                String userId = String.valueOf(rs.getInt(2));
+                int sum = rs.getInt(1);
+                resultMap.put(userId, sum);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return resultMap;
+    }
+
+    /**
      * Return the sum of all entries of a wg
      *
      * @param wgId The wgId of the wg

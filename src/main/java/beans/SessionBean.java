@@ -1,5 +1,8 @@
 package beans;
 
+import models.User;
+import utilities.SQLDCLogin;
+
 /**
  * Session bean that keeps relevant user data to authenticate the user and fetch data more quickly
  */
@@ -10,16 +13,19 @@ public class SessionBean {
     private String lastName = "";
     private String wgId = "";
     private String wgName = "";
+    private String email = "";
 
     public SessionBean(String userId) {
-        LoginBean loginBean = new LoginBean();
-
         this.userId = userId;
-        this.username = loginBean.getUsernameById(userId);
-        this.firstName = loginBean.getFirstName(this.username);
-        this.lastName = loginBean.getLastName(this.username);
-        this.wgId = loginBean.getWgIdByUserId(userId);
-        this.wgName = loginBean.getWgNameByUserId(userId);
+
+        User thisUser = SQLDCLogin.getAllUserData(userId);
+
+        this.username = thisUser.getUsername();
+        this.firstName = thisUser.getFirstName();
+        this.lastName = thisUser.getLastName();
+        this.wgId = thisUser.getWgId();
+        this.wgName = thisUser.getWgName();
+        this.email = thisUser.getEmail();
     }
 
     public SessionBean() {
@@ -60,6 +66,10 @@ public class SessionBean {
 
     public String getWgName() {
         return wgName;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setFirstName(String firstName) {
