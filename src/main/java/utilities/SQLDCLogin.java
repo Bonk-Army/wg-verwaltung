@@ -375,7 +375,7 @@ public class SQLDCLogin extends SQLDatabaseConnection {
         User user = new User();
 
         try {
-            ResultSet userSet = executeQuery(("SELECT username ,firstName, lastName, wgId, email FROM user WHERE uniqueID = " + Integer.valueOf(userId)));
+            ResultSet userSet = executeQuery(("SELECT username ,firstName, lastName, wgId, email FROM users WHERE uniqueID = " + Integer.valueOf(userId)));
 
             while (userSet.next()) {
                 user.setUserId(userId);
