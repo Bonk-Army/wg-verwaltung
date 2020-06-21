@@ -14,6 +14,7 @@ public class SessionBean {
     private String wgId = "";
     private String wgName = "";
     private String email = "";
+    private boolean loggedIn = false;
 
     public SessionBean(String userId) {
         this.userId = userId;
@@ -26,6 +27,7 @@ public class SessionBean {
         this.wgId = thisUser.getWgId();
         this.wgName = thisUser.getWgName();
         this.email = thisUser.getEmail();
+        this.loggedIn = true;
     }
 
     public SessionBean() {
@@ -70,6 +72,10 @@ public class SessionBean {
 
     public String getEmail() {
         return email;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
     }
 
     public void setFirstName(String firstName) {
