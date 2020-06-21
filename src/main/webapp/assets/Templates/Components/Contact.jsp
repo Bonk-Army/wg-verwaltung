@@ -1,3 +1,8 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
+<c:if test="${sessionBean.loggedIn}">
+    <%@include file="Sidebar.jsp" %>
+</c:if>
 <div id="content">
     <section class="mb-4">
 
@@ -14,7 +19,7 @@
                     <!--Grid column-->
                     <div class="col-md-6">
                         <div class="md-form mb-0">
-                            <input type="text" id="name" name="name" class="form-control">
+                            <input type="text" id="name" name="name" class="form-control" value="${sessionBean.firstName} ${sessionBean.lastName}">
                             <label for="name">Dein Name</label>
                         </div>
                     </div>
@@ -23,7 +28,7 @@
                     <!--Grid column-->
                     <div class="col-md-6">
                         <div class="md-form mb-0">
-                            <input type="text" id="email" name="email" class="form-control">
+                            <input type="text" id="email" name="email" class="form-control" value="${sessionBean.email}">
                             <label for="email">Deine E-Mail</label>
                         </div>
                     </div>
