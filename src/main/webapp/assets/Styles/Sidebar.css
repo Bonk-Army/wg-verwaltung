@@ -54,6 +54,15 @@ button#logout:hover{
     display: none;
 }
 
+#sidebar.active button#logout bold{
+    display: none;
+}
+
+#sidebar.active button#logout{
+    max-width: 90px;
+    margin-left: 5px;
+}
+
 #sidebar.active .sidebar-header strong {
     display: block;
 }
@@ -179,6 +188,16 @@ ul ul a {
     #sidebar .sidebar-header strong {
         display: block;
     }
+
+    #sidebar button#logout bold{
+        display: none;
+    }
+
+    #sidebar button#logout{
+        max-width: 90px;
+        margin-left: 5px;
+    }
+
     #sidebar ul li a {
         padding: 20px 10px;
         text-align: center;
