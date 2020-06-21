@@ -56,5 +56,18 @@
                 Impressum
             </a>
         </li>
+        <li>
+            <a href="/settings">
+                <i class="fas fa-cog"></i>
+                Einstellungen
+            </a>
+        </li>
+    </ul>
+    <ul class="list-unstyled components">
+        <li>
+            <form action="logoutLogic" method="GET">
+                <button id="logout" class="btn btn-lg btn-primary btn-block" type="submit"><i class="fas fa-sign-out-alt"></i> <bold>Ausloggen</bold></button>
+            </form>
+        </li>
     </ul>
 </nav>

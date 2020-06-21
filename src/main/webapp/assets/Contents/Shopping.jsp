@@ -3,6 +3,8 @@
     <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
     <jsp:useBean id="shoppingBean" class="beans.ShoppingBean" scope="request"/>
     <jsp:setProperty name="shoppingBean" property="userId" value="${sessionBean.userId}"/>
+    <jsp:setProperty name="shoppingBean" property="username" value="${sessionBean.username}"/>
+    <jsp:setProperty name="shoppingBean" property="wgId" value="${sessionBean.wgId}"/>
     <button title="Artikel hinzuf&uuml;gen" id="addShopping" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal"
             data-target="#exampleModal">+
     </button>

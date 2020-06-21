@@ -3,6 +3,7 @@
     <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
     <jsp:useBean id="todoBean" class="beans.ToDoBean" scope="request"/>
     <jsp:setProperty name="todoBean" property="userId" value="${sessionBean.userId}"/>
+    <jsp:setProperty name="todoBean" property="wgId" value="${sessionBean.wgId}"/>
     <button title="ToDo hinzuf&uuml;gen" id="addToDo" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal"
             data-target="#createToDo">+
     </button>

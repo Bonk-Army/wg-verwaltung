@@ -8,6 +8,8 @@ import java.util.ArrayList;
  * Bean used for the settings page
  */
 public class SettingsBean {
+    private String userId;
+
     public SettingsBean() {
     }
 
@@ -126,7 +128,8 @@ public class SettingsBean {
 
     /**
      * Change the users password
-     * @param username The username of the user
+     *
+     * @param username    The username of the user
      * @param oldPassword The old password
      * @param newPassword The new password
      * @return If it was successful
@@ -136,13 +139,39 @@ public class SettingsBean {
         String pwsalt = SQLDCLogin.getPasswordSalt(username);
         String oldPasswordHash = PasswordHasher.hashPassword(oldPassword, pwsalt);
 
-        if(oldPasswordSavedHash.equals(oldPasswordHash)){
+        if (oldPasswordSavedHash.equals(oldPasswordHash)) {
             String newPasswordHash = PasswordHasher.hashPassword(newPassword, pwsalt);
 
             return SQLDCLogin.setPassword(username, newPasswordHash) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
         }
 
         return ErrorCodes.WRONGPASSWORD;
+    }
+
+    /**
+     * Change the name of the user
+     *
+     * @param userId    The userId of the user
+     * @param firstName The new first name
+     * @param lastName  The new last name
+     * @return If it was successful
+     */
+    public ErrorCodes changeName(String userId, String firstName, String lastName) {
+        if (RegexHelper.checkString(firstName) && RegexHelper.checkString(lastName)) {
+            return SQLDCLogin.setName(userId, firstName, lastName) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+        }
+
+        return ErrorCodes.WRONGENTRY;
+    }
+
+    /**
+     * Clear the wgId for the given user when he wants to leave the wg
+     *
+     * @param userId The userId of the user
+     * @return If it was successful
+     */
+    public ErrorCodes leaveWg(String userId) {
+        return SQLDCLogin.clearWg(userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
     }
 
     /*
@@ -157,4 +186,24 @@ public class SettingsBean {
     */
 
     // Getters and Setters for use with JSPs
+
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * Check if the user has a wg
+     *
+     * @return true if he has a wg, false if not
+     */
+    public boolean getUserHasWg() {
+        String wgId = new LoginBean().getWgIdByUserId(this.userId);
+
+        if (wgId != null) {
+            return !wgId.isEmpty();
+        }
+
+        return false;
+    }
 }

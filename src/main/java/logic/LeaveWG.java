@@ -1,6 +1,5 @@
 package logic;
 
-import beans.LoginBean;
 import beans.SessionBean;
 import beans.SettingsBean;
 import utilities.ErrorCodes;
@@ -11,18 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Join wg servlet that is called when the user tries to join a wg via invite code or invite link
- */
-public class JoinWG extends HttpServlet {
+public class LeaveWG extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public JoinWG() {
+    public LeaveWG() {
         super();
     }
 
     /**
-     * Called when the user tries to join a WG via settings page or invite link
+     * Called when the user wants to leave his wg via the settings page
      *
      * @param request  The http GET request
      * @param response The http response
@@ -31,38 +27,31 @@ public class JoinWG extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LoginBean loginBean = new LoginBean();
         SettingsBean settingsBean = new SettingsBean();
         SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
-        request.setCharacterEncoding("UTF-8");
 
-        String wgCode = request.getParameter("wgcode");
+        request.setCharacterEncoding("UTF-8");
 
         String userId = sessionBean.getUserId();
 
-        ErrorCodes status = settingsBean.setWgId(userId, wgCode);
+        ErrorCodes status = settingsBean.leaveWg(userId);
 
         switch (status) {
             case SUCCESS:
-                //Show success
-                // Change wgId and wgName in the Session Bean
-                sessionBean.setWgId(settingsBean.getWgIdFromUserId(userId));
-                sessionBean.setWgName(settingsBean.getWgNameFromUserID(userId));
+                // Clear wg fields on sessionBean
+                sessionBean.setWgName("");
+                sessionBean.setWgId("");
+                // Show success pages
                 response.sendRedirect("/settings");
                 break;
             case FAILURE:
-                //Show failure
+                // Show server error page
                 request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-                break;
-            case WRONGENTRY:
-                //Show wrongentry
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
                 break;
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }
