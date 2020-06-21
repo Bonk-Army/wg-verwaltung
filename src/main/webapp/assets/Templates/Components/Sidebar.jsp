@@ -63,4 +63,11 @@
             </a>
         </li>
     </ul>
+    <ul class="list-unstyled components">
+        <li>
+            <form action="logoutLogic" method="GET">
+                <button id="logout" class="btn btn-lg btn-primary btn-block" type="submit">Ausloggen</button>
+            </form>
+        </li>
+    </ul>
 </nav>
