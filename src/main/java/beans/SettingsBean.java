@@ -164,6 +164,18 @@ public class SettingsBean {
         return ErrorCodes.WRONGENTRY;
     }
 
+    /**
+     * Clear the wgId for the given user when he wants to leave the wg
+     *
+     * @param userId The userId of the user
+     * @return If it was successful
+     */
+    public ErrorCodes leaveWg(String userId) {
+        // TODO: Replace user data with dummy data in wg (Ticket WGV-133)
+
+        return SQLDCLogin.clearWg(userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+    }
+
     /*
       /$$$$$$              /$$     /$$                                               /$$        /$$$$$$              /$$     /$$
      /$$__  $$            | $$    | $$                                              /$$/       /$$__  $$            | $$    | $$

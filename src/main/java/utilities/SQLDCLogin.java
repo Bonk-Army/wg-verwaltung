@@ -317,7 +317,7 @@ public class SQLDCLogin extends SQLDatabaseConnection {
     public static String getCookiePostfix(String username) {
         String postfix = "";
         try {
-            ResultSet rs = executeQuery("SELECT cookiePostfix FROM users WHERE username='" + username + "'");
+            ResultSet rs = executeQuery(("SELECT cookiePostfix FROM users WHERE username='" + username + "'"));
 
             while (rs.next()) {
                 postfix = rs.getString(1);
@@ -338,7 +338,24 @@ public class SQLDCLogin extends SQLDatabaseConnection {
      */
     public static boolean setCookiePostfix(String username, String cookiePostfix) {
         try {
-            executeQuery("UPDATE users SET cookiePostfix='" + cookiePostfix + "' WHERE username = '" + username + "'");
+            executeQuery(("UPDATE users SET cookiePostfix='" + cookiePostfix + "' WHERE username = '" + username + "'"));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * Clear the wgId for the given user
+     * @param userId The userId of the user
+     * @return If it was successful
+     */
+    public static boolean clearWg(String userId) {
+        try {
+            executeQuery(("UPDATE users SET wgID = " + null + " WHERE uniqueID = " + Integer.valueOf(userId)));
 
             return true;
         } catch (Exception e) {

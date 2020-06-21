@@ -22,10 +22,6 @@ public class Reset extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //LoginBean bean = new LoginBean();
-        //RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/changePassword");
-        //dispatcher.forward(request, response);
-        //DEPRECATED???
     }
 
     /**
