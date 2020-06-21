@@ -8,6 +8,18 @@ body {
     align-items: stretch;
 }
 
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #3c415e;
+    color: aliceblue;
+    transition: all 0.3s;
+}
+
 a,
 a:hover,
 a:focus {
@@ -28,21 +40,9 @@ button#logout:hover{
     border-color: #1d1c1c;
 }
 
-/* ---------------------------------------------------
-    SIDEBAR STYLE
------------------------------------------------------ */
-
-#sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    background: #3c415e;
-    color: aliceblue;
-    transition: all 0.3s;
-}
-
 #sidebar.active {
-    min-width: 100px;
-    max-width: 100px;
+    min-width: 127px;
+    max-width: 127px;
     text-align: center;
 }
 
@@ -59,7 +59,7 @@ button#logout:hover{
 }
 
 #sidebar.active button#logout{
-    max-width: 90px;
+    max-width: 117px;
     margin-left: 5px;
 }
 
@@ -162,8 +162,8 @@ ul ul a {
 
 @media (max-width: 768px) {
     #sidebar {
-        min-width: 100px;
-        max-width: 100px;
+        min-width: 127px;
+        max-width: 127px;
         text-align: center;
         margin-left: 0px !important;
     }
@@ -193,8 +193,12 @@ ul ul a {
         display: none;
     }
 
+    #sidebar button#logout i{
+        word-break: break-all;
+    }
+
     #sidebar button#logout{
-        max-width: 90px;
+        max-width: 117px;
         margin-left: 5px;
     }
 
