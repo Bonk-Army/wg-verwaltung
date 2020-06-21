@@ -48,7 +48,7 @@ public class JoinWG extends HttpServlet {
                 // Change wgId and wgName in the Session Bean
                 sessionBean.setWgId(settingsBean.getWgIdFromUserId(userId));
                 sessionBean.setWgName(settingsBean.getWgNameFromUserID(userId));
-                request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
+                response.sendRedirect("/settings");
                 break;
             case FAILURE:
                 //Show failure

@@ -52,7 +52,7 @@ public class CreateWG extends HttpServlet {
                 sessionBean.setWgId(settingsBean.getWgIdFromUserId(userId));
                 sessionBean.setWgName(wgName);
                 //Show success
-                request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
+                response.sendRedirect("/settings");
                 break;
             case FAILURE:
                 //Show failure
