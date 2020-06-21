@@ -4,13 +4,13 @@
     <jsp:useBean id="settingBean" class="beans.SettingsBean" scope="request"/>
     <jsp:setProperty name="settingBean" property="userId" value="${sessionBean.userId}"/>
     <h2>Settings</h2>
-    <form action="settingLogic" method="POST">
+    <form action="changeNameLogic" method="POST">
         <label for="username">Benutzername</label>
         <input id="username" class="form-control" type="text" placeholder="${sessionBean.username}" readonly="readonly"/>
-        <label for="firstname">Vorname</label>
-        <input id="firstname" name="firstname" class="form-control" type="text" value="${sessionBean.firstName}"/>
-        <label for="lastname">Nachname</label>
-        <input id="lastname" name="lastname" class="form-control" type="text" value="${sessionBean.lastName}"/>
+        <label for="firstName">Vorname</label>
+        <input id="firstName" name="firstName" class="form-control" type="text" value="${sessionBean.firstName}"/>
+        <label for="lastName">Nachname</label>
+        <input id="lastName" name="lastName" class="form-control" type="text" value="${sessionBean.lastName}"/>
         <label for="email">E-Mail</label>
         <input class="form-control" type="email" id="email" class="form-control" placeholder="${settingBean}" readonly="readonly" required>
         <button id="saveButton" class="btn btn-lg btn-primary btn-block" type="submit">&Auml;nderungen speichern</button>
@@ -19,7 +19,9 @@
         <c:when test="${settingBean.userHasWg}">
             <label for="wg">WG</label>
             <input id="wg" class="form-control" placeholder="${sessionBean.wgName}" readonly="readonly"/>
-            <form action="leaveWgLogic"><button id="leaveWg"class="btn btn-lg btn-primary btn-block leave" type="submit" >Aktuelle WG verlassen</button></form>
+            <form action="leaveWgLogic">
+                <button id="leaveWg" class="btn btn-lg btn-primary btn-block leave" type="submit">Aktuelle WG verlassen</button>
+            </form>
         </c:when>
         <c:otherwise>
             <form action="/wgverwaltung">
@@ -27,7 +29,7 @@
             </form>
         </c:otherwise>
     </c:choose>
-    <form action="settingLogic">
+    <form action="changePasswordLogic">
         <label for="oldPassword">Altes Passwort</label>
         <input id="oldPassword" class="form-control" name="oldPassword" type="password"/>
         <label for="password">Neues Passwort</label>
