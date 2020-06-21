@@ -8,7 +8,7 @@
         <thead class="thead-dark">
         <tr>
             <c:forEach items="${financialBean.totalPerUser}" var="user">
-                <th scope="col">${user.name}</th>
+                <th scope="col">${user.nameString}</th>
             </c:forEach>
         </tr>
         </thead>
