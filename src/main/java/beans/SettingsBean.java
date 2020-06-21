@@ -202,6 +202,10 @@ public class SettingsBean {
     public boolean getUserHasWg() {
         String wgId = new LoginBean().getWgIdByUserId(this.userId);
 
-        return !wgId.isEmpty();
+        if (wgId != null) {
+            return !wgId.isEmpty();
+        }
+
+        return false;
     }
 }

@@ -113,7 +113,7 @@ public class SQLDCUtility extends SQLDatabaseConnection {
      */
     public static String getWgNameFromWgId(String wgId) {
         try {
-            ResultSet rs = executeQuery(("SELECT name FROM wg WHERE uniqueID=" + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT name FROM wgs WHERE uniqueID=" + Integer.valueOf(wgId)));
 
             while (rs.next()) {
                 return rs.getString(1);
