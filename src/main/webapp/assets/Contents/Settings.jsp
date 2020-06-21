@@ -28,11 +28,13 @@
         </c:otherwise>
     </c:choose>
     <form action="settingLogic">
+        <label for="oldPassword">Altes Passwort</label>
+        <input id="oldPassword" class="form-control" name="oldPassword" type="password"/>
         <label for="password">Neues Passwort</label>
         <div id="strengthbar" style="max-width: 500px;">
             <div id="bar" class="bar0"></div>
         </div>
-        <input id="password" onkeyup="checkPassword()" name="password" class="form-control" type="password"/>
+        <input id="password" onkeyup="checkPassword()" name="newPassword" class="form-control" type="password"/>
         <label for="password2">Neues Passwort wiederholen</label>
         <input id="password2" class="form-control" type="password"/>
         <button id="visibleSavePasswordButton" class="btn btn-lg btn-primary btn-block" type="button">Passwort &auml;ndern</button>
