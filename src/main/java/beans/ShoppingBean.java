@@ -43,7 +43,7 @@ public class ShoppingBean {
         if (RegexHelper.checkText(article) && RegexHelper.checkText(amount) && RegexHelper.checkString(requestedBy)) {
             String wgId = new LoginBean().getWgIdByUserId(createdBy);
 
-            return SQLDCShopping.addArticleRequest(article, amount, createdBy, requestedBy, dateDue, wgId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            return SQLDCshopping.addArticleRequest(article, amount, createdBy, requestedBy, dateDue, wgId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
         }
 
         return ErrorCodes.WRONGENTRY;
@@ -57,10 +57,10 @@ public class ShoppingBean {
      */
     public ErrorCodes setRequestDone(String requestId, String wgId) {
         if (RegexHelper.checkString(requestId)) {
-            String savedWgId = SQLDCTodo.getWgIdOfTodo(requestId);
+            String savedWgId = SQLDCtodo.getWgIdOfTodo(requestId);
 
             if (savedWgId.equals(wgId)) {
-                return SQLDCShopping.setArticleRequestDone(requestId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                return SQLDCshopping.setArticleRequestDone(requestId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
             }
         }
 
@@ -75,7 +75,7 @@ public class ShoppingBean {
      */
     public String getNameString(String username) {
         if (RegexHelper.checkString(username)) {
-            return SQLDCUtility.getNameString(username);
+            return SQLDCusers.getNameString(username);
         }
 
         return "";
@@ -113,7 +113,7 @@ public class ShoppingBean {
      * @return A List of Maps of which each represents an article
      */
     public List<Map<String, String>> getRequests() {
-        return SQLDCShopping.getActiveArticleRequests(this.wgId);
+        return SQLDCshopping.getActiveArticleRequests(this.wgId);
     }
 
     /**
@@ -122,7 +122,7 @@ public class ShoppingBean {
      * @return A List of Maps of which each contains the username and the formatted name string
      */
     public List<Map<String, String>> getUsersOfWg() {
-        List<Map<String, String>> userList = SQLDCLogin.getAllNameStringsForWg(this.wgId);
+        List<Map<String, String>> userList = SQLDCusers.getAllNameStringsForWg(this.wgId);
         List<Map<String, String>> newList = new ArrayList<Map<String, String>>();
 
         for (Map<String, String> user : userList) {

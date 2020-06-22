@@ -38,7 +38,7 @@ public class ToDoBean {
     public ErrorCodes createTodo(String task, String userId, String wgId, Date dateDue, String createdById) {
         if (RegexHelper.checkText(task)) {
             if (RegexHelper.checkString(userId) && RegexHelper.checkString(wgId) && RegexHelper.checkString(createdById)) {
-                return SQLDCTodo.createTodo(task, userId, wgId, dateDue, createdById) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                return SQLDCtodo.createTodo(task, userId, wgId, dateDue, createdById) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
             }
         }
         return ErrorCodes.WRONGENTRY;
@@ -61,7 +61,7 @@ public class ToDoBean {
      * @return The list with usernames
      */
     public List<String> getAllUsersOfWG(String wgId) {
-        return SQLDCTodo.getAllUsersOfWG(wgId);
+        return SQLDCusers.getAllUsersOfWG(wgId);
     }
 
     /**
@@ -72,7 +72,7 @@ public class ToDoBean {
      */
     public String getNameString(String username) {
         if (RegexHelper.checkString(username)) {
-            return SQLDCUtility.getNameString(username);
+            return SQLDCusers.getNameString(username);
         }
 
         return "";
@@ -85,7 +85,7 @@ public class ToDoBean {
      * @return The wgId
      */
     public String getWgIdByUserId(String userId) {
-        return SQLDCTodo.getWgIdByUser(userId);
+        return SQLDCusers.getWgIdByUser(userId);
     }
 
     /**
@@ -96,10 +96,10 @@ public class ToDoBean {
      */
     public ErrorCodes setTodoDone(String todoId, String wgId) {
         if (RegexHelper.checkString(todoId)) {
-            String savedWgId = SQLDCTodo.getWgIdOfTodo(todoId);
+            String savedWgId = SQLDCtodo.getWgIdOfTodo(todoId);
 
             if (savedWgId.equals(wgId)) {
-                return SQLDCTodo.setTodoDone(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                return SQLDCtodo.setTodoDone(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
             }
         }
 
@@ -115,10 +115,10 @@ public class ToDoBean {
      */
     public ErrorCodes removeTodo(String todoId, String wgId) {
         if (RegexHelper.checkString(todoId)) {
-            String savedWgId = SQLDCTodo.getWgIdOfTodo(todoId);
+            String savedWgId = SQLDCtodo.getWgIdOfTodo(todoId);
 
             if (savedWgId.equals(wgId)) {
-                return SQLDCTodo.removeTodo(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                return SQLDCtodo.removeTodo(todoId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
             }
         }
 
@@ -157,7 +157,7 @@ public class ToDoBean {
      * @return The username of the user
      */
     public String getUsername() {
-        return SQLDCLogin.getUsername(this.userId);
+        return SQLDCusers.getUsername(this.userId);
     }
 
     /**
@@ -166,7 +166,7 @@ public class ToDoBean {
      * @return The List of Todos
      */
     public List<Map<String, String>> getTodos() {
-        return SQLDCTodo.getAllActiveTodos(this.wgId);
+        return SQLDCtodo.getAllActiveTodos(this.wgId);
     }
 
     /**
@@ -175,6 +175,6 @@ public class ToDoBean {
      * @return A List of Maps of which each contains the username and the formatted name string
      */
     public List<Map<String, String>> getUsersOfWg() {
-        return SQLDCLogin.getAllNameStringsForWg(this.wgId);
+        return SQLDCusers.getAllNameStringsForWg(this.wgId);
     }
 }
