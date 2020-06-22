@@ -44,6 +44,10 @@ public class CleanBean {
         this.userId = userId;
     }
 
+    public void setWgId(String wgId) {
+        this.wgId = wgId;
+    }
+
     public List<Map<String, String>> getCleanData() {
         List<Map<String, String>> returnMap = new ArrayList<>();
 
