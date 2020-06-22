@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="createTodoBean" class="beans.ToDoBean" scope="request"/>
 <jsp:setProperty name="createTodoBean" property="userId" value="${sessionBean.userId}"/>
+<jsp:setProperty name="createTodoBean" property="wgId" value="${sessionBean.wgId}"/>
 <!-- Modal -->
 <div class="modal fade" id="createToDo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

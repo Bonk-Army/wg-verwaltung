@@ -1,3 +1,8 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
+<c:if test="${sessionBean.loggedIn}">
+    <%@include file="Sidebar.jsp" %>
+</c:if>
 <div id="content">
     <section class="mb-4">
 
@@ -14,8 +19,8 @@
                     <!--Grid column-->
                     <div class="col-md-6">
                         <div class="md-form mb-0">
-                            <input type="text" id="name" name="name" class="form-control">
-                            <label for="name" class="">Dein Name</label>
+                            <input type="text" id="name" name="name" class="form-control" value="${sessionBean.firstName} ${sessionBean.lastName}">
+                            <label for="name">Dein Name</label>
                         </div>
                     </div>
                     <!--Grid column-->
@@ -23,8 +28,8 @@
                     <!--Grid column-->
                     <div class="col-md-6">
                         <div class="md-form mb-0">
-                            <input type="text" id="email" name="email" class="form-control">
-                            <label for="email" class="">Deine E-Mail</label>
+                            <input type="text" id="email" name="email" class="form-control" value="${sessionBean.email}">
+                            <label for="email">Deine E-Mail</label>
                         </div>
                     </div>
                     <!--Grid column-->
@@ -37,7 +42,7 @@
                     <div class="col-md-12">
                         <div class="md-form mb-0">
                             <input type="text" id="subject" name="subject" class="form-control">
-                            <label for="subject" class="">Betreff</label>
+                            <label for="subject">Betreff</label>
                         </div>
                     </div>
                 </div>
@@ -63,12 +68,14 @@
             <div class="text-center">
                 <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Senden</a>
             </div>
-            <div class="center">
-                <hr>
-            </div>
-            <div class="text-center">
-                <a href="./">Zur&uuml;ck zu Login</a>
-            </div>
+            <c:if test="${!sessionBean.loggedIn}">
+                <div class="center">
+                    <hr>
+                </div>
+                <div class="text-center">
+                    <a href="./">Zur&uuml;ck zu Login</a>
+                </div>
+            </c:if>
 
             <div class="status"></div>
         </div>

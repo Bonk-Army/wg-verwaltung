@@ -1,0 +1,54 @@
+h2 {
+    font-family: Arial, Verdana;
+    font-weight: 800;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+}
+
+.form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    max-width: 500px;
+}
+
+.btn.btn-lg.btn-primary.btn-block {
+    max-width: 500px;
+}
+
+label {
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+
+button.leave, button.btn-primary:focus {
+    background-color: #cc0000;
+    border-color: #cc0000;
+}
+
+button.leave:hover {
+    background-color: #a10101;
+    border-color: #a10101;
+}
+
+button.join {
+    background-color: #05ce00;
+    border-color: #05ce00;
+}
+
+button.join:hover {
+    background-color: #0cad09;
+    border-color: #0cad09;
+}
+
+.modal-content {
+    background-color: #272525;
+    color: aliceblue;
+}
+
+.close {
+    color: aliceblue;
+}

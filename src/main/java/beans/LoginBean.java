@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class LoginBean {
     private ErrorCodes status;
+    private String cookiePostfixNotHashed = "";
 
     public LoginBean() {
     }
@@ -41,13 +42,15 @@ public class LoginBean {
         String salt = SQLDCLogin.getPasswordSalt(username);
         String hash = SQLDCLogin.getPasswordHash(username);
         String cookiePostfix = new RandomStringGenerator(21).nextString();
+        this.cookiePostfixNotHashed = cookiePostfix;
+        String cookiePostfixHash = PasswordHasher.hashPassword(cookiePostfix, salt);
 
         if (!salt.isEmpty() && !hash.isEmpty()) {
             String newHash = PasswordHasher.hashPassword(password, salt);
 
             //Login was either successful or one of the entered params was wrong
             if (newHash.equals(hash)) {
-                if (SQLDCLogin.setCookiePostfix(username, cookiePostfix)) {
+                if (SQLDCLogin.setCookiePostfix(username, cookiePostfixHash)) {
                     this.status = ErrorCodes.SUCCESS;
                     return ErrorCodes.SUCCESS;
                 } else {
@@ -89,9 +92,11 @@ public class LoginBean {
                 //Create new user. Generate random, 10-digit verification code for email verification.
                 String verificationCode = new RandomStringGenerator(10).nextString();
                 String cookiePostfix = new RandomStringGenerator(21).nextString();
+                this.cookiePostfixNotHashed = cookiePostfix;
+                String cookiePostfixHash = PasswordHasher.hashPassword(cookiePostfix, hash);
 
                 // If the user creation was successful, send an email and continue registration
-                if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfix)) {
+                if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfixHash)) {
                     // Now send an email to the user with the verification link
                     String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
                     String fullName = firstName + " " + lastName;
@@ -221,9 +226,12 @@ public class LoginBean {
             String cookiePostfix = sessionIdentifier.substring(splitIndex + 1, sessionIdentifier.length());
 
             String username = SQLDCLogin.getUsername(userId);
-            String savedCookiePostfix = SQLDCLogin.getCookiePostfix(username);
 
-            if (savedCookiePostfix.equals(cookiePostfix)) {
+            String pwsalt = SQLDCLogin.getPasswordSalt(username);
+            String cookiePostfixHash = PasswordHasher.hashPassword(cookiePostfix, pwsalt);
+            String savedCookiePostfixHash = SQLDCLogin.getCookiePostfix(username);
+
+            if (savedCookiePostfixHash.equals(cookiePostfixHash)) {
                 return userId;
             }
         }
@@ -334,5 +342,9 @@ public class LoginBean {
 
     public ErrorCodes getStatus() {
         return this.status;
+    }
+
+    public String getCookiePostfixNotHashed() {
+        return cookiePostfixNotHashed;
     }
 }

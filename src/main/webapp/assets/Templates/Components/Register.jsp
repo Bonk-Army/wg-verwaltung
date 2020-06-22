@@ -22,7 +22,7 @@
         </div>
         <input name="isRegister" type="checkbox" checked="checked" hidden="hidden" id="isRegister">
         <button id="visibleRegisterButton" class="btn btn-lg btn-primary btn-block" type="button">Registrieren</button>
-        <button id="registerButton" class="btn btn-lg btn-primary btn-block" type="submit" style="display: none;">Abschicken</button>
+        <button id="registerButton" class="btn btn-lg btn-primary btn-block" type="submit" style="display: none">Abschicken</button>
     </form>
     <div class="center">
         <hr>
@@ -34,7 +34,7 @@
         <hr>
     </div>
     <div class="text-center">
-        <a href="./contact">Contact</a>  &emsp; <a href="./impressum">Impressum </a><br>
+        <a href="./contact">Kontakt</a>  &emsp; <a href="./faq">FAQ's </a>  &emsp; <a href="./impressum">Impressum </a><br><br>
     </div>
     <div class="center">
         <hr>

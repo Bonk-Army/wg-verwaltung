@@ -1,13 +1,13 @@
 package utilities;
 
+import models.User;
+
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
- * Provides SQL accessor methods for the login page
+ * Provides SQL accessor methods for everything that accesses the users table
  */
 public class SQLDCLogin extends SQLDatabaseConnection {
     /**
@@ -90,8 +90,7 @@ public class SQLDCLogin extends SQLDatabaseConnection {
      */
     public static boolean verifyUser(String username) {
         try {
-            ResultSet rs = executeQuery("UPDATE users SET isVerified = true WHERE username = '" + username + "'");
-            ResultSet rs2 = executeQuery("UPDATE users SET verificationCode = '' WHERE username = '" + username + "'");
+            ResultSet rs = executeQuery("UPDATE users SET isVerified = true, verificationCode = '' WHERE username = '" + username + "'");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -289,6 +288,26 @@ public class SQLDCLogin extends SQLDatabaseConnection {
     }
 
     /**
+     * Set the new name for the given user
+     *
+     * @param userId    The userId of the user
+     * @param firstName The new first name
+     * @param lastName  The new last name
+     * @return If it was successful
+     */
+    public static boolean setName(String userId, String firstName, String lastName) {
+        try {
+            executeQuery("UPDATE users SET firstName = '" + firstName + "', lastName = '" + lastName + "' WHERE uniqueID = " + Integer.valueOf(userId));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
      * Return the cookie postfix required for the session identifier for a specific user
      *
      * @param username The username of the user
@@ -297,7 +316,7 @@ public class SQLDCLogin extends SQLDatabaseConnection {
     public static String getCookiePostfix(String username) {
         String postfix = "";
         try {
-            ResultSet rs = executeQuery("SELECT cookiePostfix FROM users WHERE username='" + username + "'");
+            ResultSet rs = executeQuery(("SELECT cookiePostfix FROM users WHERE username='" + username + "'"));
 
             while (rs.next()) {
                 postfix = rs.getString(1);
@@ -318,7 +337,7 @@ public class SQLDCLogin extends SQLDatabaseConnection {
      */
     public static boolean setCookiePostfix(String username, String cookiePostfix) {
         try {
-            executeQuery("UPDATE users SET cookiePostfix='" + cookiePostfix + "' WHERE username = '" + username + "'");
+            executeQuery(("UPDATE users SET cookiePostfix='" + cookiePostfix + "' WHERE username = '" + username + "'"));
 
             return true;
         } catch (Exception e) {
@@ -326,5 +345,121 @@ public class SQLDCLogin extends SQLDatabaseConnection {
         }
 
         return false;
+    }
+
+    /**
+     * Clear the wgId for the given user
+     *
+     * @param userId The userId of the user
+     * @return If it was successful
+     */
+    public static boolean clearWg(String userId) {
+        try {
+            executeQuery(("UPDATE users SET wgID = " + null + " WHERE uniqueID = " + Integer.valueOf(userId)));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * Return all user data as a user object
+     *
+     * @param userId The userId of the user to get data for
+     * @return The User object
+     */
+    public static User getAllUserData(String userId) {
+        User user = new User();
+
+        try {
+            ResultSet userSet = executeQuery(("SELECT username ,firstName, lastName, wgId, email FROM users WHERE uniqueID = " + Integer.valueOf(userId)));
+
+            while (userSet.next()) {
+                user.setUserId(userId);
+                user.setUsername(userSet.getString(1));
+                user.setFirstName(userSet.getString(2));
+                user.setLastName(userSet.getString(3));
+                user.setWgId(String.valueOf(userSet.getInt(4)));
+                user.setEmail(userSet.getString(5));
+            }
+
+            ResultSet wgSet = executeQuery(("SELECT name FROM wgs WHERE uniqueID = " + Integer.valueOf(user.getWgId())));
+
+            while (wgSet.next()) {
+                user.setWgName(wgSet.getString(1));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
+    /**
+     * Return a list of maps of which each contains the username and the nameString of a user for all users of the specified wg
+     *
+     * @param wgId The wgId of the wg
+     * @return A list of maps of which each represents a user
+     */
+    public static List<Map<String, String>> getAllNameStringsForWg(String wgId) {
+        List<Map<String, String>> nameList = new ArrayList<Map<String, String>>();
+
+        try {
+            ResultSet rs = executeQuery(("SELECT username, firstName, lastName FROM users WHERE wgId="
+                    + Integer.valueOf(wgId) + " ORDER BY firstName"));
+
+            while (rs.next()) {
+                Map<String, String> currentUser = new HashMap<String, String>();
+
+                currentUser.put("username", rs.getString(1));
+
+                String firstName = rs.getString(2);
+                String lastName = rs.getString(3);
+
+                currentUser.put("nameString", (firstName + " " + lastName.substring(0, 1)));
+
+                nameList.add(currentUser);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return nameList;
+    }
+
+    /**
+     * Return a list of maps of which each contains the userId and the nameString of a user for all users of the specified wg
+     *
+     * @param wgId The wgId of the wg
+     * @return A list of maps of which each represents a user
+     */
+    public static List<Map<String, String>> getAllNameStringsWithUserIdForWg(String wgId) {
+        List<Map<String, String>> nameList = new ArrayList<Map<String, String>>();
+
+        try {
+            ResultSet rs = executeQuery(("SELECT uniqueID, firstName, lastName FROM users WHERE wgId="
+                    + Integer.valueOf(wgId) + " ORDER BY firstName"));
+
+            while (rs.next()) {
+                Map<String, String> currentUser = new HashMap<String, String>();
+
+                currentUser.put("userId", String.valueOf(rs.getInt(1)));
+
+                String firstName = rs.getString(2);
+                String lastName = rs.getString(3);
+
+                currentUser.put("nameString", (firstName + " " + lastName.substring(0, 1)));
+
+                nameList.add(currentUser);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return nameList;
     }
 }

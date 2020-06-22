@@ -9,6 +9,8 @@ import java.util.*;
  */
 public class ShoppingBean {
     private String userId = "";
+    private String wgId = "";
+    private String username = "";
 
     public ShoppingBean() {
     }
@@ -93,8 +95,16 @@ public class ShoppingBean {
 
     // Getters and Setters for use with JSPs
 
-    public void setUserId(String userId){
+    public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public void setWgId(String wgId) {
+        this.wgId = wgId;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
@@ -103,9 +113,7 @@ public class ShoppingBean {
      * @return A List of Maps of which each represents an article
      */
     public List<Map<String, String>> getRequests() {
-        String wgId = new LoginBean().getWgIdByUserId(this.userId);
-
-        return SQLDCShopping.getActiveArticleRequests(wgId);
+        return SQLDCShopping.getActiveArticleRequests(this.wgId);
     }
 
     /**
@@ -114,25 +122,20 @@ public class ShoppingBean {
      * @return A List of Maps of which each contains the username and the formatted name string
      */
     public List<Map<String, String>> getUsersOfWg() {
-        String wgId = SQLDCTodo.getWgIdByUser(userId);
-        String currentUsername = new LoginBean().getUsernameById(userId);
+        List<Map<String, String>> userList = SQLDCLogin.getAllNameStringsForWg(this.wgId);
+        List<Map<String, String>> newList = new ArrayList<Map<String, String>>();
 
-        List<String> usernames = SQLDCTodo.getAllUsersOfWG(wgId);
-        usernames.remove(currentUsername);
-        List<Map<String, String>> formattedNames = new ArrayList<Map<String, String>>();
+        for (Map<String, String> user : userList) {
+            if (user.get("username").equals(this.username)) {
+                newList.add(user);
+                userList.remove(user);
 
-        List<String> usernamesSorted = new ArrayList<String>();
-        usernamesSorted.add(currentUsername);
-        usernamesSorted.addAll(usernames);
+                newList.addAll(userList);
 
-        for (String username : usernamesSorted) {
-            Map<String, String> userMap = new HashMap<String, String>();
-            userMap.put("username", username);
-            userMap.put("nameString", getNameString(username));
-
-            formattedNames.add(userMap);
+                return newList;
+            }
         }
 
-        return formattedNames;
+        return newList;
     }
 }
