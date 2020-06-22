@@ -2,11 +2,16 @@
     background-color: #d75a5a;
 }
 
-.positive{
+.positive {
     background-color: #71bf71;
 }
 
-button.remove{
+button.remove {
+    max-width: 62px;
+}
+
+#addArticle {
+    margin-bottom: 10px;
     max-width: 62px;
 }
 

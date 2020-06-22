@@ -20,7 +20,7 @@
         </tr>
         </tbody>
     </table>
-    <button title="ToDo hinzuf&uuml;gen" id="addToDo" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal"
+    <button title="ToDo hinzuf&uuml;gen" id="addArticle" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal"
             data-target="#createFinancial">+
     </button>
     <table class="table">
