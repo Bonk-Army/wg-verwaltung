@@ -1,10 +1,19 @@
 package beans;
 
+import utilities.SQLDCusers;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
 /**
  * Bean used for the cleaning plan page
  */
 public class CleanBean {
-    private String userId;
+    private String userId = "";
+    private String wgId = "";
 
     /*
       /$$$$$$                                 /$$             /$$
@@ -33,5 +42,27 @@ public class CleanBean {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public List<Map<String, String>> getCleanData() {
+        List<Map<String, String>> returnMap = new ArrayList<>();
+
+        Map<String, String> testData = new HashMap<>();
+
+        testData.put("cleanId", "1");
+        testData.put("title", "Küche putzen");
+
+        returnMap.add(testData);
+
+        return returnMap;
+    }
+
+    /**
+     * Return a List of the names (Format: Max M for Max Mustermann) of the users in the wg of the specified user
+     *
+     * @return A List of Maps of which each contains the username and the formatted name string
+     */
+    public List<Map<String, String>> getUsersOfWg() {
+        return SQLDCusers.getAllNameStringsWithUserIdForWg(this.wgId);
     }
 }
