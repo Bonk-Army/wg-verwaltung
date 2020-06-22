@@ -4,8 +4,8 @@ package beans;
  * Bean used for the cleaning plan page
  */
 public class CleanBean {
-    // Variables
-        // private List<Clean> cleanList;
+    private String userId = "";
+    private String wgId = "";
 
     /*
       /$$$$$$                                 /$$             /$$
@@ -19,14 +19,6 @@ public class CleanBean {
      */
     // Methods used by servlets
 
-    // Public Methods
-
-        // public void init() { receive cleaning plan for wg of user }
-        // public void addTask() {}
-        // public void removeTask() {}
-        // public void editTask() {}
-
-    // Private Methods
 
     /*
       /$$$$$$              /$$     /$$                                               /$$        /$$$$$$              /$$     /$$
