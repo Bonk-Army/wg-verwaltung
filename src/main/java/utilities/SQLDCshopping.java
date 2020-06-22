@@ -1,15 +1,29 @@
 package utilities;
 
-import java.awt.*;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.List;
 
+/*
+ Table structure:
+
+        - uniqueID          (int)
+        - isDone            (bool)
+        - isActive          (bool)
+        - amount            (String)
+        - article           (String)
+        - dateDue           (Date)
+        - requestedBy       (int)       (Foreign key to users.uniqueID)
+        - wgId              (int)       (Foreign key to wgs.uniqueID)
+        - createdBy         (int)       (Foreign key to users.uniqueID)
+        - dateCreated       (Date)
+ */
+
 /**
  * Provides SQL accessor methods for everything that accesses the shopping table
  */
-public class SQLDCShopping extends SQLDatabaseConnection {
+public class SQLDCshopping extends SQLDatabaseConnection {
     /**
      * Add an article request to the shopping list
      *
@@ -79,11 +93,11 @@ public class SQLDCShopping extends SQLDatabaseConnection {
 
                 String createdById = String.valueOf(rs.getInt(3));
                 String requestedById = String.valueOf(rs.getInt(4));
-                String createdBy = SQLDCLogin.getUsername(createdById);
-                String requestedBy = SQLDCLogin.getUsername(requestedById);
+                String createdBy = SQLDCusers.getUsername(createdById);
+                String requestedBy = SQLDCusers.getUsername(requestedById);
 
-                currentArticle.put("requestedBy", SQLDCUtility.getNameString(requestedBy));
-                currentArticle.put("createdBy", SQLDCUtility.getNameString(createdBy));
+                currentArticle.put("requestedBy", SQLDCusers.getNameString(requestedBy));
+                currentArticle.put("createdBy", SQLDCusers.getNameString(createdBy));
 
                 // Color the requests based on their priority
                 Date currentDate = new Date();

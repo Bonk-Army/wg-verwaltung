@@ -40,8 +40,8 @@ public class LoginBean {
             return ErrorCodes.WRONGUNAME;
         }
 
-        String salt = SQLDCLogin.getPasswordSalt(username);
-        String hash = SQLDCLogin.getPasswordHash(username);
+        String salt = SQLDCusers.getPasswordSalt(username);
+        String hash = SQLDCusers.getPasswordHash(username);
         String cookiePostfix = new RandomStringGenerator(21).nextString();
         this.cookiePostfixNotHashed = cookiePostfix;
         String cookiePostfixHash = PasswordHasher.hashPassword(cookiePostfix, salt);
@@ -55,7 +55,7 @@ public class LoginBean {
 
             //Login was either successful or one of the entered params was wrong
             if (newHash.equals(hash)) {
-                if (SQLDCLogin.setCookiePostfix(username, cookiePostfixHash)) {
+                if (SQLDCusers.setCookiePostfix(username, cookiePostfixHash)) {
                     this.status = ErrorCodes.SUCCESS;
                     return ErrorCodes.SUCCESS;
                 } else {
@@ -109,7 +109,7 @@ public class LoginBean {
                 }
 
                 // If the user creation was successful, send an email and continue registration
-                if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfixHash)) {
+                if (SQLDCusers.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfixHash)) {
                     // Now send an email to the user with the verification link
                     String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
                     String fullName = firstName + " " + lastName;
@@ -138,11 +138,11 @@ public class LoginBean {
         if (!RegexHelper.checkString(username) || !RegexHelper.checkString(verificationCode)) {
             return ErrorCodes.WRONGENTRY;
         } else {
-            String savedVerificationCode = SQLDCLogin.getUserVerificationCode(username);
+            String savedVerificationCode = SQLDCusers.getUserVerificationCode(username);
 
             // If the entered verification code matches the saved one, verify the user
             if (verificationCode.equals(savedVerificationCode)) {
-                SQLDCLogin.verifyUser(username);
+                SQLDCusers.verifyUser(username);
 
                 return ErrorCodes.SUCCESS;
             }
@@ -159,10 +159,10 @@ public class LoginBean {
     public ErrorCodes sendPasswordResetLink(String email) {
         if (RegexHelper.checkEmail(email)) {
             String randomKey = new RandomStringGenerator(30).nextString();
-            if (SQLDCLogin.setPasswordKey(email, randomKey)) {
-                String username = SQLDCLogin.getUsernameByEmail(email);
+            if (SQLDCusers.setPasswordKey(email, randomKey)) {
+                String username = SQLDCusers.getUsernameByEmail(email);
                 String resetLink = "resetPassword?uname=" + username + "&key=" + randomKey;
-                String fullName = SQLDCUtility.getFirstName(username) + " " + SQLDCUtility.getLastName(username);
+                String fullName = SQLDCusers.getFirstName(username) + " " + SQLDCusers.getLastName(username);
                 MailSender.sendResetPasswordMail(email, fullName, resetLink);
                 return ErrorCodes.SUCCESS;
             }
@@ -183,13 +183,13 @@ public class LoginBean {
         if (!RegexHelper.checkString(username) || !RegexHelper.checkString(key)) {
             return ErrorCodes.WRONGENTRY;
         } else {
-            String salt = SQLDCLogin.getPasswordSalt(username);
-            String savedKey = SQLDCLogin.getPasswordKey(username);
+            String salt = SQLDCusers.getPasswordSalt(username);
+            String savedKey = SQLDCusers.getPasswordKey(username);
 
             String pwhash = PasswordHasher.hashPassword(password, salt);
 
             if (key.equals(savedKey)) {
-                return SQLDCLogin.setPassword(username, pwhash) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                return SQLDCusers.setPassword(username, pwhash) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
             }
 
             return ErrorCodes.WRONGENTRY;
@@ -204,7 +204,7 @@ public class LoginBean {
      * @return The ID as a String
      */
     public String getUserId(String username) {
-        return SQLDCLogin.getUserId(username);
+        return SQLDCusers.getUserId(username);
     }
 
     /**
@@ -215,8 +215,8 @@ public class LoginBean {
      */
     public String getSessionIdentifier(String username) {
         if (RegexHelper.checkString(username)) {
-            String userId = SQLDCLogin.getUserId(username);
-            String cookiePostfix = SQLDCLogin.getCookiePostfix(username);
+            String userId = SQLDCusers.getUserId(username);
+            String cookiePostfix = SQLDCusers.getCookiePostfix(username);
 
             if (!userId.isEmpty() && !cookiePostfix.isEmpty()) {
                 return userId + "-" + cookiePostfix;
@@ -238,11 +238,11 @@ public class LoginBean {
             String userId = sessionIdentifier.substring(0, splitIndex);
             String cookiePostfix = sessionIdentifier.substring(splitIndex + 1, sessionIdentifier.length());
 
-            String username = SQLDCLogin.getUsername(userId);
+            String username = SQLDCusers.getUsername(userId);
 
-            String pwsalt = SQLDCLogin.getPasswordSalt(username);
+            String pwsalt = SQLDCusers.getPasswordSalt(username);
             String cookiePostfixHash = PasswordHasher.hashPassword(cookiePostfix, pwsalt);
-            String savedCookiePostfixHash = SQLDCLogin.getCookiePostfix(username);
+            String savedCookiePostfixHash = SQLDCusers.getCookiePostfix(username);
 
             if (savedCookiePostfixHash.equals(cookiePostfixHash)) {
                 return userId;
@@ -260,7 +260,7 @@ public class LoginBean {
      */
     public String getUsernameById(String userId) {
         if (RegexHelper.checkString(userId)) {
-            return SQLDCLogin.getUsername(userId);
+            return SQLDCusers.getUsername(userId);
         }
 
         return "";
@@ -274,7 +274,7 @@ public class LoginBean {
      */
     public String getFirstName(String username) {
         if (RegexHelper.checkString(username) && !username.isEmpty()) {
-            return SQLDCUtility.getFirstName(username);
+            return SQLDCusers.getFirstName(username);
         }
         return "";
     }
@@ -287,7 +287,7 @@ public class LoginBean {
      */
     public String getLastName(String username) {
         if (RegexHelper.checkString(username) && !username.isEmpty()) {
-            return SQLDCUtility.getLastName(username);
+            return SQLDCusers.getLastName(username);
         }
         return "";
     }
@@ -300,7 +300,7 @@ public class LoginBean {
      */
     public String getWgNameByUserId(String userId) {
         if (RegexHelper.checkString(userId)) {
-            return SQLDCOverview.getWgName(userId);
+            return SQLDCwgs.getWgName(userId);
         }
 
         return "";
@@ -313,7 +313,7 @@ public class LoginBean {
      * @return The wgId
      */
     public String getWgIdByUserId(String userId) {
-        return SQLDCTodo.getWgIdByUser(userId);
+        return SQLDCusers.getWgIdByUser(userId);
     }
 
     /**
@@ -323,7 +323,7 @@ public class LoginBean {
      * @return If the username is unique (so it returns true if the name can be used)
      */
     private boolean isUsernameUnique(String username) {
-        List<String> usedNames = SQLDCLogin.getAllUserNames();
+        List<String> usedNames = SQLDCusers.getAllUserNames();
 
         return !usedNames.contains(username);
     }
@@ -335,7 +335,7 @@ public class LoginBean {
      * @return If the email is unique (so it returns true if the email can be used)
      */
     private boolean isEmailUnique(String email) {
-        List<String> usedEmails = SQLDCLogin.getAllEmails();
+        List<String> usedEmails = SQLDCusers.getAllEmails();
 
         return !usedEmails.contains(email);
     }

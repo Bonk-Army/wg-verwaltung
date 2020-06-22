@@ -6,10 +6,22 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.*;
 
+/*
+ Table structure:
+
+        - uniqueID          (int)
+        - reason            (String)
+        - value             (int)
+        - dateCreated       (Date)
+        - createdBy         (int)       (Foreign key to users.uniqueID)
+        - isActive          (bool)
+        - wgId              (int)       (Foreign key to wgs.uniqueID)
+ */
+
 /**
  * Provides SQL Accessor methods for everything that accesses the financial table
  */
-public class SQLDCFinancial extends SQLDatabaseConnection {
+public class SQLDCfinancial extends SQLDatabaseConnection {
     /**
      * Create a new financial record
      *
@@ -64,8 +76,8 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
 
                 currentEntry.put("value", valueString);
                 currentEntry.put("dateCreated", createdDateString);
-                String createdByUsername = SQLDCLogin.getUsername(String.valueOf(rs.getInt(4)));
-                currentEntry.put("createdBy", SQLDCUtility.getNameString(createdByUsername));
+                String createdByUsername = SQLDCusers.getUsername(String.valueOf(rs.getInt(4)));
+                currentEntry.put("createdBy", SQLDCusers.getNameString(createdByUsername));
                 currentEntry.put("entryId", String.valueOf(rs.getInt(5)));
 
                 entries.add(currentEntry);
@@ -146,29 +158,6 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
         }
 
         return entries;
-    }
-
-    /**
-     * Returns a list of all the ids of every user in the given wg ordered by the first name of the user
-     *
-     * @param wgId The wgId of the wg to get the users for
-     * @return The List of ids
-     */
-    public static List<String> getAllUserIdsOfWg(String wgId) {
-        List<String> ids = new ArrayList<String>();
-
-        try {
-            ResultSet rs = executeQuery(("SELECT uniqueID FROM users WHERE wgID="
-                    + Integer.valueOf(wgId) + " ORDER BY firstName"));
-
-            while (rs.next()) {
-                ids.add(String.valueOf(rs.getInt(1)));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return ids;
     }
 
     /**

@@ -35,15 +35,17 @@ public class SettingsBean {
      */
     public ErrorCodes createWg(String userId, String nameWg) {
         if (RegexHelper.checkString(nameWg)) {
-            ArrayList<String> stringList = SQLDCSettings.getAccessKeyList();
+            ArrayList<String> stringList = SQLDCwgs.getAccessKeyList();
             String accessKey = new RandomStringGenerator(20).nextString();
+
+            // To prevent duplicate keys
             while (stringList.contains(accessKey)) {
                 accessKey = new RandomStringGenerator(20).nextString();
             }
-            if (SQLDCSettings.createWg(nameWg, accessKey)) {
-                String wgId = SQLDCSettings.getWgId(accessKey);
+            if (SQLDCwgs.createWg(nameWg, accessKey)) {
+                String wgId = SQLDCwgs.getWgId(accessKey);
                 if (!wgId.equals("")) {
-                    if (SQLDCSettings.setWgId(wgId, userId) && SQLDCSettings.setUserRights(userId, UserRights.WG_ADMIN.getSqlKey())) {
+                    if (SQLDCusers.setWgId(wgId, userId) && SQLDCusers.setUserRights(userId, UserRights.WG_ADMIN.getSqlKey())) {
                         return ErrorCodes.SUCCESS;
                     }
                     return ErrorCodes.FAILURE;
@@ -61,7 +63,7 @@ public class SettingsBean {
      */
     public String getWgId(String accessKey) {
         if (RegexHelper.checkString(accessKey)) {
-            return SQLDCSettings.getWgId(accessKey);
+            return SQLDCwgs.getWgId(accessKey);
         }
         return "";
     }
@@ -74,7 +76,7 @@ public class SettingsBean {
      */
     public String getWgIdFromUserId(String userId) {
         if (RegexHelper.checkString(userId)) {
-            return SQLDCUtility.getWgIdFromUserId(userId);
+            return SQLDCusers.getWgIdFromUserId(userId);
         }
 
         return "";
@@ -88,9 +90,9 @@ public class SettingsBean {
      */
     public String getWgNameFromUserID(String userId) {
         if (RegexHelper.checkString(userId)) {
-            String wgId = SQLDCUtility.getWgIdFromUserId(userId);
+            String wgId = SQLDCusers.getWgIdFromUserId(userId);
 
-            return SQLDCUtility.getWgNameFromWgId(wgId);
+            return SQLDCwgs.getWgNameFromWgId(wgId);
         }
 
         return "";
@@ -105,9 +107,9 @@ public class SettingsBean {
      */
     public ErrorCodes setWgId(String userId, String accessKey) {
         if (RegexHelper.checkString(accessKey)) {
-            String wgId = SQLDCSettings.getWgId(accessKey);
+            String wgId = SQLDCwgs.getWgId(accessKey);
             if (!wgId.equals("")) {
-                return SQLDCSettings.setWgId(wgId, userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                return SQLDCusers.setWgId(wgId, userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
             }
         }
         return ErrorCodes.WRONGENTRY;
@@ -135,14 +137,14 @@ public class SettingsBean {
      * @return If it was successful
      */
     public ErrorCodes changePassword(String username, String oldPassword, String newPassword) {
-        String oldPasswordSavedHash = SQLDCLogin.getPasswordHash(username);
-        String pwsalt = SQLDCLogin.getPasswordSalt(username);
+        String oldPasswordSavedHash = SQLDCusers.getPasswordHash(username);
+        String pwsalt = SQLDCusers.getPasswordSalt(username);
         String oldPasswordHash = PasswordHasher.hashPassword(oldPassword, pwsalt);
 
         if (oldPasswordSavedHash.equals(oldPasswordHash)) {
             String newPasswordHash = PasswordHasher.hashPassword(newPassword, pwsalt);
 
-            return SQLDCLogin.setPassword(username, newPasswordHash) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            return SQLDCusers.setPassword(username, newPasswordHash) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
         }
 
         return ErrorCodes.WRONGPASSWORD;
@@ -158,7 +160,7 @@ public class SettingsBean {
      */
     public ErrorCodes changeName(String userId, String firstName, String lastName) {
         if (RegexHelper.checkString(firstName) && RegexHelper.checkString(lastName)) {
-            return SQLDCLogin.setName(userId, firstName, lastName) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            return SQLDCusers.setName(userId, firstName, lastName) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
         }
 
         return ErrorCodes.WRONGENTRY;
@@ -171,7 +173,7 @@ public class SettingsBean {
      * @return If it was successful
      */
     public ErrorCodes leaveWg(String userId) {
-        return SQLDCLogin.clearWg(userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+        return SQLDCusers.clearWg(userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
     }
 
     /*
