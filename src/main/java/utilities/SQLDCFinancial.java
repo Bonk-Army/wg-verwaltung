@@ -46,7 +46,7 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
 
         try {
             ResultSet rs = executeQuery(("SELECT reason, value, dateCreated, createdBy, uniqueID FROM financial WHERE wgId="
-                    + Integer.valueOf(wgId) + " AND isActive = 1 LIMIT " + limit));
+                    + Integer.valueOf(wgId) + " AND isActive = 1 LIMIT " + limit + " ORDER BY "));
 
             while (rs.next()) {
                 Map<String, String> currentEntry = new HashMap<String, String>();

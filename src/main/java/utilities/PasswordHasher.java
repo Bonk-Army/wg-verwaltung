@@ -18,7 +18,8 @@ public class PasswordHasher {
     /**
      * Hashes the given password with PBKDF2
      *
-     * @param password The password to be hashed
+     * @param password   The password to be hashed
+     * @param saltString The password salt used for salting the hash for more security
      * @return The hash. If null is returned, the registration process MUST be interrupted!!!
      */
     public static String hashPassword(String password, String saltString) {

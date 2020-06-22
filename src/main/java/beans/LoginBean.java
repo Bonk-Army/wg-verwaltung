@@ -1,6 +1,7 @@
 package beans;
 
 import utilities.*;
+
 import java.util.List;
 
 /**
@@ -45,6 +46,10 @@ public class LoginBean {
         this.cookiePostfixNotHashed = cookiePostfix;
         String cookiePostfixHash = PasswordHasher.hashPassword(cookiePostfix, salt);
 
+        if (cookiePostfixHash == null) {
+            return ErrorCodes.FAILURE;
+        }
+
         if (!salt.isEmpty() && !hash.isEmpty()) {
             String newHash = PasswordHasher.hashPassword(password, salt);
 
@@ -84,6 +89,10 @@ public class LoginBean {
         //Calculate password hash
         String hash = PasswordHasher.hashPassword(password, salt);
 
+        if (hash == null) {
+            return ErrorCodes.FAILURE;
+        }
+
         //Call SQL to ask if username / email is unique. If unique, it continues registration process, else it stops
         if (!RegexHelper.checkString(username) || !RegexHelper.checkString(firstName) || !RegexHelper.checkString(lastName) || !RegexHelper.checkEmail(email)) {
             return ErrorCodes.WRONGENTRY;
@@ -94,6 +103,10 @@ public class LoginBean {
                 String cookiePostfix = new RandomStringGenerator(21).nextString();
                 this.cookiePostfixNotHashed = cookiePostfix;
                 String cookiePostfixHash = PasswordHasher.hashPassword(cookiePostfix, hash);
+
+                if (cookiePostfixHash == null) {
+                    return ErrorCodes.FAILURE;
+                }
 
                 // If the user creation was successful, send an email and continue registration
                 if (SQLDCLogin.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfixHash)) {
