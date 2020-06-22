@@ -67,6 +67,14 @@ public class CleanBean {
      * @return A List of Maps of which each contains the username and the formatted name string
      */
     public List<Map<String, String>> getUsersOfWg() {
-        return SQLDCusers.getAllNameStringsWithUserIdForWg(this.wgId);
+        List<Map<String, String>> users = SQLDCusers.getAllNameStringsWithUserIdForWg(this.wgId);
+
+        Map<String, String> emptyUser = new HashMap<String, String>();
+        emptyUser.put("userId", "");
+        emptyUser.put("nameString", "");
+
+        users.add(emptyUser);
+
+        return users;
     }
 }
