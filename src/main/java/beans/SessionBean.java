@@ -2,9 +2,7 @@ package beans;
 
 import models.User;
 import utilities.ErrorCodes;
-import utilities.SQLDCLogin;
-
-import java.util.concurrent.ScheduledExecutorService;
+import utilities.SQLDCusers;
 
 /**
  * Session bean that keeps relevant user data to authenticate the user and fetch data more quickly
@@ -22,7 +20,7 @@ public class SessionBean {
     public SessionBean(String userId) {
         this.userId = userId;
 
-        User thisUser = SQLDCLogin.getAllUserData(userId);
+        User thisUser = SQLDCusers.getAllUserData(userId);
 
         this.username = thisUser.getUsername();
         this.firstName = thisUser.getFirstName();
@@ -42,7 +40,7 @@ public class SessionBean {
      * @return if it was successful
      */
     public ErrorCodes logout() {
-        ErrorCodes status = SQLDCLogin.setCookiePostfix(this.username, "") ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+        ErrorCodes status = SQLDCusers.setCookiePostfix(this.username, "") ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
 
         if (status == ErrorCodes.SUCCESS) {
             this.loggedIn = false;

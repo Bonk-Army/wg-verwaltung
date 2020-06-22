@@ -36,7 +36,7 @@ public class FinancialBean {
         int valueCents = (int) Math.round(100 * Double.parseDouble(value));
 
         if (RegexHelper.checkText(reason)) {
-            return SQLDCFinancial.createEntry(reason, valueCents, createdBy, wgId, date) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            return SQLDCfinancial.createEntry(reason, valueCents, createdBy, wgId, date) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
         }
 
         return ErrorCodes.WRONGENTRY;
@@ -51,10 +51,10 @@ public class FinancialBean {
      */
     public ErrorCodes removeFinancialEntry(String entryId, String wgId) {
         if (RegexHelper.checkString(entryId)) {
-            String savedWgId = SQLDCFinancial.getWgIdOfEntry(entryId);
+            String savedWgId = SQLDCfinancial.getWgIdOfEntry(entryId);
 
             if (savedWgId.equals(wgId)) {
-                return SQLDCFinancial.setEntryInactive(entryId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                return SQLDCfinancial.setEntryInactive(entryId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
             }
         }
 
@@ -96,7 +96,7 @@ public class FinancialBean {
     public List<Map<String, String>> getEntries(int viewLimit) {
         String wgId = new LoginBean().getWgIdByUserId(this.userId);
 
-        return SQLDCFinancial.getAllActiveEntries(wgId, viewLimit);
+        return SQLDCfinancial.getAllActiveEntries(wgId, viewLimit);
     }
 
     /**
@@ -105,8 +105,8 @@ public class FinancialBean {
      * @return A List of maps of which each represents one user
      */
     public List<Map<String, String>> getTotalPerUser() {
-        List<Map<String, String>> userNameStringsWithId = SQLDCLogin.getAllNameStringsWithUserIdForWg(this.wgId);
-        Map<String, Integer> sumPerUserById = SQLDCFinancial.getSumForEveryUserOfWg(this.wgId);
+        List<Map<String, String>> userNameStringsWithId = SQLDCusers.getAllNameStringsWithUserIdForWg(this.wgId);
+        Map<String, Integer> sumPerUserById = SQLDCfinancial.getSumForEveryUserOfWg(this.wgId);
         List<Map<String, String>> userList = new ArrayList<Map<String, String>>();
 
         for (Map<String, String> user : userNameStringsWithId) {
@@ -137,7 +137,7 @@ public class FinancialBean {
      * @return The value as a formatted String
      */
     public String getTotalPerWg() {
-        int sumForWg = SQLDCFinancial.getTotalForWg(this.wgId);
+        int sumForWg = SQLDCfinancial.getTotalForWg(this.wgId);
         String sumString = String.format("%.2f", (sumForWg / 100d));
 
         return sumString;

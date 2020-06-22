@@ -33,7 +33,7 @@ public class OverviewBean {
      */
     public int getNumberofTodosWG(String wgId) {
         if (RegexHelper.checkString(wgId) && !wgId.isEmpty()) {
-            return SQLDCOverview.countTodo(wgId);
+            return SQLDCtodo.countTodo(wgId);
         }
         return -1;
     }
@@ -46,7 +46,7 @@ public class OverviewBean {
      */
     public int getNumberofDoneWG(String wgId) {
         if (RegexHelper.checkString(wgId) && !wgId.isEmpty()) {
-            return SQLDCOverview.countDone(wgId);
+            return SQLDCtodo.countDone(wgId);
         }
         return -1;
     }
@@ -60,7 +60,7 @@ public class OverviewBean {
      */
     public int getNumberofTodosUser(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
-            return SQLDCOverview.countTodoUser(userId);
+            return SQLDCtodo.countTodoUser(userId);
         }
         return -1;
     }
@@ -73,7 +73,7 @@ public class OverviewBean {
      */
     public int getNumberofDoneUser(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
-            return SQLDCOverview.countDoneUser(userId);
+            return SQLDCtodo.countDoneUser(userId);
         }
         return -1;
     }
@@ -86,7 +86,7 @@ public class OverviewBean {
      */
     public String getFirstName(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
-            return SQLDCUtility.getFirstName(userId);
+            return SQLDCusers.getFirstName(userId);
         }
         return "";
     }
@@ -99,7 +99,7 @@ public class OverviewBean {
      */
     public String getLastName(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
-            return SQLDCUtility.getLastName(userId);
+            return SQLDCusers.getLastName(userId);
         }
         return "";
     }
@@ -112,7 +112,7 @@ public class OverviewBean {
      */
     public String getFullName(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
-            return SQLDCUtility.getFullName(userId);
+            return SQLDCusers.getFullName(userId);
         }
         return "";
     }
@@ -125,7 +125,7 @@ public class OverviewBean {
      */
     public int getNumberofTodos(String wgID) {
         if (RegexHelper.checkString(wgID) && !wgID.isEmpty()) {
-            return SQLDCOverview.countTodo(wgID);
+            return SQLDCtodo.countTodo(wgID);
         }
         return -1;
     }
@@ -138,7 +138,7 @@ public class OverviewBean {
      */
     public int getNumberofDone(String wgID) {
         if (RegexHelper.checkString(wgID) && !wgID.isEmpty()) {
-            return SQLDCOverview.countDone(wgID);
+            return SQLDCtodo.countDone(wgID);
         }
         return -1;
     }
@@ -151,7 +151,7 @@ public class OverviewBean {
      */
     public String getUsernameById(String userId) {
         if (RegexHelper.checkString(userId)) {
-            return SQLDCLogin.getUsername(userId);
+            return SQLDCusers.getUsername(userId);
         }
 
         return "";
@@ -165,7 +165,7 @@ public class OverviewBean {
      */
     public String getWgNameByUserId(String userId) {
         if (RegexHelper.checkString(userId)) {
-            return SQLDCOverview.getWgName(userId);
+            return SQLDCwgs.getWgName(userId);
         }
 
         return "";
@@ -199,7 +199,7 @@ public class OverviewBean {
      * @return The sum of all entry values
      */
     public String getExpenseSum() {
-        int sumForUser = SQLDCFinancial.getTotalForUser(this.userId, this.wgId);
+        int sumForUser = SQLDCfinancial.getTotalForUser(this.userId, this.wgId);
         String sumString = String.format("%.2f", (sumForUser / 100d));
 
         return sumString;
@@ -211,7 +211,7 @@ public class OverviewBean {
      * @return The number of open todos
      */
     public String getOpenTodosUser() {
-        int openTodos = SQLDCTodo.getOpenTodosPerUser(this.userId, this.wgId);
+        int openTodos = SQLDCtodo.getOpenTodosPerUser(this.userId, this.wgId);
 
         return String.valueOf(openTodos);
     }
@@ -222,7 +222,7 @@ public class OverviewBean {
      * @return The number of open todos
      */
     public String getOpenTodosWg() {
-        int openTodos = SQLDCTodo.getOpenTodosPerWg(this.wgId);
+        int openTodos = SQLDCtodo.getOpenTodosPerWg(this.wgId);
 
         return String.valueOf(openTodos);
     }
