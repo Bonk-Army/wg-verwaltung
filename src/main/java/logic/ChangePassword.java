@@ -1,6 +1,7 @@
 package logic;
 
-import beans.LoginBean;
+import beans.SessionBean;
+import beans.SettingsBean;
 import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
@@ -10,13 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Reset servlet that is called  when the user wants to reset his password and therefore entered his email address
- * to receive a link to reset his password
+ * Called when the users tries to change his password from the settings page
  */
-public class Reset extends HttpServlet {
+public class ChangePassword extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public Reset() {
+    public ChangePassword() {
         super();
     }
 
@@ -29,21 +29,24 @@ public class Reset extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LoginBean bean = new LoginBean();
+        SettingsBean settingsBean = new SettingsBean();
+        SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
-        String email = request.getParameter("email");
+        String oldPassword = request.getParameter("oldPassword");
+        String newPassword = request.getParameter("newPassword");
+        String username = sessionBean.getUsername();
 
-        ErrorCodes status = bean.sendPasswordResetLink(email);
+        ErrorCodes status = settingsBean.changePassword(username, oldPassword, newPassword);
 
         switch (status) {
             case SUCCESS:
-                // Show success page
-                request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
+                // Show success pages
+                response.sendRedirect("/settings");
                 break;
-            case WRONGEMAIL:
+            case WRONGPASSWORD:
                 // Show wrong email page
-                request.getServletContext().getRequestDispatcher("/responseWrongEMail").forward(request, response);
+                request.getServletContext().getRequestDispatcher("/responseWrongPassword").forward(request, response);
                 break;
             case FAILURE:
                 // Show server error page

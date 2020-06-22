@@ -5,10 +5,24 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.sql.ResultSet;
 
-/**
- * Provides SQL accessor methods for the Todo Page
+/*
+ Table structure:
+
+        - uniqueID          (int)
+        - isActive          (bool)
+        - task              (String)
+        - userId            (int)       (Foreign key to users.uniqueID)
+        - dateCreated       (Date)
+        - dateDue           (Date)
+        - isDone            (bool)
+        - wgId              (int)       (Foreign key to wgs.uniqueID)
+        - createdBy         (int)       (Foreign key to users.uniqueID)
  */
-public class SQLDCTodo extends SQLDatabaseConnection {
+
+/**
+ * Provides SQL accessor methods for everything that accesses the todo table
+ */
+public class SQLDCtodo extends SQLDatabaseConnection {
     /**
      * Create a to-do in the database
      *
@@ -91,11 +105,11 @@ public class SQLDCTodo extends SQLDatabaseConnection {
                 // Text formatting
                 String userId = rs.getString(2);
                 String creatorId = rs.getString(7);
-                String assignee = SQLDCLogin.getUsername(userId);
-                String creator = SQLDCLogin.getUsername(creatorId);
+                String assignee = SQLDCusers.getUsername(userId);
+                String creator = SQLDCusers.getUsername(creatorId);
 
-                currentTodo.put("assignee", SQLDCUtility.getNameString(assignee));
-                currentTodo.put("creator", SQLDCUtility.getNameString(creator));
+                currentTodo.put("assignee", SQLDCusers.getNameString(assignee));
+                currentTodo.put("creator", SQLDCusers.getNameString(creator));
 
                 todoList.add(currentTodo);
             }
@@ -104,50 +118,6 @@ public class SQLDCTodo extends SQLDatabaseConnection {
             e.printStackTrace();
         }
         return null;
-    }
-
-    /**
-     * Return a list with all usernames of the users in the specified WG
-     *
-     * @param wgId The wgId of the WG
-     * @return The list of usernames
-     */
-    public static List<String> getAllUsersOfWG(String wgId) {
-        List<String> users = new ArrayList<String>();
-
-        try {
-            ResultSet rs = executeQuery(("SELECT username FROM users WHERE wgId=" + Integer.valueOf(wgId) + " ORDER BY firstName ASC"));
-
-            while (rs.next()) {
-                users.add(rs.getString(1));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return users;
-    }
-
-    /**
-     * Get the wgId for the specified user
-     *
-     * @param userId The userId of the user
-     * @return The wgId as a String
-     */
-    public static String getWgIdByUser(String userId) {
-        String wgId = "";
-
-        try {
-            ResultSet rs = executeQuery("SELECT wgId FROM users WHERE uniqueID=" + Integer.valueOf(userId));
-
-            while (rs.next()) {
-                wgId = rs.getString(1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return wgId;
     }
 
     /**
@@ -215,15 +185,16 @@ public class SQLDCTodo extends SQLDatabaseConnection {
     }
 
     /**
-     * Return the number of open todos for a user
+     * Return the number of open todos for a user for his current wg
      *
      * @param userId the userId of the user
+     * @param wgId   The wgId of the current wg
      * @return The number of open todos
      */
-    public static int getOpenTodosPerUser(String userId) {
+    public static int getOpenTodosPerUser(String userId, String wgId) {
         try {
             ResultSet rs = executeQuery(("SELECT COUNT(uniqueID) FROM todo WHERE userId="
-                    + Integer.valueOf(userId) + " AND isDone = 0 AND isActive = 1"));
+                    + Integer.valueOf(userId) + " AND isDone = 0 AND isActive = 1 AND wgId = " + Integer.valueOf(wgId)));
 
             while (rs.next()) {
                 return rs.getInt(1);
@@ -254,5 +225,77 @@ public class SQLDCTodo extends SQLDatabaseConnection {
         }
 
         return 0;
+    }
+
+    /**
+     * Sends SQL Query in order to count number of To-Do's for specific WG
+     *
+     * @param wgId The ID of the WG
+     * @return Number of To-Do's for given WG, done or not
+     */
+    public static int countTodo(String wgId) {
+        int numberofTodo;
+        try {
+            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE wgID=" + wgId + ";");
+            numberofTodo = rs.getInt(1);
+            return numberofTodo;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    /**
+     * Sends SQL Query in order to count the number of done To-Do's for specific WG
+     *
+     * @param wgId The ID of the WG
+     * @return Number of done To-Do's
+     */
+    public static int countDone(String wgId) {
+        int numberofDone;
+        try {
+            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE wgID=" + wgId + " AND isDone=1;");
+            numberofDone = rs.getInt(1);
+            return numberofDone;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    /**
+     * Sends SQL Query in order to count the number of done To-Do's assigned to specific User
+     *
+     * @param userId The ID of the user
+     * @return Number of done To-Do's
+     */
+    public static int countDoneUser(String userId) {
+        int numberofDone;
+        try {
+            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE userID=" + userId + " AND isDone=1;");
+            numberofDone = rs.getInt(1);
+            return numberofDone;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    /**
+     * Sends SQL Query in order to count number of To-Do's for specific WG
+     *
+     * @param userId The ID of the user
+     * @return Number of To-Do's for given user, done or not
+     */
+    public static int countTodoUser(String userId) {
+        int numberofTodo;
+        try {
+            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE userId=" + userId + ";");
+            numberofTodo = rs.getInt(1);
+            return numberofTodo;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
     }
 }

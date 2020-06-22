@@ -1,3 +1,8 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
+<c:if test="${sessionBean.loggedIn}">
+    <%@include file="../Templates/Components/Sidebar.jsp" %>
+</c:if>
 <div id="content">
     <h2>Frequently Asked Questions</h2>
     <hr>
@@ -51,4 +56,12 @@
             </div>
         </div>
     </div>
+    <c:if test="${!sessionBean.loggedIn}">
+    <div class="center">
+        <hr>
+    </div>
+    <div class="text-center">
+        <a href="./">Zur&uuml;ck zu Login</a>
+    </div>
+    </c:if>
 </div>

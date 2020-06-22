@@ -6,10 +6,22 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.*;
 
-/**
- * Provides SQL Accessor methods for the financial status page
+/*
+ Table structure:
+
+        - uniqueID          (int)
+        - reason            (String)
+        - value             (int)
+        - dateCreated       (Date)
+        - createdBy         (int)       (Foreign key to users.uniqueID)
+        - isActive          (bool)
+        - wgId              (int)       (Foreign key to wgs.uniqueID)
  */
-public class SQLDCFinancial extends SQLDatabaseConnection {
+
+/**
+ * Provides SQL Accessor methods for everything that accesses the financial table
+ */
+public class SQLDCfinancial extends SQLDatabaseConnection {
     /**
      * Create a new financial record
      *
@@ -46,7 +58,7 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
 
         try {
             ResultSet rs = executeQuery(("SELECT reason, value, dateCreated, createdBy, uniqueID FROM financial WHERE wgId="
-                    + Integer.valueOf(wgId) + " AND isActive = 1 LIMIT " + limit));
+                    + Integer.valueOf(wgId) + " AND isActive = 1 LIMIT " + limit + " ORDER BY "));
 
             while (rs.next()) {
                 Map<String, String> currentEntry = new HashMap<String, String>();
@@ -64,8 +76,8 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
 
                 currentEntry.put("value", valueString);
                 currentEntry.put("dateCreated", createdDateString);
-                String createdByUsername = SQLDCLogin.getUsername(String.valueOf(rs.getInt(4)));
-                currentEntry.put("createdBy", SQLDCUtility.getNameString(createdByUsername));
+                String createdByUsername = SQLDCusers.getUsername(String.valueOf(rs.getInt(4)));
+                currentEntry.put("createdBy", SQLDCusers.getNameString(createdByUsername));
                 currentEntry.put("entryId", String.valueOf(rs.getInt(5)));
 
                 entries.add(currentEntry);
@@ -149,38 +161,16 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
     }
 
     /**
-     * Returns a list of all the ids of every user in the given wg ordered by the first name of the user
-     *
-     * @param wgId The wgId of the wg to get the users for
-     * @return The List of ids
-     */
-    public static List<String> getAllUserIdsOfWg(String wgId) {
-        List<String> ids = new ArrayList<String>();
-
-        try {
-            ResultSet rs = executeQuery(("SELECT uniqueID FROM users WHERE wgID="
-                    + Integer.valueOf(wgId) + " ORDER BY firstName"));
-
-            while (rs.next()) {
-                ids.add(String.valueOf(rs.getInt(1)));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return ids;
-    }
-
-    /**
-     * Return the sum of all entries of a user
+     * Return the sum of all entries of a user for the current wg
      *
      * @param userId The userId of the user
+     * @param wgId   The wgId of the current wg of the user
      * @return An integer with the sum or 0 in case of an error
      */
-    public static int getTotalForUser(String userId) {
+    public static int getTotalForUser(String userId, String wgId) {
         try {
             ResultSet rs = executeQuery(("SELECT SUM(value) FROM financial WHERE createdBy = "
-                    + Integer.valueOf(userId) + " AND isActive = 1"));
+                    + Integer.valueOf(userId) + " AND isActive = 1 AND wgId = " + Integer.valueOf(wgId)));
 
             while (rs.next()) {
                 return rs.getInt(1);
@@ -190,6 +180,31 @@ public class SQLDCFinancial extends SQLDatabaseConnection {
         }
 
         return 0;
+    }
+
+    /**
+     * Return a map with the sum of expenses as value and the userId as key for every user of the wg
+     *
+     * @param wgId The wgId of the wg
+     * @return A map with userId as key and sum as value
+     */
+    public static Map<String, Integer> getSumForEveryUserOfWg(String wgId) {
+        Map<String, Integer> resultMap = new HashMap<String, Integer>();
+
+        try {
+            ResultSet rs = executeQuery("SELECT SUM(value), createdBy FROM financial WHERE wgId = "
+                    + Integer.valueOf(wgId) + " AND isActive = 1 GROUP BY createdBy");
+
+            while (rs.next()) {
+                String userId = String.valueOf(rs.getInt(2));
+                int sum = rs.getInt(1);
+                resultMap.put(userId, sum);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return resultMap;
     }
 
     /**

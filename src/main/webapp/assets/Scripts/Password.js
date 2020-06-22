@@ -13,7 +13,7 @@ function checkPassword() {
     if (pw.match(/[0-9]+/)){
         strength++;
     }
-    // Prüfung min. ein Sondezeichen
+    // Prüfung min. ein Sonderzeichen
     if (pw.match(/[!"§$%&/()=?@#'+*~^°\-_,;.:<>´`{}\[\]]+/)){
         strength++;
     }

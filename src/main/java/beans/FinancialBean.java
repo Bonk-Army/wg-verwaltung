@@ -9,6 +9,7 @@ import java.util.*;
  */
 public class FinancialBean {
     private String userId = "";
+    private String wgId = "";
 
     /*
       /$$$$$$                                 /$$             /$$
@@ -35,7 +36,7 @@ public class FinancialBean {
         int valueCents = (int) Math.round(100 * Double.parseDouble(value));
 
         if (RegexHelper.checkText(reason)) {
-            return SQLDCFinancial.createEntry(reason, valueCents, createdBy, wgId, date) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            return SQLDCfinancial.createEntry(reason, valueCents, createdBy, wgId, date) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
         }
 
         return ErrorCodes.WRONGENTRY;
@@ -50,10 +51,10 @@ public class FinancialBean {
      */
     public ErrorCodes removeFinancialEntry(String entryId, String wgId) {
         if (RegexHelper.checkString(entryId)) {
-            String savedWgId = SQLDCFinancial.getWgIdOfEntry(entryId);
+            String savedWgId = SQLDCfinancial.getWgIdOfEntry(entryId);
 
             if (savedWgId.equals(wgId)) {
-                return SQLDCFinancial.setEntryInactive(entryId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                return SQLDCfinancial.setEntryInactive(entryId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
             }
         }
 
@@ -74,6 +75,19 @@ public class FinancialBean {
     // Getters and Setters for use with JSPs
 
     /**
+     * Set the user id
+     *
+     * @param userId The userId
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setWgId(String wgId) {
+        this.wgId = wgId;
+    }
+
+    /**
      * Get all financial record entries for the given wg
      *
      * @param viewLimit How many entries should be fetched
@@ -82,7 +96,7 @@ public class FinancialBean {
     public List<Map<String, String>> getEntries(int viewLimit) {
         String wgId = new LoginBean().getWgIdByUserId(this.userId);
 
-        return SQLDCFinancial.getAllActiveEntries(wgId, viewLimit);
+        return SQLDCfinancial.getAllActiveEntries(wgId, viewLimit);
     }
 
     /**
@@ -91,22 +105,27 @@ public class FinancialBean {
      * @return A List of maps of which each represents one user
      */
     public List<Map<String, String>> getTotalPerUser() {
-        String wgId = new LoginBean().getWgIdByUserId(this.userId);
-        List<String> userIds = SQLDCFinancial.getAllUserIdsOfWg(wgId);
-
+        List<Map<String, String>> userNameStringsWithId = SQLDCusers.getAllNameStringsWithUserIdForWg(this.wgId);
+        Map<String, Integer> sumPerUserById = SQLDCfinancial.getSumForEveryUserOfWg(this.wgId);
         List<Map<String, String>> userList = new ArrayList<Map<String, String>>();
 
-        for (String userId : userIds) {
-            Map<String, String> user = new HashMap<String, String>();
+        for (Map<String, String> user : userNameStringsWithId) {
+            Map<String, String> currentUser = new HashMap<String, String>();
 
-            int sumForUser = SQLDCFinancial.getTotalForUser(userId);
-            String sumString = String.format("%.2f", (sumForUser / 100d));
+            currentUser.put("nameString", user.get("nameString"));
 
-            String username = SQLDCLogin.getUsername(userId);
-            user.put("name", SQLDCUtility.getNameString(username));
-            user.put("sum", sumString);
+            // If the user has not had any expenses yet, he is not in the sumPerUserById map and
+            // the sum fetching would fail, hence checking if the user exists in the map
+            if(sumPerUserById.keySet().contains(user.get("userId"))){
+                int sum = sumPerUserById.get(user.get("userId"));
+                String sumString = String.format("%.2f", (sum / 100d));
 
-            userList.add(user);
+                currentUser.put("sum", sumString);
+            } else {
+                currentUser.put("sum", "0,00");
+            }
+
+            userList.add(currentUser);
         }
 
         return userList;
@@ -118,20 +137,9 @@ public class FinancialBean {
      * @return The value as a formatted String
      */
     public String getTotalPerWg() {
-        String wgId = new LoginBean().getWgIdByUserId(this.userId);
-
-        int sumForWg = SQLDCFinancial.getTotalForWg(wgId);
+        int sumForWg = SQLDCfinancial.getTotalForWg(this.wgId);
         String sumString = String.format("%.2f", (sumForWg / 100d));
 
         return sumString;
-    }
-
-    /**
-     * Set the user id
-     *
-     * @param userId The userId
-     */
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 }
