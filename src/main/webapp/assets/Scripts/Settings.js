@@ -17,6 +17,7 @@ $(document).ready(function () {
     });
 });
 
+//Send leaveWg POST if you click "ok" in modal
 function leaveWg() {
     $( "#leaveWG" ).click(function() {
         $('#leaveWgButton').click();
