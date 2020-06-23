@@ -411,4 +411,10 @@
         <servlet-name>ResponseTryAgain</servlet-name>
         <url-pattern>/responseTryAgain</url-pattern>
     </servlet-mapping>
+
+    <!-- Error Pages -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/Pages/Response/404.jsp</location>
+    </error-page>
 </web-app>
