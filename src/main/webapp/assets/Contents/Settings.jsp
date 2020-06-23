@@ -6,7 +6,7 @@
     <h2>Settings</h2>
     <form action="changeNameLogic" method="POST">
         <label for="username">Benutzername</label>
-        <input id="username" class="form-control" type="text" placeholder="${sessionBean.username}" readonly="readonly"/>
+        <input id="username" class="form-control" type="text" value="${sessionBean.username}" readonly="readonly"/>
         <label for="firstName">Vorname</label>
         <input id="firstName" name="firstName" class="form-control" type="text" value="${sessionBean.firstName}"/>
         <label for="lastName">Nachname</label>
