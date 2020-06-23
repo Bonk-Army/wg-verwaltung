@@ -24,7 +24,7 @@ label {
     margin-bottom: 4px;
 }
 
-button.leave, button.btn-primary:focus {
+button.leave, button.leave:focus {
     background-color: #cc0000;
     border-color: #cc0000;
 }
