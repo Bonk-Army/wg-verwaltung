@@ -61,6 +61,7 @@ public class CleanBean {
      */
     public ErrorCodes updateUsersForTask(String wgId, String taskId, String mon, String tue, String wed, String thu, String fri, String sat, String sun) {
         List<String> usersInWg = SQLDCusers.getAllUserIdsOfWg(wgId);
+        usersInWg.add(""); // In case no one is assigned
 
         if (RegexHelper.checkString(taskId)) {
             // If the user is not allowed to edit this task, return an error
