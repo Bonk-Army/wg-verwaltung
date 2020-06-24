@@ -40,7 +40,7 @@ public class UpdateCleaningAssignees extends HttpServlet {
         SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
-        String wgId = request.getParameter("wgId");
+        String wgId = sessionBean.getWgId();
 
         List<String> taskIds = cleanBean.getTaskIdsForWg(wgId);
 

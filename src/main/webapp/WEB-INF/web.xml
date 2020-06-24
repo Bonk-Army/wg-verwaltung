@@ -23,17 +23,17 @@
         |__ /createWGLogic              | Servlet : CreateWG                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /addTodoLogic               | Servlet : ToDo                    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /setDoneLogic               | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /sendContactRequestLogic    | Servlet: ContactRequest           | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /sendContactRequestLogic    | Servlet : ContactRequest          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /removeLogic                | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
-        |__ /removeShoppingRequestLogic | Servlet: RemoveShoppingRequest    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addShoppingRequestLogic    | Servlet: AddShoppingRequest       | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addFinancialEntryLogic     | Servlet: AddFinancialEntry        | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /removeFinancialEntryLogic  | Servlet: RemoveFinancialEntry     | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /changePasswordLogic        | Servlet: ChangePassword           | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /changeNameLogic            | Servlet: ChangeName               | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /leaveWgLogic               | Servlet: LeaveWG                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /logoutLogic                | Servlet: Logout                   | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /updateCleaningLogic        | Servlet: UpdateCleaningAssignees  | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /removeShoppingRequestLogic | Servlet : RemoveShoppingRequest   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addShoppingRequestLogic    | Servlet : AddShoppingRequest      | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addFinancialEntryLogic     | Servlet : AddFinancialEntry       | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /removeFinancialEntryLogic  | Servlet : RemoveFinancialEntry    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /changePasswordLogic        | Servlet : ChangePassword          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /changeNameLogic            | Servlet : ChangeName              | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /leaveWgLogic               | Servlet : LeaveWG                 | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /logoutLogic                | Servlet : Logout                  | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /updateCleaningLogic        | Servlet : UpdateCleaningAssignees | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
