@@ -340,6 +340,16 @@ public class LoginBean {
         return !usedEmails.contains(email);
     }
 
+    /**
+     * Set last login time for the user that recently logged in
+     *
+     * @param userId The userId of the user
+     * @return If it was successful
+     */
+    public boolean setLastLogin(String userId) {
+        return SQLDCusers.setLastLogin(userId);
+    }
+
     /*
       /$$$$$$              /$$     /$$                                               /$$        /$$$$$$              /$$     /$$
      /$$__  $$            | $$    | $$                                              /$$/       /$$__  $$            | $$    | $$
