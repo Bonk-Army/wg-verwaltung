@@ -33,6 +33,7 @@
         |__ /changeNameLogic            | Servlet: ChangeName               | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /leaveWgLogic               | Servlet: LeaveWG                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /logoutLogic                | Servlet: Logout                   | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /updateCleaningLogic        | Servlet: UpdateCleaningAssignees  | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -343,6 +344,14 @@
     <servlet-mapping>
         <servlet-name>LogoutLogic</servlet-name>
         <url-pattern>/logoutLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdateCleaningLogic</servlet-name>
+        <servlet-class>logic.UpdateCleaningAssignees</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateCleaningLogic</servlet-name>
+        <url-pattern>/updateCleaningLogic</url-pattern>
     </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--

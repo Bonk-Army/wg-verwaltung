@@ -83,11 +83,11 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
      * Get all cleaning tasks for a wg with their assignees.
      *
      * @param wgId The wgId of the wg
-     * @return A list of maps of which each represents one task
-     * <p>
+     * @return A list of maps of lists of maps (see datamodel below and code comments)
      * <p>
      * DATAMODEL: List with maps with lists with maps
-     * REPRESENTS: rows -> days -> list with -> users
+     * REPRESENTS: rows[] -> info<>, days<> -> list[] with -> users<>
+     * </p>
      */
     public static List<Map<String, List<Map<String, String>>>> getAllCleaningTasksForWg(String wgId) {
         List<Map<String, List<Map<String, String>>>> tasksList = new ArrayList<Map<String, List<Map<String, String>>>>();
@@ -98,40 +98,100 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
 
             List<Map<String, String>> namesForWg = SQLDCusers.getAllNameStringsWithUserIdForWg(wgId);
 
-            while (rs.next()) {
-                Map<String, Map<String, String>> currentTask = new HashMap<String, Map<String, String>>();
+            while (rs.next()) { // Each iteration is one row in the cleaning table
+                Map<String, List<Map<String, String>>> currentTask = new HashMap<String, List<Map<String, String>>>();
 
-                Map<String, String> generalInfo = new HashMap<String, String>();
-                generalInfo.put("cleanId", String.valueOf(rs.getInt(1)));
-                generalInfo.put("title", rs.getString(2));
-
-                currentTask.put("general", generalInfo);
+                // General info list contains only one element: the general info map
+                List<Map<String, String>> generalInfoList = new ArrayList<Map<String, String>>();
+                Map<String, String> generalInfoMap = new HashMap<String, String>();
+                generalInfoMap.put("taskId", String.valueOf(rs.getInt(1))); // Task ID
+                generalInfoMap.put("title", rs.getString(2)); // Task Name
+                generalInfoList.add(generalInfoMap);
+                currentTask.put("general", generalInfoList);
 
                 String weekdays[] = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
+
+                // Iterate over each weekday. Create a new List for each weekday which contains the user info for the
+                // dropdown menu. Then put that list in the currentTask map under the corresponding week day.
                 for (int i = 0; i < 7; i++) {
-                    String weekday = weekdays[i];
-                    Map<String, String> currentDayData = new HashMap<String, String>();
+                    String weekday = weekdays[i]; // Current weekday
+
+                    // The fetched list of users for that wg
                     List<Map<String, String>> currentNamesForWg = namesForWg;
+                    // The copy of that list to be sorted so the assigned user is at index 0
                     List<Map<String, String>> currentUserList = new ArrayList<Map<String, String>>();
 
                     String assignedUserId = rs.getString((3 + i));
 
-                    for (Map<String, String> user : currentNamesForWg) {
-                        if (user.get("userId").equals(assignedUserId)) {
-                            currentUserList.add(user);
-                            currentNamesForWg.remove(user);
+                    // If no user is assigned, put an empty map at index 0. Otherwise, put the assigned user at
+                    // index 0 and just append the rest of the list to the currentUserList
+                    if (assignedUserId.equals("")) {
+                        currentUserList.add(new HashMap<String, String>());
+                        currentUserList.addAll(currentNamesForWg);
+                    } else {
+                        for (Map<String, String> user : currentNamesForWg) {
+                            if (user.get("userId").equals(assignedUserId)) {
+                                currentUserList.add(user);
+                                currentNamesForWg.remove(user);
 
-                            currentUserList.addAll(currentNamesForWg);
+                                currentUserList.addAll(currentNamesForWg);
 
-                            break;
+                                break;
+                            }
                         }
                     }
+
+                    currentTask.put(weekday, currentUserList);
                 }
+
+                tasksList.add(currentTask);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return tasksList;
+    }
+
+    /**
+     * Get the wgId associated with the given task
+     *
+     * @param taskId The taskId of the task
+     * @return The wgId
+     */
+    public static String getWgIdForTask(String taskId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT wgId FROM cleaning WHERE uniqueID=" + Integer.valueOf(taskId)));
+
+            while (rs.next()) {
+                return String.valueOf(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+    /**
+     * Get the ids of every task associated with the given wg
+     *
+     * @param wgId The wgId of the wg
+     * @return The list of ids
+     */
+    public static List<String> getTaskIdsForWg(String wgId) {
+        List<String> taskList = new ArrayList<String>();
+
+        try {
+            ResultSet rs = executeQuery(("SELECT uniqueID FROM cleaning WHERE wgId=" + Integer.valueOf(wgId)));
+
+            while (rs.next()) {
+                taskList.add(String.valueOf(rs.getInt(1)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return taskList;
     }
 }
