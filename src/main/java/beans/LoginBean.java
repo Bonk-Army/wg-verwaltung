@@ -94,7 +94,7 @@ public class LoginBean {
         }
 
         //Call SQL to ask if username / email is unique. If unique, it continues registration process, else it stops
-        if (!RegexHelper.checkString(username) || !RegexHelper.checkString(firstName) || !RegexHelper.checkString(lastName) || !RegexHelper.checkEmail(email)) {
+        if (!RegexHelper.checkString(username) || !RegexHelper.checkText(firstName) || !RegexHelper.checkText(lastName) || !RegexHelper.checkEmail(email)) {
             return ErrorCodes.WRONGENTRY;
         } else {
             if (isUsernameUnique(username) && isEmailUnique(email)) {

@@ -1,0 +1,32 @@
+.table{
+    color: aliceblue;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.modal-content {
+    background-color: #272525;
+    color: aliceblue;
+}
+
+.close {
+    color: aliceblue;
+}
+
+#addClean, #saveClean, button.remove{
+    margin-bottom: 10px;
+    max-width: 62px;
+    height: 48px;
+    display: inline;
+}
+
+select.form-control, select :first-child {
+    background-color: #272525;
+    color: white;
+}
+
+select.updated {
+    background-color: white;
+    color: #272525;
+}

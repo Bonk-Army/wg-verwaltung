@@ -6,13 +6,13 @@
     <h2>Settings</h2>
     <form action="changeNameLogic" method="POST">
         <label for="username">Benutzername</label>
-        <input id="username" class="form-control" type="text" placeholder="${sessionBean.username}" readonly="readonly"/>
+        <input id="username" class="form-control" type="text" value="${sessionBean.username}" readonly="readonly" style="color: grey"/>
         <label for="firstName">Vorname</label>
-        <input id="firstName" name="firstName" class="form-control" type="text" value="${sessionBean.firstName}"/>
+        <input id="firstName" name="firstName" class="form-control" type="text" value="${sessionBean.firstName}" required/>
         <label for="lastName">Nachname</label>
-        <input id="lastName" name="lastName" class="form-control" type="text" value="${sessionBean.lastName}"/>
+        <input id="lastName" name="lastName" class="form-control" type="text" value="${sessionBean.lastName}" required/>
         <label for="email">E-Mail</label>
-        <input class="form-control" type="email" id="email" placeholder="${sessionBean.email}" readonly="readonly" required>
+        <input class="form-control" type="email" id="email" value="${sessionBean.email}" readonly="readonly" style="color: grey">
         <button id="saveButton" class="btn btn-lg btn-primary btn-block" type="submit">&Auml;nderungen speichern</button>
     </form>
     <c:choose>
