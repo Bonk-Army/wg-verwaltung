@@ -23,16 +23,18 @@
         |__ /createWGLogic              | Servlet : CreateWG                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /addTodoLogic               | Servlet : ToDo                    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /setDoneLogic               | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /sendContactRequestLogic    | Servlet: ContactRequest           | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /sendContactRequestLogic    | Servlet : ContactRequest          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /removeLogic                | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
-        |__ /removeShoppingRequestLogic | Servlet: RemoveShoppingRequest    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addShoppingRequestLogic    | Servlet: AddShoppingRequest       | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addFinancialEntryLogic     | Servlet: AddFinancialEntry        | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /removeFinancialEntryLogic  | Servlet: RemoveFinancialEntry     | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /changePasswordLogic        | Servlet: ChangePassword           | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /changeNameLogic            | Servlet: ChangeName               | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /leaveWgLogic               | Servlet: LeaveWG                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /logoutLogic                | Servlet: Logout                   | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /removeShoppingRequestLogic | Servlet : RemoveShoppingRequest   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addShoppingRequestLogic    | Servlet : AddShoppingRequest      | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addFinancialEntryLogic     | Servlet : AddFinancialEntry       | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /removeFinancialEntryLogic  | Servlet : RemoveFinancialEntry    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /changePasswordLogic        | Servlet : ChangePassword          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /changeNameLogic            | Servlet : ChangeName              | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /leaveWgLogic               | Servlet : LeaveWG                 | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /logoutLogic                | Servlet : Logout                  | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /updateCleaningLogic        | Servlet : UpdateCleaningAssignees | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addCleaningLogic           | Servlet : UpdateCleaningAssignees | Zuständig: @PM       | Mapped by @KA | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -344,6 +346,22 @@
         <servlet-name>LogoutLogic</servlet-name>
         <url-pattern>/logoutLogic</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdateCleaningLogic</servlet-name>
+        <servlet-class>logic.UpdateCleaningAssignees</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateCleaningLogic</servlet-name>
+        <url-pattern>/updateCleaningLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddCleaningLogic</servlet-name>
+        <servlet-class>logic.AddCleaningTask</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddCleaningLogic</servlet-name>
+        <url-pattern>/addCleaningLogic</url-pattern>
+    </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--
      888888ba                                                                     888888ba
@@ -411,4 +429,10 @@
         <servlet-name>ResponseTryAgain</servlet-name>
         <url-pattern>/responseTryAgain</url-pattern>
     </servlet-mapping>
+
+    <!-- Error Pages -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/Pages/Response/404.jsp</location>
+    </error-page>
 </web-app>

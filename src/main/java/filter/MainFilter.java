@@ -79,7 +79,7 @@ public class MainFilter extends HttpServlet {
                 }
             }
         } else {
-            // Session Bean
+            // Session Bean available, forward user
             req.getServletContext().getRequestDispatcher(part + "Page").forward(req, resp);
         }
 
