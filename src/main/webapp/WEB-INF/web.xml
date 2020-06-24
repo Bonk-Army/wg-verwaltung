@@ -94,7 +94,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>FAQ</servlet-name>
-        <url-pattern>/faq</url-pattern>
+        <url-pattern>/faqPage</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Contact</servlet-name>
@@ -102,7 +102,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Contact</servlet-name>
-        <url-pattern>/contact</url-pattern>
+        <url-pattern>/contactPage</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Impressum</servlet-name>
@@ -110,7 +110,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Impressum</servlet-name>
-        <url-pattern>/impressum</url-pattern>
+        <url-pattern>/impressumPage</url-pattern>
     </servlet-mapping>
     <!-- Filter Servlet -->
     <servlet>
@@ -126,6 +126,9 @@
         <url-pattern>/clean</url-pattern>
         <url-pattern>/shopping</url-pattern>
         <url-pattern>/settings</url-pattern>
+        <url-pattern>/faq</url-pattern>
+        <url-pattern>/impressum</url-pattern>
+        <url-pattern>/contact</url-pattern>
     </servlet-mapping>
     <!-- Protected via Filter Servlet -->
     <servlet>

@@ -6,10 +6,30 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.*;
 
+/*
+ Table structure:
+
+        - uniqueID          (int)
+        - username          (String)
+        - email             (String)
+        - pwhash            (String)
+        - pwsalt            (String)
+        - verificationCode  (String)
+        - rights            (Strings)
+        - isVerified        (bool)
+        - passwordResetKey  (String)
+        - cookiePostfix     (String)
+        - wgId              (int)       (Foreign key to wgs.uniqueID)
+        - firstName         (String)
+        - lastName          (String)
+        - registrationDate  (Date)
+        - lastLogin         (Datetime)
+ */
+
 /**
  * Provides SQL accessor methods for everything that accesses the users table
  */
-public class SQLDCLogin extends SQLDatabaseConnection {
+public class SQLDCusers extends SQLDatabaseConnection {
     /**
      * Create a user in the database
      *
@@ -461,5 +481,237 @@ public class SQLDCLogin extends SQLDatabaseConnection {
         }
 
         return nameList;
+    }
+
+    /**
+     * Returns a list of all the ids of every user in the given wg ordered by the first name of the user
+     *
+     * @param wgId The wgId of the wg to get the users for
+     * @return The List of ids
+     */
+    public static List<String> getAllUserIdsOfWg(String wgId) {
+        List<String> ids = new ArrayList<String>();
+
+        try {
+            ResultSet rs = executeQuery(("SELECT uniqueID FROM users WHERE wgID="
+                    + Integer.valueOf(wgId) + " ORDER BY firstName"));
+
+            while (rs.next()) {
+                ids.add(String.valueOf(rs.getInt(1)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ids;
+    }
+
+    /**
+     * Set the wg ID of an user
+     *
+     * @param wgId   the new wg ID
+     * @param userId the user ID who changes the wg
+     * @return If the wg ID has been set successfully. If not, the user has to be informed!
+     */
+    public static boolean setWgId(String wgId, String userId) {
+        try {
+            executeQuery(("UPDATE users SET wgId=" + Integer.valueOf(wgId) + " WHERE uniqueID=" + Integer.valueOf(userId)));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Set the passed right for the specified user
+     *
+     * @param userID The userId of the user
+     * @param right  The right to be set for the user
+     * @return If it was successful
+     */
+    public static boolean setUserRights(String userID, String right) {
+        try {
+            executeQuery(("UPDATE users SET rights='" + right + "' WHERE uniqueID=" + Integer.valueOf(userID)));
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * Return a list with all usernames of the users in the specified WG
+     *
+     * @param wgId The wgId of the WG
+     * @return The list of usernames
+     */
+    public static List<String> getAllUsersOfWG(String wgId) {
+        List<String> users = new ArrayList<String>();
+
+        try {
+            ResultSet rs = executeQuery(("SELECT username FROM users WHERE wgId=" + Integer.valueOf(wgId) + " ORDER BY firstName ASC"));
+
+            while (rs.next()) {
+                users.add(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return users;
+    }
+
+    /**
+     * Get the wgId for the specified user
+     *
+     * @param userId The userId of the user
+     * @return The wgId as a String
+     */
+    public static String getWgIdByUser(String userId) {
+        String wgId = "";
+
+        try {
+            ResultSet rs = executeQuery("SELECT wgId FROM users WHERE uniqueID=" + Integer.valueOf(userId));
+
+            while (rs.next()) {
+                wgId = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return wgId;
+    }
+
+    /**
+     * Return the first name of the user by his username
+     *
+     * @param username The username of the user
+     * @return The first name of the user as a String
+     */
+    public static String getFirstName(String username) {
+        String firstName = "";
+        try {
+            ResultSet rs = executeQuery("SELECT firstName FROM users WHERE username='" + username + "'");
+
+            while (rs.next()) {
+                firstName = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return firstName;
+    }
+
+    /**
+     * Return the first name of the user by his username
+     *
+     * @param username The username of the user
+     * @return The first name of the user as a String
+     */
+    public static String getLastName(String username) {
+        String lastName = "";
+        try {
+            ResultSet rs = executeQuery("SELECT lastName FROM users WHERE username='" + username + "'");
+
+            while (rs.next()) {
+                lastName = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return lastName;
+    }
+
+    /**
+     * Concatenates First name and the first letter of the last name
+     *
+     * @param username The username of the user
+     * @return The name string
+     */
+    public static String getNameString(String username) {
+        String firstName = "";
+        String lastName = "";
+        try {
+            ResultSet rs = executeQuery(("SELECT firstName, lastName FROM users WHERE username='" + username + "'"));
+
+            while (rs.next()) {
+                firstName = rs.getString(1);
+                lastName = rs.getString(2);
+            }
+
+            return firstName + " " + lastName.substring(0, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
+     * Concatenates First and Last Name
+     *
+     * @param userId The ID of the User
+     * @return Full Name
+     */
+    public static String getFullName(String userId) {
+        String firstName = "";
+        String lastName = "";
+        try {
+
+            ResultSet rs = executeQuery(("SELECT firstName, lastName FROM users WHERE uniqueID=" + Integer.valueOf(userId)));
+
+            while (rs.next()) {
+                firstName = rs.getString(1);
+                lastName = rs.getString(2);
+            }
+            return firstName + " " + lastName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
+     * Return the wgId of the given user
+     *
+     * @param userId The userId of the user
+     * @return The wgId
+     */
+    public static String getWgIdFromUserId(String userId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT wgId FROM users WHERE uniqueId=" + Integer.valueOf(userId)));
+
+            while (rs.next()) {
+                return String.valueOf(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+    /**
+     * Set the last login field to the current time
+     *
+     * @param userId The userId of the user that logged in recently
+     * @return If it was successful
+     */
+    public static boolean setLastLogin(String userId) {
+        try {
+            Date now = new Date();
+            Timestamp nowStamp = new Timestamp(now.getTime());
+            executeQuery(("UPDATE users SET lastLogin='" + nowStamp + "' WHERE uniqueID = " + Integer.valueOf(userId)));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }
