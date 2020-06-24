@@ -57,9 +57,10 @@ public class MainFilter extends HttpServlet {
                 sessionBean = new SessionBean(userId);
                 if (userId.equals("29")) {
                     resp.sendRedirect("https://www.youtube.com/watch?v=8KsT6RgXF_I");
+                } else {
+                    req.getSession().setAttribute("sessionBean", sessionBean);
+                    req.getServletContext().getRequestDispatcher((part + "Page")).forward(req, resp);
                 }
-                req.getSession().setAttribute("sessionBean", sessionBean);
-                req.getServletContext().getRequestDispatcher((part + "Page")).forward(req, resp);
             } else {
                 // If the page is a public page, the user can be forwarded to that page even if he is not logged in.
                 // If it is a page in the protected area, he will be redirected to the login page if he is not logged in
