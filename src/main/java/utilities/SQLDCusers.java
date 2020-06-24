@@ -23,6 +23,7 @@ import java.util.*;
         - firstName         (String)
         - lastName          (String)
         - registrationDate  (Date)
+        - lastLogin         (Datetime)
  */
 
 /**
@@ -692,5 +693,25 @@ public class SQLDCusers extends SQLDatabaseConnection {
         }
 
         return "";
+    }
+
+    /**
+     * Set the last login field to the current time
+     *
+     * @param userId The userId of the user that logged in recently
+     * @return If it was successful
+     */
+    public static boolean setLastLogin(String userId) {
+        try {
+            Date now = new Date();
+            Timestamp nowStamp = new Timestamp(now.getTime());
+            executeQuery(("UPDATE users SET lastLogin='" + nowStamp + "' WHERE uniqueID = " + Integer.valueOf(userId)));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }
