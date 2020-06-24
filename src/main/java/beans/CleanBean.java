@@ -78,7 +78,7 @@ public class CleanBean {
             // If all entries are correct, update the task
             if (RegexHelper.checkString(mon) && RegexHelper.checkString(tue) && RegexHelper.checkString(wed)
                     && RegexHelper.checkString(thu) && RegexHelper.checkString(fri) && RegexHelper.checkString(sat) && RegexHelper.checkString(sun)) {
-                SQLDCcleaning.updateUsersForTask(taskId, mon, tue, wed, thu, fri, sat, sun);
+                return SQLDCcleaning.updateUsersForTask(taskId, mon, tue, wed, thu, fri, sat, sun) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
             }
         }
 
