@@ -117,7 +117,7 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
                     String weekday = weekdays[i]; // Current weekday
 
                     // The fetched list of users for that wg
-                    List<Map<String, String>> currentNamesForWg = namesForWg;
+                    List<Map<String, String>> currentNamesForWg = new ArrayList<>(namesForWg);
                     // The copy of that list to be sorted so the assigned user is at index 0
                     List<Map<String, String>> currentUserList = new ArrayList<Map<String, String>>();
 
