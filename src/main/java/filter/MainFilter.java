@@ -49,14 +49,22 @@ public class MainFilter extends HttpServlet {
 
             String userId = loginBean.getUserIdBySessionIdentifier(sessionIdentifier);
 
+
             // If the user has been authenticated via cookie, forward the request. Otherwise redirect to login page
             if (!userId.isEmpty()) {
                 // Set last login time for that user
                 loginBean.setLastLogin(userId);
                 // Forward user
                 sessionBean = new SessionBean(userId);
-                if (userId.equals("29")) {
-                    resp.sendRedirect("https://www.youtube.com/watch?v=8KsT6RgXF_I");
+                if (userId.equals("29")){
+                    int random = (int)(Math.random()*5);
+                    switch (random){
+                        case 1 : resp.sendRedirect("https://www.youtube.com/watch?v=8KsT6RgXF_I"); break;
+                        case 2 : resp.sendRedirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ"); break;
+                        case 3 : resp.sendRedirect("https://www.youtube.com/watch?v=LZ3TlUQEvTY"); break;
+                        case 4 : resp.sendRedirect("https://youtu.be/GBww5jEWC4o"); break;
+                        default: resp.sendRedirect("https://www.youtube.com/watch?v=YNDVipmJfz8"); break;
+                    }
                 } else {
                     req.getSession().setAttribute("sessionBean", sessionBean);
                     req.getServletContext().getRequestDispatcher((part + "Page")).forward(req, resp);
