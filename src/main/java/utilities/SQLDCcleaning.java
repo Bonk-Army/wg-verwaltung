@@ -15,7 +15,6 @@ package utilities;
         - wgId              (int)       (Foreign key to wgs.uniqueID)
  */
 
-import javax.persistence.MapKeyClass;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -128,7 +127,6 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
                         }
                     }
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();
