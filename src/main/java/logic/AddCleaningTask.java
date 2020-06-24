@@ -49,7 +49,7 @@ public class AddCleaningTask extends HttpServlet {
         switch (status) {
         case SUCCESS:
             //Show success
-            response.sendRedirect("/cleaning");
+            response.sendRedirect("/clean");
             break;
         case FAILURE:
             //Show failure

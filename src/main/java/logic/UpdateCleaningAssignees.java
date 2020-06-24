@@ -83,7 +83,7 @@ public class UpdateCleaningAssignees extends HttpServlet {
 
         if (!thereAreErrors) {
             // If no errors have occured, send user back to cleaning page
-            response.sendRedirect("/cleaning");
+            response.sendRedirect("/clean");
         }
     }
 }
