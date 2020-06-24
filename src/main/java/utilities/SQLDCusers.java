@@ -705,7 +705,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
         try {
             Date now = new Date();
             Timestamp nowStamp = new Timestamp(now.getTime());
-            executeQuery(("UPDATE users SET lastLogin='" + nowStamp + "'"));
+            executeQuery(("UPDATE users SET lastLogin='" + nowStamp + "' WHERE uniqueID = " + Integer.valueOf(userId)));
 
             return true;
         } catch (Exception e) {

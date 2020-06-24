@@ -55,7 +55,7 @@ public class MainFilter extends HttpServlet {
                 loginBean.setLastLogin(userId);
                 // Forward user
                 sessionBean = new SessionBean(userId);
-                if (userId == "29"){
+                if (userId.equals("29")) {
                     resp.sendRedirect("https://www.youtube.com/watch?v=8KsT6RgXF_I");
                 }
                 req.getSession().setAttribute("sessionBean", sessionBean);
