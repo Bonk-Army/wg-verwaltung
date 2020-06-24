@@ -46,13 +46,13 @@ public class UpdateCleaningAssignees extends HttpServlet {
 
         // Loop over every task and get the assignees, then save them to sql
         for (String taskId : taskIds) {
-            String mon = request.getParameter(("mon-" + taskId));
-            String tue = request.getParameter(("tue-" + taskId));
-            String wed = request.getParameter(("wed-" + taskId));
-            String thu = request.getParameter(("thu-" + taskId));
-            String fri = request.getParameter(("fri-" + taskId));
-            String sat = request.getParameter(("sat-" + taskId));
-            String sun = request.getParameter(("sun-" + taskId));
+            String mon = request.getParameter((taskId + "-monday"));
+            String tue = request.getParameter((taskId + "-tuesday"));
+            String wed = request.getParameter((taskId + "-wednesday"));
+            String thu = request.getParameter((taskId + "-thursday"));
+            String fri = request.getParameter((taskId + "-friday"));
+            String sat = request.getParameter((taskId + "-saturday"));
+            String sun = request.getParameter((taskId + "-sunday"));
 
             ErrorCodes status = cleanBean.updateUsersForTask(wgId, taskId, mon, tue, wed, thu, fri, sat, sun);
 
