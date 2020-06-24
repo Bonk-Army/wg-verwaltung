@@ -45,22 +45,23 @@ public class MainFilter extends HttpServlet {
                 }
             }
 
-            LoginBean loginBean = new LoginBean();
-
-            String userId = loginBean.getUserIdBySessionIdentifier(sessionIdentifier);
+            String userId = new LoginBean().getUserIdBySessionIdentifier(sessionIdentifier);
 
             // If the user has been authenticated via cookie, forward the request. Otherwise redirect to login page
             if (!userId.isEmpty()) {
-                // Set last login time for that user
-                loginBean.setLastLogin(userId);
-                // Forward user
                 sessionBean = new SessionBean(userId);
-                if (userId.equals("29")) {
-                    resp.sendRedirect("https://www.youtube.com/watch?v=8KsT6RgXF_I");
-                } else {
-                    req.getSession().setAttribute("sessionBean", sessionBean);
-                    req.getServletContext().getRequestDispatcher((part + "Page")).forward(req, resp);
+                if (userId == "29"){
+                    int random = (int)(Math.random()*10);
+                    switch (random){
+                        case 1 : resp.sendRedirect("https://www.youtube.com/watch?v=8KsT6RgXF_I"); break;
+                        case 2 : resp.sendRedirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ"); break;
+                        case 3 : resp.sendRedirect("https://www.youtube.com/watch?v=LZ3TlUQEvTY"); break;
+                        case 4 : resp.sendRedirect("https://youtu.be/GBww5jEWC4o"); break;
+                        default: resp.sendRedirect("https://www.youtube.com/watch?v=YNDVipmJfz8"); break;
+                    }
                 }
+                req.getSession().setAttribute("sessionBean", sessionBean);
+                req.getServletContext().getRequestDispatcher((part + "Page")).forward(req, resp);
             } else {
                 // If the page is a public page, the user can be forwarded to that page even if he is not logged in.
                 // If it is a page in the protected area, he will be redirected to the login page if he is not logged in
