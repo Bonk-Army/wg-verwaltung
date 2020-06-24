@@ -132,6 +132,7 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
                         for (Map<String, String> user : currentNamesForWg) {
                             if (user.get("userId").equals(assignedUserId)) {
                                 currentUserList.add(user);
+                                currentUserList.add(new HashMap<String, String>());
                                 currentNamesForWg.remove(user);
 
                                 currentUserList.addAll(currentNamesForWg);
