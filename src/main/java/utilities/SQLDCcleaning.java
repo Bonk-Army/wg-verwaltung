@@ -125,7 +125,7 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
 
                     // If no user is assigned, put an empty map at index 0. Otherwise, put the assigned user at
                     // index 0 and just append the rest of the list to the currentUserList
-                    if (assignedUserId != null && assignedUserId.equals("")) {
+                    if (assignedUserId == null || assignedUserId.equals("")) {
                         currentUserList.add(new HashMap<String, String>());
                         currentUserList.addAll(currentNamesForWg);
                     } else {
