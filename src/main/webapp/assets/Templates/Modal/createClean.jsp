@@ -24,7 +24,7 @@
             </div>
             <form action="addFinancialEntryLogic" method="POST">
                 <label for="exercise" class="sr-only">Aufgabe</label>
-                <input id="exercise" class="form-control" placeholder="Aufgabe" name="exercise" type="text" required>
+                <input id="exercise" class="form-control" placeholder="Aufgabe" name="taskname" type="text" required>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary odom-submit">Aufgabe hinzuf&uuml;gen</button>
