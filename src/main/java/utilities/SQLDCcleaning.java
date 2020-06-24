@@ -59,13 +59,13 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
      * @return If it was successful
      */
     public static boolean updateUsersForTask(String taskId, String mon, String tue, String wed, String thu, String fri, String sat, String sun) {
-        int monInt = mon.isEmpty() ? null : Integer.valueOf(mon);
-        int tueInt = tue.isEmpty() ? null : Integer.valueOf(tue);
-        int wedInt = wed.isEmpty() ? null : Integer.valueOf(wed);
-        int thuInt = thu.isEmpty() ? null : Integer.valueOf(thu);
-        int friInt = fri.isEmpty() ? null : Integer.valueOf(fri);
-        int satInt = sat.isEmpty() ? null : Integer.valueOf(sat);
-        int sunInt = sun.isEmpty() ? null : Integer.valueOf(sun);
+        Integer monInt = mon.isEmpty() ? null : Integer.valueOf(mon);
+        Integer tueInt = tue.isEmpty() ? null : Integer.valueOf(tue);
+        Integer wedInt = wed.isEmpty() ? null : Integer.valueOf(wed);
+        Integer thuInt = thu.isEmpty() ? null : Integer.valueOf(thu);
+        Integer friInt = fri.isEmpty() ? null : Integer.valueOf(fri);
+        Integer satInt = sat.isEmpty() ? null : Integer.valueOf(sat);
+        Integer sunInt = sun.isEmpty() ? null : Integer.valueOf(sun);
         try {
             executeQuery(("UPDATE cleaning SET mondayUser = " + monInt + ", tuesdayUser = " + tueInt
                     + ", wednesdayUser = " + wedInt + ", thursdayUser = " + thuInt + ", fridayUser = " + friInt
