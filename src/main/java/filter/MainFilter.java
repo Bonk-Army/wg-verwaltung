@@ -50,7 +50,7 @@ public class MainFilter extends HttpServlet {
             // If the user has been authenticated via cookie, forward the request. Otherwise redirect to login page
             if (!userId.isEmpty()) {
                 sessionBean = new SessionBean(userId);
-                if (userId == "29"){
+                if (userId.equals("29")){
                     int random = (int)(Math.random()*10);
                     switch (random){
                         case 1 : resp.sendRedirect("https://www.youtube.com/watch?v=8KsT6RgXF_I"); break;
