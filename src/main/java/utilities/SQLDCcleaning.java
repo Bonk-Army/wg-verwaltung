@@ -105,7 +105,7 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
                 List<Map<String, String>> generalInfoList = new ArrayList<Map<String, String>>();
                 Map<String, String> generalInfoMap = new HashMap<String, String>();
                 generalInfoMap.put("taskId", String.valueOf(rs.getInt(1))); // Task ID
-                generalInfoMap.put("taskName", rs.getString(2)); // Task Name
+                generalInfoMap.put("taskname", rs.getString(2)); // Task Name
                 generalInfoList.add(generalInfoMap);
                 currentTask.put("general", generalInfoList);
 
