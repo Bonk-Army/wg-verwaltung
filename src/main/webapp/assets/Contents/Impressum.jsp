@@ -1,8 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
-<c:if test="${sessionBean.loggedIn}">
-    <%@include file="../Templates/Components/Sidebar.jsp" %>
-</c:if>
 <div id="content">
     <div class='impressum'><h1>Impressum</h1>
         <p>Angaben gem&auml;&szlig; &sect; 5 TMG</p>

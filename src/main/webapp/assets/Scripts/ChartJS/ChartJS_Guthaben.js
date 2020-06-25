@@ -8,8 +8,8 @@ var chart = new Chart(ctx, {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             label: 'Mein Guthaben',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgb(215,90,90)',
+            borderColor: 'rgb(215,90,90)',
             data: [0, 100, 350, -200, 200, 300, 450]
         }]
     },

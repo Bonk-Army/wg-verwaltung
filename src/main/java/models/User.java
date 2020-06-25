@@ -1,5 +1,8 @@
 package models;
 
+/**
+ * Model for users used in the backend exclusively
+ */
 public class User {
     private String userId;
     private String username;

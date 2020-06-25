@@ -1,8 +1,6 @@
 package logic;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,10 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.CleanBean;
-import beans.FinancialBean;
 import beans.SessionBean;
 import utilities.ErrorCodes;
 
+/**
+ * Called when the user wants to add a new cleaning task
+ */
 public class AddCleaningTask extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

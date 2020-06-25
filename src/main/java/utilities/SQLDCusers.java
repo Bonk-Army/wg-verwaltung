@@ -652,6 +652,30 @@ public class SQLDCusers extends SQLDatabaseConnection {
     }
 
     /**
+     * Concatenates First name and the first letter of the last name
+     *
+     * @param userId The userId of the user
+     * @return The name string
+     */
+    public static String getNameStringById(String userId) {
+        String firstName = "";
+        String lastName = "";
+        try {
+            ResultSet rs = executeQuery(("SELECT firstName, lastName FROM users WHERE uniqueID=" + Integer.valueOf(userId)));
+
+            while (rs.next()) {
+                firstName = rs.getString(1);
+                lastName = rs.getString(2);
+            }
+
+            return firstName + " " + lastName.substring(0, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
      * Concatenates First and Last Name
      *
      * @param userId The ID of the User
@@ -713,5 +737,25 @@ public class SQLDCusers extends SQLDatabaseConnection {
         }
 
         return false;
+    }
+
+    /**
+     * Get the email address of the specified user
+     *
+     * @param userId The userId of the user
+     * @return The email address
+     */
+    public static String getEmailAddressForUser(String userId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT email FROM users WHERE uniqueID=" + Integer.valueOf(userId)));
+
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
     }
 }

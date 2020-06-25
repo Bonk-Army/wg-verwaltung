@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Called when the user wants to update the assignees for the cleaning tasks
+ */
 public class UpdateCleaningAssignees extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

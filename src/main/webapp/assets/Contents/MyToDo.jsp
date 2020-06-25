@@ -4,26 +4,21 @@
     <jsp:useBean id="todoBean" class="beans.ToDoBean" scope="request"/>
     <jsp:setProperty name="todoBean" property="userId" value="${sessionBean.userId}"/>
     <jsp:setProperty name="todoBean" property="wgId" value="${sessionBean.wgId}"/>
-    <button title="ToDo hinzuf&uuml;gen" id="addToDo" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal"
-            data-target="#createToDo">+
-    </button>
     <table class="table">
         <thead class="thead-dark">
         <tr>
             <th scope="col">Aufgabe</th>
             <th scope="col">zu erledigen bis</th>
-            <th scope="col">wird erledigt von</th>
             <th scope="col">Erledigt?</th>
             <th scope="col">Check</th>
             <th/>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${todoBean.todos}" var="todo">
+        <c:forEach items="${todoBean.todosForUser}" var="todo">
         <tr class="${todo.colorClass}">
             <td title="erstellt am ${todo.dateCreated} von ${todo.creator}">${todo.task}</td>
             <td>${todo.dateDue}</td>
-            <td>${todo.assignee}</td>
             <td>${todo.doneMessage}</td>
             <td>
                 <form action="setDoneLogic" method="POST">

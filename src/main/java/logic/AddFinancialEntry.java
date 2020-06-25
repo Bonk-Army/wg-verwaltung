@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Called when the user wants to create a new financial entry
+ */
 public class AddFinancialEntry extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
