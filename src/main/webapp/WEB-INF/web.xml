@@ -40,15 +40,16 @@
         |__ ^^-^^
         |__ GUI                         |                                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /home                       | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /financial                  | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @KA | Initial
+        |__ /financial                  | JSP Page : Finanzielles           | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @KA | Initial
         |__ /todo                       | JSP Page : ToDo                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /clean                      | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /shopping                   | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @KA | Initial
-        |__ /faq                        | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /contact                    | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /clean                      | JSP Page : Putzplan               | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /shopping                   | JSP Page : Einkaufsliste          | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @KA | Initial
+        |__ /faq                        | JSP Page : FAQ                    | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /contact                    | JSP Page : Kontakt                | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /impressum                  | JSP Page : Impressum              | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /settings                   | JSP Page : Settings               | Zuständig : @KA/LK   | Mapped by @KA | Zuständig für Inhalt @KA | Initial
+        |__ /settings                   | JSP Page : Settings               | Zuständig : @KA      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
         |__ /wgverwaltung               | JSP Page : WGVerwaltung           | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /resetPassword              | JSP Page : WGVerwaltung           | Zuständig : @KA      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -113,6 +114,14 @@
     <servlet-mapping>
         <servlet-name>Impressum</servlet-name>
         <url-pattern>/impressumPage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ResetPassword</servlet-name>
+        <jsp-file>/Pages/Public/ResetPassword.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/resetPassword</url-pattern>
     </servlet-mapping>
     <!-- Filter Servlet -->
     <servlet>
