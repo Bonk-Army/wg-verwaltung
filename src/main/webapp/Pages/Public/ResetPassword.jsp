@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Login.css">
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Password.css">
 </head>
 <body>
 <%@include file="../../assets/Templates/Components/ResetPassword.jsp" %>

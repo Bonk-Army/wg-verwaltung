@@ -65,12 +65,3 @@ th:last-child, td:last-child {
 .form-control {
     margin-bottom: 10px;
 }
-
-.modal-content {
-    background-color: #272525;
-    color: aliceblue;
-}
-
-.close {
-    color: aliceblue;
-}

@@ -43,12 +43,3 @@ button.join:hover {
     background-color: #0cad09;
     border-color: #0cad09;
 }
-
-.modal-content {
-    background-color: #272525;
-    color: aliceblue;
-}
-
-.close {
-    color: aliceblue;
-}
