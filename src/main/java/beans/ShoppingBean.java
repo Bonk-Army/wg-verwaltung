@@ -53,6 +53,7 @@ public class ShoppingBean {
      * Set a request to done
      *
      * @param requestId The requestId of the request that has to be set to done
+     * @param wgId      The wgId of the current users wg
      * @return If it was successful
      */
     public ErrorCodes setRequestDone(String requestId, String wgId) {
@@ -61,6 +62,25 @@ public class ShoppingBean {
 
             if (savedWgId.equals(wgId)) {
                 return SQLDCshopping.setArticleRequestDone(requestId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            }
+        }
+
+        return ErrorCodes.WRONGENTRY;
+    }
+
+    /**
+     * Set a request to inactive
+     *
+     * @param requestId The requestId of the request
+     * @param wgId      The wgId of the current users wg
+     * @return If it was successful
+     */
+    public ErrorCodes setRequestInactive(String requestId, String wgId) {
+        if (RegexHelper.checkString(requestId)) {
+            String savedWgId = SQLDCtodo.getWgIdOfTodo(requestId);
+
+            if (savedWgId.equals(wgId)) {
+                return SQLDCshopping.setArticleRequestInactive(requestId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
             }
         }
 
