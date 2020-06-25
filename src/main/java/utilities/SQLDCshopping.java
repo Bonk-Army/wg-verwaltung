@@ -97,7 +97,7 @@ public class SQLDCshopping extends SQLDatabaseConnection {
 
         try {
             ResultSet rs = executeQuery(("SELECT article, amount, createdBy, requestedBy, dateDue, dateCreated, uniqueID, isDone FROM shopping WHERE wgId="
-                    + Integer.valueOf(wgId) + " AND (dateDue < DATE_ADD(CURDATE(), INTERVAL 7 DAY) OR isDone = 0) AND isActive = 1 ORDER BY dateDue"));
+                    + Integer.valueOf(wgId) + " AND (dateDue < DATE_ADD(CURDATE(), INTERVAL 7 DAY) OR isDone = 0) AND isActive = 1 ORDER BY isDone, dateDue ASC"));
 
             while (rs.next()) {
                 Map<String, String> currentArticle = new HashMap<String, String>();
