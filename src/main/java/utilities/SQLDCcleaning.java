@@ -186,7 +186,8 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
         List<String> taskList = new ArrayList<String>();
 
         try {
-            ResultSet rs = executeQuery(("SELECT uniqueID FROM cleaning WHERE wgId=" + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT uniqueID FROM cleaning WHERE wgId=" + Integer.valueOf(wgId)
+                    + " AND isActive = 1"));
 
             while (rs.next()) {
                 taskList.add(String.valueOf(rs.getInt(1)));
