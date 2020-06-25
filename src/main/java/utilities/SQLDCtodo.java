@@ -308,4 +308,69 @@ public class SQLDCtodo extends SQLDatabaseConnection {
         }
         return -1;
     }
+
+    /**
+     * Get all active todos where the given user is assigned
+     *
+     * @param userId The userId of the user
+     * @return The List of todos
+     */
+    public static List<Map<String, String>> getAllActiveTodosForUser(String userId) {
+        deactivateOldToDos();
+        List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
+        try {
+            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE userId = "
+                    + Integer.valueOf(userId) + " AND isActive = 1 ORDER BY isDone, dateDue ASC"));
+            while (rs.next()) {
+                Map<String, String> currentTodo = new HashMap<String, String>();
+                currentTodo.put("task", rs.getString(1));
+                currentTodo.put("isDone", String.valueOf(rs.getBoolean(5)));
+                currentTodo.put("todoId", rs.getString(8));
+
+                // Parameters for better visualization of the status of every todo
+
+                // Dates for colors
+                Date dateDue = rs.getDate(4);
+                Date dateCreated = rs.getDate(3);
+                Date currentDate = new Date();
+                Calendar c = Calendar.getInstance();
+                c.setTime(currentDate);
+                c.add(Calendar.DATE, 3);
+                Date threeDaysDate = c.getTime();
+
+                SimpleDateFormat fancyFormatter = new SimpleDateFormat("dd. MMMM yyyy HH:mm");
+                currentTodo.put("dateDue", fancyFormatter.format(dateDue));
+                currentTodo.put("dateCreated", fancyFormatter.format(dateCreated));
+
+                Boolean isDone = rs.getBoolean(5);
+                if (isDone) {
+                    currentTodo.put("doneMessage", "Ja");
+                    currentTodo.put("buttonHideStatus", "hidden=\"hidden\"");
+                    currentTodo.put("colorClass", "done");
+                } else {
+                    currentTodo.put("doneMessage", "Nein");
+                    currentTodo.put("buttonHideStatus", "");
+                    if (currentDate.after(dateDue)) {
+                        currentTodo.put("colorClass", "notDone tooLate");
+                    } else if (threeDaysDate.after(dateDue)) {
+                        currentTodo.put("colorClass", "notDone late");
+                    } else {
+                        currentTodo.put("colorClass", "notDone");
+                    }
+                }
+
+                // Text formatting
+                String creatorId = rs.getString(7);
+                String creator = SQLDCusers.getUsername(creatorId);
+
+                currentTodo.put("creator", SQLDCusers.getNameString(creator));
+
+                todoList.add(currentTodo);
+            }
+            return todoList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

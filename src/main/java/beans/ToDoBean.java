@@ -170,6 +170,15 @@ public class ToDoBean {
     }
 
     /**
+     * Get all active todos where the current user is assigned
+     *
+     * @return A list of Todos
+     */
+    public List<Map<String, String>> getTodosForUser() {
+        return SQLDCtodo.getAllActiveTodosForUser(this.userId);
+    }
+
+    /**
      * Return a List of the names (Format: Max M for Max Mustermann) of the users in the wg of the specified user
      *
      * @return A List of Maps of which each contains the username and the formatted name string
