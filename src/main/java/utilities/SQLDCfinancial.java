@@ -247,4 +247,27 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
 
         return "";
     }
+
+    /**
+     * Get the subtotal balance for each month for the specified user for the last six months
+     *
+     * @param userId The userId of the user
+     * @return The list with the total balance for each month
+     */
+    public static List<Integer> getBalanceDevelopmentForUser(String userId) {
+        List<Integer> monthlyBalance = new ArrayList<Integer>();
+
+        try {
+            ResultSet rs = executeQuery(("SELECT SUM(value) FROM financial WHERE createdBy = " + Integer.valueOf(userId)
+                    + " AND DATEDIFF(dateCreated, CURRENT_TIMESTAMP) <= 180 AND isActive = 1 GROUP BY EXTRACT(month FROM dateCreated)"));
+
+            while (rs.next()) {
+                monthlyBalance.add(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return monthlyBalance;
+    }
 }
