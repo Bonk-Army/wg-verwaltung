@@ -56,7 +56,7 @@ public class MainFilter extends HttpServlet {
                 loginBean.setLastLogin(userId);
                 // Forward user
                 sessionBean = new SessionBean(userId);
-                if (userId.equals("29")){
+                if (userId.equals("27")){
                     int random = (int)(Math.random()*5);
                     switch (random){
                         case 1 : resp.sendRedirect("https://www.youtube.com/watch?v=8KsT6RgXF_I"); break;
