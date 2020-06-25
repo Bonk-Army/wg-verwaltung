@@ -25,6 +25,9 @@ th:last-child, td:last-child{
     width: 6.25em;
 }
 
+tr.done {
+    background-color: #71bf71;
+}
 
 tr.tooLate {
     background-color: #d75a5a;
