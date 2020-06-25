@@ -42,7 +42,7 @@ public class SettingsBean {
             while (stringList.contains(accessKey)) {
                 accessKey = new RandomStringGenerator(20).nextString();
             }
-            if (SQLDCwgs.createWg(nameWg, accessKey)) {
+            if (SQLDCwgs.createWg(nameWg, accessKey, userId)) {
                 String wgId = SQLDCwgs.getWgId(accessKey);
                 if (!wgId.equals("")) {
                     if (SQLDCusers.setWgId(wgId, userId) && SQLDCusers.setUserRights(userId, UserRights.WG_ADMIN.getSqlKey())) {
