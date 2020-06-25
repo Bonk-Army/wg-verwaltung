@@ -1,8 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
-<c:if test="${sessionBean.loggedIn}">
-    <%@include file="Sidebar.jsp" %>
-</c:if>
 <div id="content">
     <section class="mb-4">
 

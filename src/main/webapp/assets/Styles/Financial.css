@@ -15,18 +15,18 @@ button.remove {
     max-width: 62px;
 }
 
-.table{
+.table {
     color: aliceblue;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
 
-th:not(:nth-child(1)){
+thead.tasks th:not(:nth-child(1)) {
     width: 12.5em;
 }
 
-th:last-child, td:last-child{
+th:last-child, td:last-child {
     width: 6.25em;
 }
 
