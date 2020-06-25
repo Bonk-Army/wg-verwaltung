@@ -11,6 +11,9 @@ import beans.SessionBean;
 import beans.ShoppingBean;
 import utilities.ErrorCodes;
 
+/**
+ * Called when the user wants to set a shopping request to done / bought
+ */
 public class SetBoughtShopping extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

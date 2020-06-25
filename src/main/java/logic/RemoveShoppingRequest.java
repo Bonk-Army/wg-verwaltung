@@ -2,7 +2,6 @@ package logic;
 
 import beans.SessionBean;
 import beans.ShoppingBean;
-import beans.ToDoBean;
 import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;

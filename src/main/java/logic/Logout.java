@@ -1,6 +1,5 @@
 package logic;
 
-import beans.FinancialBean;
 import beans.SessionBean;
 import utilities.ErrorCodes;
 
@@ -10,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
+/**
+ * Called when the user wants to log out of his account
+ */
 public class Logout extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

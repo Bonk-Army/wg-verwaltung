@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Called when the user wants to leave his wg
+ */
 public class LeaveWG extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

@@ -9,6 +9,7 @@ import java.util.ArrayList;
         - uniqueID      (int)
         - name          (String)
         - accessKey     (String)
+        - createdBy     (int)       (Foreign key to users.uniqueID)
  */
 
 /**
