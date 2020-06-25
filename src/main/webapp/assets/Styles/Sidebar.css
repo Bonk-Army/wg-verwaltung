@@ -156,7 +156,7 @@ ul ul a {
 ----------------------------------------------------- */
 
 #content {
-    width: 100%;
+    width: calc(100% - 15.625em);
     padding: 40px 20px;
     min-height: 100vh;
     transition: all 0.3s;
