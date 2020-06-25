@@ -150,4 +150,23 @@ public class SQLDCshopping extends SQLDatabaseConnection {
         return requestList;
     }
 
+    /**
+     * Get the wgId of a request
+     *
+     * @param requestId The requestId of the request
+     * @return The wgId associated to the request
+     */
+    public static String getWgIdOfRequest(String requestId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT wgId FROM shopping WHERE uniqueID=" + Integer.valueOf(requestId)));
+
+            while (rs.next()) {
+                return String.valueOf(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
 }

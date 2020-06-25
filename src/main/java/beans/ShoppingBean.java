@@ -58,7 +58,7 @@ public class ShoppingBean {
      */
     public ErrorCodes setRequestDone(String requestId, String wgId) {
         if (RegexHelper.checkString(requestId)) {
-            String savedWgId = SQLDCtodo.getWgIdOfTodo(requestId);
+            String savedWgId = SQLDCshopping.getWgIdOfRequest(requestId);
 
             if (savedWgId.equals(wgId)) {
                 return SQLDCshopping.setArticleRequestDone(requestId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
