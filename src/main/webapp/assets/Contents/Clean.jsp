@@ -13,7 +13,6 @@
         <table class="table">
             <thead class="thead-dark">
             <tr>
-                <th/>
                 <th scope="col">Aufgabe</th>
                 <th scope="col">Montag</th>
                 <th scope="col">Dienstag</th>
@@ -22,20 +21,12 @@
                 <th scope="col">Freitag</th>
                 <th scope="col">Samstag</th>
                 <th scope="col">Sonntag</th>
+                <th/>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${cleanBean.cleanData}" var="clean">
                 <tr>
-                    <td>
-                        <input type="text" name="cleanId" hidden="hidden" value="${clean.general.get(0).taskId}">
-                        <button title="CLean remove check" onclick="removeClean(${clean.general.get(0).taskId})"
-                                class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
-                                data-target="#removeModal">&times;
-                        </button>
-                        <button title="ToDo remove check" id="remove${clean.general.get(0).taskId}" type="button"
-                                style="display: none;"></button>
-                    </td>
                     <td>${clean.general.get(0).taskname}</td>
                     <td>
                         <select id="monday${clean.general.get(0).taskId}" class="form-control" name="${clean.general.get(0).taskId}-monday"
@@ -95,6 +86,14 @@
                                 <option value="${user.userId}">${user.nameString}</option>
                             </c:forEach>
                         </select>
+                    </td>
+                    <td>
+                        <input type="text" name="cleanId" hidden="hidden" value="${clean.general.get(0).taskId}">
+                        <button title="CLean remove check" onclick="removeClean(${clean.general.get(0).taskId})"
+                                class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
+                                data-target="#removeModal">&times;
+                        </button>
+                        <a href="/removeCleaningLogic?taskId=${clean.general.get(0).taskId}" id="remove${clean.general.get(0).taskId}" style="display: none;"></a>
                     </td>
                 </tr>
             </c:forEach>

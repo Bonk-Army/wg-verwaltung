@@ -1,4 +1,4 @@
-<div class="text-center">
+<div id="content" class="text-center">
     <img src="/assets/Images/lama.png" style="width: 130px">
     <form method="GET" action="joinWGLogic" class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal">WG Beitreten</h1>

@@ -8,7 +8,7 @@ public enum UserRights {
 
     private String sqlKey;
 
-    private UserRights(String sqlKey){
+    private UserRights(String sqlKey) {
         this.sqlKey = sqlKey;
     }
 

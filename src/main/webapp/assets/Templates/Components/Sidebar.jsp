@@ -1,7 +1,7 @@
 <!-- Sidebar  -->
 <nav id="sidebar">
     <div class="sidebar-header">
-        <button type="button" id="sidebarCollapse" class="btn btn-info">
+        <button type="button" id="sidebarCollapse" class="btn">
             <h3>WG - Planer</h3>
             <strong>WG</strong>
         </button>
@@ -22,7 +22,10 @@
             </a>
             <ul class="collapse list-unstyled" id="pageSubmenu">
                 <li>
-                    <a href="/todo">ToDo 1</a>
+                    <a href="/todo">Alle ToDos</a>
+                </li>
+                <li>
+                    <a href="/mytodo">Meine ToDos</a>
                 </li>
             </ul>
         </li>

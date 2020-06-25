@@ -1,13 +1,8 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
-<c:if test="${sessionBean.loggedIn}">
-    <%@include file="Sidebar.jsp" %>
-</c:if>
 <div id="content">
     <section class="mb-4">
 
     <!--Section heading-->
-    <h2 class="h1-responsive font-weight-bold text-center my-4">Kontaktiere uns</h2>
+    <h2 class="h1-responsive my-4">Kontaktiere uns</h2>
     <!--Section description-->
     <p class="text-center w-responsive mx-auto mb-5">Hast du Fragen? Z&ouml;gere nicht, uns direkt zu kontaktieren. Unser Team wird dir in wenigen Stunden helfen</p>
     <div class="row">
@@ -83,5 +78,4 @@
     </div>
 
 </section>
-<!--Section: Contact v.2-->
 </div>

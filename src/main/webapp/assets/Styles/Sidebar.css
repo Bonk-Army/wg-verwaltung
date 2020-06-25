@@ -1,23 +1,18 @@
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #272525;
-    color: aliceblue;
-    display: flex;
-    align-items: stretch;
-}
-
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
 
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
+    height: 100%;
+    min-width: 15.625em;
+    max-width: 15.625em;
     background: #3c415e;
     color: aliceblue;
     transition: all 0.3s;
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
 }
 
 a,
@@ -41,13 +36,16 @@ button#logout:hover{
 }
 
 #sidebar.active {
-    min-width: 127px;
-    max-width: 127px;
+    min-width: 7.9375em;
+    max-width: 7.9375em;
     text-align: center;
 }
 
-#sidebar button {
+#sidebar button, #sidebar button.btn-info:focus {
+    color: aliceblue;
     background: #272525;
+    border-color: #272525;
+    box-shadow: none;
 }
 
 #sidebar.active .sidebar-header h3 {
@@ -157,13 +155,30 @@ ul ul a {
 }
 
 /* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+    width: calc(100% - 15.625em);
+    padding: 40px 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    margin-left: 15.625em;
+}
+
+#content.active {
+    margin-left: 7.9375em;
+    width: calc(100% - 7.9375em);
+}
+
+/* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
 
 @media (max-width: 768px) {
     #sidebar {
-        min-width: 127px;
-        max-width: 127px;
+        min-width: 7.9375em;
+        max-width: 7.9375em;
         text-align: center;
         margin-left: 0px !important;
     }
@@ -220,16 +235,8 @@ ul ul a {
     #sidebar {
         margin-left: 0;
     }
-}
-
-/* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
-
-#content {
-    width: 100%;
-    padding: 40px 20px;
-    min-height: 100vh;
-    transition: all 0.3s;
-    overflow: scroll;
+    #content {
+        margin-left: 7.9375em;
+        max-width: unset;
+    }
 }

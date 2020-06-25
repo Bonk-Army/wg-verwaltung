@@ -99,6 +99,23 @@ public class CleanBean {
         return new ArrayList<>();
     }
 
+    /**
+     * Set the given task as inactive if the user is allowed to do so
+     *
+     * @param taskId The taskId of the task
+     * @param wgId   The wgId of the current user
+     * @return If it was successful
+     */
+    public ErrorCodes removeCleaningTask(String taskId, String wgId) {
+        String savedWgId = SQLDCcleaning.getWgIdForTask(taskId);
+
+        if (RegexHelper.checkString(taskId) && savedWgId.equals(wgId)) {
+            return SQLDCcleaning.setTaskDone(taskId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+        }
+
+        return ErrorCodes.WRONGENTRY;
+    }
+
     /*
       /$$$$$$              /$$     /$$                                               /$$        /$$$$$$              /$$     /$$
      /$$__  $$            | $$    | $$                                              /$$/       /$$__  $$            | $$    | $$

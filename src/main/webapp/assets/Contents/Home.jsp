@@ -1,12 +1,13 @@
-<div id="content">
-    <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
-    <jsp:useBean id="overview" class="beans.OverviewBean"/>
-    <jsp:setProperty name="overview" property="userId" value="${sessionBean.userId}"/>
-    <jsp:setProperty name="overview" property="wgId" value="${sessionBean.wgId}"/>
+<jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
+<jsp:useBean id="overview" class="beans.OverviewBean"/>
+<jsp:setProperty name="overview" property="userId" value="${sessionBean.userId}"/>
+<jsp:setProperty name="overview" property="wgId" value="${sessionBean.wgId}"/>
 
+<div id="content">
     <h1>Willkommen
         <jsp:getProperty name="sessionBean" property="firstName"/>
-        <jsp:getProperty name="sessionBean" property="lastName"/>, oder besser bekannt als
+        <jsp:getProperty name="sessionBean" property="lastName"/>
+        , oder besser bekannt als
         <jsp:getProperty name="sessionBean" property="username"/>
         aus der WG
         <jsp:getProperty name="sessionBean" property="wgName"/>

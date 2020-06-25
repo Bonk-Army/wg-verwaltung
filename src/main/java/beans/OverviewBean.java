@@ -2,6 +2,10 @@ package beans;
 
 import utilities.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Bean used for the home page (overview page)
  */
@@ -31,7 +35,7 @@ public class OverviewBean {
      * @param wgId The ID of the WG
      * @return Number of To-Do's for given WG
      */
-    public int getNumberofTodosWG(String wgId) {
+    public int getNumberOfTodosWG(String wgId) {
         if (RegexHelper.checkString(wgId) && !wgId.isEmpty()) {
             return SQLDCtodo.countTodo(wgId);
         }
@@ -44,7 +48,7 @@ public class OverviewBean {
      * @param wgId The ID of the WG
      * @return Number of done To-Do's for given WG
      */
-    public int getNumberofDoneWG(String wgId) {
+    public int getNumberOfDoneWG(String wgId) {
         if (RegexHelper.checkString(wgId) && !wgId.isEmpty()) {
             return SQLDCtodo.countDone(wgId);
         }
@@ -58,7 +62,7 @@ public class OverviewBean {
      * @param userId The ID of the User
      * @return Number of To-Do's for given User
      */
-    public int getNumberofTodosUser(String userId) {
+    public int getNumberOfTodosUser(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
             return SQLDCtodo.countTodoUser(userId);
         }
@@ -71,7 +75,7 @@ public class OverviewBean {
      * @param userId The ID of the User
      * @return Number of done To-Do's for given User
      */
-    public int getNumberofDoneUser(String userId) {
+    public int getNumberOfDoneUser(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
             return SQLDCtodo.countDoneUser(userId);
         }
@@ -123,7 +127,7 @@ public class OverviewBean {
      * @param wgID The wgId of the wg
      * @return The total number of todos
      */
-    public int getNumberofTodos(String wgID) {
+    public int getNumberOfTodos(String wgID) {
         if (RegexHelper.checkString(wgID) && !wgID.isEmpty()) {
             return SQLDCtodo.countTodo(wgID);
         }
@@ -136,7 +140,7 @@ public class OverviewBean {
      * @param wgID The wgId of the wg
      * @return The number of finished todos
      */
-    public int getNumberofDone(String wgID) {
+    public int getNumberOfDone(String wgID) {
         if (RegexHelper.checkString(wgID) && !wgID.isEmpty()) {
             return SQLDCtodo.countDone(wgID);
         }
@@ -225,6 +229,31 @@ public class OverviewBean {
         int openTodos = SQLDCtodo.getOpenTodosPerWg(this.wgId);
 
         return String.valueOf(openTodos);
+    }
+
+    /**
+     * Get the total balance of the whole month for the logged in user for the last six months
+     *
+     * @return The list with the balance for the last six months
+     */
+    public List<Double> getBalanceChartData() {
+        List<Integer> monthlyBalance = SQLDCfinancial.getBalanceDevelopmentForUser(this.userId);
+        List<Double> monthlyBalanceConverted = new ArrayList<Double>();
+
+        for (int month : monthlyBalance) {
+            monthlyBalanceConverted.add((month / 100d));
+        }
+
+        return monthlyBalanceConverted;
+    }
+
+    /**
+     * Get the number of open todos and their name string for every user of the wg
+     *
+     * @return A list of maps of which each represents one user
+     */
+    public List<Map<String, String>> getTodoChartData() {
+        return SQLDCtodo.getOpenTodosPerUserOfWg(this.wgId);
     }
 }
 

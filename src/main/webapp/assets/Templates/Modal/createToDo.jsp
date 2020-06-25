@@ -25,13 +25,14 @@
                     <option value="${user.username}">${user.nameString}</option>
                     </c:forEach>
                 </select>
-                        <h6>Bis wann soll die Aufgabe erledigt sein?</h6>
-                    <label for="deadline" class="sr-only">Deadline</label>
-                    <input id="deadline" class="form-control" placeholder="Deadline" name="deadline" type="date" required>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary odom-submit">ToDo erstellen</button>
-                    </div>
+                <h6>Bis wann soll die Aufgabe erledigt sein?</h6>
+                <input id="date" class="form-control date" name="date" type="date" required>
+                <label for="time" class="sr-only">Deadline</label>
+                <input id="time" class="form-control time" name="time" type="time" required>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary odom-submit">ToDo erstellen</button>
+                </div>
             </form>
         </div>
     </div>

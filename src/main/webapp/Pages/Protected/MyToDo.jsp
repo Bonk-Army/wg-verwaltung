@@ -12,14 +12,21 @@
     <%@include file="../../assets/Templates/Imports/Fonts.jsp" %>
     <%@include file="../../assets/Templates/Imports/Bootstrap.jsp" %>
 
-    <title>Einloggen</title>
+    <title>Meine ToDos</title>
 
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
-    <link rel="stylesheet" type="text/css" href="./assets/Styles/Login.css">
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/ToDo.css">
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
 </head>
 <body>
-<%@include file="../../assets/Templates/Components/Login.jsp" %>
-<%@include file="../../assets/Templates/Modal/Login.jsp" %>
+<%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
+<%@include file="../../assets/Templates/Modal/doneToDo.jsp" %>
+<%@include file="../../assets/Templates/Modal/removeToDo.jsp" %>
+
+<%@include file="../../assets/Contents/MyToDo.jsp" %>
+
+<script><%@include file="../../assets/Scripts/Sidebar.js" %></script>
 <script><%@include file="../../assets/Scripts/Modal.js" %></script>
+<script><%@include file="../../assets/Scripts/ToDo.js" %></script>
 </body>
 </html>

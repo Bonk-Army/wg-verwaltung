@@ -41,9 +41,9 @@ public class SQLDCshopping extends SQLDatabaseConnection {
             Timestamp createdStamp = new Timestamp(dateCreated.getTime());
             Timestamp dueStamp = new Timestamp(dateDue.getTime());
 
-            ResultSet rs = executeQuery(("INSERT INTO shopping (article, amount, createdBy, requestedBy, wgId, dateDue, dateCreated, isDone) "
+            ResultSet rs = executeQuery(("INSERT INTO shopping (article, amount, createdBy, requestedBy, wgId, dateDue, dateCreated, isDone, isActive) "
                     + "VALUES ('" + article + "', '" + amount + "', " + Integer.valueOf(createdBy) + ", " + Integer.valueOf(requestedBy)
-                    + ", " + Integer.valueOf(wgId) + ", '" + dueStamp + "', '" + createdStamp + "', 0)"));
+                    + ", " + Integer.valueOf(wgId) + ", '" + dueStamp + "', '" + createdStamp + "', 0, 1)"));
 
             return true;
         } catch (Exception e) {
@@ -70,7 +70,24 @@ public class SQLDCshopping extends SQLDatabaseConnection {
     }
 
     /**
-     * Returns all open article requests for the given wg
+     * Set an article request to inactive
+     *
+     * @param requestId The requestId of the request
+     * @return If it was successful
+     */
+    public static boolean setArticleRequestInactive(String requestId) {
+        try {
+            executeQuery(("UPDATE shopping SET isActive = 0 WHERE uniqueID=" + Integer.valueOf(requestId)));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Returns all recent (open + last seven days) article requests for the given wg
      *
      * @param wgId The wg Id of the wg
      * @return A List of Maps which contain an article each
@@ -79,8 +96,8 @@ public class SQLDCshopping extends SQLDatabaseConnection {
         List<Map<String, String>> requestList = new ArrayList<Map<String, String>>();
 
         try {
-            ResultSet rs = executeQuery(("SELECT article, amount, createdBy, requestedBy, dateDue, dateCreated, uniqueID FROM shopping WHERE wgId="
-                    + Integer.valueOf(wgId) + " AND isDone = 0 ORDER BY dateDue"));
+            ResultSet rs = executeQuery(("SELECT article, amount, createdBy, requestedBy, dateDue, dateCreated, uniqueID, isDone FROM shopping WHERE wgId="
+                    + Integer.valueOf(wgId) + " AND (dateDue < DATE_ADD(CURDATE(), INTERVAL 7 DAY) OR isDone = 0) AND isActive = 1 ORDER BY isDone, dateDue ASC"));
 
             while (rs.next()) {
                 Map<String, String> currentArticle = new HashMap<String, String>();
@@ -96,6 +113,8 @@ public class SQLDCshopping extends SQLDatabaseConnection {
                 String createdBy = SQLDCusers.getUsername(createdById);
                 String requestedBy = SQLDCusers.getUsername(requestedById);
 
+                boolean isDone = rs.getBoolean(8);
+
                 currentArticle.put("requestedBy", SQLDCusers.getNameString(requestedBy));
                 currentArticle.put("createdBy", SQLDCusers.getNameString(createdBy));
 
@@ -108,13 +127,20 @@ public class SQLDCshopping extends SQLDatabaseConnection {
                 Date tomorrow = c.getTime();
                 currentArticle.put("doneMessage", "Nein");
                 currentArticle.put("buttonHideStatus", "");
+
+                String colorClass = "";
                 if (currentDate.after(dateDue)) {
-                    currentArticle.put("colorClass", "tooLate");
+                    colorClass = "tooLate";
                 } else if (tomorrow.after(dateDue)) {
-                    currentArticle.put("colorClass", "late");
-                } else {
-                    currentArticle.put("colorClass", "");
+                    colorClass = "late";
                 }
+
+                if (isDone) {
+                    colorClass = "done";
+                }
+
+
+                currentArticle.put("colorClass", colorClass);
 
                 requestList.add(currentArticle);
             }
@@ -124,4 +150,23 @@ public class SQLDCshopping extends SQLDatabaseConnection {
         return requestList;
     }
 
+    /**
+     * Get the wgId of a request
+     *
+     * @param requestId The requestId of the request
+     * @return The wgId associated to the request
+     */
+    public static String getWgIdOfRequest(String requestId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT wgId FROM shopping WHERE uniqueID=" + Integer.valueOf(requestId)));
+
+            while (rs.next()) {
+                return String.valueOf(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
 }

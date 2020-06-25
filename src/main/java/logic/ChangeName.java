@@ -1,6 +1,5 @@
 package logic;
 
-import beans.LoginBean;
 import beans.SessionBean;
 import beans.SettingsBean;
 import utilities.ErrorCodes;

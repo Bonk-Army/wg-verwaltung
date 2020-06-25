@@ -81,7 +81,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 c.add(Calendar.DATE, 3);
                 Date threeDaysDate = c.getTime();
 
-                SimpleDateFormat fancyFormatter = new SimpleDateFormat("dd. MMMM yyyy");
+                SimpleDateFormat fancyFormatter = new SimpleDateFormat("dd. MMMM yyyy HH:mm");
                 currentTodo.put("dateDue", fancyFormatter.format(dateDue));
                 currentTodo.put("dateCreated", fancyFormatter.format(dateCreated));
 
@@ -160,8 +160,16 @@ public class SQLDCtodo extends SQLDatabaseConnection {
      * WGV-115
      * Deactivates done ToDos older than 30 days
      */
-    public static void deactivateOldToDos() {
-        executeQuery("UPDATE todo SET isActive=0 WHERE isDone=1 AND dateDue < DATE_ADD(CURDATE(), INTERVAL -30 DAY);");
+    public static boolean deactivateOldToDos() {
+        try {
+            executeQuery("UPDATE todo SET isActive=0 WHERE isDone=1 AND dateDue < DATE_ADD(CURDATE(), INTERVAL -30 DAY);");
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     /**
@@ -172,7 +180,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
      */
     public static String getWgIdOfTodo(String todoId) {
         try {
-            ResultSet rs = executeQuery(("SELECT wgId FROM todo WHERE uniqueID = " + Integer.valueOf(todoId)));
+            ResultSet rs = executeQuery(("SELECT wgId FROM todo WHERE uniqueID=" + Integer.valueOf(todoId)));
 
             while (rs.next()) {
                 return String.valueOf(rs.getInt(1));
@@ -297,5 +305,102 @@ public class SQLDCtodo extends SQLDatabaseConnection {
             e.printStackTrace();
         }
         return -1;
+    }
+
+    /**
+     * Get all active todos where the given user is assigned
+     *
+     * @param userId The userId of the user
+     * @return The List of todos
+     */
+    public static List<Map<String, String>> getAllActiveTodosForUser(String userId) {
+        deactivateOldToDos();
+        List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
+        try {
+            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE userId = "
+                    + Integer.valueOf(userId) + " AND isActive = 1 ORDER BY isDone, dateDue ASC"));
+            while (rs.next()) {
+                Map<String, String> currentTodo = new HashMap<String, String>();
+                currentTodo.put("task", rs.getString(1));
+                currentTodo.put("isDone", String.valueOf(rs.getBoolean(5)));
+                currentTodo.put("todoId", rs.getString(8));
+
+                // Parameters for better visualization of the status of every todo
+
+                // Dates for colors
+                Date dateDue = rs.getDate(4);
+                Date dateCreated = rs.getDate(3);
+                Date currentDate = new Date();
+                Calendar c = Calendar.getInstance();
+                c.setTime(currentDate);
+                c.add(Calendar.DATE, 3);
+                Date threeDaysDate = c.getTime();
+
+                SimpleDateFormat fancyFormatter = new SimpleDateFormat("dd. MMMM yyyy HH:mm");
+                currentTodo.put("dateDue", fancyFormatter.format(dateDue));
+                currentTodo.put("dateCreated", fancyFormatter.format(dateCreated));
+
+                boolean isDone = rs.getBoolean(5);
+                if (isDone) {
+                    currentTodo.put("doneMessage", "Ja");
+                    currentTodo.put("buttonHideStatus", "hidden=\"hidden\"");
+                    currentTodo.put("colorClass", "done");
+                } else {
+                    currentTodo.put("doneMessage", "Nein");
+                    currentTodo.put("buttonHideStatus", "");
+                    if (currentDate.after(dateDue)) {
+                        currentTodo.put("colorClass", "notDone tooLate");
+                    } else if (threeDaysDate.after(dateDue)) {
+                        currentTodo.put("colorClass", "notDone late");
+                    } else {
+                        currentTodo.put("colorClass", "notDone");
+                    }
+                }
+
+                // Text formatting
+                String creatorId = rs.getString(7);
+                String creator = SQLDCusers.getUsername(creatorId);
+
+                currentTodo.put("creator", SQLDCusers.getNameString(creator));
+
+                todoList.add(currentTodo);
+            }
+            return todoList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Get the number of open todos for every user of the wg alongside their name string
+     *
+     * @param wgId The wgId of the wg to fetch the users for
+     * @return A list of maps of which each represents one user
+     */
+    public static List<Map<String, String>> getOpenTodosPerUserOfWg(String wgId) {
+        List<Map<String, String>> openTodosPerUser = new ArrayList<Map<String, String>>();
+
+        try {
+            ResultSet rs = executeQuery(("SELECT COUNT(todo.uniqueID), users.firstName, users.lastName FROM todo "
+                    + "LEFT OUTER JOIN users ON users.uniqueID = todo.userId WHERE todo.wgId =" + Integer.valueOf(wgId)
+                    + "AND todo.isActive = 1 AND todo.isDone = 0 GROUP BY todo.userId"));
+
+            while (rs.next()) {
+                Map<String, String> currentUser = new HashMap<String, String>();
+
+                String nameString = rs.getString(2) + " " + rs.getString(3).substring(0, 1);
+                int openTodos = rs.getInt(1);
+
+                currentUser.put("nameString", nameString);
+                currentUser.put("todos", String.valueOf(openTodos));
+
+                openTodosPerUser.add(currentUser);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return openTodosPerUser;
     }
 }

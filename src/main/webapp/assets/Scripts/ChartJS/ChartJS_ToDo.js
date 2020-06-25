@@ -8,8 +8,8 @@ var chart = new Chart(ctx, {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
             label: 'Meine offenen ToDos',
-            backgroundColor: 'rgb(182,255,99)',
-            borderColor: 'rgb(182,255,99)',
+            backgroundColor: 'rgb(113,191,113)',
+            borderColor: 'rgb(113,191,113)',
             data: [0, 5, 3, 0, 1, 2, 4]
         }]
     },
