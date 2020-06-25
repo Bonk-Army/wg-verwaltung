@@ -1,7 +1,7 @@
 <!-- Sidebar  -->
 <nav id="sidebar">
     <div class="sidebar-header">
-        <button type="button" id="sidebarCollapse" class="btn btn-info">
+        <button type="button" id="sidebarCollapse" class="btn">
             <h3>WG - Planer</h3>
             <strong>WG</strong>
         </button>
