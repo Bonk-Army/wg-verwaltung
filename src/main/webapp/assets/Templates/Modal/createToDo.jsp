@@ -27,7 +27,7 @@
                 </select>
                         <h6>Bis wann soll die Aufgabe erledigt sein?</h6>
                     <label for="deadline" class="sr-only">Deadline</label>
-                    <input id="deadline" class="form-control" placeholder="Deadline" name="deadline" type="date" required>
+                    <input id="deadline" class="form-control" placeholder="Deadline" name="deadline" type="datetime-local" required>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary odom-submit">ToDo erstellen</button>
