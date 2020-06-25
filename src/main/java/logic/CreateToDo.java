@@ -46,8 +46,9 @@ public class CreateToDo extends HttpServlet {
 
         String task = request.getParameter("todo");
         String assignee = request.getParameter("username");
-        String dueDateString = request.getParameter("deadline");
-        dueDateString.replace('T', ' ');
+        String dueDateString = request.getParameter("date");
+        String dueDateTime = request.getParameter("time");
+        dueDateString = (dueDateString + " " + dueDateTime);
 
         String userId = sessionBean.getUserId();
 
