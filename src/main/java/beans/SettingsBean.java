@@ -46,6 +46,10 @@ public class SettingsBean {
                 String wgId = SQLDCwgs.getWgId(accessKey);
                 if (!wgId.equals("")) {
                     if (SQLDCusers.setWgId(wgId, userId) && SQLDCusers.setUserRights(userId, UserRights.WG_ADMIN.getSqlKey())) {
+                        String userEmail = SQLDCusers.getEmailAddressForUser(userId);
+                        String userNameString = SQLDCusers.getNameStringById(userId);
+                        String inviteLink = "https://wgverwaltung.azurewebsites.net/joinWGLogic?wgcode=" + accessKey;
+                        MailSender.sendWgCreationMail(userNameString, userEmail, nameWg, accessKey, inviteLink);
                         return ErrorCodes.SUCCESS;
                     }
                     return ErrorCodes.FAILURE;

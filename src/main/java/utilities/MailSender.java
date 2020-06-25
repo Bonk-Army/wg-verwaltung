@@ -106,13 +106,14 @@ public class MailSender {
 
     /**
      * Send the content of the contact request form to patrick
-     * @param name The entered name
-     * @param email The entered email address
+     *
+     * @param name    The entered name
+     * @param email   The entered email address
      * @param subject The entered subject
      * @param message The entered message
      * @return If it was successful
      */
-    public static boolean sendContactRequestMail(String name, String email, String subject, String message){
+    public static boolean sendContactRequestMail(String name, String email, String subject, String message) {
         Map<String, String> args = new HashMap<String, String>();
         args.put("name", name);
         args.put("email", email);
@@ -122,13 +123,25 @@ public class MailSender {
         return sendEmail("wgverwaltung-contactrequest@mueller-patrick.tech", Mailtypes.CONTACT, args);
     }
 
+    public static boolean sendWgCreationMail(String name, String receiver, String wgname, String inviteCode, String inviteLink) {
+        Map<String, String> args = new HashMap<String, String>();
+
+        args.put("username", name);
+        args.put("wgname", wgname);
+        args.put("invitecode", inviteCode);
+        args.put("invitelink", inviteLink);
+
+        return sendEmail(receiver, Mailtypes.WGCREATE, args);
+    }
+
     /**
      * Enum for types of emails we send
      */
     public static enum Mailtypes {
         VERIFY("d-48e403a281cb4e9382351342188b786b"),
         RESETPW("d-d6e6140c08c343fdb1c1136b07c36829"),
-        CONTACT("d-0203b477107643089ad24671014480a9");
+        CONTACT("d-0203b477107643089ad24671014480a9"),
+        WGCREATE("d-32b313dcbfa44a89984a2ce83df781a7");
 
         private String templateID;
 
@@ -139,5 +152,5 @@ public class MailSender {
         public String getTemplateID() {
             return this.templateID;
         }
-        }
+    }
 }
