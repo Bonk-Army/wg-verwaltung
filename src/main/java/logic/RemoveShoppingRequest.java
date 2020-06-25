@@ -33,7 +33,7 @@ public class RemoveShoppingRequest extends HttpServlet {
         String requestId = request.getParameter("requestId");
         String wgId = sessionBean.getWgId();
 
-        ErrorCodes status = shoppingBean.setRequestDone(requestId, wgId);
+        ErrorCodes status = shoppingBean.setRequestInactive(requestId, wgId);
 
         switch (status) {
             case SUCCESS:

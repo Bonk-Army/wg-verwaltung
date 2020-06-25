@@ -340,7 +340,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 currentTodo.put("dateDue", fancyFormatter.format(dateDue));
                 currentTodo.put("dateCreated", fancyFormatter.format(dateCreated));
 
-                Boolean isDone = rs.getBoolean(5);
+                boolean isDone = rs.getBoolean(5);
                 if (isDone) {
                     currentTodo.put("doneMessage", "Ja");
                     currentTodo.put("buttonHideStatus", "hidden=\"hidden\"");
