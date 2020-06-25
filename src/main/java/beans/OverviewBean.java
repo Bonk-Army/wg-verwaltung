@@ -31,7 +31,7 @@ public class OverviewBean {
      * @param wgId The ID of the WG
      * @return Number of To-Do's for given WG
      */
-    public int getNumberofTodosWG(String wgId) {
+    public int getNumberOfTodosWG(String wgId) {
         if (RegexHelper.checkString(wgId) && !wgId.isEmpty()) {
             return SQLDCtodo.countTodo(wgId);
         }
@@ -44,7 +44,7 @@ public class OverviewBean {
      * @param wgId The ID of the WG
      * @return Number of done To-Do's for given WG
      */
-    public int getNumberofDoneWG(String wgId) {
+    public int getNumberOfDoneWG(String wgId) {
         if (RegexHelper.checkString(wgId) && !wgId.isEmpty()) {
             return SQLDCtodo.countDone(wgId);
         }
@@ -58,7 +58,7 @@ public class OverviewBean {
      * @param userId The ID of the User
      * @return Number of To-Do's for given User
      */
-    public int getNumberofTodosUser(String userId) {
+    public int getNumberOfTodosUser(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
             return SQLDCtodo.countTodoUser(userId);
         }
@@ -71,7 +71,7 @@ public class OverviewBean {
      * @param userId The ID of the User
      * @return Number of done To-Do's for given User
      */
-    public int getNumberofDoneUser(String userId) {
+    public int getNumberOfDoneUser(String userId) {
         if (RegexHelper.checkString(userId) && !userId.isEmpty()) {
             return SQLDCtodo.countDoneUser(userId);
         }
@@ -123,7 +123,7 @@ public class OverviewBean {
      * @param wgID The wgId of the wg
      * @return The total number of todos
      */
-    public int getNumberofTodos(String wgID) {
+    public int getNumberOfTodos(String wgID) {
         if (RegexHelper.checkString(wgID) && !wgID.isEmpty()) {
             return SQLDCtodo.countTodo(wgID);
         }
@@ -136,7 +136,7 @@ public class OverviewBean {
      * @param wgID The wgId of the wg
      * @return The number of finished todos
      */
-    public int getNumberofDone(String wgID) {
+    public int getNumberOfDone(String wgID) {
         if (RegexHelper.checkString(wgID) && !wgID.isEmpty()) {
             return SQLDCtodo.countDone(wgID);
         }

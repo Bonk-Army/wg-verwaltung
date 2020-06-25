@@ -186,4 +186,28 @@ public class ToDoBean {
     public List<Map<String, String>> getUsersOfWg() {
         return SQLDCusers.getAllNameStringsForWg(this.wgId);
     }
+
+    /**
+     * Get Total number of To-Do's for WG
+     * Done or not!
+     *
+     * @return Number of To-Do's for given User
+     */
+    public String getOpenTodosUser() {
+        int openTodos = SQLDCtodo.getOpenTodosPerUser(this.userId, this.wgId);
+
+        return String.valueOf(openTodos);
+    }
+
+    /**
+     * Get Total number of To-Do's for WG
+     * Done or not!
+     *
+     * @return Number of To-Do's for given WG
+     */
+    public String getOpenTodosWg() {
+        int openTodos = SQLDCtodo.getOpenTodosPerWg(this.wgId);
+
+        return String.valueOf(openTodos);
+    }
 }
