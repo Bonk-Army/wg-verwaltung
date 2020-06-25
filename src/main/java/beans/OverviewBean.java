@@ -2,6 +2,10 @@ package beans;
 
 import utilities.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Bean used for the home page (overview page)
  */
@@ -225,6 +229,31 @@ public class OverviewBean {
         int openTodos = SQLDCtodo.getOpenTodosPerWg(this.wgId);
 
         return String.valueOf(openTodos);
+    }
+
+    /**
+     * Get the total balance of the whole month for the logged in user for the last six months
+     *
+     * @return The list with the balance for the last six months
+     */
+    public List<Double> getBalanceChartData() {
+        List<Integer> monthlyBalance = SQLDCfinancial.getBalanceDevelopmentForUser(this.userId);
+        List<Double> monthlyBalanceConverted = new ArrayList<Double>();
+
+        for (int month : monthlyBalance) {
+            monthlyBalanceConverted.add((month / 100d));
+        }
+
+        return monthlyBalanceConverted;
+    }
+
+    /**
+     * Get the number of open todos and their name string for every user of the wg
+     *
+     * @return A list of maps of which each represents one user
+     */
+    public List<Map<String, String>> getTodoChartData() {
+        return SQLDCtodo.getOpenTodosPerUserOfWg(this.wgId);
     }
 }
 

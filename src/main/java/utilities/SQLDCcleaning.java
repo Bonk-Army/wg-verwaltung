@@ -13,6 +13,7 @@ package utilities;
         - saturdayUser      (int)       (Foreign key to users.uniqueID)
         - sundayUser        (int)       (Foreign key to users.uniqueID)
         - wgId              (int)       (Foreign key to wgs.uniqueID)
+        - isActive          (bool)
  */
 
 import java.sql.ResultSet;
@@ -34,8 +35,8 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
      */
     public static boolean addNewTask(String wgId, String taskName) {
         try {
-            executeQuery(("INSERT INTO cleaning (taskName, wgId) VALUES "
-                    + "('" + taskName + "', " + Integer.valueOf(wgId) + ")"));
+            executeQuery(("INSERT INTO cleaning (taskName, wgId, isActive) VALUES "
+                    + "('" + taskName + "', " + Integer.valueOf(wgId) + ", 1)"));
 
             return true;
         } catch (Exception e) {
@@ -94,7 +95,8 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
 
         try {
             ResultSet rs = executeQuery(("SELECT uniqueID, taskName, mondayUser, tuesdayUser, wednesdayUser, thursdayUser,"
-                    + " fridayUser, saturdayUser, sundayUser FROM cleaning WHERE wgId = " + Integer.valueOf(wgId)));
+                    + " fridayUser, saturdayUser, sundayUser FROM cleaning WHERE wgId = " + Integer.valueOf(wgId)
+                    + " AND isActive = 1"));
 
             List<Map<String, String>> namesForWg = SQLDCusers.getAllNameStringsWithUserIdForWg(wgId);
 
@@ -184,7 +186,8 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
         List<String> taskList = new ArrayList<String>();
 
         try {
-            ResultSet rs = executeQuery(("SELECT uniqueID FROM cleaning WHERE wgId=" + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT uniqueID FROM cleaning WHERE wgId=" + Integer.valueOf(wgId)
+                    + " AND isActive = 1"));
 
             while (rs.next()) {
                 taskList.add(String.valueOf(rs.getInt(1)));
@@ -194,5 +197,23 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
         }
 
         return taskList;
+    }
+
+    /**
+     * Set the given task as inactive
+     *
+     * @param taskId The taskId of the task
+     * @return If it was successful
+     */
+    public static boolean setTaskDone(String taskId) {
+        try {
+            executeQuery(("UPDATE cleaning SET isActive = 0 WHERE uniqueID=" + Integer.valueOf(taskId)));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }

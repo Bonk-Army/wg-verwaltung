@@ -1,7 +1,8 @@
 package logic;
 
+import beans.CleanBean;
+import beans.FinancialBean;
 import beans.SessionBean;
-import beans.ShoppingBean;
 import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
@@ -11,34 +12,39 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Remove shopping request servlet that is called when a shopping request is set to done
+ * Called when the user tries to remove a cleaning task from his wg
  */
-public class RemoveShoppingRequest extends HttpServlet {
+public class RemoveCleaning extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public RemoveShoppingRequest() {
+    public RemoveCleaning() {
         super();
     }
 
+    /**
+     * Called when the user tries to remove a cleaning task from his wg
+     *
+     * @param request  The http GET request
+     * @param response The http response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ShoppingBean shoppingBean = new ShoppingBean();
+        CleanBean cleanBean = new CleanBean();
         SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
-        String requestId = request.getParameter("requestId");
         String wgId = sessionBean.getWgId();
 
-        ErrorCodes status = shoppingBean.setRequestInactive(requestId, wgId);
+        String taskId = request.getParameter("taskId");
+
+        ErrorCodes status = cleanBean.removeCleaningTask(taskId, wgId);
 
         switch (status) {
             case SUCCESS:
                 //Show success
-                response.sendRedirect("/shopping");
+                response.sendRedirect("/clean");
                 break;
             case FAILURE:
                 //Show failure
@@ -48,5 +54,9 @@ public class RemoveShoppingRequest extends HttpServlet {
                 request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
                 break;
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }

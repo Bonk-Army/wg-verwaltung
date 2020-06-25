@@ -51,8 +51,11 @@ button#logout:hover{
     text-align: center;
 }
 
-#sidebar button {
+#sidebar button, #sidebar button.btn-info:focus {
+    color: aliceblue;
     background: #272525;
+    border-color: #272525;
+    box-shadow: none;
 }
 
 #sidebar.active .sidebar-header h3 {

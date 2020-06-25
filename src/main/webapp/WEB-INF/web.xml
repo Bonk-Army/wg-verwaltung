@@ -36,6 +36,7 @@
         |__ /logoutLogic                | Servlet : Logout                  | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /updateCleaningLogic        | Servlet : UpdateCleaningAssignees | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /addCleaningLogic           | Servlet : UpdateCleaningAssignees | Zuständig: @PM       | Mapped by @KA | Zuständig für Inhalt @PM | Initial
+        |__ /removeCleaningLogic        | Servlet : RemoveCleaning          | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -388,6 +389,14 @@
     <servlet-mapping>
         <servlet-name>AddCleaningLogic</servlet-name>
         <url-pattern>/addCleaningLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RemoveCleaningLogic</servlet-name>
+        <servlet-class>logic.RemoveCleaning</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveCleaningLogic</servlet-name>
+        <url-pattern>/removeCleaningLogic</url-pattern>
     </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--
