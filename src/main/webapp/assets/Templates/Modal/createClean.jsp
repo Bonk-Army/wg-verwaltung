@@ -22,7 +22,7 @@
             <div class="modal-body">
                 Neue Aufgabe eingeben
             </div>
-            <form action="addFinancialEntryLogic" method="POST">
+            <form action="addCleaningLogic" method="POST">
                 <label for="exercise" class="sr-only">Aufgabe</label>
                 <input id="exercise" class="form-control" placeholder="Aufgabe" name="taskname" type="text" required>
                 <div class="modal-footer">

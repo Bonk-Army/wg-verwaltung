@@ -20,3 +20,13 @@
     height: 48px;
     display: inline;
 }
+
+select.form-control, select :first-child {
+    background-color: #272525;
+    color: white;
+}
+
+select.updated {
+    background-color: white;
+    color: #272525;
+}
