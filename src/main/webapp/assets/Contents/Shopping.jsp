@@ -11,28 +11,17 @@
     <table class="table">
         <thead class="thead-dark">
         <tr>
-            <th/>
             <th scope="col">Artikel</th>
             <th scope="col">Menge</th>
             <th scope="col">zu kaufen bis</th>
             <th scope="col">gew&uuml;nscht von</th>
             <th scope="col">Check</th>
+            <th/>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${shoppingBean.requests}" var="article">
         <tr class="${article.colorClass}">
-            <td>
-                <form action="removeShoppingRequestLogic" method="POST">
-                    <input type="text" name="requestId" hidden="hidden" value="${article.requestId}">
-
-                    <button title="ToDo remove check" onclick="removeArticle(${article.requestId})"
-                            class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
-                            data-target="#removeModal" ${article.buttonHideStatus}>&times;
-                    </button>
-                    <button title="Shopping remove check" id="remove${article.requestId}" type="submit" style="display: none;"></button>
-                </form>
-            </td>
             <td title="erstellt am ${article.dateCreated} von ${article.createdBy}">${article.article}</td>
             <td>${article.amount}</td>
             <td>${article.dateDue}</td>
@@ -44,6 +33,17 @@
                             data-toggle="modal" data-target="#todoModal" ${article.buttonHideStatus}>erledigt?
                     </button>
                     <button title="Shopping check" id="${article.requestId}" type="submit" style="display: none;"></button>
+                </form>
+            </td>
+            <td>
+                <form action="removeShoppingRequestLogic" method="POST">
+                    <input type="text" name="requestId" hidden="hidden" value="${article.requestId}">
+
+                    <button title="ToDo remove check" onclick="removeArticle(${article.requestId})"
+                            class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
+                            data-target="#removeModal" ${article.buttonHideStatus}>&times;
+                    </button>
+                    <button title="Shopping remove check" id="remove${article.requestId}" type="submit" style="display: none;"></button>
                 </form>
             </td>
         </tr>

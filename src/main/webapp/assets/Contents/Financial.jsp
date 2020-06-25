@@ -26,16 +26,20 @@
     <table class="table">
         <thead class="thead-dark">
         <tr>
-            <th/>
             <th scope="col">Wann?</th>
             <th scope="col">Grund</th>
             <th scope="col">Betrag</th>
             <th scope="col">von wem?</th>
+            <th/>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${financialBean.getEntries(20)}" var="expense">
         <tr class="${expense.colorClass}">
+            <td>${expense.dateCreated}</td>
+            <td>${expense.reason}</td>
+            <td>${expense.value}&euro;</td>
+            <td>${expense.createdBy}</td>
             <td>
                 <form action="removeFinancialEntryLogic" method="POST">
                     <input type="text" name="entryId" hidden="hidden" value="${expense.entryId}">
@@ -47,10 +51,6 @@
                     <button title="Expense remove check" id="remove${expense.entryId}" class="remove" type="submit" style="display: none;"></button>
                 </form>
             </td>
-            <td>${expense.dateCreated}</td>
-            <td>${expense.reason}</td>
-            <td>${expense.value}&euro;</td>
-            <td>${expense.createdBy}</td>
         </tr>
         </c:forEach>
         </tbody>

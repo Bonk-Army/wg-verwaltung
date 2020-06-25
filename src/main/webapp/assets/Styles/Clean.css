@@ -21,6 +21,15 @@
     display: inline;
 }
 
+th:not(:nth-child(1)){
+    width: 12.5em;
+}
+
+th:last-child, td:last-child{
+    width: 6.25em;
+}
+
+
 select.form-control, select :first-child {
     background-color: #272525;
     color: white;
