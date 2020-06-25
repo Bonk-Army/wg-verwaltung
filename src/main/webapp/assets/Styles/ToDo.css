@@ -50,6 +50,19 @@ tr.late {
     margin-bottom: 10px;
     font-size: 16px;
 }
+
+.form-control.date{
+    display: inline;
+    box-sizing: unset;
+    width: 50%;
+}
+
+.form-control.time{
+    display: inline;
+    box-sizing: unset;
+    width: 40%;
+}
+
 .form-signin .form-control:focus {
     z-index: 2;
 }
