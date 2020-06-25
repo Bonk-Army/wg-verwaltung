@@ -27,6 +27,7 @@
         |__ /removeLogic                | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
         |__ /removeShoppingRequestLogic | Servlet : RemoveShoppingRequest   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /addShoppingRequestLogic    | Servlet : AddShoppingRequest      | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /setBoughtLogic             | Servlet : SetArticleBought        | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @PM | Initial
         |__ /addFinancialEntryLogic     | Servlet : AddFinancialEntry       | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /removeFinancialEntryLogic  | Servlet : RemoveFinancialEntry    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /changePasswordLogic        | Servlet : ChangePassword          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
@@ -306,6 +307,14 @@
     <servlet-mapping>
         <servlet-name>AddShoppingRequestLogic</servlet-name>
         <url-pattern>/addShoppingRequestLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SetArticleBought</servlet-name>
+        <servlet-class>logic.SetBoughtShopping</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SetArticleBought</servlet-name>
+        <url-pattern>/setBoughtLogic</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>AddFinancialEntryLogic</servlet-name>

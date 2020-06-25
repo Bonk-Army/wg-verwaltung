@@ -38,7 +38,7 @@
             <td>${article.dateDue}</td>
             <td>${article.requestedBy}</td>
             <td>
-                <form action="removeShoppingRequestLogic" method="POST">
+                <form action="setBoughtLogic" method="POST">
                     <input type="text" name="requestId" hidden="hidden" value="${article.requestId}">
                     <button title="Shopping check" onclick="boughtArticle(${article.requestId})" class="btn btn-lg btn-primary btn-block" type="button"
                             data-toggle="modal" data-target="#todoModal" ${article.buttonHideStatus}>erledigt?
