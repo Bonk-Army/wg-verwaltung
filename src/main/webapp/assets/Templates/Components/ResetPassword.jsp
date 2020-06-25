@@ -9,6 +9,6 @@
         <input type="text" id="key" name="key" hidden="hidden" value="<%= request.getParameter("key") %>">
         <input type="text" id="username" name="username" hidden="hidden" value="<%= request.getParameter("uname") %>">
         <button id="visibleResetPasswordButton" class="btn btn-lg btn-primary btn-block" type="button">Passwort &auml;ndern</button>
-        <button type="submit" id="resetPasswordButton" hidden="hidden"></button>
+        <button type="submit" id="resetPasswordButton" style="display: none;"></button>
     </form>
 </div>

@@ -46,7 +46,7 @@
 
                     <button title="Expense remove check" onclick="removeExpense(${expense.entryId})"
                             class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
-                            data-target="#removeModal" ${expense.buttonHideStatus}>&times;
+                            data-target="#removeModal">&times;
                     </button>
                     <button title="Expense remove check" id="remove${expense.entryId}" class="remove" type="submit" style="display: none;"></button>
                 </form>
