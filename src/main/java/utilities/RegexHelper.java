@@ -6,7 +6,7 @@ package utilities;
 public class RegexHelper {
     /**
      * Checks if the entered String matches the rules we have for usernames.
-     * Not allowed are whitespaces and ;?&%/\'<></> (; because we dont want SQLi)
+     * Not allowed are whitespaces and ;?&%/\'<></> (; because we dont want SQLi / XSS)
      *
      * @param toCheck The String to be matched
      * @return If the string is allowed
@@ -17,7 +17,7 @@ public class RegexHelper {
 
     /**
      * Checks if the entered String matches the rules we have for usernames.
-     * Not allowed are ;\' (; because we dont want SQLi)
+     * Not allowed are ;\' (; because we dont want SQLi / XSS)
      *
      * @param toCheck The Text to be matched
      * @return If the text is allowed
