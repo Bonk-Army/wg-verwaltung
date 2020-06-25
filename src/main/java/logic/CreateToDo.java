@@ -47,17 +47,18 @@ public class CreateToDo extends HttpServlet {
         String task = request.getParameter("todo");
         String assignee = request.getParameter("username");
         String dueDateString = request.getParameter("deadline");
+        dueDateString.replace('T', ' ');
 
         String userId = sessionBean.getUserId();
 
         String assigneeId = "";
-        if(RegexHelper.checkString(assignee)) {
+        if (RegexHelper.checkString(assignee)) {
             assigneeId = loginBean.getUserId(assignee);
         }
         String wgId = toDoBean.getWgIdByUserId(userId);
         Date dueDate = null;
         try {
-            dueDate = new SimpleDateFormat("yyyy-MM-dd").parse(dueDateString);
+            dueDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dueDateString);
         } catch (ParseException e) {
             e.printStackTrace();
         }

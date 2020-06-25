@@ -81,7 +81,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 c.add(Calendar.DATE, 3);
                 Date threeDaysDate = c.getTime();
 
-                SimpleDateFormat fancyFormatter = new SimpleDateFormat("dd. MMMM yyyy HH.mm");
+                SimpleDateFormat fancyFormatter = new SimpleDateFormat("dd. MMMM yyyy HH:mm");
                 currentTodo.put("dateDue", fancyFormatter.format(dateDue));
                 currentTodo.put("dateCreated", fancyFormatter.format(dateCreated));
 
