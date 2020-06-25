@@ -17,6 +17,14 @@ body {
     text-align: center;
 }
 
+th:not(:nth-child(1)){
+    width: 12.5em;
+}
+
+th:last-child, td:last-child{
+    width: 6.25em;
+}
+
 tr.done {
     background-color: #71bf71;
 }
