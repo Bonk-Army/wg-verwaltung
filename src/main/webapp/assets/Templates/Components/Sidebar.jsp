@@ -22,7 +22,10 @@
             </a>
             <ul class="collapse list-unstyled" id="pageSubmenu">
                 <li>
-                    <a href="/todo">ToDo 1</a>
+                    <a href="/todo">Alle ToDo's</a>
+                </li>
+                <li>
+                    <a href="/mytodo">Meine ToDo's</a>
                 </li>
             </ul>
         </li>

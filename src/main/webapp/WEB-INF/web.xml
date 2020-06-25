@@ -133,6 +133,7 @@
         <servlet-name>HomeTest</servlet-name>
         <url-pattern>/home</url-pattern>
         <url-pattern>/todo</url-pattern>
+        <url-pattern>/mytodo</url-pattern>
         <url-pattern>/wgverwaltung</url-pattern>
         <url-pattern>/financial</url-pattern>
         <url-pattern>/clean</url-pattern>
@@ -174,6 +175,14 @@
     <servlet-mapping>
         <servlet-name>ToDo</servlet-name>
         <url-pattern>/todoPage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MyToDo</servlet-name>
+        <jsp-file>/Pages/Protected/MyToDo.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyToDo</servlet-name>
+        <url-pattern>/mytodoPage</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Cleaning</servlet-name>
