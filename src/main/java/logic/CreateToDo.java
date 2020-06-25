@@ -59,7 +59,7 @@ public class CreateToDo extends HttpServlet {
         String wgId = toDoBean.getWgIdByUserId(userId);
         Date dueDate = null;
         try {
-            dueDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dueDateString);
+            dueDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dueDateString);
         } catch (ParseException e) {
             e.printStackTrace();
         }
