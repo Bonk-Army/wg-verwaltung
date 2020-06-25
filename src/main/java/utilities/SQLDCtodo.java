@@ -1,5 +1,7 @@
 package utilities;
 
+import jdk.jshell.spi.ExecutionControl;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -160,8 +162,16 @@ public class SQLDCtodo extends SQLDatabaseConnection {
      * WGV-115
      * Deactivates done ToDos older than 30 days
      */
-    public static void deactivateOldToDos() {
-        executeQuery("UPDATE todo SET isActive=0 WHERE isDone=1 AND dateDue < DATE_ADD(CURDATE(), INTERVAL -30 DAY);");
+    public static boolean deactivateOldToDos() {
+        try {
+            executeQuery("UPDATE todo SET isActive=0 WHERE isDone=1 AND dateDue < DATE_ADD(CURDATE(), INTERVAL -30 DAY);");
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     /**
@@ -172,7 +182,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
      */
     public static String getWgIdOfTodo(String todoId) {
         try {
-            ResultSet rs = executeQuery(("SELECT wgId FROM todo WHERE uniqueID = " + Integer.valueOf(todoId)));
+            ResultSet rs = executeQuery(("SELECT wgId FROM todo WHERE uniqueID=" + Integer.valueOf(todoId)));
 
             while (rs.next()) {
                 return String.valueOf(rs.getInt(1));
