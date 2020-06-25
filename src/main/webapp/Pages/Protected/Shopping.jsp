@@ -13,7 +13,8 @@
     <%@include file="../../assets/Templates/Imports/Bootstrap.jsp" %>
 
     <title>Einkaufsliste</title>
-
+    
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Shopping.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
 </head>

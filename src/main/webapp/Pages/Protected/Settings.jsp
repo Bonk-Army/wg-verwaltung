@@ -14,6 +14,7 @@
 
     <title>Einstellungen</title>
 
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Settings.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Password.css">

@@ -14,6 +14,7 @@
 
     <title>Einloggen</title>
 
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Login.css">
 </head>
 <body>

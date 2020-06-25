@@ -1,26 +1,3 @@
-html,
-body {
-    height: 100%;
-    width: 100%;
-}
-
-body {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #272525;
-    color: aliceblue;
-    justify-content: center;
-}
-
-a, a:hover{
-    color: aliceblue;
-    text-decoration: none
-}
-
 .form-signin, #backButton{
     width: 100%;
     max-width: 330px;
