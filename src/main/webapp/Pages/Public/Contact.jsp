@@ -9,10 +9,11 @@
 
     <title>Contact</title>
 
-    <link rel="stylesheet" type="text/css" href="./assets/Styles/Home.css">
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
     <c:if test="${sessionBean.loggedIn}">
         <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
     </c:if>
+
 </head>
 <body>
 <%@include file="../../assets/Templates/Components/Contact.jsp" %>

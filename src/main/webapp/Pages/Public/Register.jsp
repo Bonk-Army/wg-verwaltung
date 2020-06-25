@@ -14,8 +14,9 @@
 
     <title>Registrierung</title>
 
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Login.css">
-    <link rel="stylesheet" type="text/css" href="./assets/Styles/password.css">
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Password.css">
 
     <script><%@include file="../../assets/Scripts/Register.js" %></script>
     <script><%@include file="../../assets/Scripts/Password.js" %></script>

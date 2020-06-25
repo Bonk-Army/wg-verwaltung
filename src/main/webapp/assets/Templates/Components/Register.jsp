@@ -1,4 +1,4 @@
-<div class="text-center">
+<div id="content" class="text-center">
     <img src="/assets/Images/lama.png" style="height: 220px">
     <form class="form-signin" method="POST" action="loginLogic">
         <h1 class="h3 mb-3 font-weight-normal">Bitte registriere dich</h1>
@@ -34,7 +34,7 @@
         <hr>
     </div>
     <div class="text-center">
-        <a href="./contact">Kontakt</a>  &emsp; <a href="./faq">FAQ's </a>  &emsp; <a href="./impressum">Impressum </a><br><br>
+        <a href="./contact">Kontakt</a>  &emsp; <a href="./faq">FAQ's </a>  &emsp; <a href="./impressum">Impressum </a>
     </div>
     <div class="center">
         <hr>

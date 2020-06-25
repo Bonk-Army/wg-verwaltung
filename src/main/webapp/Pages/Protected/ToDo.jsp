@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: patrick
+  User: Lama
   Date: 14.06.20
   Time: 10:29
   To change this template use File | Settings | File Templates.
@@ -14,6 +14,7 @@
 
     <title>ToDo</title>
 
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/ToDo.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
 </head>

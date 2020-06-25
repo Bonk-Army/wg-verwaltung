@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Fehler</title>
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
 </head>
 <body>
 <h1>Fehler</h1>

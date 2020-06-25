@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: krissi
+  User: Lama
   Date: 16.06.2020
   Time: 14:51
   To change this template use File | Settings | File Templates.
@@ -14,6 +14,7 @@
 
     <title>Finanzielles</title>
 
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Financial.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
 </head>

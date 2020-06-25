@@ -1,0 +1,44 @@
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+/* ---------------------------------------------------
+    MAIN STYLE
+----------------------------------------------------- */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #272525;
+    color: aliceblue;
+    align-items: center;
+    padding: 1.25em;
+}
+
+h2 {
+    font-family: Arial, Verdana;
+    font-weight: 800;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+a, a:hover{
+    color: aliceblue;
+    text-decoration: none
+}
+
+#content{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ---------------------------------------------------
+    MODAL STYLE
+----------------------------------------------------- */
+
+.modal-content {
+    background-color: #272525;
+    color: aliceblue;
+}
+
+.close {
+    color: aliceblue;
+}
