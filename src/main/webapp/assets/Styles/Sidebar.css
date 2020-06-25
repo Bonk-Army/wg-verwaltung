@@ -233,5 +233,6 @@ ul ul a {
     }
     #content {
         margin-left: 7.9375em;
+        max-width: unset;
     }
 }

@@ -1,8 +1,5 @@
-h2 {
-    font-family: Arial, Verdana;
-    font-weight: 800;
-    font-size: 2.5rem;
-    text-transform: uppercase;
+#content{
+    max-width: calc(100% - 31.25em);
 }
 
 .form-control {
@@ -12,11 +9,12 @@ h2 {
     padding: 10px;
     margin-bottom: 10px;
     font-size: 16px;
-    max-width: 500px;
 }
 
-.btn.btn-lg.btn-primary.btn-block {
-    max-width: 500px;
+section {
+    max-width: 43.75em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 label {
@@ -42,4 +40,22 @@ button.join {
 button.join:hover {
     background-color: #0cad09;
     border-color: #0cad09;
+}
+
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 1069px) {
+    #content {
+        margin-left: 15.625em;
+        max-width: unset;
+    }
+
+    section {
+        max-width: 31.25em;
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
