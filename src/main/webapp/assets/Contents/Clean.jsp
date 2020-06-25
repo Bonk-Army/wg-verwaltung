@@ -93,8 +93,7 @@
                                 class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
                                 data-target="#removeModal">&times;
                         </button>
-                        <button title="ToDo remove check" id="remove${clean.general.get(0).taskId}" type="button"
-                                style="display: none;"></button>
+                        <a href="/removeCleaningLogic?taskId=${clean.general.get(0).taskId}" id="remove${clean.general.get(0).taskId}" style="display: none;"></a>
                     </td>
                 </tr>
             </c:forEach>
