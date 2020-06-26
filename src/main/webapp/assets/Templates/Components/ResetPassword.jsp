@@ -1,4 +1,4 @@
-<div class="text-center">
+<div id=content" class="text-center">
     <form method="POST" action="resetComplete" class="form-signin">
         <img src="/assets/Images/lama.png" style="height: 220px">
         <div id="strengthbar"><div id="bar" class="bar0"></div></div>

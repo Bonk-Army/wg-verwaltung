@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: kristin.agne
+  User: Lama
   Date: 20.06.2020
   Time: 23:39
   To change this template use File | Settings | File Templates.
@@ -14,6 +14,7 @@
 
     <title>Putzplan</title>
 
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Clean.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
 </head>

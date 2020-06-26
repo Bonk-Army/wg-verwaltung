@@ -1,30 +1,11 @@
-html,
-body {
-    height: 100%;
-    width: 100%;
-}
-
-body {
-    display: -ms-flexbox;
+body{
     display: flex;
-    -ms-flex-align: center;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #272525;
-    color: aliceblue;
-    justify-content: center;
-}
-
-a, a:hover{
-    color: aliceblue;
-    text-decoration: none
 }
 
 .form-signin, #backButton{
     width: 100%;
-    max-width: 330px;
-    padding: 15px;
+    max-width: 20.625em;
+    padding-top: 0.9375em;
 }
 .form-signin .checkbox {
     font-weight: 400;
@@ -33,9 +14,9 @@ a, a:hover{
     position: relative;
     box-sizing: border-box;
     height: auto;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
+    padding: 0.625em;
+    margin-bottom: 0.625em;
+    font-size: 1em;
 }
 .form-signin .form-control:focus {
     z-index: 2;
@@ -50,13 +31,4 @@ a, a:hover{
 }
 .mt-custom {
     margin-top: 10%;
-}
-
-.modal-content {
-    background-color: #272525;
-    color: aliceblue;
-}
-
-.close {
-    color: aliceblue;
 }
