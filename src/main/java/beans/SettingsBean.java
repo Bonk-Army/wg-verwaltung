@@ -3,6 +3,7 @@ package beans;
 import utilities.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Bean used for the settings page
@@ -111,10 +112,16 @@ public class SettingsBean {
      */
     public ErrorCodes setWgId(String userId, String accessKey) {
         if (RegexHelper.checkString(accessKey)) {
-            String wgId = SQLDCwgs.getWgId(accessKey);
-            if (!wgId.equals("")) {
-                return SQLDCusers.setWgId(wgId, userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            List<String> allAccessKeys = SQLDCwgs.getAccessKeyList();
+            if (allAccessKeys.contains(accessKey)) {
+                String wgId = SQLDCwgs.getWgId(accessKey);
+                if (!wgId.equals("")) {
+                    return SQLDCusers.setWgId(wgId, userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                }
+            } else {
+                return ErrorCodes.WRONGENTRY;
             }
+
         }
         return ErrorCodes.WRONGENTRY;
     }
