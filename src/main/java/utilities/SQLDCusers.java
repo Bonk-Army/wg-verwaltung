@@ -42,7 +42,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
      */
     public static boolean createUser(String username, String email, String pwhash, String pwsalt, String verificationCode, String firstName, String lastName, String cookiePostfix) {
         try {
-            Date registrationDate = new Date();
+            Date registrationDate = DateFormatter.getCurrentDateTime();
             // Convert dates to java.sql.Timestamp to save them to SQL
             Timestamp registrationStamp = new Timestamp(registrationDate.getTime());
             ResultSet rs = executeQuery(("INSERT INTO users (username, email, pwhash, pwsalt, verificationCode, firstName, lastName, cookiePostfix, registrationDate)"
@@ -727,7 +727,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
      */
     public static boolean setLastLogin(String userId) {
         try {
-            Date now = new Date();
+            Date now = DateFormatter.getCurrentDateTime();
             Timestamp nowStamp = new Timestamp(now.getTime());
             executeQuery(("UPDATE users SET lastLogin='" + nowStamp + "' WHERE uniqueID = " + Integer.valueOf(userId)));
 

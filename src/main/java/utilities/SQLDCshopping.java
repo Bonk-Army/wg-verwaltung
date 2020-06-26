@@ -37,7 +37,7 @@ public class SQLDCshopping extends SQLDatabaseConnection {
      */
     public static boolean addArticleRequest(String article, String amount, String createdBy, String requestedBy, Date dateDue, String wgId) {
         try {
-            Date dateCreated = new Date();
+            Date dateCreated = DateFormatter.getCurrentDateTime();
             Timestamp createdStamp = new Timestamp(dateCreated.getTime());
             Timestamp dueStamp = new Timestamp(dateDue.getTime());
 
@@ -119,7 +119,7 @@ public class SQLDCshopping extends SQLDatabaseConnection {
                 currentArticle.put("createdBy", SQLDCusers.getNameString(createdBy));
 
                 // Color the requests based on their priority
-                Date currentDate = new Date();
+                Date currentDate = DateFormatter.getCurrentDateTime();
                 Date dateDue = rs.getDate(5);
                 Calendar c = Calendar.getInstance();
                 c.setTime(currentDate);

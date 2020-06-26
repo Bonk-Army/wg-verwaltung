@@ -35,7 +35,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
      */
     public static boolean createTodo(String task, String assignedId, String wgId, Date dateDue, String createdById) {
         try {
-            Date dateCreated = new Date();
+            Date dateCreated = DateFormatter.getCurrentDateTime();
             // Convert dates to java.sql.Timestamp to save them to SQL
             Timestamp createdStamp = new Timestamp(dateCreated.getTime());
             Timestamp dueStamp = new Timestamp(dateDue.getTime());
@@ -75,7 +75,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 // Dates for colors
                 Date dateDue = rs.getDate(4);
                 Date dateCreated = rs.getDate(3);
-                Date currentDate = new Date();
+                Date currentDate = DateFormatter.getCurrentDateTime();
                 Calendar c = Calendar.getInstance();
                 c.setTime(currentDate);
                 c.add(Calendar.DATE, 3);
@@ -330,7 +330,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 // Dates for colors
                 Date dateDue = rs.getDate(4);
                 Date dateCreated = rs.getDate(3);
-                Date currentDate = new Date();
+                Date currentDate = DateFormatter.getCurrentDateTime();
                 Calendar c = Calendar.getInstance();
                 c.setTime(currentDate);
                 c.add(Calendar.DATE, 3);
