@@ -1,10 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
+<jsp:useBean id="shoppingBean" class="beans.ShoppingBean" scope="request"/>
+<jsp:setProperty name="shoppingBean" property="userId" value="${sessionBean.userId}"/>
+<jsp:setProperty name="shoppingBean" property="username" value="${sessionBean.username}"/>
+<jsp:setProperty name="shoppingBean" property="wgId" value="${sessionBean.wgId}"/>
 <div id="content">
-    <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
-    <jsp:useBean id="shoppingBean" class="beans.ShoppingBean" scope="request"/>
-    <jsp:setProperty name="shoppingBean" property="userId" value="${sessionBean.userId}"/>
-    <jsp:setProperty name="shoppingBean" property="username" value="${sessionBean.username}"/>
-    <jsp:setProperty name="shoppingBean" property="wgId" value="${sessionBean.wgId}"/>
+    <h2 class="header">Einkaufsliste der WG ${sessionBean.wgName} &#129433;</h2>
     <button title="Artikel hinzuf&uuml;gen" id="addShopping" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal"
             data-target="#exampleModal">+
     </button>

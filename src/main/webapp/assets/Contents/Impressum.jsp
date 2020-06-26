@@ -1,5 +1,5 @@
 <div id="content">
-    <div class='impressum'><h2>Impressum</h2>
+    <div class='impressum'><h2 class="header">Impressum</h2>
         <p>Angaben gem&auml;&szlig; &sect; 5 TMG</p>
         <p>Patrick M&uuml;ller<br>
             Schachtstr. 8<br>
