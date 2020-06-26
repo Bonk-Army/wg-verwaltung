@@ -30,15 +30,13 @@
                 </form>
             </td>
             <td>
-                <form action="removeLogic" method="POST">
-                    <input type="text" name="todoId" hidden="hidden" value="${todo.todoId}">
+                <input type="text" name="todoId" hidden="hidden" value="${todo.todoId}">
 
-                    <button title="ToDo remove check" onclick="removeTodo(${todo.todoId})"
-                            class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
-                            data-target="#removeModal" ${todo.buttonHideStatus}>&times;
-                    </button>
-                    <button title="ToDo remove check" id="remove${todo.todoId}" type="submit" style="display: none;"></button>
-                </form>
+                <button title="ToDo remove check" onclick="removeTodo(${todo.todoId})"
+                        class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
+                        data-target="#removeModal" ${todo.buttonHideStatus}>&times;
+                </button>
+                <a href="/removeTodoLogic?todoId=${todo.todoId}" id="remove${todo.todoId}" style="display: none;"></a>
             </td>
         </tr>
         </tbody>

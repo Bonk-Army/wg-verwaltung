@@ -41,15 +41,15 @@
             <td>${expense.value}&euro;</td>
             <td>${expense.createdBy}</td>
             <td>
-                <form action="removeFinancialEntryLogic" method="POST">
+
                     <input type="text" name="entryId" hidden="hidden" value="${expense.entryId}">
 
                     <button title="Expense remove check" onclick="removeExpense(${expense.entryId})"
                             class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
                             data-target="#removeModal">&times;
                     </button>
-                    <button title="Expense remove check" id="remove${expense.entryId}" class="remove" type="submit" style="display: none;"></button>
-                </form>
+                    <a href="/removeFinancialEntryLogic?entryId=${expense.entryId}" id="remove${expense.entryId}" style="display: none;"></a>
+
             </td>
         </tr>
         </c:forEach>
