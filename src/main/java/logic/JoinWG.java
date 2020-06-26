@@ -60,7 +60,9 @@ public class JoinWG extends HttpServlet {
                     break;
                 case WRONGENTRY:
                     //Show wrongentry
-                    request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
+                    request.setAttribute("header", "Testheader");
+                    request.setAttribute("message", "TestMessage");
+                    request.getServletContext().getRequestDispatcher("/error").forward(request, response);
                     break;
             }
         }
