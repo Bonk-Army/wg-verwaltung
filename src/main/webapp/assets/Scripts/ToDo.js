@@ -1,7 +1,7 @@
 //Send done POST if you click "ok" in modal
 function doneTodo(id) {
     $( "#doneToDo" ).click(function() {
-        $('#'+id).click();
+        document.querySelector('#done'+id).click();
     });
 }
 

@@ -21,13 +21,11 @@
             <td>${todo.dateDue}</td>
             <td>${todo.doneMessage}</td>
             <td>
-                <form action="setDoneLogic" method="POST">
-                    <input type="text" name="todoId" hidden="hidden" value="${todo.todoId}">
-                    <button title="ToDo check" onclick="doneTodo(${todo.todoId})" class="btn btn-lg btn-primary btn-block" type="button"
-                            data-toggle="modal" data-target="#doneModal" ${todo.buttonHideStatus}>erledigt?
-                    </button>
-                    <button title="ToDo check" id="${todo.todoId}" type="submit" style="display: none;"></button>
-                </form>
+                <input type="text" name="todoId" hidden="hidden" value="${todo.todoId}">
+                <button title="ToDo check" onclick="doneTodo(${todo.todoId})" class="btn btn-lg btn-primary btn-block" type="button"
+                        data-toggle="modal" data-target="#doneModal" ${todo.buttonHideStatus}>erledigt?
+                </button>
+                <a href="/setDoneLogic?todoId=${todo.todoId}" id="done${todo.todoId}" style="display: none;"></a>
             </td>
             <td>
                 <input type="text" name="todoId" hidden="hidden" value="${todo.todoId}">

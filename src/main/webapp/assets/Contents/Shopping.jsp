@@ -37,7 +37,7 @@
                         type="button"
                         data-toggle="modal" data-target="#todoModal" ${article.buttonHideStatus}>erledigt?
                 </button>
-                <a href="/setBoughtLogic?requestId=${article.requestId}" id="done${article.requestId}"
+                <a href="/setBoughtLogic?requestId=${article.requestId}" id="bought${article.requestId}"
                    style="display: none;"></a>
             </td>
             <td>
