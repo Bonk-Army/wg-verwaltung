@@ -35,23 +35,22 @@
         </thead>
         <tbody>
         <c:forEach items="${financialBean.getEntries(20)}" var="expense">
-        <tr class="${expense.colorClass}">
-            <td>${expense.dateCreated}</td>
-            <td>${expense.reason}</td>
-            <td>${expense.value}&euro;</td>
-            <td>${expense.createdBy}</td>
-            <td>
-
+            <tr class="${expense.colorClass}">
+                <td>${expense.dateCreated}</td>
+                <td>${expense.reason}</td>
+                <td>${expense.value}&euro;</td>
+                <td>${expense.createdBy}</td>
+                <td>
                     <input type="text" name="entryId" hidden="hidden" value="${expense.entryId}">
 
                     <button title="Expense remove check" onclick="removeExpense(${expense.entryId})"
                             class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
                             data-target="#removeModal">&times;
                     </button>
-                    <a href="/removeFinancialEntryLogic?entryId=${expense.entryId}" id="remove${expense.entryId}" style="display: none;"></a>
-
-            </td>
-        </tr>
+                    <a href="/removeFinancialEntryLogic?entryId=${expense.entryId}" id="remove${expense.entryId}"
+                       style="display: none;"></a>
+                </td>
+            </tr>
         </c:forEach>
         </tbody>
     </table>
