@@ -465,6 +465,14 @@
         <servlet-name>ResponseTryAgain</servlet-name>
         <url-pattern>/responseTryAgain</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Status</servlet-name>
+        <jsp-file>/Pages/Response/Status.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Status</servlet-name>
+        <url-pattern>/status</url-pattern>
+    </servlet-mapping>
 
     <!-- Error Pages -->
     <error-page>
