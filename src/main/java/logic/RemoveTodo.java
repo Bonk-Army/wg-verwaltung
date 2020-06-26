@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Remove Todo servlet that is called when the users tries to delete a todo from his wg
  */
-public class RemoveTodo extends HttpServlet{
+public class RemoveTodo extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     public RemoveTodo() {
@@ -29,17 +29,23 @@ public class RemoveTodo extends HttpServlet{
         String todoId = request.getParameter("todoId");
         String wgId = sessionBean.getWgId();
 
+        boolean isMyTodoPage = Boolean.parseBoolean(request.getParameter("isMyTodo"));
+
         ErrorCodes status = toDoBean.removeTodo(todoId, wgId);
 
         switch (status) {
-        case SUCCESS:
-            //Show success
-            response.sendRedirect("/todo");
-            break;
-        case FAILURE:
-            //Show failure
-            request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-            break;
+            case SUCCESS:
+                //Show success
+                if (isMyTodoPage) {
+                    response.sendRedirect("/mytodo");
+                } else {
+                    response.sendRedirect("/todo");
+                }
+                break;
+            case FAILURE:
+                //Show failure
+                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+                break;
         }
     }
 
