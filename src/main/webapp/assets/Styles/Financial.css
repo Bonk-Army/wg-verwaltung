@@ -9,11 +9,16 @@
     text-align: center;
 }
 
-th:not(:nth-child(2)){
+.table.overview {
+    table-layout: fixed;
+    width: unset;
+}
+
+th:not(:nth-child(2)) {
     width: 12.5em;
 }
 
-th:last-child, td:last-child{
+th:last-child, td:last-child {
     width: 6.25em;
 }
 
