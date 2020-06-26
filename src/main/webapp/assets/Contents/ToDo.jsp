@@ -5,6 +5,7 @@
 <jsp:setProperty name="todoBean" property="wgId" value="${sessionBean.wgId}"/>
 <div id="content">
     <h2 class="header">Alle ToDos in der WG ${sessionBean.wgName} &#129433;</h2>
+    <h5>Deine WG hat noch ${todoBean.openTodosWg} offene ToDos, davon sind ${todoBean.openTodosUser} dir zugeordnet.</h5>
     <button title="ToDo hinzuf&uuml;gen" id="addToDo" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal"
             data-target="#createToDo">+
     </button>

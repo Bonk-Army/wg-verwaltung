@@ -18,7 +18,7 @@
     <br>
     <hr>
     <br>
-    <h4>Offene ToDo's in deiner WG: ${overview.openTodosWg}</h4>
+    <h4>Offene ToDos in deiner WG: ${overview.openTodosWg}</h4>
     <h5>davon dir zugeordnet: ${overview.openTodosUser}</h5>
 
     <canvas id="myChartTodo" width="auto" height="40"></canvas>
