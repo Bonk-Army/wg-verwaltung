@@ -36,28 +36,33 @@ public class JoinWG extends HttpServlet {
         SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
-        String wgCode = request.getParameter("wgcode");
+        // If user is not logged in, redirect him to the login page
+        if (sessionBean == null) {
+            response.sendRedirect("/");
+        } else {
+            String wgCode = request.getParameter("wgcode");
 
-        String userId = sessionBean.getUserId();
+            String userId = sessionBean.getUserId();
 
-        ErrorCodes status = settingsBean.setWgId(userId, wgCode);
+            ErrorCodes status = settingsBean.setWgId(userId, wgCode);
 
-        switch (status) {
-            case SUCCESS:
-                //Show success
-                // Change wgId and wgName in the Session Bean
-                sessionBean.setWgId(settingsBean.getWgIdFromUserId(userId));
-                sessionBean.setWgName(settingsBean.getWgNameFromUserID(userId));
-                response.sendRedirect("/settings");
-                break;
-            case FAILURE:
-                //Show failure
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-                break;
-            case WRONGENTRY:
-                //Show wrongentry
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
-                break;
+            switch (status) {
+                case SUCCESS:
+                    //Show success
+                    // Change wgId and wgName in the Session Bean
+                    sessionBean.setWgId(settingsBean.getWgIdFromUserId(userId));
+                    sessionBean.setWgName(settingsBean.getWgNameFromUserID(userId));
+                    response.sendRedirect("/settings");
+                    break;
+                case FAILURE:
+                    //Show failure
+                    request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+                    break;
+                case WRONGENTRY:
+                    //Show wrongentry
+                    request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
+                    break;
+            }
         }
     }
 
