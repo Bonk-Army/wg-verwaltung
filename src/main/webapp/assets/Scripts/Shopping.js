@@ -1,7 +1,7 @@
 //Send  bought POST if you click "ok" in modal
 function boughtArticle(id) {
     $( "#boughtArticle" ).click(function() {
-        document.querySelector('#done'+id).click();
+        document.querySelector('#bought'+id).click();
     });
 }
 

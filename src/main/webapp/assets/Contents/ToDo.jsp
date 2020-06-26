@@ -10,38 +10,42 @@
     <table class="table">
         <thead class="thead-dark">
         <tr>
+            <th scope="col"/>
             <th scope="col">Aufgabe</th>
             <th scope="col">zu erledigen bis</th>
             <th scope="col">wird erledigt von</th>
             <th scope="col">Erledigt?</th>
             <th scope="col">Check</th>
-            <th/>
+            <th scope="col"/>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${todoBean.todos}" var="todo">
         <tr class="${todo.colorClass}">
-            <td title="erstellt am ${todo.dateCreated} von ${todo.creator}">${todo.task}</td>
+            <td>
+                <a class="info" data-toggle="popover" data-trigger="hover" data-placement="right"
+                   data-content="Dieses ToDo wurde am ${todo.dateCreated} von ${todo.creator} hinzugef&uuml;gt."
+                   data-original-title="ToDo Info"><i class="fas fa-info-circle"></i></a>
+            </td>
+            <td>${todo.task}</td>
             <td>${todo.dateDue}</td>
             <td>${todo.assignee}</td>
             <td>${todo.doneMessage}</td>
             <td>
-                <form action="setDoneLogic" method="POST">
-                    <input type="text" name="todoId" hidden="hidden" value="${todo.todoId}">
-                    <button title="ToDo check" onclick="doneTodo(${todo.todoId})" class="btn btn-lg btn-primary btn-block" type="button"
-                            data-toggle="modal" data-target="#doneModal" ${todo.buttonHideStatus}>erledigt?
-                    </button>
-                    <button title="ToDo check" id="${todo.todoId}" type="submit" style="display: none;"></button>
-                </form>
+                <input type="text" name="todoId" hidden="hidden" value="${todo.todoId}">
+                <button title="ToDo check" onclick="doneTodo(${todo.todoId})" class="btn btn-lg btn-primary btn-block" type="button"
+                        data-toggle="modal" data-target="#doneModal" ${todo.buttonHideStatus}>erledigt?
+                </button>
+                <a href="/setDoneLogic?todoId=${todo.todoId}" id="done${todo.todoId}" style="display: none;"></a>
             </td>
             <td>
-                    <input type="text" name="todoId" hidden="hidden" value="${todo.todoId}">
+                <input type="text" name="todoId" hidden="hidden" value="${todo.todoId}">
 
-                    <button title="ToDo remove check" onclick="removeTodo(${todo.todoId})"
-                            class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
-                            data-target="#removeModal" ${todo.buttonHideStatus}>&times;
-                    </button>
-                    <a href="/removeTodoLogic?todoId=${todo.todoId}" id="remove${todo.todoId}" style="display: none;"></a>
+                <button title="ToDo remove check" onclick="removeTodo(${todo.todoId})"
+                        class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
+                        data-target="#removeModal" ${todo.buttonHideStatus}>&times;
+                </button>
+                <a href="/removeTodoLogic?todoId=${todo.todoId}" id="remove${todo.todoId}" style="display: none;"></a>
             </td>
         </tr>
         </tbody>
