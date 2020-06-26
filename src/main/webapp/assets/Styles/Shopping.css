@@ -1,3 +1,7 @@
+/* ---------------------------------------------------
+    TABLE STYLE
+----------------------------------------------------- */
+
 .table{
     color: aliceblue;
     margin-left: auto;
@@ -28,6 +32,10 @@ tr.tooLate {
 tr.late {
     background-color: #ffc658;
 }
+
+/* ---------------------------------------------------
+    BUTTON STYLE
+----------------------------------------------------- */
 
 #addShopping, button.remove{
     margin-bottom: 10px;
@@ -66,6 +74,10 @@ tr.late {
 .mt-custom {
     margin-top: 10%;
 }
+
+/* ---------------------------------------------------
+    INFO STYLE
+----------------------------------------------------- */
 
 .popover-header, .popover-body, .arrow:after {
     background-color: #272525;

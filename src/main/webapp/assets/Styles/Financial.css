@@ -1,19 +1,6 @@
-.negative{
-    background-color: #d75a5a;
-}
-
-.positive {
-    background-color: #71bf71;
-}
-
-button.remove {
-    max-width: 62px;
-}
-
-#addArticle {
-    margin-bottom: 10px;
-    max-width: 62px;
-}
+/* ---------------------------------------------------
+    TABLE STYLE
+----------------------------------------------------- */
 
 .table {
     color: aliceblue;
@@ -38,6 +25,26 @@ th:last-child, td:last-child {
     width: 6.25em;
 }
 
+.negative{
+    background-color: #d75a5a;
+}
+
+.positive {
+    background-color: #71bf71;
+}
+
+button.remove {
+    max-width: 62px;
+}
+
+/* ---------------------------------------------------
+    BUTTON STYLE
+----------------------------------------------------- */
+
+#addArticle {
+    margin-bottom: 10px;
+    max-width: 62px;
+}
 
 .form-signin {
     width: 100%;
