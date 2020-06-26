@@ -11,3 +11,5 @@ function removeArticle(id) {
         document.querySelector('#remove'+id).click();
     });
 }
+
+$('[data-toggle="popover"]').popover()

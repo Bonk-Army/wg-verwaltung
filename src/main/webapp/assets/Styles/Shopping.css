@@ -30,7 +30,6 @@ tr.late {
     max-width: 62px;
 }
 
-
 .form-signin {
     width: 100%;
     max-width: 330px;
@@ -62,4 +61,9 @@ tr.late {
 }
 .mt-custom {
     margin-top: 10%;
+}
+
+.popover-header, .popover-body, .arrow:after {
+    background-color: #272525;
+    color: aliceblue;
 }
