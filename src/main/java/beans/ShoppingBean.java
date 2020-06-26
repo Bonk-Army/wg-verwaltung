@@ -77,7 +77,7 @@ public class ShoppingBean {
      */
     public ErrorCodes setRequestInactive(String requestId, String wgId) {
         if (RegexHelper.checkString(requestId)) {
-            String savedWgId = SQLDCtodo.getWgIdOfTodo(requestId);
+            String savedWgId = SQLDCshopping.getWgIdOfRequest(requestId);
 
             if (savedWgId.equals(wgId)) {
                 return SQLDCshopping.setArticleRequestInactive(requestId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
