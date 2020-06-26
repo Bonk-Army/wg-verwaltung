@@ -47,13 +47,12 @@ public class ChangeName extends HttpServlet {
                 // Show success page
                 response.sendRedirect("/settings");
                 break;
-            case WRONGENTRY:
-                // Show wrong email page
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
-                break;
-            case FAILURE:
-                // Show server error page
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+            default:
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }

@@ -33,14 +33,17 @@ public class SetBoughtShopping extends HttpServlet {
         ErrorCodes status = shoppingBean.setRequestDone(requestId, wgId);
 
         switch (status) {
-        case SUCCESS:
-            //Show success
-            response.sendRedirect("/shopping");
-            break;
-        case FAILURE:
-            //Show failure
-            request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-            break;
+            case SUCCESS:
+                //Show success
+                response.sendRedirect("/shopping");
+                break;
+            default:
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
+                break;
         }
     }
 

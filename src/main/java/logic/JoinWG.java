@@ -54,15 +54,12 @@ public class JoinWG extends HttpServlet {
                     sessionBean.setWgName(settingsBean.getWgNameFromUserID(userId));
                     response.sendRedirect("/settings");
                     break;
-                case FAILURE:
+                default:
                     //Show failure
-                    request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-                    break;
-                case WRONGENTRY:
-                    //Show wrongentry
-                    request.setAttribute("header", "Testheader");
-                    request.setAttribute("message", "TestMessage");
-                    request.getServletContext().getRequestDispatcher("/error").forward(request, response);
+                    request.setAttribute("isSadLlama", true);
+                    request.setAttribute("header", status.getHeader());
+                    request.setAttribute("message", status.getMessage());
+                    request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                     break;
             }
         }
