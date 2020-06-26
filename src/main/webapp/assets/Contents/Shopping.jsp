@@ -33,18 +33,14 @@
             <td>${article.dateDue}</td>
             <td>${article.requestedBy}</td>
             <td>
-                <form action="setBoughtLogic" method="POST">
-                    <input type="text" name="requestId" hidden="hidden" value="${article.requestId}">
-                    <button title="Shopping check" onclick="boughtArticle(${article.requestId})" class="btn btn-lg btn-primary btn-block"
-                            type="button"
-                            data-toggle="modal" data-target="#todoModal" ${article.buttonHideStatus}>erledigt?
-                    </button>
-                    <button id="${article.requestId}" type="submit" style="display: none;"></button>
-                </form>
+                <button title="Shopping check" onclick="boughtArticle(${article.requestId})" class="btn btn-lg btn-primary btn-block"
+                        type="button"
+                        data-toggle="modal" data-target="#todoModal" ${article.buttonHideStatus}>erledigt?
+                </button>
+                <a href="/setBoughtLogic?requestId=${article.requestId}" id="done${article.requestId}"
+                   style="display: none;"></a>
             </td>
             <td>
-                <input type="text" name="requestId" hidden="hidden" value="${article.requestId}">
-
                 <button title="ToDo remove check" onclick="removeArticle(${article.requestId})"
                         class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
                         data-target="#removeModal" ${article.buttonHideStatus}>&times;
