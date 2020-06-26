@@ -77,3 +77,8 @@ tr.late {
 .form-control {
     margin-bottom: 10px;
 }
+
+.popover-header, .popover-body, .arrow:after {
+    background-color: #272525;
+    color: aliceblue;
+}

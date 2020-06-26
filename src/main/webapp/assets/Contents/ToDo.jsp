@@ -10,18 +10,24 @@
     <table class="table">
         <thead class="thead-dark">
         <tr>
+            <th scope="col"/>
             <th scope="col">Aufgabe</th>
             <th scope="col">zu erledigen bis</th>
             <th scope="col">wird erledigt von</th>
             <th scope="col">Erledigt?</th>
             <th scope="col">Check</th>
-            <th/>
+            <th scope="col"/>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${todoBean.todos}" var="todo">
         <tr class="${todo.colorClass}">
-            <td title="erstellt am ${todo.dateCreated} von ${todo.creator}">${todo.task}</td>
+            <td>
+                <a class="info" data-toggle="popover" data-trigger="hover" data-placement="right"
+                   data-content="Dieses ToDo wurde am ${todo.dateCreated} von ${todo.creator} hinzugef&uuml;gt."
+                   data-original-title="ToDo Info"><i class="fas fa-info-circle"></i></a>
+            </td>
+            <td>${todo.task}</td>
             <td>${todo.dateDue}</td>
             <td>${todo.assignee}</td>
             <td>${todo.doneMessage}</td>
