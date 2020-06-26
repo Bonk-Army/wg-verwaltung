@@ -137,6 +137,9 @@ public class SQLDCshopping extends SQLDatabaseConnection {
 
                 if (isDone) {
                     colorClass = "done";
+                    currentArticle.put("buttonHideStatus", "hidden=\"hidden\"");
+                } else {
+                    currentArticle.put("buttonHideStatus", "");
                 }
 
 
