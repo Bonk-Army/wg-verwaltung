@@ -11,7 +11,7 @@ import java.sql.ResultSet;
         - uniqueID          (int)
         - isActive          (bool)
         - task              (String)
-        - userId            (int)       (Foreign key to users.uniqueID)
+        - assignedId            (int)       (Foreign key to users.uniqueID)
         - dateCreated       (Date)
         - dateDue           (Date)
         - isDone            (bool)
@@ -27,21 +27,21 @@ public class SQLDCtodo extends SQLDatabaseConnection {
      * Create a to-do in the database
      *
      * @param task        The task of the user
-     * @param userId      The ID of the user that is assigned to this task
+     * @param assignedId  The ID of the user that is assigned to this task
      * @param wgId        The ID of the WG
      * @param dateDue     The date til the task should be done
      * @param createdById The id of the user that created the todo
      * @return If the to-do has been created successfully. If not, the user has to be informed!
      */
-    public static boolean createTodo(String task, String userId, String wgId, Date dateDue, String createdById) {
+    public static boolean createTodo(String task, String assignedId, String wgId, Date dateDue, String createdById) {
         try {
             Date dateCreated = new Date();
             // Convert dates to java.sql.Timestamp to save them to SQL
             Timestamp createdStamp = new Timestamp(dateCreated.getTime());
             Timestamp dueStamp = new Timestamp(dateDue.getTime());
 
-            ResultSet rs = executeQuery(("INSERT INTO todo (task, userId, wgId, dateCreated, dateDue, isDone, createdBy, isActive) "
-                    + "VALUES ('" + task + "', " + Integer.valueOf(userId) + ", " + Integer.valueOf(wgId) + ", '"
+            ResultSet rs = executeQuery(("INSERT INTO todo (task, assignedId, wgId, dateCreated, dateDue, isDone, createdBy, isActive) "
+                    + "VALUES ('" + task + "', " + Integer.valueOf(assignedId) + ", " + Integer.valueOf(wgId) + ", '"
                     + createdStamp + "', '" + dueStamp + "', " + false + ", " + Integer.valueOf(createdById) + ", 1)"));
 
             return true;
@@ -62,7 +62,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
         deactivateOldToDos();
         List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
         try {
-            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE wgId = "
+            ResultSet rs = executeQuery(("SELECT task, assignedId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE wgId = "
                     + Integer.valueOf(wgId) + " AND isActive = 1 ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
                 Map<String, String> currentTodo = new HashMap<String, String>();
@@ -103,9 +103,9 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 }
 
                 // Text formatting
-                String userId = rs.getString(2);
+                String assignedId = rs.getString(2);
                 String creatorId = rs.getString(7);
-                String assignee = SQLDCusers.getUsername(userId);
+                String assignee = SQLDCusers.getUsername(assignedId);
                 String creator = SQLDCusers.getUsername(creatorId);
 
                 currentTodo.put("assignee", SQLDCusers.getNameString(assignee));
@@ -195,14 +195,14 @@ public class SQLDCtodo extends SQLDatabaseConnection {
     /**
      * Return the number of open todos for a user for his current wg
      *
-     * @param userId the userId of the user
-     * @param wgId   The wgId of the current wg
+     * @param assignedId the assignedId of the user
+     * @param wgId       The wgId of the current wg
      * @return The number of open todos
      */
-    public static int getOpenTodosPerUser(String userId, String wgId) {
+    public static int getOpenTodosPerUser(String assignedId, String wgId) {
         try {
-            ResultSet rs = executeQuery(("SELECT COUNT(uniqueID) FROM todo WHERE userId="
-                    + Integer.valueOf(userId) + " AND isDone = 0 AND isActive = 1 AND wgId = " + Integer.valueOf(wgId)));
+            ResultSet rs = executeQuery(("SELECT COUNT(uniqueID) FROM todo WHERE assignedId="
+                    + Integer.valueOf(assignedId) + " AND isDone = 0 AND isActive = 1 AND wgId = " + Integer.valueOf(wgId)));
 
             while (rs.next()) {
                 return rs.getInt(1);
@@ -244,7 +244,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
     public static int countTodo(String wgId) {
         int numberofTodo;
         try {
-            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE wgID=" + wgId + ";");
+            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE wgID=" + Integer.valueOf(wgId) + ";");
             numberofTodo = rs.getInt(1);
             return numberofTodo;
         } catch (Exception e) {
@@ -262,7 +262,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
     public static int countDone(String wgId) {
         int numberofDone;
         try {
-            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE wgID=" + wgId + " AND isDone=1;");
+            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE wgID=" + Integer.valueOf(wgId) + " AND isDone=1;");
             numberofDone = rs.getInt(1);
             return numberofDone;
         } catch (Exception e) {
@@ -274,13 +274,13 @@ public class SQLDCtodo extends SQLDatabaseConnection {
     /**
      * Sends SQL Query in order to count the number of done To-Do's assigned to specific User
      *
-     * @param userId The ID of the user
+     * @param assignedId The ID of the user
      * @return Number of done To-Do's
      */
-    public static int countDoneUser(String userId) {
+    public static int countDoneUser(String assignedId) {
         int numberofDone;
         try {
-            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE userID=" + userId + " AND isDone=1;");
+            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE assignedId=" + Integer.valueOf(assignedId) + " AND isDone=1;");
             numberofDone = rs.getInt(1);
             return numberofDone;
         } catch (Exception e) {
@@ -292,13 +292,13 @@ public class SQLDCtodo extends SQLDatabaseConnection {
     /**
      * Sends SQL Query in order to count number of To-Do's for specific WG
      *
-     * @param userId The ID of the user
+     * @param assignedId The ID of the user
      * @return Number of To-Do's for given user, done or not
      */
-    public static int countTodoUser(String userId) {
+    public static int countTodoUser(String assignedId) {
         int numberofTodo;
         try {
-            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE userId=" + userId + ";");
+            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE assignedId=" + Integer.valueOf(assignedId) + ";");
             numberofTodo = rs.getInt(1);
             return numberofTodo;
         } catch (Exception e) {
@@ -310,15 +310,15 @@ public class SQLDCtodo extends SQLDatabaseConnection {
     /**
      * Get all active todos where the given user is assigned
      *
-     * @param userId The userId of the user
+     * @param assignedId The assignedId of the user
      * @return The List of todos
      */
-    public static List<Map<String, String>> getAllActiveTodosForUser(String userId) {
+    public static List<Map<String, String>> getAllActiveTodosForUser(String assignedId) {
         deactivateOldToDos();
         List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
         try {
-            ResultSet rs = executeQuery(("SELECT task, userId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE userId = "
-                    + Integer.valueOf(userId) + " AND isActive = 1 ORDER BY isDone, dateDue ASC"));
+            ResultSet rs = executeQuery(("SELECT task, assignedId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE assignedId = "
+                    + Integer.valueOf(assignedId) + " AND isActive = 1 ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
                 Map<String, String> currentTodo = new HashMap<String, String>();
                 currentTodo.put("task", rs.getString(1));
@@ -383,8 +383,8 @@ public class SQLDCtodo extends SQLDatabaseConnection {
 
         try {
             ResultSet rs = executeQuery(("SELECT COUNT(todo.uniqueID), users.firstName, users.lastName FROM todo "
-                    + "LEFT OUTER JOIN users ON users.uniqueID = todo.userId WHERE todo.wgId =" + Integer.valueOf(wgId)
-                    + "AND todo.isActive = 1 AND todo.isDone = 0 GROUP BY todo.userId"));
+                    + "LEFT OUTER JOIN users ON users.uniqueID = todo.assignedId WHERE todo.wgId =" + Integer.valueOf(wgId)
+                    + "AND todo.isActive = 1 AND todo.isDone = 0 GROUP BY todo.assignedId"));
 
             while (rs.next()) {
                 Map<String, String> currentUser = new HashMap<String, String>();
