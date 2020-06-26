@@ -8,6 +8,6 @@ function boughtArticle(id) {
 //Send remove POST if you click "ok" in modal
 function removeArticle(id) {
     $( "#removeArticle" ).click(function() {
-        $('#remove'+id).click();
+        document.querySelector('#remove'+id).click();
     });
 }
