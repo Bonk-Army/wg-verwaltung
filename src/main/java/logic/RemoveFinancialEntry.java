@@ -20,10 +20,6 @@ public class RemoveFinancialEntry extends HttpServlet {
         super();
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
     /**
      * Called when the users wants to remove a financial entry
      *
@@ -33,7 +29,7 @@ public class RemoveFinancialEntry extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FinancialBean financialBean = new FinancialBean();
         SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
@@ -46,17 +42,21 @@ public class RemoveFinancialEntry extends HttpServlet {
         ErrorCodes status = financialBean.removeFinancialEntry(entryId, wgId);
 
         switch (status) {
-            case SUCCESS:
-                //Show success
-                response.sendRedirect("/financial");
-                break;
-            case FAILURE:
-                //Show failure
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-                break;
-            case WRONGENTRY:
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
-                break;
+        case SUCCESS:
+            //Show success
+            response.sendRedirect("/financial");
+            break;
+        case FAILURE:
+            //Show failure
+            request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+            break;
+        case WRONGENTRY:
+            request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
+            break;
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }

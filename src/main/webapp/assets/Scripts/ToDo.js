@@ -8,6 +8,6 @@ function doneTodo(id) {
 //Send remove POST if you click "ok" in modal
 function removeTodo(id) {
     $( "#removeToDo" ).click(function() {
-        $('#remove'+id).click();
+        document.querySelector('#remove'+id).click();
     });
 }
