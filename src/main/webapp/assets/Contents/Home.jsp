@@ -25,5 +25,6 @@
 
     <canvas id="myChartTodo" width="auto" height="40"></canvas>
 
+    <hr>
     <h5>Letzter Login: ${overview.lastLogin}</h5>
 </div>
