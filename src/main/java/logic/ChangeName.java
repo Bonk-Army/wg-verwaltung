@@ -45,7 +45,10 @@ public class ChangeName extends HttpServlet {
                 sessionBean.setFirstName(firstName);
                 sessionBean.setLastName(lastName);
                 // Show success page
-                response.sendRedirect("/settings");
+                request.setAttribute("isSadLlama", false);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
             default:
                 //Show failure
