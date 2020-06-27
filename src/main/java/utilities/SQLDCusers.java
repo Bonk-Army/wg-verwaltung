@@ -758,4 +758,26 @@ public class SQLDCusers extends SQLDatabaseConnection {
 
         return "";
     }
+
+    /**
+     * Get the last login time for the given user as a formatted string
+     *
+     * @param userId The userId of the user
+     * @return The date as a formatted string
+     */
+    public static String getLastLogin(String userId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT lastLogin FROM users WHERE uniqueID=" + Integer.valueOf(userId)));
+
+            while (rs.next()) {
+                Date lastLoginDate = rs.getDate(1);
+
+                return DateFormatter.dateTimeToString(lastLoginDate);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
 }
