@@ -175,7 +175,11 @@ public class ToDoBean {
      * @return A list of Todos
      */
     public List<Map<String, String>> getTodosForUser() {
-        return SQLDCtodo.getAllActiveTodosForUser(this.userId);
+        if(!wgId.isEmpty()) {
+            return SQLDCtodo.getAllActiveTodosForUser(this.userId, this.wgId);
+        }
+
+        return new ArrayList<Map<String, String>>();
     }
 
     /**

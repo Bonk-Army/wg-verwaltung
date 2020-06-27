@@ -313,12 +313,12 @@ public class SQLDCtodo extends SQLDatabaseConnection {
      * @param assignedId The assignedId of the user
      * @return The List of todos
      */
-    public static List<Map<String, String>> getAllActiveTodosForUser(String assignedId) {
+    public static List<Map<String, String>> getAllActiveTodosForUser(String assignedId, String wgId) {
         deactivateOldToDos();
         List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
         try {
             ResultSet rs = executeQuery(("SELECT task, assignedId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE assignedId = "
-                    + Integer.valueOf(assignedId) + " AND isActive = 1 ORDER BY isDone, dateDue ASC"));
+                    + Integer.valueOf(assignedId) + " AND wgId = " + Integer.valueOf(wgId) + " AND isActive = 1 ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
                 Map<String, String> currentTodo = new HashMap<String, String>();
                 currentTodo.put("task", rs.getString(1));
