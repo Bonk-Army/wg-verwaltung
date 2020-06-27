@@ -35,7 +35,9 @@ public class LoginBean {
      * @return The status of the request
      */
     public ErrorCodes login(String username, String password) {
-        if (!RegexHelper.checkString(username)) {
+        List<String> allUserNames = SQLDCusers.getAllUserNames();
+
+        if (!RegexHelper.checkString(username) || !allUserNames.contains(username)) {
             this.status = ErrorCodes.WRONGUNAME;
             return ErrorCodes.WRONGUNAME;
         }
