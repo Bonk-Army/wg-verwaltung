@@ -21,7 +21,7 @@
         |__ /verify                     | Servlet : Verify                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /joinWGLogic                | Servlet : JoinWG                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /createWGLogic              | Servlet : CreateWG                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addTodoLogic               | Servlet : ToDo                    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addTodoLogic               | Servlet : AddTodo                 | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /setDoneLogic               | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /sendContactRequestLogic    | Servlet : ContactRequest          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /removeTodoLogic            | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
@@ -33,10 +33,10 @@
         |__ /changePasswordLogic        | Servlet : ChangePassword          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /changeNameLogic            | Servlet : ChangeName              | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /leaveWgLogic               | Servlet : LeaveWG                 | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /logoutLogic                | Servlet : Logout                  | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /updateCleaningLogic        | Servlet : UpdateCleaningAssignees | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addCleaningLogic           | Servlet : UpdateCleaningAssignees | Zuständig: @PM       | Mapped by @KA | Zuständig für Inhalt @PM | Initial
-        |__ /removeCleaningLogic        | Servlet : RemoveCleaning          | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /logoutLogic                | Servlet : Logout                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /updateCleaningLogic        | Servlet : UpdateCleaningAssignees | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addCleaningLogic           | Servlet : AddCleaningTask         | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @PM | Initial
+        |__ /removeCleaningLogic        | Servlet : RemoveCleaning          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -272,7 +272,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>AddTodoLogic</servlet-name>
-        <servlet-class>logic.CreateToDo</servlet-class>
+        <servlet-class>logic.AddTodo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddTodoLogic</servlet-name>
