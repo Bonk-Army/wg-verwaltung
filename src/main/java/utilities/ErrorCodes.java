@@ -12,7 +12,8 @@ public enum ErrorCodes {
     WRONGPASSWORD("Dieses Passwort passt nicht zum eingegebenen Benutzernamen. Das behauptet zumindest unser Hashing-Lama.", "Falsches Passwort"),  //The entered password was wrong
     WRONGEMAIL("Unser Post-Lama behauptet, dass diese E-Mail-Addresse nicht funktioniert. Vielleicht müssen wir aber auch auf Brieftauben umstellen.", "Falsche E-Mail-Adresse"),     //The entered email address was wrong
     TRYAGAIN("Das Runtime-Lama sagt, dass du es einfach nochmal versuchen musst. Hör auf das Runtime-Lama. Es ist ein gutes Lama.", "Erneut versuchen"),       //The user should simply try it again
-    AUTHFAIL("Das Türsteher-Lama hat deinen Ausweis verschlampt. Bitte melde dich nochmal an.", "Authentifikation fehlgeschlagen");       //Authentication error, must log in again
+    AUTHFAIL("Das Türsteher-Lama hat deinen Ausweis verschlampt. Bitte melde dich nochmal an.", "Authentifikation fehlgeschlagen"),       //Authentication error, must log in again
+    NOWGFOUND("Das Boss-Lama sagt, dass du in keiner WG bist. Einsame Alpakas sind schwach, sei kein einsames Alpaka!", "Keine WG");
 
     private String message;
     private String header;
