@@ -1,3 +1,11 @@
+h5 {
+    text-align: center;
+}
+
+/* ---------------------------------------------------
+    TABLE STYLE
+----------------------------------------------------- */
+
 .table{
     color: aliceblue;
     margin-left: auto;
@@ -5,12 +13,16 @@
     text-align: center;
 }
 
-th:not(:nth-child(1)){
+th:not(:nth-child(2)){
     width: 12.5em;
 }
 
 th:last-child, td:last-child{
     width: 6.25em;
+}
+
+th:first-child, td:first-child {
+    width: 3.125em;
 }
 
 tr.done {
@@ -24,6 +36,10 @@ tr.tooLate {
 tr.late {
     background-color: #ffc658;
 }
+
+/* ---------------------------------------------------
+    BUTTON STYLE
+----------------------------------------------------- */
 
 #addToDo, button.remove{
     margin-bottom: 10px;
@@ -76,4 +92,13 @@ tr.late {
 
 .form-control {
     margin-bottom: 10px;
+}
+
+/* ---------------------------------------------------
+    INFO STYLE
+----------------------------------------------------- */
+
+.popover-header, .popover-body, .arrow:after {
+    background-color: #272525;
+    color: aliceblue;
 }

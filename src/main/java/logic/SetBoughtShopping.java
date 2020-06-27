@@ -23,10 +23,6 @@ public class SetBoughtShopping extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ShoppingBean shoppingBean = new ShoppingBean();
         SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
@@ -37,14 +33,21 @@ public class SetBoughtShopping extends HttpServlet {
         ErrorCodes status = shoppingBean.setRequestDone(requestId, wgId);
 
         switch (status) {
-        case SUCCESS:
-            //Show success
-            response.sendRedirect("/shopping");
-            break;
-        case FAILURE:
-            //Show failure
-            request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-            break;
+            case SUCCESS:
+                //Show success
+                response.sendRedirect("/shopping");
+                break;
+            default:
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
+                break;
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }

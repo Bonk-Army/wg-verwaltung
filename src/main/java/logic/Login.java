@@ -74,17 +74,12 @@ public class Login extends HttpServlet {
                 response.addCookie(sessionCookie);
                 response.sendRedirect("/home");
                 break;
-            case WRONGENTRY:
-                // Return "wrong entry" error page
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
-                break;
-            case WRONGUNAME:
-                // Return "wrong entry" error page
-                request.getServletContext().getRequestDispatcher("/responseWrongUName").forward(request, response);
-                break;
-            case FAILURE:
-                // Return "try again" error page
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+            default:
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }

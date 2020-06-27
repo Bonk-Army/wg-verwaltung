@@ -1,3 +1,35 @@
+/* ---------------------------------------------------
+    TABLE STYLE
+----------------------------------------------------- */
+
+.table {
+    color: aliceblue;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.table.overview {
+    table-layout: fixed;
+    width: unset;
+}
+
+th:not(:nth-child(2)) {
+    width: 12.5em;
+}
+
+th:last-child, td:last-child {
+    width: 6.25em;
+}
+
+thead.tasks th:not(:nth-child(1)) {
+    width: 12.5em;
+}
+
+th:last-child, td:last-child {
+    width: 6.25em;
+}
+
 .negative{
     background-color: #d75a5a;
 }
@@ -10,26 +42,14 @@ button.remove {
     max-width: 62px;
 }
 
+/* ---------------------------------------------------
+    BUTTON STYLE
+----------------------------------------------------- */
+
 #addArticle {
     margin-bottom: 10px;
     max-width: 62px;
 }
-
-.table {
-    color: aliceblue;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-thead.tasks th:not(:nth-child(1)) {
-    width: 12.5em;
-}
-
-th:last-child, td:last-child {
-    width: 6.25em;
-}
-
 
 .form-signin {
     width: 100%;

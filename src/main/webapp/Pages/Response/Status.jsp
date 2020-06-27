@@ -3,15 +3,22 @@
 <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
 <html>
 <head>
-    <title>404</title>
+    <title>${requestScope.header}</title>
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Status.css">
 </head>
 <body>
 <div>
-    <h1>404</h1>
-    <p>Das angefragte Lama wurde nicht gefunden.</p>
-    <img src="../../assets/Images/404-llama.jpg">
+    <h1>${requestScope.header}</h1>
+    <p>${requestScope.message}</p>
+    <c:choose>
+        <c:when test="${requestScope.isSadLlama}">
+            <img src="../../assets/Images/sad-llama.png">
+        </c:when>
+        <c:otherwise>
+            <img src="../../assets/Images/success-alpacas.jpg">
+        </c:otherwise>
+    </c:choose>
     <c:choose>
         <c:when test="${sessionBean.loggedIn}">
             <hr>

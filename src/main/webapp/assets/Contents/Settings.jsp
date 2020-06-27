@@ -3,7 +3,7 @@
 <jsp:useBean id="settingBean" class="beans.SettingsBean" scope="request"/>
 <jsp:setProperty name="settingBean" property="userId" value="${sessionBean.userId}"/>
 <div id="content">
-    <h2>Settings</h2>
+    <h2 class="header">Settings</h2>
     <section class="mb-4">
         <form action="changeNameLogic" method="POST">
             <label for="username">Benutzername</label>

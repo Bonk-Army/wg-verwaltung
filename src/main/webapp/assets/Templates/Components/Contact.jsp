@@ -2,7 +2,7 @@
     <section class="mb-4">
 
     <!--Section heading-->
-    <h2 class="h1-responsive my-4">Kontaktiere uns</h2>
+    <h2 class="header">Kontaktiere uns</h2>
     <!--Section description-->
     <p class="text-center w-responsive mx-auto mb-5">Hast du Fragen? Z&ouml;gere nicht, uns direkt zu kontaktieren. Unser Team wird dir in wenigen Stunden helfen</p>
     <div class="row">

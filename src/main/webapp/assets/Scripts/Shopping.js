@@ -1,13 +1,15 @@
 //Send  bought POST if you click "ok" in modal
 function boughtArticle(id) {
     $( "#boughtArticle" ).click(function() {
-        $('#'+id).click();
+        document.querySelector('#bought'+id).click();
     });
 }
 
 //Send remove POST if you click "ok" in modal
 function removeArticle(id) {
     $( "#removeArticle" ).click(function() {
-        $('#remove'+id).click();
+        document.querySelector('#remove'+id).click();
     });
 }
+
+$('[data-toggle="popover"]').popover()

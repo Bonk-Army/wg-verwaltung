@@ -71,13 +71,12 @@ public class CreateToDo extends HttpServlet {
                 //Redirect back to the todo page
                 response.sendRedirect("/todo");
                 break;
-            case FAILURE:
-                //Forward to failure page
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-                break;
-            case WRONGENTRY:
-                //Forward to wrong entry page
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
+            default:
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }

@@ -158,15 +158,19 @@ public class LoginBean {
      */
     public ErrorCodes sendPasswordResetLink(String email) {
         if (RegexHelper.checkEmail(email)) {
-            String randomKey = new RandomStringGenerator(30).nextString();
-            if (SQLDCusers.setPasswordKey(email, randomKey)) {
-                String username = SQLDCusers.getUsernameByEmail(email);
-                String resetLink = "resetPassword?uname=" + username + "&key=" + randomKey;
-                String fullName = SQLDCusers.getFirstName(username) + " " + SQLDCusers.getLastName(username);
-                MailSender.sendResetPasswordMail(email, fullName, resetLink);
-                return ErrorCodes.SUCCESS;
+            List<String> knownMailAddresses = SQLDCusers.getAllEmails();
+
+            if(knownMailAddresses.contains(email)) {
+                String randomKey = new RandomStringGenerator(30).nextString();
+                if (SQLDCusers.setPasswordKey(email, randomKey)) {
+                    String username = SQLDCusers.getUsernameByEmail(email);
+                    String resetLink = "resetPassword?uname=" + username + "&key=" + randomKey;
+                    String fullName = SQLDCusers.getFirstName(username) + " " + SQLDCusers.getLastName(username);
+                    MailSender.sendResetPasswordMail(email, fullName, resetLink);
+                    return ErrorCodes.SUCCESS;
+                }
+                return ErrorCodes.FAILURE;
             }
-            return ErrorCodes.FAILURE;
         }
         return ErrorCodes.WRONGEMAIL;
     }
