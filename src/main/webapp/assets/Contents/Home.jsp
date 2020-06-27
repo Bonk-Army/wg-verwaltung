@@ -14,7 +14,9 @@
         &#129433;</h2>
     <hr>
     <h4>Aktuelles Guthaben: ${overview.expenseSum}&euro;</h4>
+
     <canvas id="myChart" width="auto" height="40"></canvas>
+
     <br>
     <hr>
     <br>
@@ -22,4 +24,6 @@
     <h5>davon dir zugeordnet: ${overview.openTodosUser}</h5>
 
     <canvas id="myChartTodo" width="auto" height="40"></canvas>
+
+    <h5>Letzter Login: ${overview.lastLogin}</h5>
 </div>
