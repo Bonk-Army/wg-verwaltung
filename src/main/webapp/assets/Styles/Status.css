@@ -1,0 +1,17 @@
+body{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+hr {
+    max-width: 30em;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+img {
+    width: 30em;
+}

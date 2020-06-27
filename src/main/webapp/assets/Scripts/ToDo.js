@@ -1,13 +1,15 @@
 //Send done POST if you click "ok" in modal
 function doneTodo(id) {
     $( "#doneToDo" ).click(function() {
-        $('#'+id).click();
+        document.querySelector('#done'+id).click();
     });
 }
 
 //Send remove POST if you click "ok" in modal
 function removeTodo(id) {
     $( "#removeToDo" ).click(function() {
-        $('#remove'+id).click();
+        document.querySelector('#remove'+id).click();
     });
 }
+
+$('[data-toggle="popover"]').popover()

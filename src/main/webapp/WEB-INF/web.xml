@@ -24,7 +24,7 @@
         |__ /addTodoLogic               | Servlet : ToDo                    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /setDoneLogic               | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /sendContactRequestLogic    | Servlet : ContactRequest          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /removeLogic                | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
+        |__ /removeTodoLogic            | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
         |__ /removeShoppingRequestLogic | Servlet : RemoveShoppingRequest   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /addShoppingRequestLogic    | Servlet : AddShoppingRequest      | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /setBoughtLogic             | Servlet : SetArticleBought        | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @PM | Initial
@@ -300,7 +300,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>RemoveTodoLogic</servlet-name>
-        <url-pattern>/removeLogic</url-pattern>
+        <url-pattern>/removeTodoLogic</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>RemoveShoppingRequestLogic</servlet-name>
@@ -464,6 +464,14 @@
     <servlet-mapping>
         <servlet-name>ResponseTryAgain</servlet-name>
         <url-pattern>/responseTryAgain</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Status</servlet-name>
+        <jsp-file>/Pages/Response/Status.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Status</servlet-name>
+        <url-pattern>/status</url-pattern>
     </servlet-mapping>
 
     <!-- Error Pages -->

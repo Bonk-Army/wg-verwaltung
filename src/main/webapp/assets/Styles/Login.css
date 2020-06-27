@@ -1,5 +1,6 @@
 body{
     display: flex;
+    justify-content: center;
 }
 
 .form-signin, #backButton{
@@ -21,14 +22,7 @@ body{
 .form-signin .form-control:focus {
     z-index: 2;
 }
-.form-signin input[type="email"] {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
+
 .mt-custom {
     margin-top: 10%;
 }

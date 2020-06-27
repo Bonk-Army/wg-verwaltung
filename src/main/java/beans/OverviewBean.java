@@ -2,9 +2,7 @@ package beans;
 
 import utilities.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Bean used for the home page (overview page)
@@ -204,7 +202,10 @@ public class OverviewBean {
      */
     public String getExpenseSum() {
         int sumForUser = SQLDCfinancial.getTotalForUser(this.userId, this.wgId);
-        String sumString = String.format("%.2f", (sumForUser / 100d));
+        StringBuilder sb = new StringBuilder();
+        Formatter formatter = new Formatter(sb, Locale.GERMAN);
+        formatter.format("%,.2f", (sumForUser / 100d));
+        String sumString = sb.toString();
 
         return sumString;
     }

@@ -64,17 +64,15 @@ public class UpdateCleaningAssignees extends HttpServlet {
             // If there was an error at any point in the iteration, abort the rest of the loop and directly forward
             // the user to the respective error page
             switch (status) {
-                case FAILURE:
-                    //Show failure
-                    request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-                    hasError = true;
-                    break;
-                case WRONGENTRY:
-                    //Show wrongentry
-                    request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
-                    hasError = true;
+                case SUCCESS:
                     break;
                 default:
+                    //Show failure
+                    request.setAttribute("isSadLlama", true);
+                    request.setAttribute("header", status.getHeader());
+                    request.setAttribute("message", status.getMessage());
+                    request.getServletContext().getRequestDispatcher("/status").forward(request, response);
+                    hasError = true;
                     break;
             }
 

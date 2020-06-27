@@ -47,9 +47,12 @@ public class LeaveWG extends HttpServlet {
                 // Show success pages
                 response.sendRedirect("/settings");
                 break;
-            case FAILURE:
-                // Show server error page
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+            default:
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }

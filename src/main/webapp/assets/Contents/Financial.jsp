@@ -1,9 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
+<jsp:useBean id="financialBean" class="beans.FinancialBean" scope="request"/>
+<jsp:setProperty name="financialBean" property="userId" value="${sessionBean.userId}"/>
+<jsp:setProperty name="financialBean" property="wgId" value="${sessionBean.wgId}"/>
 <div id="content">
-    <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
-    <jsp:useBean id="financialBean" class="beans.FinancialBean" scope="request"/>
-    <jsp:setProperty name="financialBean" property="userId" value="${sessionBean.userId}"/>
-    <jsp:setProperty name="financialBean" property="wgId" value="${sessionBean.wgId}"/>
+    <h2 class="header">Finanzielles der WG ${sessionBean.wgName} &#129433;</h2>
     <table class="table overview">
         <thead class="thead-dark">
         <tr>
@@ -35,23 +36,22 @@
         </thead>
         <tbody>
         <c:forEach items="${financialBean.getEntries(20)}" var="expense">
-        <tr class="${expense.colorClass}">
-            <td>${expense.dateCreated}</td>
-            <td>${expense.reason}</td>
-            <td>${expense.value}&euro;</td>
-            <td>${expense.createdBy}</td>
-            <td>
-                <form action="removeFinancialEntryLogic" method="POST">
+            <tr class="${expense.colorClass}">
+                <td>${expense.dateCreated}</td>
+                <td>${expense.reason}</td>
+                <td>${expense.value}&euro;</td>
+                <td>${expense.createdBy}</td>
+                <td>
                     <input type="text" name="entryId" hidden="hidden" value="${expense.entryId}">
 
                     <button title="Expense remove check" onclick="removeExpense(${expense.entryId})"
                             class="btn btn-lg btn-primary btn-block remove" type="button" data-toggle="modal"
                             data-target="#removeModal">&times;
                     </button>
-                    <button title="Expense remove check" id="remove${expense.entryId}" class="remove" type="submit" style="display: none;"></button>
-                </form>
-            </td>
-        </tr>
+                    <a href="/removeFinancialEntryLogic?entryId=${expense.entryId}" id="remove${expense.entryId}"
+                       style="display: none;"></a>
+                </td>
+            </tr>
         </c:forEach>
         </tbody>
     </table>
