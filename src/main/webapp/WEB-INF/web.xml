@@ -61,7 +61,7 @@
         |__
         |__ ^^-^^
         |__ ErrorPages                  |                                   | Zuständig : @KA      | Mapped by @PM                            | Initial
-        |__ 404                         | JSP Page : Response / Failure     | Zuständig : @KA      | Mapped by @PM                            | Initial
+        |__ 404                         | JSP Page : 404                    | Zuständig : @KA      | Mapped by @PM                            | Initial
         |__ ^^-^^
     -->
     <!-- ############################################################################################################ -->
