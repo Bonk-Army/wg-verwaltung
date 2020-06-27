@@ -19,14 +19,13 @@
             <img src="../../assets/Images/success-alpacas.jpg">
         </c:otherwise>
     </c:choose>
+    <hr>
     <c:choose>
         <c:when test="${sessionBean.loggedIn}">
-            <hr>
-            <a href="./home">Zur Home-Seite</a>
+            <a href="./home">Zur&uuml; zur Home-Seite</a>
         </c:when>
         <c:otherwise>
-            <hr>
-            <a href="./">Zur Login-Seite</a>
+            <a href="./">Zur&uuml; zur Login-Seite</a>
         </c:otherwise>
     </c:choose>
 </div>
