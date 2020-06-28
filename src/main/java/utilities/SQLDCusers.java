@@ -384,7 +384,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
      */
     public static boolean clearWg(String userId) {
         try {
-            executeQuery(("UPDATE users SET wgID = " + null + " WHERE uniqueID = " + Integer.valueOf(userId)));
+            executeQuery(("UPDATE users SET wgID = " + null + ", rights = '' WHERE uniqueID = " + Integer.valueOf(userId)));
 
             return true;
         } catch (Exception e) {
