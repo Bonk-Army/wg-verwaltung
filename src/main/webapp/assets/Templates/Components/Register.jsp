@@ -28,7 +28,7 @@
         <hr>
     </div>
     <div class="text-center">
-        <a href="./">Back to Login</a>
+        <a href="./">Zur&uuml;ck zu Login</a>
     </div>
     <div class="center">
         <hr>

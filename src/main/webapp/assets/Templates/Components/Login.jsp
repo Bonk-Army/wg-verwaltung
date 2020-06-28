@@ -20,8 +20,12 @@
             Passwort vergessen?
         </button>
     </form>
+
+    <div class="center">
+        <hr>
+    </div>
     <div class="text-center">
-        <a href="./contact">Kontakt</a>  &emsp; <a href="./faq">FAQ's </a>  &emsp; <a href="./impressum">Impressum </a><br><br>
+        <a href="./contact">Kontakt</a>  &emsp; <a href="./faq">FAQ's </a>  &emsp; <a href="./impressum">Impressum </a>
     </div>
     <div class="center">
         <hr>
