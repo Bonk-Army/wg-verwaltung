@@ -83,7 +83,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
-        <url-pattern></url-pattern>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Register</servlet-name>
@@ -132,6 +132,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeTest</servlet-name>
+        <url-pattern></url-pattern>
         <url-pattern>/home</url-pattern>
         <url-pattern>/todo</url-pattern>
         <url-pattern>/mytodo</url-pattern>
