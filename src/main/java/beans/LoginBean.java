@@ -30,11 +30,12 @@ public class LoginBean {
      * Called by LoginServlet upon login action from user. Returns user id in case of successfull login, otherwise
      * returns an empty String
      *
-     * @param username The entered username
-     * @param password The entered password
+     * @param username       The entered username
+     * @param password       The entered password
+     * @param cookieLifetime The lifetime of the session cookie in days
      * @return The status of the request
      */
-    public ErrorCodes login(String username, String password) {
+    public ErrorCodes login(String username, String password, int cookieLifetime) {
         List<String> allUserNames = SQLDCusers.getAllUserNames();
 
         if (!RegexHelper.checkString(username) || !allUserNames.contains(username)) {
@@ -57,7 +58,8 @@ public class LoginBean {
 
             //Login was either successful or one of the entered params was wrong
             if (newHash.equals(hash)) {
-                if (SQLDCusers.setCookiePostfix(username, cookiePostfixHash)) {
+                if (SQLDCusers.setCookiePostfix(username, cookiePostfixHash) && SQLDCusers.setCookieLifetime(username, cookieLifetime)
+                        && SQLDCusers.setLastPasswordLogin(username)) {
                     this.status = ErrorCodes.SUCCESS;
                     return ErrorCodes.SUCCESS;
                 } else {
@@ -79,12 +81,13 @@ public class LoginBean {
      * Called by LoginServlet upon register action from user. Returns the new user id in case the registration is
      * successful, otherwise returns an empty String
      *
-     * @param username The entered username (must not exist yet)
-     * @param password The entered password
-     * @param email    The entered email (must not exist yet)
+     * @param username       The entered username (must not exist yet)
+     * @param password       The entered password
+     * @param email          The entered email (must not exist yet)
+     * @param cookieLifetime The lifetime of the session cookie in days
      * @return The status of the request
      */
-    public ErrorCodes register(String username, String password, String email, String firstName, String lastName) {
+    public ErrorCodes register(String username, String password, String email, String firstName, String lastName, int cookieLifetime) {
         //Generate random salt
         String salt = PasswordHasher.generateSalt();
 
@@ -111,7 +114,7 @@ public class LoginBean {
                 }
 
                 // If the user creation was successful, send an email and continue registration
-                if (SQLDCusers.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfixHash)) {
+                if (SQLDCusers.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfixHash, cookieLifetime)) {
                     // Now send an email to the user with the verification link
                     String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
                     String fullName = firstName + " " + lastName;
@@ -162,7 +165,7 @@ public class LoginBean {
         if (RegexHelper.checkEmail(email)) {
             List<String> knownMailAddresses = SQLDCusers.getAllEmails();
 
-            if(knownMailAddresses.contains(email)) {
+            if (knownMailAddresses.contains(email)) {
                 String randomKey = new RandomStringGenerator(30).nextString();
                 if (SQLDCusers.setPasswordKey(email, randomKey)) {
                     String username = SQLDCusers.getUsernameByEmail(email);
@@ -210,7 +213,11 @@ public class LoginBean {
      * @return The ID as a String
      */
     public String getUserId(String username) {
-        return SQLDCusers.getUserId(username);
+        if (RegexHelper.checkString(username)) {
+            return SQLDCusers.getUserId(username);
+        }
+
+        return "";
     }
 
     /**
@@ -354,6 +361,16 @@ public class LoginBean {
      */
     public boolean setLastLogin(String userId) {
         return SQLDCusers.setLastLogin(userId);
+    }
+
+    /**
+     * Check if the session cookie for the user is still valid
+     *
+     * @param userId The userId of the user
+     * @return If it is still valid
+     */
+    public boolean isSessionCookieStillValid(String userId) {
+        return SQLDCusers.isSessionCookieStillValid(userId);
     }
 
     /*

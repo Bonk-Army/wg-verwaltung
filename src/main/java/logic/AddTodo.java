@@ -52,11 +52,8 @@ public class AddTodo extends HttpServlet {
 
         String userId = sessionBean.getUserId();
 
-        String assigneeId = "";
-        if (RegexHelper.checkString(assignee)) {
-            assigneeId = loginBean.getUserId(assignee);
-        }
-        String wgId = toDoBean.getWgIdByUserId(userId);
+        String assigneeId = loginBean.getUserId(assignee);
+        String wgId = sessionBean.getWgId();
         Date dueDate = null;
         try {
             dueDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dueDateString);
