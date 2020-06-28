@@ -256,5 +256,14 @@ public class OverviewBean {
     public List<Map<String, String>> getTodoChartData() {
         return SQLDCtodo.getOpenTodosPerUserOfWg(this.wgId);
     }
+
+    /**
+     * Get the timestamp of the last login
+     *
+     * @return The formatted Date as a String
+     */
+    public String getLastLogin() {
+        return SQLDCusers.getLastLogin(this.userId);
+    }
 }
 

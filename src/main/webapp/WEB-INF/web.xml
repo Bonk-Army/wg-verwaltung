@@ -21,7 +21,7 @@
         |__ /verify                     | Servlet : Verify                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /joinWGLogic                | Servlet : JoinWG                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /createWGLogic              | Servlet : CreateWG                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addTodoLogic               | Servlet : ToDo                    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addTodoLogic               | Servlet : AddTodo                 | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /setDoneLogic               | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /sendContactRequestLogic    | Servlet : ContactRequest          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /removeTodoLogic            | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
@@ -33,10 +33,10 @@
         |__ /changePasswordLogic        | Servlet : ChangePassword          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /changeNameLogic            | Servlet : ChangeName              | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /leaveWgLogic               | Servlet : LeaveWG                 | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /logoutLogic                | Servlet : Logout                  | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /updateCleaningLogic        | Servlet : UpdateCleaningAssignees | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addCleaningLogic           | Servlet : UpdateCleaningAssignees | Zuständig: @PM       | Mapped by @KA | Zuständig für Inhalt @PM | Initial
-        |__ /removeCleaningLogic        | Servlet : RemoveCleaning          | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /logoutLogic                | Servlet : Logout                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /updateCleaningLogic        | Servlet : UpdateCleaningAssignees | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addCleaningLogic           | Servlet : AddCleaningTask         | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @PM | Initial
+        |__ /removeCleaningLogic        | Servlet : RemoveCleaning          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -56,13 +56,13 @@
         |__
         |__ ^^-^^
         |__ Response                    |                                   | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseSuccess            | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseFailure            | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongEntry         | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongUName         | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongPassword      | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongEMail         | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongTryAgain      | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /status                     | JSP Page : Status                 | Zuständig : @KA      | Mapped by @KA                            | Initial
+        |__ ^^-^^
+        |__
+        |__ ^^-^^
+        |__ ErrorPages                  |                                   | Zuständig : @KA      | Mapped by @PM                            | Initial
+        |__ 404                         | JSP Page : 404                    | Zuständig : @KA      | Mapped by @PM                            | Initial
+        |__ 500                         | JSP Page: 500                     | Zuständig : @KA      | MApped by @PM                            | Initial
         |__ ^^-^^
     -->
     <!-- ############################################################################################################ -->
@@ -272,7 +272,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>AddTodoLogic</servlet-name>
-        <servlet-class>logic.CreateToDo</servlet-class>
+        <servlet-class>logic.AddTodo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddTodoLogic</servlet-name>
@@ -410,62 +410,6 @@
                                  dP                                                                   d8888P
     -->
     <servlet>
-        <servlet-name>ResponseSuccess</servlet-name>
-        <jsp-file>/Pages/Response/Success.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResponseSuccess</servlet-name>
-        <url-pattern>/responseSuccess</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ResponseFailure</servlet-name>
-        <jsp-file>/Pages/Response/Failure.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResponseFailure</servlet-name>
-        <url-pattern>/responseFailure</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ResponseWrongEntry</servlet-name>
-        <jsp-file>/Pages/Response/WrongEntry.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResponseWrongEntry</servlet-name>
-        <url-pattern>/responseWrongEntry</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ResponseWrongUName</servlet-name>
-        <jsp-file>/Pages/Response/WrongUName.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResponseWrongUName</servlet-name>
-        <url-pattern>/responseWrongUName</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ResponseWrongPassword</servlet-name>
-        <jsp-file>/Pages/Response/WrongPassword.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResponseWrongPassword</servlet-name>
-        <url-pattern>/responseWrongPassword</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ResponseWrongEMail</servlet-name>
-        <jsp-file>/Pages/Response/WrongEMail.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResponseWrongEMail</servlet-name>
-        <url-pattern>/responseWrongEMail</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ResponseTryAgain</servlet-name>
-        <jsp-file>/Pages/Response/TryAgain.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResponseTryAgain</servlet-name>
-        <url-pattern>/responseTryAgain</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>Status</servlet-name>
         <jsp-file>/Pages/Response/Status.jsp</jsp-file>
     </servlet>
@@ -478,5 +422,13 @@
     <error-page>
         <error-code>404</error-code>
         <location>/Pages/Response/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/Pages/Response/500.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/Pages/Response/exception.jsp</location>
     </error-page>
 </web-app>

@@ -42,7 +42,10 @@ public class ChangePassword extends HttpServlet {
         switch (status) {
             case SUCCESS:
                 // Show success pages
-                response.sendRedirect("/settings");
+                request.setAttribute("isSadLlama", false);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
             default:
                 //Show failure

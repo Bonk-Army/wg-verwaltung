@@ -11,22 +11,22 @@
 
 .table.overview {
     table-layout: fixed;
-    width: unset;
+    width: 100%;
 }
 
-th:not(:nth-child(2)) {
+.all th:not(:nth-child(2)) {
     width: 12.5em;
 }
 
-th:last-child, td:last-child {
+.all th:last-child, td:last-child {
     width: 6.25em;
 }
 
-thead.tasks th:not(:nth-child(1)) {
+thead.tasks th:not(:nth-child(1), :last-child) {
     width: 12.5em;
 }
 
-th:last-child, td:last-child {
+.all th:last-child, td:last-child {
     width: 6.25em;
 }
 

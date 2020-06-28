@@ -47,17 +47,17 @@ public class AddCleaningTask extends HttpServlet {
         ErrorCodes status = cleanBean.addNewTask(taskname, wgId);
 
         switch (status) {
-        case SUCCESS:
-            //Show success
-            response.sendRedirect("/clean");
-            break;
-        default:
-            //Show failure
-            request.setAttribute("isSadLlama", true);
-            request.setAttribute("header", status.getHeader());
-            request.setAttribute("message", status.getMessage());
-            request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-            break;
+            case SUCCESS:
+                //Show success
+                response.sendRedirect("/clean");
+                break;
+            default:
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
+                break;
         }
     }
 }
