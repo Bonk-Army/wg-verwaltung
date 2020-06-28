@@ -63,7 +63,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
         List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
         try {
             ResultSet rs = executeQuery(("SELECT task, assignedId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE wgId = "
-                    + Integer.valueOf(wgId) + " AND isActive = 1 ORDER BY isDone, dateDue ASC"));
+                    + Integer.valueOf(wgId) + " AND isActive = 1 AND (isDone = 0 OR DATEDIFF(dateDue, CURRENT_TIMESTAMP) <= 7) ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
                 Map<String, String> currentTodo = new HashMap<String, String>();
                 currentTodo.put("task", rs.getString(1));
@@ -317,7 +317,8 @@ public class SQLDCtodo extends SQLDatabaseConnection {
         List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
         try {
             ResultSet rs = executeQuery(("SELECT task, assignedId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE assignedId = "
-                    + Integer.valueOf(assignedId) + " AND wgId = " + Integer.valueOf(wgId) + " AND isActive = 1 ORDER BY isDone, dateDue ASC"));
+                    + Integer.valueOf(assignedId) + " AND wgId = " + Integer.valueOf(wgId) + " AND isActive = 1 "
+                    + " AND (isDone = 0 OR DATEDIFF(dateDue, CURRENT_TIMESTAMP) <= 7) ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
                 Map<String, String> currentTodo = new HashMap<String, String>();
                 currentTodo.put("task", rs.getString(1));
@@ -371,7 +372,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
     }
 
     /**
-     * Get the number of open todos for every user of the wg alongside their name string
+     * Get the <b>number</b> of open todos for every user of the wg alongside their name string
      *
      * @param wgId The wgId of the wg to fetch the users for
      * @return A list of maps of which each represents one user
