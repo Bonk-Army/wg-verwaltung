@@ -3,15 +3,15 @@
 <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
 <html>
 <head>
-    <title>500</title>
+    <title>Exception</title>
     <link rel="stylesheet" type="text/css" href="../../assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="../../assets/Styles/Status.css">
 </head>
 <body>
 <div>
-    <h1>500</h1>
-    <p>Dem Lama ist vom Server ein unerwarteter Fehler gemeldet worden.</p>
-    <img src="../../assets/Images/500-llama.png">
+    <h1>Exception</h1>
+    <p>Dem Lama ist ein Fehler gemeldet worden, bitte melde dich beim Team Lama.</p>
+    <img src="../../assets/Images/exception-llama.jpg">
     <hr>
     <c:choose>
         <c:when test="${sessionBean.loggedIn}">
