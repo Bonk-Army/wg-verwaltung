@@ -11,9 +11,9 @@ import java.sql.ResultSet;
         - uniqueID          (int)
         - isActive          (bool)
         - task              (String)
-        - assignedId            (int)       (Foreign key to users.uniqueID)
-        - dateCreated       (Date)
-        - dateDue           (Date)
+        - assignedId        (int)       (Foreign key to users.uniqueID)
+        - dateCreated       (Datetime)
+        - dateDue           (Datetime)
         - isDone            (bool)
         - wgId              (int)       (Foreign key to wgs.uniqueID)
         - createdBy         (int)       (Foreign key to users.uniqueID)
@@ -63,7 +63,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
         List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
         try {
             ResultSet rs = executeQuery(("SELECT task, assignedId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE wgId = "
-                    + Integer.valueOf(wgId) + " AND isActive = 1 ORDER BY isDone, dateDue ASC"));
+                    + Integer.valueOf(wgId) + " AND isActive = 1 AND (isDone = 0 OR DATEDIFF(dateDue, CURRENT_TIMESTAMP) <= 7) ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
                 Map<String, String> currentTodo = new HashMap<String, String>();
                 currentTodo.put("task", rs.getString(1));
@@ -81,9 +81,8 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 c.add(Calendar.DATE, 3);
                 Date threeDaysDate = c.getTime();
 
-                SimpleDateFormat fancyFormatter = new SimpleDateFormat("dd. MMMM yyyy HH:mm");
-                currentTodo.put("dateDue", fancyFormatter.format(dateDue));
-                currentTodo.put("dateCreated", fancyFormatter.format(dateCreated));
+                currentTodo.put("dateDue", DateFormatter.dateTimeMinutesToString(dateDue));
+                currentTodo.put("dateCreated", DateFormatter.dateTimeMinutesToString(dateCreated));
 
                 Boolean isDone = rs.getBoolean(5);
                 if (isDone) {
@@ -313,12 +312,13 @@ public class SQLDCtodo extends SQLDatabaseConnection {
      * @param assignedId The assignedId of the user
      * @return The List of todos
      */
-    public static List<Map<String, String>> getAllActiveTodosForUser(String assignedId) {
+    public static List<Map<String, String>> getAllActiveTodosForUser(String assignedId, String wgId) {
         deactivateOldToDos();
         List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
         try {
             ResultSet rs = executeQuery(("SELECT task, assignedId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE assignedId = "
-                    + Integer.valueOf(assignedId) + " AND isActive = 1 ORDER BY isDone, dateDue ASC"));
+                    + Integer.valueOf(assignedId) + " AND wgId = " + Integer.valueOf(wgId) + " AND isActive = 1 "
+                    + " AND (isDone = 0 OR DATEDIFF(dateDue, CURRENT_TIMESTAMP) <= 7) ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
                 Map<String, String> currentTodo = new HashMap<String, String>();
                 currentTodo.put("task", rs.getString(1));
@@ -336,9 +336,8 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 c.add(Calendar.DATE, 3);
                 Date threeDaysDate = c.getTime();
 
-                SimpleDateFormat fancyFormatter = new SimpleDateFormat("dd. MMMM yyyy HH:mm");
-                currentTodo.put("dateDue", fancyFormatter.format(dateDue));
-                currentTodo.put("dateCreated", fancyFormatter.format(dateCreated));
+                currentTodo.put("dateDue", DateFormatter.dateTimeMinutesToString(dateDue));
+                currentTodo.put("dateCreated", DateFormatter.dateTimeMinutesToString(dateCreated));
 
                 boolean isDone = rs.getBoolean(5);
                 if (isDone) {
@@ -373,7 +372,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
     }
 
     /**
-     * Get the number of open todos for every user of the wg alongside their name string
+     * Get the <b>number</b> of open todos for every user of the wg alongside their name string
      *
      * @param wgId The wgId of the wg to fetch the users for
      * @return A list of maps of which each represents one user

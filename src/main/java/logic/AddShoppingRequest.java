@@ -43,18 +43,24 @@ public class AddShoppingRequest extends HttpServlet {
         String dateDueString = request.getParameter("dateDue");
         Date dateDue = null;
 
-        try {
-            dateDue = new SimpleDateFormat("yyyy-MM-dd").parse(dateDueString);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String wgId = sessionBean.getWgId();
 
-        String requestedById = "";
-        if (RegexHelper.checkString(requestedBy)) {
-            requestedById = new LoginBean().getUserId(requestedBy);
-        }
+        ErrorCodes status = ErrorCodes.FAILURE;
 
-        ErrorCodes status = shoppingBean.createRequest(article, amount, userId, requestedById, dateDue);
+        // If the user has no wg, show an error page. Otherwise, try to add the shopping request
+        if (wgId.equals("")) {
+            status = ErrorCodes.NOWGFOUND;
+        } else {
+            try {
+                dateDue = new SimpleDateFormat("yyyy-MM-dd").parse(dateDueString);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            String requestedById = new LoginBean().getUserId(requestedBy);
+
+            status = shoppingBean.createRequest(article, amount, userId, requestedById, dateDue);
+        }
 
         switch (status) {
             case SUCCESS:

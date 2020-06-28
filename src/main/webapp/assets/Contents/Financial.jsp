@@ -24,7 +24,7 @@
     <button title="ToDo hinzuf&uuml;gen" id="addArticle" class="btn btn-lg btn-primary btn-block" type="button" data-toggle="modal"
             data-target="#createFinancial">+
     </button>
-    <table class="table">
+    <table class="table all">
         <thead class="thead-dark tasks">
         <tr>
             <th scope="col">Wann?</th>

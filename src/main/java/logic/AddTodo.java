@@ -18,10 +18,10 @@ import java.util.Date;
 /**
  * Create Todo servlet that is called when the user tries to create a new todo for his wg
  */
-public class CreateToDo extends HttpServlet {
+public class AddTodo extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public CreateToDo() {
+    public AddTodo() {
         super();
     }
 
@@ -52,11 +52,8 @@ public class CreateToDo extends HttpServlet {
 
         String userId = sessionBean.getUserId();
 
-        String assigneeId = "";
-        if (RegexHelper.checkString(assignee)) {
-            assigneeId = loginBean.getUserId(assignee);
-        }
-        String wgId = toDoBean.getWgIdByUserId(userId);
+        String assigneeId = loginBean.getUserId(assignee);
+        String wgId = sessionBean.getWgId();
         Date dueDate = null;
         try {
             dueDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dueDateString);
