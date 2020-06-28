@@ -68,7 +68,7 @@
                     <hr>
                 </div>
                 <div class="text-center">
-                    <a href="./">Zur&uuml;ck zu Login</a>
+                    <a href="./">Zur&uuml;ck zur Login-Seite</a>
                 </div>
             </c:if>
 
