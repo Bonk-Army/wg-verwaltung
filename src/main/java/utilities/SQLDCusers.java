@@ -536,7 +536,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
      * Set the passed right for the specified user
      *
      * @param userID The userId of the user
-     * @param rights  The rights to be set for the user
+     * @param rights The rights to be set for the user
      * @return If it was successful
      */
     public static boolean setUserRights(String userID, String rights) {

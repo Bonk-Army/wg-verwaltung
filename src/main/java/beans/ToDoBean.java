@@ -37,8 +37,10 @@ public class ToDoBean {
      */
     public ErrorCodes createTodo(String task, String userId, String wgId, Date dateDue, String createdById) {
         if (RegexHelper.checkText(task)) {
-            if (RegexHelper.checkString(userId) && RegexHelper.checkString(wgId) && RegexHelper.checkString(createdById)) {
+            if (!wgId.equals("")) {
                 return SQLDCtodo.createTodo(task, userId, wgId, dateDue, createdById) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            } else {
+                return ErrorCodes.NOWGFOUND;
             }
         }
         return ErrorCodes.WRONGENTRY;
@@ -175,7 +177,7 @@ public class ToDoBean {
      * @return A list of Todos
      */
     public List<Map<String, String>> getTodosForUser() {
-        if(!wgId.isEmpty()) {
+        if (!wgId.isEmpty()) {
             return SQLDCtodo.getAllActiveTodosForUser(this.userId, this.wgId);
         }
 
