@@ -81,9 +81,8 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 c.add(Calendar.DATE, 3);
                 Date threeDaysDate = c.getTime();
 
-                SimpleDateFormat fancyFormatter = new SimpleDateFormat("dd. MMMM yyyy HH:mm");
-                currentTodo.put("dateDue", fancyFormatter.format(dateDue));
-                currentTodo.put("dateCreated", fancyFormatter.format(dateCreated));
+                currentTodo.put("dateDue", DateFormatter.dateTimeMinutesToString(dateDue));
+                currentTodo.put("dateCreated", DateFormatter.dateTimeMinutesToString(dateCreated));
 
                 Boolean isDone = rs.getBoolean(5);
                 if (isDone) {
@@ -336,9 +335,8 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 c.add(Calendar.DATE, 3);
                 Date threeDaysDate = c.getTime();
 
-                SimpleDateFormat fancyFormatter = new SimpleDateFormat("dd. MMMM yyyy HH:mm");
-                currentTodo.put("dateDue", fancyFormatter.format(dateDue));
-                currentTodo.put("dateCreated", fancyFormatter.format(dateCreated));
+                currentTodo.put("dateDue", DateFormatter.dateTimeMinutesToString(dateDue));
+                currentTodo.put("dateCreated", DateFormatter.dateTimeMinutesToString(dateCreated));
 
                 boolean isDone = rs.getBoolean(5);
                 if (isDone) {

@@ -307,6 +307,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
     public static boolean setPassword(String username, String pwhash) {
         try {
             executeQuery("UPDATE users SET pwhash='" + pwhash + "', passwordResetKey=NULL WHERE username='" + username + "'");
+
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -535,12 +536,12 @@ public class SQLDCusers extends SQLDatabaseConnection {
      * Set the passed right for the specified user
      *
      * @param userID The userId of the user
-     * @param right  The right to be set for the user
+     * @param rights  The rights to be set for the user
      * @return If it was successful
      */
-    public static boolean setUserRights(String userID, String right) {
+    public static boolean setUserRights(String userID, String rights) {
         try {
-            executeQuery(("UPDATE users SET rights='" + right + "' WHERE uniqueID=" + Integer.valueOf(userID)));
+            executeQuery(("UPDATE users SET rights='" + rights + "' WHERE uniqueID=" + Integer.valueOf(userID)));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -800,7 +801,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
             while (rs.next()) {
                 Date lastLoginDate = rs.getDate(1);
 
-                return DateFormatter.dateTimeToString(lastLoginDate);
+                return DateFormatter.dateTimeSecondsToString(lastLoginDate);
             }
         } catch (Exception e) {
             e.printStackTrace();
