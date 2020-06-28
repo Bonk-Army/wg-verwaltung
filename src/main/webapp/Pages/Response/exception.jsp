@@ -3,24 +3,17 @@
 <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
 <html>
 <head>
-    <title>Exception</title>
+    <title>Unerwarteter Fehler</title>
     <link rel="stylesheet" type="text/css" href="../../assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="../../assets/Styles/Status.css">
 </head>
 <body>
 <div>
-    <h1>Exception</h1>
+    <h1>Unerwarteter Fehler</h1>
     <p>Dem Lama ist ein Fehler gemeldet worden, bitte melde dich beim Team Lama.</p>
     <img src="../../assets/Images/exception-llama.jpg">
     <hr>
-    <c:choose>
-        <c:when test="${sessionBean.loggedIn}">
-            <a href="./home">Zur&uuml;ck zur Home-Seite</a>
-        </c:when>
-        <c:otherwise>
-            <a href="./">Zur&uuml;ck zur Login-Seite</a>
-        </c:otherwise>
-    </c:choose>
+    <a href="./contact">Zur Kontakt-Seite</a>
 </div>
 </body>
 </html>
