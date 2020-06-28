@@ -2,15 +2,6 @@
     max-width: calc(100% - 31.25em);
 }
 
-.form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-
 section {
     max-width: 43.75em;
     margin-left: auto;
@@ -43,9 +34,16 @@ button.join:hover {
 }
 
 
-/* ---------------------------------------------------
-    MEDIAQUERIES
------------------------------------------------------ */
+/*
+    8888ba.88ba                 dP oo                                              oo
+    88  `8b  `8b                88
+    88   88   88 .d8888b. .d888b88 dP .d8888b. .d8888b. dP    dP .d8888b. 88d888b. dP .d8888b. .d8888b.
+    88   88   88 88ooood8 88'  `88 88 88'  `88 88'  `88 88    88 88ooood8 88'  `88 88 88ooood8 Y8ooooo.
+    88   88   88 88.  ... 88.  .88 88 88.  .88 88.  .88 88.  .88 88.  ... 88       88 88.  ...       88
+    dP   dP   dP `88888P' `88888P8 dP `88888P8 `8888P88 `88888P' `88888P' dP       dP `88888P' `88888P'
+                                                 88
+                                                 dP
+*/
 
 @media (max-width: 1069px) {
     #content {

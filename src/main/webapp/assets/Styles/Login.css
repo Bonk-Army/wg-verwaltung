@@ -2,27 +2,3 @@ body{
     display: flex;
     justify-content: center;
 }
-
-.form-signin, #backButton{
-    width: 100%;
-    max-width: 20.625em;
-    padding-top: 0.9375em;
-}
-.form-signin .checkbox {
-    font-weight: 400;
-}
-.form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 0.625em;
-    margin-bottom: 0.625em;
-    font-size: 1em;
-}
-.form-signin .form-control:focus {
-    z-index: 2;
-}
-
-.mt-custom {
-    margin-top: 10%;
-}

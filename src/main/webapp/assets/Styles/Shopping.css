@@ -1,6 +1,11 @@
-/* ---------------------------------------------------
-    TABLE STYLE
------------------------------------------------------ */
+/*
+    d888888P          dP       dP
+       88             88       88
+       88    .d8888b. 88d888b. 88 .d8888b.
+       88    88'  `88 88'  `88 88 88ooood8
+       88    88.  .88 88.  .88 88 88.  ...
+       dP    `88888P8 88Y8888' dP `88888P'
+ */
 
 .table{
     color: aliceblue;
@@ -33,51 +38,28 @@ tr.late {
     background-color: #ffc658;
 }
 
-/* ---------------------------------------------------
-    BUTTON STYLE
------------------------------------------------------ */
+/*
+     888888ba             dP     dP
+     88    `8b            88     88
+    a88aaaa8P' dP    dP d8888P d8888P .d8888b. 88d888b.
+     88   `8b. 88    88   88     88   88'  `88 88'  `88
+     88    .88 88.  .88   88     88   88.  .88 88    88
+     88888888P `88888P'   dP     dP   `88888P' dP    dP
+ */
 
 #addShopping, button.remove{
     margin-bottom: 10px;
     max-width: 62px;
 }
 
-.form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-}
-.form-signin .checkbox {
-    font-weight: 400;
-}
-.form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-.form-signin .form-control:focus {
-    z-index: 2;
-}
-.form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-.mt-custom {
-    margin-top: 10%;
-}
-
-/* ---------------------------------------------------
-    INFO STYLE
------------------------------------------------------ */
+/*
+    dP          .8888b
+    88          88   "
+    88 88d888b. 88aaa  .d8888b.
+    88 88'  `88 88     88'  `88
+    88 88    88 88     88.  .88
+    dP dP    dP dP     `88888P'
+*/
 
 .popover-header, .popover-body, .arrow:after {
     background-color: #272525;

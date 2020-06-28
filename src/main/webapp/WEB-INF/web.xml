@@ -23,20 +23,20 @@
         |__ /createWGLogic              | Servlet : CreateWG                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /addTodoLogic               | Servlet : AddTodo                 | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /setDoneLogic               | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /sendContactRequestLogic    | Servlet : ContactRequest          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /removeTodoLogic            | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
-        |__ /removeShoppingRequestLogic | Servlet : RemoveShoppingRequest   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /addShoppingRequestLogic    | Servlet : AddShoppingRequest      | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /setBoughtLogic             | Servlet : SetArticleBought        | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @PM | Initial
+        |__ /removeShoppingRequestLogic | Servlet : RemoveShoppingRequest   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /addFinancialEntryLogic     | Servlet : AddFinancialEntry       | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /removeFinancialEntryLogic  | Servlet : RemoveFinancialEntry    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /changePasswordLogic        | Servlet : ChangePassword          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addCleaningLogic           | Servlet : AddCleaningTask         | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @PM | Initial
+        |__ /updateCleaningLogic        | Servlet : UpdateCleaningAssignees | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /removeCleaningLogic        | Servlet : RemoveCleaning          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /sendContactRequestLogic    | Servlet : ContactRequest          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /changeNameLogic            | Servlet : ChangeName              | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /changePasswordLogic        | Servlet : ChangePassword          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /leaveWgLogic               | Servlet : LeaveWG                 | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /logoutLogic                | Servlet : Logout                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /updateCleaningLogic        | Servlet : UpdateCleaningAssignees | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addCleaningLogic           | Servlet : AddCleaningTask         | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @PM | Initial
-        |__ /removeCleaningLogic        | Servlet : RemoveCleaning          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -62,7 +62,8 @@
         |__ ^^-^^
         |__ ErrorPages                  |                                   | Zuständig : @KA      | Mapped by @PM                            | Initial
         |__ 404                         | JSP Page : 404                    | Zuständig : @KA      | Mapped by @PM                            | Initial
-        |__ 500                         | JSP Page: 500                     | Zuständig : @KA      | MApped by @PM                            | Initial
+        |__ 500                         | JSP Page: 500                     | Zuständig : @KA      | Mapped by @KA                            | Initial
+        |__ Java Exception              | JSP Page: Exception               | Zuständig : @KA      | Mapped by @KA                            | Initial
         |__ ^^-^^
     -->
     <!-- ############################################################################################################ -->
@@ -83,7 +84,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
-        <url-pattern></url-pattern>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Register</servlet-name>
@@ -132,6 +133,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeTest</servlet-name>
+        <url-pattern></url-pattern>
         <url-pattern>/home</url-pattern>
         <url-pattern>/todo</url-pattern>
         <url-pattern>/mytodo</url-pattern>
@@ -429,6 +431,6 @@
     </error-page>
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
-        <location>/Pages/Response/exception.jsp</location>
+        <location>/Pages/Response/Exception.jsp</location>
     </error-page>
 </web-app>
