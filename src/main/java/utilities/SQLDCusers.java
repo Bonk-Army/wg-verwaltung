@@ -24,6 +24,8 @@ import java.util.*;
         - lastName          (String)
         - registrationDate  (Date)
         - lastLogin         (Datetime)
+        - cookieLifetime    (int)
+        - lastPasswordLogin (Datetime)
  */
 
 /**
@@ -38,17 +40,23 @@ public class SQLDCusers extends SQLDatabaseConnection {
      * @param pwhash           The hashed password
      * @param pwsalt           The salt that has been used for hashing
      * @param verificationCode The randomly generated code that the user needs to verify his email
+     * @param firstName        The first name of the user
+     * @param lastName         The last name of the user
+     * @param cookiePostfix    The postfix of the session cookie
+     * @param cookieLifetime   The lifetime of the session cookie in days
      * @return If the user has been created successful. If not, the user has to be informed!
      */
-    public static boolean createUser(String username, String email, String pwhash, String pwsalt, String verificationCode, String firstName, String lastName, String cookiePostfix) {
+    public static boolean createUser(String username, String email, String pwhash, String pwsalt, String verificationCode, String firstName, String lastName, String cookiePostfix, int cookieLifetime) {
         try {
             Date registrationDate = DateFormatter.getCurrentDateTime();
             // Convert dates to java.sql.Timestamp to save them to SQL
             Timestamp registrationStamp = new Timestamp(registrationDate.getTime());
-            ResultSet rs = executeQuery(("INSERT INTO users (username, email, pwhash, pwsalt, verificationCode, firstName, lastName, cookiePostfix, registrationDate)"
+            // Save to SQL. We save the registration timestamp to registrationDate and lastPasswordLogin because that's the same thing here anyways
+            ResultSet rs = executeQuery(("INSERT INTO users (username, email, pwhash, pwsalt, verificationCode, firstName, lastName, cookiePostfix, registrationDate, cookieLifetime, lastPasswordLogin)"
                     + "VALUES ('" + username + "', '" + email + "', '" + pwhash + "', '"
                     + pwsalt + "', '" + verificationCode + "', '" + firstName + "', '"
-                    + lastName + "', '" + cookiePostfix + "', '" + registrationStamp + "')"));
+                    + lastName + "', '" + cookiePostfix + "', '" + registrationStamp + "', "
+                    + cookieLifetime + ",  '" + registrationStamp + "')"));
 
             return true;
         } catch (Exception e) {
@@ -740,6 +748,26 @@ public class SQLDCusers extends SQLDatabaseConnection {
     }
 
     /**
+     * Set the last password login field to the current time
+     *
+     * @param username The username of the user that logged in via password recently
+     * @return If it was successful
+     */
+    public static boolean setLastPasswordLogin(String username) {
+        try {
+            Date now = DateFormatter.getCurrentDateTime();
+            Timestamp nowStamp = new Timestamp(now.getTime());
+            executeQuery(("UPDATE users SET lastPasswordLogin='" + nowStamp + "' WHERE username = '" + username + "'"));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
      * Get the email address of the specified user
      *
      * @param userId The userId of the user
@@ -779,5 +807,53 @@ public class SQLDCusers extends SQLDatabaseConnection {
         }
 
         return "";
+    }
+
+    /**
+     * Set the session cookie lifetime for the given user
+     *
+     * @param username The username of the user
+     * @param lifetime The lifetime in days
+     * @return If it was successful
+     */
+    public static boolean setCookieLifetime(String username, int lifetime) {
+        try {
+            executeQuery(("UPDATE users SET cookieLifetime = " + lifetime + " WHERE username = '" + username + "'"));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if the session cookie of the specified user is still valid
+     *
+     * @param userId The userId of the user
+     * @return If the cookie is still valid
+     */
+    public static boolean isSessionCookieStillValid(String userId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT cookieLifetime, lastPasswordLogin FROM users WHERE uniqueID = " + Integer.valueOf(userId)));
+
+            while (rs.next()) {
+                Date now = DateFormatter.getCurrentDateTime();
+                Date lastPasswordLogin = rs.getDate(2);
+                int cookieLifetime = rs.getInt(1);
+
+                Calendar c = Calendar.getInstance();
+                c.setTime(lastPasswordLogin);
+                c.add(Calendar.DATE, cookieLifetime);
+                Date cookieLifetimeEnd = c.getTime();
+
+                return now.after(cookieLifetimeEnd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }

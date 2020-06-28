@@ -2,6 +2,7 @@ package filter;
 
 import beans.LoginBean;
 import beans.SessionBean;
+import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -17,12 +18,12 @@ import java.util.List;
  */
 public class MainFilter extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> publicPages = Arrays.asList("/impressum", "/faq", "/contact");
         boolean isPublicPage = false;
 
 
-        String url = req.getRequestURL().toString();
+        String url = request.getRequestURL().toString();
 
         String part = url.substring(url.lastIndexOf('/'));
 
@@ -31,12 +32,12 @@ public class MainFilter extends HttpServlet {
         }
 
         // Check if session bean already exists
-        SessionBean sessionBean = (SessionBean) req.getSession().getAttribute("sessionBean");
+        SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
 
         // If no session bean has been detected, continue with the logic. If there is a session bean, just forward the request
         if (sessionBean == null || sessionBean.getUserId().equals("")) {
             // Authentication via session cookie
-            Cookie[] cookies = req.getCookies();
+            Cookie[] cookies = request.getCookies();
             String sessionIdentifier = "";
 
             for (Cookie cookie : cookies) {
@@ -52,35 +53,54 @@ public class MainFilter extends HttpServlet {
 
             // If the user has been authenticated via cookie, forward the request. Otherwise redirect to login page
             if (!userId.isEmpty()) {
-                // Set last login time for that user
-                loginBean.setLastLogin(userId);
-                // Forward user
-                sessionBean = new SessionBean(userId);
-                if (userId.equals("27")){
-                    int random = (int)(Math.random()*5);
-                    switch (random){
-                        case 1 : resp.sendRedirect("https://www.youtube.com/watch?v=8KsT6RgXF_I"); break;
-                        case 2 : resp.sendRedirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ"); break;
-                        case 3 : resp.sendRedirect("https://www.youtube.com/watch?v=LZ3TlUQEvTY"); break;
-                        case 4 : resp.sendRedirect("https://youtu.be/GBww5jEWC4o"); break;
-                        default: resp.sendRedirect("https://www.youtube.com/watch?v=YNDVipmJfz8"); break;
-                    }
+                if (!loginBean.isSessionCookieStillValid(userId)) {
+                    ErrorCodes status = ErrorCodes.AUTHFAIL;
+                    // Show an authentication error
+                    request.setAttribute("isSadLlama", true);
+                    request.setAttribute("header", status.getHeader());
+                    request.setAttribute("message", status.getMessage());
+                    request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 } else {
-                    req.getSession().setAttribute("sessionBean", sessionBean);
-                    req.getServletContext().getRequestDispatcher((part + "Page")).forward(req, resp);
+                    // Set last login time for that user
+                    loginBean.setLastLogin(userId);
+                    // Forward user
+                    sessionBean = new SessionBean(userId);
+                    if (userId.equals("27")) {
+                        int random = (int) (Math.random() * 5);
+                        switch (random) {
+                            case 1:
+                                response.sendRedirect("https://www.youtube.com/watch?v=8KsT6RgXF_I");
+                                break;
+                            case 2:
+                                response.sendRedirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+                                break;
+                            case 3:
+                                response.sendRedirect("https://www.youtube.com/watch?v=LZ3TlUQEvTY");
+                                break;
+                            case 4:
+                                response.sendRedirect("https://youtu.be/GBww5jEWC4o");
+                                break;
+                            default:
+                                response.sendRedirect("https://www.youtube.com/watch?v=YNDVipmJfz8");
+                                break;
+                        }
+                    } else {
+                        request.getSession().setAttribute("sessionBean", sessionBean);
+                        request.getServletContext().getRequestDispatcher((part + "Page")).forward(request, response);
+                    }
                 }
             } else {
                 // If the page is a public page, the user can be forwarded to that page even if he is not logged in.
                 // If it is a page in the protected area, he will be redirected to the login page if he is not logged in
                 if (isPublicPage) {
-                    req.getServletContext().getRequestDispatcher(part + "Page").forward(req, resp);
+                    request.getServletContext().getRequestDispatcher(part + "Page").forward(request, response);
                 } else {
-                    resp.sendRedirect("/");
+                    response.sendRedirect("/");
                 }
             }
         } else {
             // Session Bean available, forward user
-            req.getServletContext().getRequestDispatcher(part + "Page").forward(req, resp);
+            request.getServletContext().getRequestDispatcher(part + "Page").forward(request, response);
         }
 
 

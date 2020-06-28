@@ -57,7 +57,9 @@ public class Login extends HttpServlet {
 
         stayLoggedIn = Boolean.valueOf(request.getParameter("keepSignedIn"));
 
-        ErrorCodes status = isRegister ? bean.register(username, password, email, firstName, lastName) : bean.login(username, password);
+        int cookieLifetime = stayLoggedIn ? 30 : 0;
+
+        ErrorCodes status = isRegister ? bean.register(username, password, email, firstName, lastName, cookieLifetime) : bean.login(username, password, cookieLifetime);
 
         //UserId required for session cookie
         String userId = "";
