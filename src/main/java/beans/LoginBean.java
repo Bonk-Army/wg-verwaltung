@@ -48,6 +48,7 @@ public class LoginBean {
         String cookiePostfix = new RandomStringGenerator(21).nextString();
         this.cookiePostfixNotHashed = cookiePostfix;
         String cookiePostfixHash = PasswordHasher.hashPassword(cookiePostfix, salt);
+        String userId = SQLDCusers.getUserId(username);
 
         if (cookiePostfixHash == null) {
             return ErrorCodes.FAILURE;
@@ -60,6 +61,7 @@ public class LoginBean {
             if (newHash.equals(hash)) {
                 if (SQLDCusers.setCookiePostfix(username, cookiePostfixHash) && SQLDCusers.setCookieLifetime(username, cookieLifetime)
                         && SQLDCusers.setLastPasswordLogin(username)) {
+                    setLastLogin(userId);
                     this.status = ErrorCodes.SUCCESS;
                     return ErrorCodes.SUCCESS;
                 } else {
@@ -102,32 +104,40 @@ public class LoginBean {
         if (!RegexHelper.checkString(username) || !RegexHelper.checkText(firstName) || !RegexHelper.checkText(lastName) || !RegexHelper.checkEmail(email)) {
             return ErrorCodes.WRONGENTRY;
         } else {
-            if (isUsernameUnique(username) && isEmailUnique(email)) {
-                //Create new user. Generate random, 10-digit verification code for email verification.
-                String verificationCode = new RandomStringGenerator(10).nextString();
-                String cookiePostfix = new RandomStringGenerator(21).nextString();
-                this.cookiePostfixNotHashed = cookiePostfix;
-                String cookiePostfixHash = PasswordHasher.hashPassword(cookiePostfix, hash);
+            if (isUsernameUnique(username)) {
+                if (isEmailUnique(email)) {
+                    //Create new user. Generate random, 10-digit verification code for email verification.
+                    String verificationCode = new RandomStringGenerator(10).nextString();
+                    String cookiePostfix = new RandomStringGenerator(21).nextString();
+                    this.cookiePostfixNotHashed = cookiePostfix;
+                    String cookiePostfixHash = PasswordHasher.hashPassword(cookiePostfix, hash);
 
-                if (cookiePostfixHash == null) {
+                    if (cookiePostfixHash == null) {
+                        return ErrorCodes.FAILURE;
+                    }
+
+                    // If the user creation was successful, send an email and continue registration
+                    if (SQLDCusers.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfixHash, cookieLifetime)) {
+                        // Now send an email to the user with the verification link
+                        String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
+                        String fullName = firstName + " " + lastName;
+                        MailSender.sendVerificationMail(email, fullName, verifyLink);
+
+                        // Set the lastLogin time
+                        String userId = SQLDCusers.getUserId(username);
+                        setLastLogin(userId);
+
+                        // And return success
+                        return ErrorCodes.SUCCESS;
+                    }
+                    // If something failed server-side, return FAILURE
                     return ErrorCodes.FAILURE;
+                } else {
+                    return ErrorCodes.DUPLICATEEMAIL;
                 }
-
-                // If the user creation was successful, send an email and continue registration
-                if (SQLDCusers.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfixHash, cookieLifetime)) {
-                    // Now send an email to the user with the verification link
-                    String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
-                    String fullName = firstName + " " + lastName;
-                    MailSender.sendVerificationMail(email, fullName, verifyLink);
-
-                    // And return success
-                    return ErrorCodes.SUCCESS;
-                }
-                // If something failed server-side, return FAILURE
-                return ErrorCodes.FAILURE;
             } else {
-                //If either already exists, WRONGENTRY
-                return ErrorCodes.WRONGENTRY;
+                //If either already exists, return a duplicate username error
+                return ErrorCodes.DUPLICATEUNAME;
             }
         }
     }
