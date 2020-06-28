@@ -65,6 +65,7 @@ public class MainFilter extends HttpServlet {
                     loginBean.setLastLogin(userId);
                     // Forward user
                     sessionBean = new SessionBean(userId);
+                    // TODO Remove this before submission!!!!
                     if (userId.equals("27")) {
                         int random = (int) (Math.random() * 5);
                         switch (random) {

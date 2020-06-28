@@ -213,7 +213,11 @@ public class LoginBean {
      * @return The ID as a String
      */
     public String getUserId(String username) {
-        return SQLDCusers.getUserId(username);
+        if (RegexHelper.checkString(username)) {
+            return SQLDCusers.getUserId(username);
+        }
+
+        return "";
     }
 
     /**
