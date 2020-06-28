@@ -36,7 +36,11 @@ public class FinancialBean {
         int valueCents = (int) Math.round(100 * Double.parseDouble(value));
 
         if (RegexHelper.checkText(reason)) {
-            return SQLDCfinancial.createEntry(reason, valueCents, createdBy, wgId, date) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            if (!wgId.equals("")) {
+                return SQLDCfinancial.createEntry(reason, valueCents, createdBy, wgId, date) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            } else {
+                return ErrorCodes.NOWGFOUND;
+            }
         }
 
         return ErrorCodes.WRONGENTRY;

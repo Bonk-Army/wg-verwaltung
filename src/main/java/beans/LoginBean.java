@@ -8,7 +8,6 @@ import java.util.List;
  * Bean that handles all backend logic and database callouts required for user login and registration.
  */
 public class LoginBean {
-    private ErrorCodes status;
     private String cookiePostfixNotHashed = "";
 
     public LoginBean() {
@@ -39,7 +38,6 @@ public class LoginBean {
         List<String> allUserNames = SQLDCusers.getAllUserNames();
 
         if (!RegexHelper.checkString(username) || !allUserNames.contains(username)) {
-            this.status = ErrorCodes.WRONGUNAME;
             return ErrorCodes.WRONGUNAME;
         }
 
@@ -48,6 +46,7 @@ public class LoginBean {
         String cookiePostfix = new RandomStringGenerator(21).nextString();
         this.cookiePostfixNotHashed = cookiePostfix;
         String cookiePostfixHash = PasswordHasher.hashPassword(cookiePostfix, salt);
+        String userId = SQLDCusers.getUserId(username);
 
         if (cookiePostfixHash == null) {
             return ErrorCodes.FAILURE;
@@ -60,20 +59,17 @@ public class LoginBean {
             if (newHash.equals(hash)) {
                 if (SQLDCusers.setCookiePostfix(username, cookiePostfixHash) && SQLDCusers.setCookieLifetime(username, cookieLifetime)
                         && SQLDCusers.setLastPasswordLogin(username)) {
-                    this.status = ErrorCodes.SUCCESS;
+                    setLastLogin(userId);
                     return ErrorCodes.SUCCESS;
                 } else {
-                    this.status = ErrorCodes.FAILURE;
                     return ErrorCodes.FAILURE;
                 }
             } else {
-                this.status = ErrorCodes.WRONGENTRY;
                 return ErrorCodes.WRONGENTRY;
             }
         }
 
         //Something failed server-side, return FAILURE
-        this.status = ErrorCodes.FAILURE;
         return ErrorCodes.FAILURE;
     }
 
@@ -102,32 +98,40 @@ public class LoginBean {
         if (!RegexHelper.checkString(username) || !RegexHelper.checkText(firstName) || !RegexHelper.checkText(lastName) || !RegexHelper.checkEmail(email)) {
             return ErrorCodes.WRONGENTRY;
         } else {
-            if (isUsernameUnique(username) && isEmailUnique(email)) {
-                //Create new user. Generate random, 10-digit verification code for email verification.
-                String verificationCode = new RandomStringGenerator(10).nextString();
-                String cookiePostfix = new RandomStringGenerator(21).nextString();
-                this.cookiePostfixNotHashed = cookiePostfix;
-                String cookiePostfixHash = PasswordHasher.hashPassword(cookiePostfix, hash);
+            if (isUsernameUnique(username)) {
+                if (isEmailUnique(email)) {
+                    //Create new user. Generate random, 10-digit verification code for email verification.
+                    String verificationCode = new RandomStringGenerator(10).nextString();
+                    String cookiePostfix = new RandomStringGenerator(21).nextString();
+                    this.cookiePostfixNotHashed = cookiePostfix;
+                    String cookiePostfixHash = PasswordHasher.hashPassword(cookiePostfix, hash);
 
-                if (cookiePostfixHash == null) {
+                    if (cookiePostfixHash == null) {
+                        return ErrorCodes.FAILURE;
+                    }
+
+                    // If the user creation was successful, send an email and continue registration
+                    if (SQLDCusers.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfixHash, cookieLifetime)) {
+                        // Now send an email to the user with the verification link
+                        String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
+                        String fullName = firstName + " " + lastName;
+                        MailSender.sendVerificationMail(email, fullName, verifyLink);
+
+                        // Set the lastLogin time
+                        String userId = SQLDCusers.getUserId(username);
+                        setLastLogin(userId);
+
+                        // And return success
+                        return ErrorCodes.SUCCESS;
+                    }
+                    // If something failed server-side, return FAILURE
                     return ErrorCodes.FAILURE;
+                } else {
+                    return ErrorCodes.DUPLICATEEMAIL;
                 }
-
-                // If the user creation was successful, send an email and continue registration
-                if (SQLDCusers.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfixHash, cookieLifetime)) {
-                    // Now send an email to the user with the verification link
-                    String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
-                    String fullName = firstName + " " + lastName;
-                    MailSender.sendVerificationMail(email, fullName, verifyLink);
-
-                    // And return success
-                    return ErrorCodes.SUCCESS;
-                }
-                // If something failed server-side, return FAILURE
-                return ErrorCodes.FAILURE;
             } else {
-                //If either already exists, WRONGENTRY
-                return ErrorCodes.WRONGENTRY;
+                //If either already exists, return a duplicate username error
+                return ErrorCodes.DUPLICATEUNAME;
             }
         }
     }
@@ -385,10 +389,6 @@ public class LoginBean {
     */
 
     // Getters and Setters for use with JSPs
-
-    public ErrorCodes getStatus() {
-        return this.status;
-    }
 
     public String getCookiePostfixNotHashed() {
         return cookiePostfixNotHashed;

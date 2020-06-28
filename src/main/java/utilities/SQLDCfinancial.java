@@ -67,7 +67,7 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
 
                 StringBuilder sb = new StringBuilder();
                 Formatter formatter = new Formatter(sb, Locale.GERMAN);
-                formatter.format("%,.2f", (rs.getInt(2)/100d));
+                formatter.format("%,.2f", (rs.getInt(2) / 100d));
                 String valueString = sb.toString();
 
                 String createdDateString = DateFormatter.dateToString(rs.getDate(3));

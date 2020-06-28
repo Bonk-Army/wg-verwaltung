@@ -39,7 +39,11 @@ public class CleanBean {
      */
     public ErrorCodes addNewTask(String taskname, String wgId) {
         if (RegexHelper.checkText(taskname)) {
-            return SQLDCcleaning.addNewTask(wgId, taskname) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            if (!wgId.equals("")) {
+                return SQLDCcleaning.addNewTask(wgId, taskname) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            } else {
+                return ErrorCodes.NOWGFOUND;
+            }
         }
 
         return ErrorCodes.WRONGENTRY;
