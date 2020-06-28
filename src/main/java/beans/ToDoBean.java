@@ -51,7 +51,7 @@ public class ToDoBean {
      * @return The String
      */
     public String dateToString(Date date) {
-        return DateFormatter.dateTimeToString(date);
+        return DateFormatter.dateTimeSecondsToString(date);
     }
 
     /**
