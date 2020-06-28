@@ -848,7 +848,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
                 c.add(Calendar.DATE, cookieLifetime);
                 Date cookieLifetimeEnd = c.getTime();
 
-                return now.after(cookieLifetimeEnd);
+                return !now.after(cookieLifetimeEnd);
             }
         } catch (Exception e) {
             e.printStackTrace();

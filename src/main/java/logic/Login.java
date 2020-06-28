@@ -1,6 +1,7 @@
 package logic;
 
 import beans.LoginBean;
+import beans.SessionBean;
 import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
@@ -65,7 +66,7 @@ public class Login extends HttpServlet {
         String userId = "";
         switch (status) {
             case SUCCESS:
-                // Log the user in, save a cookie and redirect him to the home page
+                // Log the user in, save a cookie, create a session bean and redirect him to the home page
                 userId = bean.getUserId(username);
                 String sessionIdentifier = (userId + "-" + bean.getCookiePostfixNotHashed());
                 Cookie sessionCookie = new Cookie("session", (sessionIdentifier));
@@ -74,6 +75,9 @@ public class Login extends HttpServlet {
                 // otherwise let it be a session cookie
                 sessionCookie.setMaxAge(cookieAge);
                 response.addCookie(sessionCookie);
+                // Now create the session bean
+                SessionBean sessionBean = new SessionBean(userId);
+                request.getSession().setAttribute("sessionBean", sessionBean);
                 response.sendRedirect("/home");
                 break;
             default:
