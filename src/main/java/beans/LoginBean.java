@@ -8,7 +8,6 @@ import java.util.List;
  * Bean that handles all backend logic and database callouts required for user login and registration.
  */
 public class LoginBean {
-    private ErrorCodes status;
     private String cookiePostfixNotHashed = "";
 
     public LoginBean() {
@@ -39,7 +38,6 @@ public class LoginBean {
         List<String> allUserNames = SQLDCusers.getAllUserNames();
 
         if (!RegexHelper.checkString(username) || !allUserNames.contains(username)) {
-            this.status = ErrorCodes.WRONGUNAME;
             return ErrorCodes.WRONGUNAME;
         }
 
@@ -62,20 +60,16 @@ public class LoginBean {
                 if (SQLDCusers.setCookiePostfix(username, cookiePostfixHash) && SQLDCusers.setCookieLifetime(username, cookieLifetime)
                         && SQLDCusers.setLastPasswordLogin(username)) {
                     setLastLogin(userId);
-                    this.status = ErrorCodes.SUCCESS;
                     return ErrorCodes.SUCCESS;
                 } else {
-                    this.status = ErrorCodes.FAILURE;
                     return ErrorCodes.FAILURE;
                 }
             } else {
-                this.status = ErrorCodes.WRONGENTRY;
                 return ErrorCodes.WRONGENTRY;
             }
         }
 
         //Something failed server-side, return FAILURE
-        this.status = ErrorCodes.FAILURE;
         return ErrorCodes.FAILURE;
     }
 
@@ -395,10 +389,6 @@ public class LoginBean {
     */
 
     // Getters and Setters for use with JSPs
-
-    public ErrorCodes getStatus() {
-        return this.status;
-    }
 
     public String getCookiePostfixNotHashed() {
         return cookiePostfixNotHashed;
