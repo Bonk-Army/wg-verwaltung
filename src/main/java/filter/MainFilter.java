@@ -21,14 +21,21 @@ public class MainFilter extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> publicPages = Arrays.asList("/impressum", "/faq", "/contact");
         boolean isPublicPage = false;
-
+        boolean isLoginPage = false;
 
         String url = request.getRequestURL().toString();
 
         String part = url.substring(url.lastIndexOf('/'));
 
+        // If the user opens a public page, set isPublicPage to true
         if (publicPages.contains(part)) {
             isPublicPage = true;
+        }
+
+        // If the user opens the login page, set isLoginPage to true so we can redirect him to /home
+        // if he is already logged in
+        if (part.equals("/")) {
+            isLoginPage = true;
         }
 
         // Check if session bean already exists
@@ -53,7 +60,23 @@ public class MainFilter extends HttpServlet {
 
             // If the user has been authenticated via cookie, forward the request. Otherwise redirect to login page
             if (!userId.isEmpty()) {
+                // If the cookie that the user sends is not valid anymore, show him an authentication error
                 if (!loginBean.isSessionCookieStillValid(userId)) {
+                    /*
+                      /$$$$$$                                        /$$
+                     /$$__  $$                                     /$$$$
+                    | $$  \__/  /$$$$$$   /$$$$$$$  /$$$$$$       |_  $$
+                    | $$       |____  $$ /$$_____/ /$$__  $$        | $$
+                    | $$        /$$$$$$$|  $$$$$$ | $$$$$$$$        | $$
+                    | $$    $$ /$$__  $$ \____  $$| $$_____/        | $$
+                    |  $$$$$$/|  $$$$$$$ /$$$$$$$/|  $$$$$$$       /$$$$$$
+                     \______/  \_______/|_______/  \_______/      |______/
+
+                    User is not identified
+
+                     Session Bean does not exist, the session cookie that the user sent is invalid (too old)
+                     User gets an error page
+                     */
                     ErrorCodes status = ErrorCodes.AUTHFAIL;
                     // Show an authentication error
                     request.setAttribute("isSadLlama", true);
@@ -61,50 +84,81 @@ public class MainFilter extends HttpServlet {
                     request.setAttribute("message", status.getMessage());
                     request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 } else {
+                    /*
+                      /$$$$$$                                       /$$$$$$
+                     /$$__  $$                                     /$$__  $$
+                    | $$  \__/  /$$$$$$   /$$$$$$$  /$$$$$$       |__/  \ $$
+                    | $$       |____  $$ /$$_____/ /$$__  $$        /$$$$$$/
+                    | $$        /$$$$$$$|  $$$$$$ | $$$$$$$$       /$$____/
+                    | $$    $$ /$$__  $$ \____  $$| $$_____/      | $$
+                    |  $$$$$$/|  $$$$$$$ /$$$$$$$/|  $$$$$$$      | $$$$$$$$
+                     \______/  \_______/|_______/  \_______/      |________/
+
+                    User is identified via cookie
+
+                    Session Bean does not exist, session cookie is valid
+                    User gets the page he opened
+                     */
                     // Set last login time for that user
                     loginBean.setLastLogin(userId);
                     // Forward user
                     sessionBean = new SessionBean(userId);
-                    // TODO Remove this before submission!!!!
-                    if (userId.equals("27")) {
-                        int random = (int) (Math.random() * 5);
-                        switch (random) {
-                            case 1:
-                                response.sendRedirect("https://www.youtube.com/watch?v=8KsT6RgXF_I");
-                                break;
-                            case 2:
-                                response.sendRedirect("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
-                                break;
-                            case 3:
-                                response.sendRedirect("https://www.youtube.com/watch?v=LZ3TlUQEvTY");
-                                break;
-                            case 4:
-                                response.sendRedirect("https://youtu.be/GBww5jEWC4o");
-                                break;
-                            default:
-                                response.sendRedirect("https://www.youtube.com/watch?v=YNDVipmJfz8");
-                                break;
-                        }
+                    // If the user opened the login page, redirect him to /home
+                    if (isLoginPage) {
+                        response.sendRedirect("/home");
                     } else {
                         request.getSession().setAttribute("sessionBean", sessionBean);
                         request.getServletContext().getRequestDispatcher((part + "Page")).forward(request, response);
                     }
                 }
             } else {
+                /*
+                  /$$$$$$                                       /$$$$$$
+                 /$$__  $$                                     /$$__  $$
+                | $$  \__/  /$$$$$$   /$$$$$$$  /$$$$$$       |__/  \ $$
+                | $$       |____  $$ /$$_____/ /$$__  $$         /$$$$$/
+                | $$        /$$$$$$$|  $$$$$$ | $$$$$$$$        |___  $$
+                | $$    $$ /$$__  $$ \____  $$| $$_____/       /$$  \ $$
+                |  $$$$$$/|  $$$$$$$ /$$$$$$$/|  $$$$$$$      |  $$$$$$/
+                 \______/  \_______/|_______/  \_______/       \______/
+
+                User is not identified
+
+                Session Bean does not exist, user sent no session cookie or it is invalid (wrong session identifier)
+                If the page is public, he sees the page. If it is protected, he gets redirected to the login page
+                 */
                 // If the page is a public page, the user can be forwarded to that page even if he is not logged in.
-                // If it is a page in the protected area, he will be redirected to the login page if he is not logged in
+                // If it is a page in the protected area, he will be forwarded to the login page if he is not logged in
                 if (isPublicPage) {
                     request.getServletContext().getRequestDispatcher(part + "Page").forward(request, response);
                 } else {
-                    response.sendRedirect("/");
+                    request.getServletContext().getRequestDispatcher("/login").forward(request, response);
                 }
             }
         } else {
-            // Session Bean available, forward user
-            request.getServletContext().getRequestDispatcher(part + "Page").forward(request, response);
+            /*
+              /$$$$$$                                      /$$   /$$
+             /$$__  $$                                    | $$  | $$
+            | $$  \__/  /$$$$$$   /$$$$$$$  /$$$$$$       | $$  | $$
+            | $$       |____  $$ /$$_____/ /$$__  $$      | $$$$$$$$
+            | $$        /$$$$$$$|  $$$$$$ | $$$$$$$$      |_____  $$
+            | $$    $$ /$$__  $$ \____  $$| $$_____/            | $$
+            |  $$$$$$/|  $$$$$$$ /$$$$$$$/|  $$$$$$$            | $$
+             \______/  \_______/|_______/  \_______/            |__/
+
+            User is identified via bean
+
+            Session Bean exists
+            User gets the page he opened or the /home page if he only opened /
+             */
+            // Session Bean available, forward user to home if he opened the login page or to the requested page if it
+            // is not the login page
+            if (isLoginPage) {
+                response.sendRedirect("/home");
+            } else {
+                request.getServletContext().getRequestDispatcher(part + "Page").forward(request, response);
+            }
         }
-
-
     }
 
     @Override
