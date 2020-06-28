@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="./assets/Styles/ToDo.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
 </head>
-<body>
+<body onload="validDate()">
 <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
 <%@include file="../../assets/Templates/Modal/createToDo.jsp" %>
 <%@include file="../../assets/Templates/Modal/doneToDo.jsp" %>
