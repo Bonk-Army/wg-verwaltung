@@ -13,3 +13,8 @@ function removeArticle(id) {
 }
 
 $('[data-toggle="popover"]').popover()
+
+function validDate(){
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementsByName("deadline")[0].setAttribute('min', today);
+}
