@@ -62,6 +62,7 @@
         |__ ^^-^^
         |__ ErrorPages                  |                                   | Zuständig : @KA      | Mapped by @PM                            | Initial
         |__ 404                         | JSP Page : 404                    | Zuständig : @KA      | Mapped by @PM                            | Initial
+        |__ 500                         | JSP Page: 500                     | Zuständig : @KA      | MApped by @PM                            | Initial
         |__ ^^-^^
     -->
     <!-- ############################################################################################################ -->
@@ -271,7 +272,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>AddTodoLogic</servlet-name>
-        <servlet-class>logic.CreateToDo</servlet-class>
+        <servlet-class>logic.AddTodo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddTodoLogic</servlet-name>
@@ -424,6 +425,6 @@
     </error-page>
     <error-page>
         <error-code>500</error-code>
-        <location>/Pages/Response/404.jsp</location>
+        <location>/Pages/Response/500.jsp</location>
     </error-page>
 </web-app>
