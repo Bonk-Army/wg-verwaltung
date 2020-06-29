@@ -7,7 +7,7 @@
     <%@include file="../../assets/Templates/Imports/Fonts.jsp" %>
     <%@include file="../../assets/Templates/Imports/Bootstrap.jsp" %>
 
-    <title>Our Team</title>
+    <title>Team</title>
 
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Team.css">
