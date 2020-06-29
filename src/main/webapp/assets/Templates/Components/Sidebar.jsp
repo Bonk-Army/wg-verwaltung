@@ -55,7 +55,7 @@
         </li>
         <li>
             <a href="/team">
-                <i class="fas fa-paper-plane"></i>
+                <i class="fas fa-users"></i>
                 Team
             </a>
         </li>
