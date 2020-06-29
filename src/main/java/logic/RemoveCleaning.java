@@ -15,8 +15,6 @@ import java.io.IOException;
  * Called when the user tries to remove a cleaning task from his wg
  */
 public class RemoveCleaning extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public RemoveCleaning() {
         super();
     }
@@ -54,9 +52,5 @@ public class RemoveCleaning extends HttpServlet {
                 request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }

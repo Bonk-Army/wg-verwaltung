@@ -15,14 +15,8 @@ import java.io.IOException;
  * Create wg servlet that is called when the user creates a new wg via form
  */
 public class CreateWG extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public CreateWG() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**

@@ -15,8 +15,6 @@ import java.io.IOException;
  * Join wg servlet that is called when the user tries to join a wg via invite code or invite link
  */
 public class JoinWG extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public JoinWG() {
         super();
     }
@@ -66,10 +64,5 @@ public class JoinWG extends HttpServlet {
                     break;
             }
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

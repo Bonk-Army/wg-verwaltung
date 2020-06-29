@@ -160,9 +160,4 @@ public class MainFilter extends HttpServlet {
             }
         }
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
-    }
 }

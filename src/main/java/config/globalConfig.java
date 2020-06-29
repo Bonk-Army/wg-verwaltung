@@ -21,6 +21,7 @@ public class globalConfig {
         return false;
     }
 
+    // So we can set a fixed os for testing purpose
     private static String OS = null;
 
     public static String getOsName() {
