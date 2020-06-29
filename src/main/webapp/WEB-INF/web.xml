@@ -49,6 +49,7 @@
         |__ /faq                        | JSP Page : FAQ                    | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /contact                    | JSP Page : Kontakt                | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /impressum                  | JSP Page : Impressum              | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /team                       | JSP Page : Team                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /settings                   | JSP Page : Settings               | Zuständig : @KA      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
         |__ /wgverwaltung               | JSP Page : WGVerwaltung           | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /resetPassword              | JSP Page : WGVerwaltung           | Zuständig : @KA      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
@@ -119,6 +120,14 @@
         <url-pattern>/impressumPage</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>Team</servlet-name>
+        <jsp-file>/Pages/Public/Team.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Team</servlet-name>
+        <url-pattern>/teamPage</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>ResetPassword</servlet-name>
         <jsp-file>/Pages/Public/ResetPassword.jsp</jsp-file>
     </servlet>
@@ -144,6 +153,7 @@
         <url-pattern>/settings</url-pattern>
         <url-pattern>/faq</url-pattern>
         <url-pattern>/impressum</url-pattern>
+        <url-pattern>/team</url-pattern>
         <url-pattern>/contact</url-pattern>
     </servlet-mapping>
     <!-- Protected via Filter Servlet -->

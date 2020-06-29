@@ -54,6 +54,12 @@
             </a>
         </li>
         <li>
+            <a href="/team">
+                <i class="fas fa-paper-plane"></i>
+                Team
+            </a>
+        </li>
+        <li>
             <a href="/impressum">
                 <i class="fas fa-newspaper"></i>
                 Impressum
