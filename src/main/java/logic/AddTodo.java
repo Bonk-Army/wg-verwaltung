@@ -19,14 +19,8 @@ import java.util.Date;
  * Create Todo servlet that is called when the user tries to create a new todo for his wg
  */
 public class AddTodo extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public AddTodo() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**

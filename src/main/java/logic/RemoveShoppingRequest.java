@@ -14,8 +14,6 @@ import java.io.IOException;
  * Remove shopping request servlet that is called when a shopping request is set to done
  */
 public class RemoveShoppingRequest extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public RemoveShoppingRequest() {
         super();
     }
@@ -44,9 +42,5 @@ public class RemoveShoppingRequest extends HttpServlet {
                 request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }

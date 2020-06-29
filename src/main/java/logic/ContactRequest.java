@@ -13,14 +13,8 @@ import java.io.IOException;
  * Contact Request Servlet that is called when the user sends the contact form data
  */
 public class ContactRequest extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public ContactRequest() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**

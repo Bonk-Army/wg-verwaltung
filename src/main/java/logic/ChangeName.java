@@ -14,14 +14,8 @@ import java.io.IOException;
  * Called when the user tries to change his first and/or last name from the settings page
  */
 public class ChangeName extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public ChangeName() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**

@@ -18,14 +18,8 @@ import java.util.Date;
  * Add shopping request logic that is called when the user creates a new shopping request
  */
 public class AddShoppingRequest extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public AddShoppingRequest() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     @Override
