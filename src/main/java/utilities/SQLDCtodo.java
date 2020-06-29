@@ -383,7 +383,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
         try {
             ResultSet rs = executeQuery(("SELECT COUNT(todo.uniqueID), users.firstName, users.lastName FROM todo "
                     + "LEFT OUTER JOIN users ON users.uniqueID = todo.assignedId WHERE todo.wgId =" + Integer.valueOf(wgId)
-                    + "AND todo.isActive = 1 AND todo.isDone = 0 GROUP BY todo.assignedId"));
+                    + " AND todo.isActive = 1 AND todo.isDone = 0 GROUP BY todo.assignedId"));
 
             while (rs.next()) {
                 Map<String, String> currentUser = new HashMap<String, String>();
