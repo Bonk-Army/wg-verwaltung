@@ -53,6 +53,7 @@
         |__ /settings                   | JSP Page : Settings               | Zuständig : @KA      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
         |__ /wgverwaltung               | JSP Page : WGVerwaltung           | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /resetPassword              | JSP Page : WGVerwaltung           | Zuständig : @KA      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
+        |__ /team                       | JSP Page : Team                   | Zusätndig : @NH      | Mapped by @PM | Zuständig für Inhalt @NH | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
