@@ -10,8 +10,8 @@ import java.util.*;
  * Bean used for the home page (overview page)
  */
 public class OverviewBean {
-    private String userId;
-    private String wgId;
+    private String userId = "";
+    private String wgId = "";
 
     public OverviewBean() {
     }
