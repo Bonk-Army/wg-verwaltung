@@ -253,7 +253,7 @@ public class OverviewBean {
      *
      * @return A map with the name as key and the number of open todos as value
      */
-    public Map<String, int> getTodoChartData() {
+    public Map<String, Integer> getTodoChartData() {
         return SQLDCtodo.getOpenTodosPerUserOfWg(this.wgId);
     }
 

@@ -377,8 +377,8 @@ public class SQLDCtodo extends SQLDatabaseConnection {
      * @param wgId The wgId of the wg to fetch the users for
      * @return A map with the name as key and the number of open todos as value
      */
-    public static Map<String, int> getOpenTodosPerUserOfWg(String wgId) {
-        Map<String, int> openTodosMap = new HashMap<String, int>();
+    public static Map<String, Integer> getOpenTodosPerUserOfWg(String wgId) {
+        Map<String, Integer> openTodosMap = new HashMap<String, Integer>();
 
         try {
             ResultSet rs = executeQuery(("SELECT COUNT(todo.uniqueID), users.firstName, users.lastName FROM todo "
