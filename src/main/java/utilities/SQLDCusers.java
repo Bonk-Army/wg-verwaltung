@@ -857,4 +857,24 @@ public class SQLDCusers extends SQLDatabaseConnection {
 
         return false;
     }
+
+    /**
+     * Check if the user has already verified their email address
+     *
+     * @param userId The userId of the user
+     * @return If the email address is verified
+     */
+    public static boolean isEmailVerified(String userId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT isVerified FROM users WHERE uniqueID = " + Integer.valueOf(userId)));
+
+            while (rs.next()) {
+                return rs.getBoolean(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

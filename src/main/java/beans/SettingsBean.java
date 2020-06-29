@@ -219,4 +219,13 @@ public class SettingsBean {
 
         return false;
     }
+
+    /**
+     * Check if the user has already verified their email address
+     *
+     * @return If it is verified
+     */
+    public boolean isEmailVerified() {
+        return SQLDCusers.isEmailVerified(this.userId);
+    }
 }
