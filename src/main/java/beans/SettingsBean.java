@@ -9,7 +9,7 @@ import java.util.List;
  * Bean used for the settings page
  */
 public class SettingsBean {
-    private String userId;
+    private String userId = "";
 
     public SettingsBean() {
     }
