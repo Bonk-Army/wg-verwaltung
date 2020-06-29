@@ -14,9 +14,9 @@
     background: #3c415e;
     color: aliceblue;
     transition: all 0.3s;
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
+    position: fixed;
+    z-index: 1;
+    top: 0;
     left: 0;
 }
 
