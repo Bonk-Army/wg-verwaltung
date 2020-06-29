@@ -17,5 +17,11 @@
 </head>
 <body>
 <%@include file="../../assets/Contents/Team.jsp" %>
+<c:if test="${sessionBean.loggedIn}">
+    <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
+    <script>
+        <%@include file="../../assets/Scripts/Sidebar.js" %>
+    </script>
+</c:if>
 </body>
 </html>
