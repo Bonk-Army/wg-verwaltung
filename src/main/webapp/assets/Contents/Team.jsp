@@ -1,9 +1,5 @@
-<!-- Header -->
-<header class="bg-primary text-center py-5 mb-4">
-    <div class="container">
-        <h1 class="font-weight-light text-white">Meet the &#129433;</h1>
-    </div>
-</header>
+
+<h2 class="header">Meet the &#129433; Crew</h2>
 
 <!-- Page Content -->
 <div class="container">
@@ -11,7 +7,7 @@
         <!-- Team Member 1 -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-0 shadow">
-                <img src="https://downloads.psd-tutorials.de/Download/_userimages/Image/Duddle/images/02.png" class="card-img-top" alt="...">
+                <img src="../../assets/Images/Team/lisa.png" class="card-img-top" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title mb-0">Lisa Kletsko</h5>
                     <div class="card-text text-black-50">F&uuml;hrerin</div>
@@ -41,7 +37,7 @@
         <!-- Team Member 4 -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-0 shadow">
-                <img src="https://downloads.psd-tutorials.de/Download/_userimages/Image/Duddle/images/02.png" class="card-img-top" alt="...">
+                <img src="../../assets/Images/Team/paul.png" class="card-img-top" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title mb-0">Paul Wolf</h5>
                     <div class="card-text text-black-50">Testmanager</div>
@@ -51,7 +47,7 @@
         <!-- Team Member 5 -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-0 shadow">
-                <img src="https://downloads.psd-tutorials.de/Download/_userimages/Image/Duddle/images/02.png" class="card-img-top" alt="...">
+                <img src="../../assets/Images/Team/henning.png" class="card-img-top" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title mb-0">Henning Sextro</h5>
                     <div class="card-text text-black-50">Backend</div>
@@ -61,7 +57,7 @@
         <!-- Team Member 6 -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-0 shadow">
-                <img src="https://downloads.psd-tutorials.de/Download/_userimages/Image/Duddle/images/02.png" class="card-img-top" alt="...">
+                <img src="../../assets/Images/Team/dave.png" class="card-img-top" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title mb-0">David Huh</h5>
                     <div class="card-text text-black-50">Backend</div>
@@ -71,7 +67,7 @@
         <!-- Team Member 7 -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-0 shadow">
-                <img src="https://downloads.psd-tutorials.de/Download/_userimages/Image/Duddle/images/02.png" class="card-img-top" alt="...">
+                <img src="../../assets/Images/Team/danny.png" class="card-img-top" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title mb-0">Danny Kroll</h5>
                     <div class="card-text text-black-50">Frontend</div>
@@ -81,7 +77,7 @@
         <!-- Team Member 8 -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-0 shadow">
-                <img src="https://downloads.psd-tutorials.de/Download/_userimages/Image/Duddle/images/02.png" class="card-img-top" alt="...">
+                <img src="../../assets/Images/Team/nico.png" class="card-img-top" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title mb-0">Nico Holzh&auml;user</h5>
                     <div class="card-text text-black-50">&#129433;&#129433;</div>
