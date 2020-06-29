@@ -857,4 +857,24 @@ public class SQLDCusers extends SQLDatabaseConnection {
 
         return false;
     }
+
+    /**
+     * Get the number of users in the given wg (because we only allow each wg to have a maximum of 10 members
+     *
+     * @param wgId The wgId of the wg
+     * @return The number of current members
+     */
+    public static int numberOfMembersInWg(String wgId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT COUNT(uniqueID) FROM users WHERE wgId = " + Integer.valueOf(wgId)));
+
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
 }

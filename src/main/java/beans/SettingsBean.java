@@ -116,7 +116,12 @@ public class SettingsBean {
             if (allAccessKeys.contains(accessKey)) {
                 String wgId = SQLDCwgs.getWgId(accessKey);
                 if (!wgId.equals("")) {
-                    return SQLDCusers.setWgId(wgId, userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                    // If there are already 10 (or more, which should technically not happen) members in the wg,
+                    // the user can't join and gets an error.
+                    if (SQLDCusers.numberOfMembersInWg(wgId) < 10) {
+                        return SQLDCusers.setWgId(wgId, userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                    }
+                    return ErrorCodes.WGFULL;
                 }
             } else {
                 return ErrorCodes.WRONGENTRY;
