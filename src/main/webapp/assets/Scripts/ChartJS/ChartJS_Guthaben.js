@@ -1,6 +1,6 @@
 var datenGuthaben = ${overview.getBalanceChartData()};
 
-var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+var monthNames = ["Januar", "Februar", unescape("M%E4rz"), "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
 
 var today = new Date();
 var d;
