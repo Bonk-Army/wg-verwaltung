@@ -1,5 +1,7 @@
 package beans;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import utilities.*;
 
 import java.util.*;
@@ -251,10 +253,22 @@ public class OverviewBean {
     /**
      * Get the number of open todos and their name string for every user of the wg
      *
-     * @return A map with the name as key and the number of open todos as value
+     * @return A json object with the name as key and the number of open todos as value
      */
-    public Map<String, Integer> getTodoChartData() {
-        return SQLDCtodo.getOpenTodosPerUserOfWg(this.wgId);
+    public String getTodoChartData() {
+        Map<String, Integer> todoMap = SQLDCtodo.getOpenTodosPerUserOfWg(this.wgId);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        String json = "";
+
+        try {
+            json = objectMapper.writeValueAsString(todoMap);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return json;
     }
 
     /**
