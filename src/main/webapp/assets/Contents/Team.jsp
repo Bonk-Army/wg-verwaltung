@@ -10,7 +10,7 @@
                     <img src="../../assets/Images/Team/lisa.png" class="card-img-top" alt="...">
                     <div class="card-body text-center">
                         <h5 class="card-title mb-0">Lisa Kletsko</h5>
-                        <div class="card-text text-black-50">F&uuml;hrerin</div>
+                        <div class="card-text text-black-50">Projektleiterin</div>
                     </div>
                 </div>
             </div>
