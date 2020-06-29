@@ -15,14 +15,8 @@ import java.io.IOException;
  * Create wg servlet that is called when the user creates a new wg via form
  */
 public class CreateWG extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public CreateWG() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**
@@ -52,15 +46,17 @@ public class CreateWG extends HttpServlet {
                 sessionBean.setWgId(settingsBean.getWgIdFromUserId(userId));
                 sessionBean.setWgName(wgName);
                 //Show success
-                response.sendRedirect("/settings");
+                request.setAttribute("isSadLlama", false);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
-            case FAILURE:
+            default:
                 //Show failure
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-                break;
-            case WRONGENTRY:
-                //Show wrongentry
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }

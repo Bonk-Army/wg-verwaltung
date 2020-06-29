@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: patrick
-  Date: 14.06.20
-  Time: 10:29
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -14,10 +7,11 @@
 
     <title>ToDo</title>
 
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/ToDo.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
 </head>
-<body>
+<body onload="validDate()">
 <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
 <%@include file="../../assets/Templates/Modal/createToDo.jsp" %>
 <%@include file="../../assets/Templates/Modal/doneToDo.jsp" %>

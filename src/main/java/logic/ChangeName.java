@@ -1,6 +1,5 @@
 package logic;
 
-import beans.LoginBean;
 import beans.SessionBean;
 import beans.SettingsBean;
 import utilities.ErrorCodes;
@@ -15,14 +14,8 @@ import java.io.IOException;
  * Called when the user tries to change his first and/or last name from the settings page
  */
 public class ChangeName extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public ChangeName() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**
@@ -46,15 +39,17 @@ public class ChangeName extends HttpServlet {
                 sessionBean.setFirstName(firstName);
                 sessionBean.setLastName(lastName);
                 // Show success page
-                response.sendRedirect("/settings");
+                request.setAttribute("isSadLlama", false);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
-            case WRONGENTRY:
-                // Show wrong email page
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
-                break;
-            case FAILURE:
-                // Show server error page
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+            default:
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }

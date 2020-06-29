@@ -3,6 +3,7 @@ package beans;
 import utilities.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Bean used for the settings page
@@ -42,10 +43,14 @@ public class SettingsBean {
             while (stringList.contains(accessKey)) {
                 accessKey = new RandomStringGenerator(20).nextString();
             }
-            if (SQLDCwgs.createWg(nameWg, accessKey)) {
+            if (SQLDCwgs.createWg(nameWg, accessKey, userId)) {
                 String wgId = SQLDCwgs.getWgId(accessKey);
                 if (!wgId.equals("")) {
                     if (SQLDCusers.setWgId(wgId, userId) && SQLDCusers.setUserRights(userId, UserRights.WG_ADMIN.getSqlKey())) {
+                        String userEmail = SQLDCusers.getEmailAddressForUser(userId);
+                        String userNameString = SQLDCusers.getNameStringById(userId);
+                        String inviteLink = "https://wgverwaltung.azurewebsites.net/joinWGLogic?wgcode=" + accessKey;
+                        MailSender.sendWgCreationMail(userNameString, userEmail, nameWg, accessKey, inviteLink);
                         return ErrorCodes.SUCCESS;
                     }
                     return ErrorCodes.FAILURE;
@@ -107,10 +112,16 @@ public class SettingsBean {
      */
     public ErrorCodes setWgId(String userId, String accessKey) {
         if (RegexHelper.checkString(accessKey)) {
-            String wgId = SQLDCwgs.getWgId(accessKey);
-            if (!wgId.equals("")) {
-                return SQLDCusers.setWgId(wgId, userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            List<String> allAccessKeys = SQLDCwgs.getAccessKeyList();
+            if (allAccessKeys.contains(accessKey)) {
+                String wgId = SQLDCwgs.getWgId(accessKey);
+                if (!wgId.equals("")) {
+                    return SQLDCusers.setWgId(wgId, userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                }
+            } else {
+                return ErrorCodes.WRONGENTRY;
             }
+
         }
         return ErrorCodes.WRONGENTRY;
     }

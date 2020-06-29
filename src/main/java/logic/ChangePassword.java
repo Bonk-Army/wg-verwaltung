@@ -14,14 +14,8 @@ import java.io.IOException;
  * Called when the users tries to change his password from the settings page
  */
 public class ChangePassword extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public ChangePassword() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**
@@ -42,15 +36,17 @@ public class ChangePassword extends HttpServlet {
         switch (status) {
             case SUCCESS:
                 // Show success pages
-                response.sendRedirect("/settings");
+                request.setAttribute("isSadLlama", false);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
-            case WRONGPASSWORD:
-                // Show wrong email page
-                request.getServletContext().getRequestDispatcher("/responseWrongPassword").forward(request, response);
-                break;
-            case FAILURE:
-                // Show server error page
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+            default:
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }

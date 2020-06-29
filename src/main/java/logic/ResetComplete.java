@@ -13,11 +13,8 @@ import java.io.IOException;
  * Reset complete servlet that is called after the user clicked the reset password link and now sends his new password
  */
 public class ResetComplete extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+    public ResetComplete() {
+        super();
     }
 
     /**
@@ -36,13 +33,17 @@ public class ResetComplete extends HttpServlet {
 
         switch (status) {
             case SUCCESS:
-                request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
+                request.setAttribute("isSadLlama", false);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
-            case FAILURE:
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-                break;
-            case WRONGENTRY:
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
+            default:
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }

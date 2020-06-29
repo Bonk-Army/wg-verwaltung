@@ -1,22 +1,7 @@
-h2 {
-    font-family: Arial, Verdana;
-    font-weight: 800;
-    font-size: 2.5rem;
-    text-transform: uppercase;
-}
-
-.form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    max-width: 500px;
-}
-
-.btn.btn-lg.btn-primary.btn-block {
-    max-width: 500px;
+section {
+    max-width: 43.75em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 label {
@@ -24,7 +9,7 @@ label {
     margin-bottom: 4px;
 }
 
-button.leave, button.btn-primary:focus {
+button.leave, button.leave:focus {
     background-color: #cc0000;
     border-color: #cc0000;
 }
@@ -44,11 +29,27 @@ button.join:hover {
     border-color: #0cad09;
 }
 
-.modal-content {
-    background-color: #272525;
-    color: aliceblue;
-}
 
-.close {
-    color: aliceblue;
+/*
+    8888ba.88ba                 dP oo                                              oo
+    88  `8b  `8b                88
+    88   88   88 .d8888b. .d888b88 dP .d8888b. .d8888b. dP    dP .d8888b. 88d888b. dP .d8888b. .d8888b.
+    88   88   88 88ooood8 88'  `88 88 88'  `88 88'  `88 88    88 88ooood8 88'  `88 88 88ooood8 Y8ooooo.
+    88   88   88 88.  ... 88.  .88 88 88.  .88 88.  .88 88.  .88 88.  ... 88       88 88.  ...       88
+    dP   dP   dP `88888P' `88888P8 dP `88888P8 `8888P88 `88888P' `88888P' dP       dP `88888P' `88888P'
+                                                 88
+                                                 dP
+*/
+
+@media (max-width: 1069px) {
+    #content {
+        margin-left: 15.625em;
+        max-width: unset;
+    }
+
+    section {
+        max-width: 31.25em;
+        margin-left: 0;
+        margin-right: 0;
+    }
 }

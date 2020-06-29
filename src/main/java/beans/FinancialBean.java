@@ -36,7 +36,11 @@ public class FinancialBean {
         int valueCents = (int) Math.round(100 * Double.parseDouble(value));
 
         if (RegexHelper.checkText(reason)) {
-            return SQLDCfinancial.createEntry(reason, valueCents, createdBy, wgId, date) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            if (!wgId.equals("")) {
+                return SQLDCfinancial.createEntry(reason, valueCents, createdBy, wgId, date) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            } else {
+                return ErrorCodes.NOWGFOUND;
+            }
         }
 
         return ErrorCodes.WRONGENTRY;
@@ -100,7 +104,7 @@ public class FinancialBean {
     }
 
     /**
-     * Get the sum of all entries for each user of the current users wg for a diagram
+     * Get the sum of all entries for each user of the current users wg for an overview table
      *
      * @return A List of maps of which each represents one user
      */
@@ -116,9 +120,12 @@ public class FinancialBean {
 
             // If the user has not had any expenses yet, he is not in the sumPerUserById map and
             // the sum fetching would fail, hence checking if the user exists in the map
-            if(sumPerUserById.keySet().contains(user.get("userId"))){
+            if (sumPerUserById.keySet().contains(user.get("userId"))) {
                 int sum = sumPerUserById.get(user.get("userId"));
-                String sumString = String.format("%.2f", (sum / 100d));
+                StringBuilder sb = new StringBuilder();
+                Formatter formatter = new Formatter(sb, Locale.GERMAN);
+                formatter.format("%,.2f", (sum / 100d));
+                String sumString = sb.toString();
 
                 currentUser.put("sum", sumString);
             } else {
@@ -138,7 +145,10 @@ public class FinancialBean {
      */
     public String getTotalPerWg() {
         int sumForWg = SQLDCfinancial.getTotalForWg(this.wgId);
-        String sumString = String.format("%.2f", (sumForWg / 100d));
+        StringBuilder sb = new StringBuilder();
+        Formatter formatter = new Formatter(sb, Locale.GERMAN);
+        formatter.format("%,.2f", (sumForWg / 100d));
+        String sumString = sb.toString();
 
         return sumString;
     }

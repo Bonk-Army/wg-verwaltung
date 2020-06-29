@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: krissi
-  Date: 16.06.2020
-  Time: 13:07
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,11 +6,12 @@
     <%@include file="../../assets/Templates/Imports/Bootstrap.jsp" %>
 
     <title>Einkaufsliste</title>
-
+    
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Shopping.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
 </head>
-<body>
+<body onload="validDate()">
 <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
 <%@include file="../../assets/Templates/Modal/createShopping.jsp" %>
 <%@include file="../../assets/Templates/Modal/doneShopping.jsp" %>

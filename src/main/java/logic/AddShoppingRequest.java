@@ -18,14 +18,8 @@ import java.util.Date;
  * Add shopping request logic that is called when the user creates a new shopping request
  */
 public class AddShoppingRequest extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public AddShoppingRequest() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     @Override
@@ -43,30 +37,36 @@ public class AddShoppingRequest extends HttpServlet {
         String dateDueString = request.getParameter("dateDue");
         Date dateDue = null;
 
-        try {
-            dateDue = new SimpleDateFormat("yyyy-MM-dd").parse(dateDueString);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String wgId = sessionBean.getWgId();
 
-        String requestedById = "";
-        if (RegexHelper.checkString(requestedBy)) {
-            requestedById = new LoginBean().getUserId(requestedBy);
-        }
+        ErrorCodes status = ErrorCodes.FAILURE;
 
-        ErrorCodes status = shoppingBean.createRequest(article, amount, userId, requestedById, dateDue);
+        // If the user has no wg, show an error page. Otherwise, try to add the shopping request
+        if (wgId.equals("")) {
+            status = ErrorCodes.NOWGFOUND;
+        } else {
+            try {
+                dateDue = new SimpleDateFormat("yyyy-MM-dd").parse(dateDueString);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            String requestedById = new LoginBean().getUserId(requestedBy);
+
+            status = shoppingBean.createRequest(article, amount, userId, requestedById, dateDue);
+        }
 
         switch (status) {
             case SUCCESS:
                 //Show success
                 response.sendRedirect("/shopping");
                 break;
-            case FAILURE:
+            default:
                 //Show failure
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-                break;
-            case WRONGENTRY:
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }

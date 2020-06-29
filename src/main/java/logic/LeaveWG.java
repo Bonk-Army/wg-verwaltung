@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Called when the user wants to leave his wg
+ */
 public class LeaveWG extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public LeaveWG() {
         super();
     }
@@ -44,14 +45,13 @@ public class LeaveWG extends HttpServlet {
                 // Show success pages
                 response.sendRedirect("/settings");
                 break;
-            case FAILURE:
-                // Show server error page
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+            default:
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }

@@ -58,14 +58,18 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
 
         try {
             ResultSet rs = executeQuery(("SELECT reason, value, dateCreated, createdBy, uniqueID FROM financial WHERE wgId="
-                    + Integer.valueOf(wgId) + " AND isActive = 1 LIMIT " + limit + " ORDER BY "));
+                    + Integer.valueOf(wgId) + " AND isActive = 1 ORDER BY dateCreated DESC LIMIT " + limit));
 
             while (rs.next()) {
                 Map<String, String> currentEntry = new HashMap<String, String>();
 
                 currentEntry.put("reason", rs.getString(1));
 
-                String valueString = String.format("%.2f", (rs.getInt(2) / 100d));
+                StringBuilder sb = new StringBuilder();
+                Formatter formatter = new Formatter(sb, Locale.GERMAN);
+                formatter.format("%,.2f", (rs.getInt(2) / 100d));
+                String valueString = sb.toString();
+
                 String createdDateString = DateFormatter.dateToString(rs.getDate(3));
 
                 if (rs.getInt(2) < 0) {
@@ -246,5 +250,41 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
         }
 
         return "";
+    }
+
+    /**
+     * Get the subtotal balance for each month for the specified user for the last six months
+     * This method always returns a list with size() == 6, filling it up with 0s if there is not enough data
+     *
+     * @param userId The userId of the user
+     * @return The list with the total balance for each month
+     */
+    public static List<Integer> getBalanceDevelopmentForUser(String userId) {
+        List<Integer> monthlyBalance = new ArrayList<Integer>();
+
+        try {
+            ResultSet rs = executeQuery(("SELECT SUM(value) FROM financial WHERE createdBy = " + Integer.valueOf(userId)
+                    + " AND DATEDIFF(dateCreated, CURRENT_TIMESTAMP) <= 180 AND isActive = 1 GROUP BY EXTRACT(month FROM dateCreated)"));
+
+            while (rs.next()) {
+                monthlyBalance.add(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (monthlyBalance.size() < 6) {
+            List<Integer> newList = new ArrayList<Integer>();
+
+            for (int i = 0; i < (6 - monthlyBalance.size()); i++) {
+                newList.add(0);
+            }
+
+            newList.addAll(monthlyBalance);
+
+            monthlyBalance = new ArrayList<Integer>(newList);
+        }
+
+        return monthlyBalance;
     }
 }

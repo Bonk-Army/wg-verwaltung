@@ -1,23 +1,23 @@
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #272525;
-    color: aliceblue;
-    display: flex;
-    align-items: stretch;
-}
-
-/* ---------------------------------------------------
-    SIDEBAR STYLE
------------------------------------------------------ */
+/*
+    .d88888b  oo       dP          dP
+    88.    "'          88          88
+    `Y88888b. dP .d888b88 .d8888b. 88d888b. .d8888b. 88d888b.
+          `8b 88 88'  `88 88ooood8 88'  `88 88'  `88 88'  `88
+   d8'   .8P 88 88.  .88 88.  ... 88.  .88 88.  .88 88
+    Y88888P  dP `88888P8 `88888P' 88Y8888' `88888P8 dP
+*/
 
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
+    height: 100%;
+    min-width: 15.625em;
+    max-width: 15.625em;
     background: #3c415e;
     color: aliceblue;
     transition: all 0.3s;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
 }
 
 a,
@@ -41,20 +41,21 @@ button#logout:hover{
 }
 
 #sidebar.active {
-    min-width: 127px;
-    max-width: 127px;
+    min-width: 7.9375em;
+    max-width: 7.9375em;
     text-align: center;
 }
 
-#sidebar button {
+#sidebar button,
+#sidebar button.btn-info:focus {
+    color: aliceblue;
     background: #272525;
+    border-color: #272525;
+    box-shadow: none;
 }
 
-#sidebar.active .sidebar-header h3 {
-    display: none;
-}
-
-#sidebar.active button#logout bold{
+#sidebar.active .sidebar-header h3,
+#sidebar.active button#logout bold {
     display: none;
 }
 
@@ -156,14 +157,43 @@ ul ul a {
     background: #3c415e;
 }
 
-/* ---------------------------------------------------
-    MEDIAQUERIES
------------------------------------------------------ */
+/*
+     a88888b.                     dP                       dP
+    d8'   `88                     88                       88
+    88        .d8888b. 88d888b. d8888P .d8888b. 88d888b. d8888P
+    88        88'  `88 88'  `88   88   88ooood8 88'  `88   88
+    Y8.   .88 88.  .88 88    88   88   88.  ... 88    88   88
+     Y88888P' `88888P' dP    dP   dP   `88888P' dP    dP   dP
+*/
+
+#content {
+    width: calc(100% - 15.625em);
+    padding: 40px 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    margin-left: 15.625em;
+}
+
+#content.active {
+    margin-left: 7.9375em;
+    width: calc(100% - 7.9375em);
+}
+
+/*
+    8888ba.88ba                 dP oo                                              oo
+    88  `8b  `8b                88
+    88   88   88 .d8888b. .d888b88 dP .d8888b. .d8888b. dP    dP .d8888b. 88d888b. dP .d8888b. .d8888b.
+    88   88   88 88ooood8 88'  `88 88 88'  `88 88'  `88 88    88 88ooood8 88'  `88 88 88ooood8 Y8ooooo.
+    88   88   88 88.  ... 88.  .88 88 88.  .88 88.  .88 88.  .88 88.  ... 88       88 88.  ...       88
+    dP   dP   dP `88888P' `88888P8 dP `88888P8 `8888P88 `88888P' `88888P' dP       dP `88888P' `88888P'
+                                                 88
+                                                 dP
+*/
 
 @media (max-width: 768px) {
     #sidebar {
-        min-width: 127px;
-        max-width: 127px;
+        min-width: 7.9375em;
+        max-width: 7.9375em;
         text-align: center;
         margin-left: 0px !important;
     }
@@ -220,16 +250,8 @@ ul ul a {
     #sidebar {
         margin-left: 0;
     }
-}
-
-/* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
-
-#content {
-    width: 100%;
-    padding: 40px 20px;
-    min-height: 100vh;
-    transition: all 0.3s;
-    overflow: scroll;
+    #content {
+        margin-left: 7.9375em;
+        width: calc(100% - 7.9375em);
+    }
 }

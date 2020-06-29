@@ -1,6 +1,7 @@
 package logic;
 
 import beans.LoginBean;
+import beans.SessionBean;
 import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
@@ -14,14 +15,8 @@ import java.io.IOException;
  * Login Servlet that is called when the users tries to log in or register from the login page
  */
 public class Login extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public Login() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**
@@ -57,13 +52,15 @@ public class Login extends HttpServlet {
 
         stayLoggedIn = Boolean.valueOf(request.getParameter("keepSignedIn"));
 
-        ErrorCodes status = isRegister ? bean.register(username, password, email, firstName, lastName) : bean.login(username, password);
+        int cookieLifetime = stayLoggedIn ? 30 : 0;
+
+        ErrorCodes status = isRegister ? bean.register(username, password, email, firstName, lastName, cookieLifetime) : bean.login(username, password, cookieLifetime);
 
         //UserId required for session cookie
         String userId = "";
         switch (status) {
             case SUCCESS:
-                // Log the user in, save a cookie and redirect him to the home page
+                // Log the user in, save a cookie, create a session bean and redirect him to the home page
                 userId = bean.getUserId(username);
                 String sessionIdentifier = (userId + "-" + bean.getCookiePostfixNotHashed());
                 Cookie sessionCookie = new Cookie("session", (sessionIdentifier));
@@ -72,19 +69,17 @@ public class Login extends HttpServlet {
                 // otherwise let it be a session cookie
                 sessionCookie.setMaxAge(cookieAge);
                 response.addCookie(sessionCookie);
+                // Now create the session bean
+                SessionBean sessionBean = new SessionBean(userId);
+                request.getSession().setAttribute("sessionBean", sessionBean);
                 response.sendRedirect("/home");
                 break;
-            case WRONGENTRY:
-                // Return "wrong entry" error page
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
-                break;
-            case WRONGUNAME:
-                // Return "wrong entry" error page
-                request.getServletContext().getRequestDispatcher("/responseWrongUName").forward(request, response);
-                break;
-            case FAILURE:
-                // Return "try again" error page
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+            default:
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }

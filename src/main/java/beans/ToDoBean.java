@@ -37,8 +37,10 @@ public class ToDoBean {
      */
     public ErrorCodes createTodo(String task, String userId, String wgId, Date dateDue, String createdById) {
         if (RegexHelper.checkText(task)) {
-            if (RegexHelper.checkString(userId) && RegexHelper.checkString(wgId) && RegexHelper.checkString(createdById)) {
+            if (!wgId.equals("")) {
                 return SQLDCtodo.createTodo(task, userId, wgId, dateDue, createdById) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+            } else {
+                return ErrorCodes.NOWGFOUND;
             }
         }
         return ErrorCodes.WRONGENTRY;
@@ -51,7 +53,7 @@ public class ToDoBean {
      * @return The String
      */
     public String dateToString(Date date) {
-        return DateFormatter.dateTimeToString(date);
+        return DateFormatter.dateTimeSecondsToString(date);
     }
 
     /**
@@ -170,11 +172,48 @@ public class ToDoBean {
     }
 
     /**
+     * Get all active todos where the current user is assigned
+     *
+     * @return A list of Todos
+     */
+    public List<Map<String, String>> getTodosForUser() {
+        if (!wgId.isEmpty()) {
+            return SQLDCtodo.getAllActiveTodosForUser(this.userId, this.wgId);
+        }
+
+        return new ArrayList<Map<String, String>>();
+    }
+
+    /**
      * Return a List of the names (Format: Max M for Max Mustermann) of the users in the wg of the specified user
      *
      * @return A List of Maps of which each contains the username and the formatted name string
      */
     public List<Map<String, String>> getUsersOfWg() {
         return SQLDCusers.getAllNameStringsForWg(this.wgId);
+    }
+
+    /**
+     * Get Total number of To-Do's for WG
+     * Done or not!
+     *
+     * @return Number of To-Do's for given User
+     */
+    public String getOpenTodosUser() {
+        int openTodos = SQLDCtodo.getOpenTodosPerUser(this.userId, this.wgId);
+
+        return String.valueOf(openTodos);
+    }
+
+    /**
+     * Get Total number of To-Do's for WG
+     * Done or not!
+     *
+     * @return Number of To-Do's for given WG
+     */
+    public String getOpenTodosWg() {
+        int openTodos = SQLDCtodo.getOpenTodosPerWg(this.wgId);
+
+        return String.valueOf(openTodos);
     }
 }

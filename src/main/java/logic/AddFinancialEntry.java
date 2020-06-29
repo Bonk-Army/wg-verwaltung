@@ -12,15 +12,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Called when the user wants to create a new financial entry
+ */
 public class AddFinancialEntry extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public AddFinancialEntry() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**
@@ -62,12 +59,12 @@ public class AddFinancialEntry extends HttpServlet {
                 //Show success
                 response.sendRedirect("/financial");
                 break;
-            case FAILURE:
+            default:
                 //Show failure
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-                break;
-            case WRONGENTRY:
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }

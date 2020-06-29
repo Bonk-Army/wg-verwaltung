@@ -1,4 +1,4 @@
-<div class="text-center">
+<div id="content" class="text-center">
     <img src="/assets/Images/lama.png" style="height: 220px">
     <form method="POST" action="loginLogic" class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal">Bitte melde dich an</h1>
@@ -20,8 +20,12 @@
             Passwort vergessen?
         </button>
     </form>
+
+    <div class="center">
+        <hr>
+    </div>
     <div class="text-center">
-        <a href="./contact">Kontakt</a>  &emsp; <a href="./faq">FAQ's </a>  &emsp; <a href="./impressum">Impressum </a><br><br>
+        <a href="./contact">Kontakt</a>  &emsp; <a href="./faq">FAQ's </a>  &emsp; <a href="./impressum">Impressum </a>
     </div>
     <div class="center">
         <hr>

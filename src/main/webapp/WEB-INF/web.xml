@@ -21,43 +21,49 @@
         |__ /verify                     | Servlet : Verify                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /joinWGLogic                | Servlet : JoinWG                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /createWGLogic              | Servlet : CreateWG                | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addTodoLogic               | Servlet : ToDo                    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addTodoLogic               | Servlet : AddTodo                 | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /setDoneLogic               | Servlet : SetTodoDone             | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /sendContactRequestLogic    | Servlet: ContactRequest           | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /removeLogic                | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
-        |__ /removeShoppingRequestLogic | Servlet: RemoveShoppingRequest    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addShoppingRequestLogic    | Servlet: AddShoppingRequest       | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /addFinancialEntryLogic     | Servlet: AddFinancialEntry        | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /removeFinancialEntryLogic  | Servlet: RemoveFinancialEntry     | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /changePasswordLogic        | Servlet: ChangePassword           | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /changeNameLogic            | Servlet: ChangeName               | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /leaveWgLogic               | Servlet: LeaveWG                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
-        |__ /logoutLogic                | Servlet: Logout                   | Zuständig: @PM       | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /removeTodoLogic            | Servlet : RemoveTodo              | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
+        |__ /addShoppingRequestLogic    | Servlet : AddShoppingRequest      | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /setBoughtLogic             | Servlet : SetArticleBought        | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @PM | Initial
+        |__ /removeShoppingRequestLogic | Servlet : RemoveShoppingRequest   | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addFinancialEntryLogic     | Servlet : AddFinancialEntry       | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /removeFinancialEntryLogic  | Servlet : RemoveFinancialEntry    | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /addCleaningLogic           | Servlet : AddCleaningTask         | Zuständig : @PM      | Mapped by @KA | Zuständig für Inhalt @PM | Initial
+        |__ /updateCleaningLogic        | Servlet : UpdateCleaningAssignees | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /removeCleaningLogic        | Servlet : RemoveCleaning          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /sendContactRequestLogic    | Servlet : ContactRequest          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /changeNameLogic            | Servlet : ChangeName              | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /changePasswordLogic        | Servlet : ChangePassword          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /leaveWgLogic               | Servlet : LeaveWG                 | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /logoutLogic                | Servlet : Logout                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
         |__ GUI                         |                                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /home                       | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /financial                  | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @KA | Initial
+        |__ /financial                  | JSP Page : Finanzielles           | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @KA | Initial
         |__ /todo                       | JSP Page : ToDo                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /clean                      | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /shopping                   | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @KA | Initial
-        |__ /faq                        | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /contact                    | JSP Page : Home                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /clean                      | JSP Page : Putzplan               | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /shopping                   | JSP Page : Einkaufsliste          | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @KA | Initial
+        |__ /faq                        | JSP Page : FAQ                    | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /contact                    | JSP Page : Kontakt                | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /impressum                  | JSP Page : Impressum              | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
-        |__ /settings                   | JSP Page : Settings               | Zuständig : @KA/LK   | Mapped by @KA | Zuständig für Inhalt @KA | Initial
+        |__ /settings                   | JSP Page : Settings               | Zuständig : @KA      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
         |__ /wgverwaltung               | JSP Page : WGVerwaltung           | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /resetPassword              | JSP Page : WGVerwaltung           | Zuständig : @KA      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
         |__ Response                    |                                   | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseSuccess            | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseFailure            | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongEntry         | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongUName         | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongPassword      | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongEMail         | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
-        |__ /responseWrongTryAgain      | JSP Page : Response / Failure     | Zuständig : @NH      | Mapped by @NH                            | Initial
+        |__ /status                     | JSP Page : Status                 | Zuständig : @KA      | Mapped by @KA                            | Initial
+        |__ ^^-^^
+        |__
+        |__ ^^-^^
+        |__ ErrorPages                  |                                   | Zuständig : @KA      | Mapped by @PM                            | Initial
+        |__ 404                         | JSP Page : 404                    | Zuständig : @KA      | Mapped by @PM                            | Initial
+        |__ 500                         | JSP Page: 500                     | Zuständig : @KA      | Mapped by @KA                            | Initial
+        |__ Java Exception              | JSP Page: Exception               | Zuständig : @KA      | Mapped by @KA                            | Initial
         |__ ^^-^^
     -->
     <!-- ############################################################################################################ -->
@@ -78,7 +84,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
-        <url-pattern></url-pattern>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Register</servlet-name>
@@ -112,6 +118,14 @@
         <servlet-name>Impressum</servlet-name>
         <url-pattern>/impressumPage</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ResetPassword</servlet-name>
+        <jsp-file>/Pages/Public/ResetPassword.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResetPassword</servlet-name>
+        <url-pattern>/resetPassword</url-pattern>
+    </servlet-mapping>
     <!-- Filter Servlet -->
     <servlet>
         <servlet-name>HomeTest</servlet-name>
@@ -119,8 +133,10 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeTest</servlet-name>
+        <url-pattern></url-pattern>
         <url-pattern>/home</url-pattern>
         <url-pattern>/todo</url-pattern>
+        <url-pattern>/mytodo</url-pattern>
         <url-pattern>/wgverwaltung</url-pattern>
         <url-pattern>/financial</url-pattern>
         <url-pattern>/clean</url-pattern>
@@ -162,6 +178,14 @@
     <servlet-mapping>
         <servlet-name>ToDo</servlet-name>
         <url-pattern>/todoPage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MyToDo</servlet-name>
+        <jsp-file>/Pages/Protected/MyToDo.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyToDo</servlet-name>
+        <url-pattern>/mytodoPage</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Cleaning</servlet-name>
@@ -250,7 +274,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>AddTodoLogic</servlet-name>
-        <servlet-class>logic.CreateToDo</servlet-class>
+        <servlet-class>logic.AddTodo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddTodoLogic</servlet-name>
@@ -278,7 +302,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>RemoveTodoLogic</servlet-name>
-        <url-pattern>/removeLogic</url-pattern>
+        <url-pattern>/removeTodoLogic</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>RemoveShoppingRequestLogic</servlet-name>
@@ -295,6 +319,14 @@
     <servlet-mapping>
         <servlet-name>AddShoppingRequestLogic</servlet-name>
         <url-pattern>/addShoppingRequestLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SetArticleBought</servlet-name>
+        <servlet-class>logic.SetBoughtShopping</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SetArticleBought</servlet-name>
+        <url-pattern>/setBoughtLogic</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>AddFinancialEntryLogic</servlet-name>
@@ -344,6 +376,30 @@
         <servlet-name>LogoutLogic</servlet-name>
         <url-pattern>/logoutLogic</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdateCleaningLogic</servlet-name>
+        <servlet-class>logic.UpdateCleaningAssignees</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateCleaningLogic</servlet-name>
+        <url-pattern>/updateCleaningLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddCleaningLogic</servlet-name>
+        <servlet-class>logic.AddCleaningTask</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddCleaningLogic</servlet-name>
+        <url-pattern>/addCleaningLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RemoveCleaningLogic</servlet-name>
+        <servlet-class>logic.RemoveCleaning</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RemoveCleaningLogic</servlet-name>
+        <url-pattern>/removeCleaningLogic</url-pattern>
+    </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--
      888888ba                                                                     888888ba
@@ -356,59 +412,29 @@
                                  dP                                                                   d8888P
     -->
     <servlet>
-        <servlet-name>ResponseSuccess</servlet-name>
-        <jsp-file>/Pages/Response/Success.jsp</jsp-file>
+        <servlet-name>Status</servlet-name>
+        <jsp-file>/Pages/Response/Status.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ResponseSuccess</servlet-name>
-        <url-pattern>/responseSuccess</url-pattern>
+        <servlet-name>Status</servlet-name>
+        <url-pattern>/status</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>ResponseFailure</servlet-name>
-        <jsp-file>/Pages/Response/Failure.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResponseFailure</servlet-name>
-        <url-pattern>/responseFailure</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ResponseWrongEntry</servlet-name>
-        <jsp-file>/Pages/Response/WrongEntry.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResponseWrongEntry</servlet-name>
-        <url-pattern>/responseWrongEntry</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ResponseWrongUName</servlet-name>
-        <jsp-file>/Pages/Response/WrongUName.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResponseWrongUName</servlet-name>
-        <url-pattern>/responseWrongUName</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ResponseWrongPassword</servlet-name>
-        <jsp-file>/Pages/Response/WrongPassword.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResponseWrongPassword</servlet-name>
-        <url-pattern>/responseWrongPassword</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ResponseWrongEMail</servlet-name>
-        <jsp-file>/Pages/Response/WrongEMail.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResponseWrongEMail</servlet-name>
-        <url-pattern>/responseWrongEMail</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>ResponseTryAgain</servlet-name>
-        <jsp-file>/Pages/Response/TryAgain.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResponseTryAgain</servlet-name>
-        <url-pattern>/responseTryAgain</url-pattern>
-    </servlet-mapping>
+
+    <!-- Error Pages -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/Pages/Response/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>405</error-code>
+        <location>/Pages/Response/405.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/Pages/Response/500.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/Pages/Response/Exception.jsp</location>
+    </error-page>
 </web-app>

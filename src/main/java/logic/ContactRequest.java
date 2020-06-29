@@ -13,14 +13,8 @@ import java.io.IOException;
  * Contact Request Servlet that is called when the user sends the contact form data
  */
 public class ContactRequest extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public ContactRequest() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**
@@ -46,11 +40,17 @@ public class ContactRequest extends HttpServlet {
         switch (status) {
             case SUCCESS:
                 //Show success
-                request.getServletContext().getRequestDispatcher("/responseSuccess").forward(request, response);
+                request.setAttribute("isSadLlama", false);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
-            case FAILURE:
+            default:
                 //Show failure
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }

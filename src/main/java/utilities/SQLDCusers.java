@@ -23,6 +23,9 @@ import java.util.*;
         - firstName         (String)
         - lastName          (String)
         - registrationDate  (Date)
+        - lastLogin         (Datetime)
+        - cookieLifetime    (int)
+        - lastPasswordLogin (Datetime)
  */
 
 /**
@@ -37,17 +40,23 @@ public class SQLDCusers extends SQLDatabaseConnection {
      * @param pwhash           The hashed password
      * @param pwsalt           The salt that has been used for hashing
      * @param verificationCode The randomly generated code that the user needs to verify his email
+     * @param firstName        The first name of the user
+     * @param lastName         The last name of the user
+     * @param cookiePostfix    The postfix of the session cookie
+     * @param cookieLifetime   The lifetime of the session cookie in days
      * @return If the user has been created successful. If not, the user has to be informed!
      */
-    public static boolean createUser(String username, String email, String pwhash, String pwsalt, String verificationCode, String firstName, String lastName, String cookiePostfix) {
+    public static boolean createUser(String username, String email, String pwhash, String pwsalt, String verificationCode, String firstName, String lastName, String cookiePostfix, int cookieLifetime) {
         try {
-            Date registrationDate = new Date();
+            Date registrationDate = DateFormatter.getCurrentDateTime();
             // Convert dates to java.sql.Timestamp to save them to SQL
             Timestamp registrationStamp = new Timestamp(registrationDate.getTime());
-            ResultSet rs = executeQuery(("INSERT INTO users (username, email, pwhash, pwsalt, verificationCode, firstName, lastName, cookiePostfix, registrationDate)"
+            // Save to SQL. We save the registration timestamp to registrationDate and lastPasswordLogin because that's the same thing here anyways
+            ResultSet rs = executeQuery(("INSERT INTO users (username, email, pwhash, pwsalt, verificationCode, firstName, lastName, cookiePostfix, registrationDate, cookieLifetime, lastPasswordLogin)"
                     + "VALUES ('" + username + "', '" + email + "', '" + pwhash + "', '"
                     + pwsalt + "', '" + verificationCode + "', '" + firstName + "', '"
-                    + lastName + "', '" + cookiePostfix + "', '" + registrationStamp + "')"));
+                    + lastName + "', '" + cookiePostfix + "', '" + registrationStamp + "', "
+                    + cookieLifetime + ",  '" + registrationStamp + "')"));
 
             return true;
         } catch (Exception e) {
@@ -298,6 +307,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
     public static boolean setPassword(String username, String pwhash) {
         try {
             executeQuery("UPDATE users SET pwhash='" + pwhash + "', passwordResetKey=NULL WHERE username='" + username + "'");
+
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -374,7 +384,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
      */
     public static boolean clearWg(String userId) {
         try {
-            executeQuery(("UPDATE users SET wgID = " + null + " WHERE uniqueID = " + Integer.valueOf(userId)));
+            executeQuery(("UPDATE users SET wgID = " + null + ", rights = '' WHERE uniqueID = " + Integer.valueOf(userId)));
 
             return true;
         } catch (Exception e) {
@@ -526,12 +536,12 @@ public class SQLDCusers extends SQLDatabaseConnection {
      * Set the passed right for the specified user
      *
      * @param userID The userId of the user
-     * @param right  The right to be set for the user
+     * @param rights The rights to be set for the user
      * @return If it was successful
      */
-    public static boolean setUserRights(String userID, String right) {
+    public static boolean setUserRights(String userID, String rights) {
         try {
-            executeQuery(("UPDATE users SET rights='" + right + "' WHERE uniqueID=" + Integer.valueOf(userID)));
+            executeQuery(("UPDATE users SET rights='" + rights + "' WHERE uniqueID=" + Integer.valueOf(userID)));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -651,6 +661,30 @@ public class SQLDCusers extends SQLDatabaseConnection {
     }
 
     /**
+     * Concatenates First name and the first letter of the last name
+     *
+     * @param userId The userId of the user
+     * @return The name string
+     */
+    public static String getNameStringById(String userId) {
+        String firstName = "";
+        String lastName = "";
+        try {
+            ResultSet rs = executeQuery(("SELECT firstName, lastName FROM users WHERE uniqueID=" + Integer.valueOf(userId)));
+
+            while (rs.next()) {
+                firstName = rs.getString(1);
+                lastName = rs.getString(2);
+            }
+
+            return firstName + " " + lastName.substring(0, 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    /**
      * Concatenates First and Last Name
      *
      * @param userId The ID of the User
@@ -692,5 +726,135 @@ public class SQLDCusers extends SQLDatabaseConnection {
         }
 
         return "";
+    }
+
+    /**
+     * Set the last login field to the current time
+     *
+     * @param userId The userId of the user that logged in recently
+     * @return If it was successful
+     */
+    public static boolean setLastLogin(String userId) {
+        try {
+            Date now = DateFormatter.getCurrentDateTime();
+            Timestamp nowStamp = new Timestamp(now.getTime());
+            executeQuery(("UPDATE users SET lastLogin='" + nowStamp + "' WHERE uniqueID = " + Integer.valueOf(userId)));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * Set the last password login field to the current time
+     *
+     * @param username The username of the user that logged in via password recently
+     * @return If it was successful
+     */
+    public static boolean setLastPasswordLogin(String username) {
+        try {
+            Date now = DateFormatter.getCurrentDateTime();
+            Timestamp nowStamp = new Timestamp(now.getTime());
+            executeQuery(("UPDATE users SET lastPasswordLogin='" + nowStamp + "' WHERE username = '" + username + "'"));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * Get the email address of the specified user
+     *
+     * @param userId The userId of the user
+     * @return The email address
+     */
+    public static String getEmailAddressForUser(String userId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT email FROM users WHERE uniqueID=" + Integer.valueOf(userId)));
+
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+    /**
+     * Get the last login time for the given user as a formatted string
+     *
+     * @param userId The userId of the user
+     * @return The date as a formatted string
+     */
+    public static String getLastLogin(String userId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT lastLogin FROM users WHERE uniqueID=" + Integer.valueOf(userId)));
+
+            while (rs.next()) {
+                Date lastLoginDate = rs.getDate(1);
+
+                return DateFormatter.dateTimeSecondsToString(lastLoginDate);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
+
+    /**
+     * Set the session cookie lifetime for the given user
+     *
+     * @param username The username of the user
+     * @param lifetime The lifetime in days
+     * @return If it was successful
+     */
+    public static boolean setCookieLifetime(String username, int lifetime) {
+        try {
+            executeQuery(("UPDATE users SET cookieLifetime = " + lifetime + " WHERE username = '" + username + "'"));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if the session cookie of the specified user is still valid
+     *
+     * @param userId The userId of the user
+     * @return If the cookie is still valid
+     */
+    public static boolean isSessionCookieStillValid(String userId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT cookieLifetime, lastPasswordLogin FROM users WHERE uniqueID = " + Integer.valueOf(userId)));
+
+            while (rs.next()) {
+                Date now = DateFormatter.getCurrentDateTime();
+                Date lastPasswordLogin = rs.getDate(2);
+                int cookieLifetime = rs.getInt(1);
+
+                Calendar c = Calendar.getInstance();
+                c.setTime(lastPasswordLogin);
+                c.add(Calendar.DATE, cookieLifetime);
+                Date cookieLifetimeEnd = c.getTime();
+
+                return !now.after(cookieLifetimeEnd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 }

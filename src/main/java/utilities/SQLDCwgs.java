@@ -9,6 +9,7 @@ import java.util.ArrayList;
         - uniqueID      (int)
         - name          (String)
         - accessKey     (String)
+        - createdBy     (int)       (Foreign key to users.uniqueID)
  */
 
 /**
@@ -49,10 +50,10 @@ public class SQLDCwgs extends SQLDatabaseConnection {
      * @param accessKey the access key of the wg
      * @return If the wg has been created successfully. If not, the user has to be informed!
      */
-    public static boolean createWg(String name, String accessKey) {
+    public static boolean createWg(String name, String accessKey, String createdBy) {
         try {
-            ResultSet rs = executeQuery(("INSERT INTO wgs (name, accessKey)"
-                    + "VALUES ('" + name + "', '" + accessKey + "')"));
+            ResultSet rs = executeQuery(("INSERT INTO wgs (name, accessKey, createdBy)"
+                    + "VALUES ('" + name + "', '" + accessKey + "', " + Integer.valueOf(createdBy) + ")"));
             return true;
         } catch (Exception e) {
             e.printStackTrace();

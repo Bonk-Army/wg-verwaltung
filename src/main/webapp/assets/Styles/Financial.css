@@ -1,3 +1,40 @@
+/*
+    d888888P          dP       dP
+       88             88       88
+       88    .d8888b. 88d888b. 88 .d8888b.
+       88    88'  `88 88'  `88 88 88ooood8
+       88    88.  .88 88.  .88 88 88.  ...
+       dP    `88888P8 88Y8888' dP `88888P'
+ */
+
+.table {
+    color: aliceblue;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.table.overview {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.all th:not(:nth-child(2)) {
+    width: 12.5em;
+}
+
+.all th:last-child, td:last-child {
+    width: 6.25em;
+}
+
+thead.tasks th:not(:nth-child(1), :last-child) {
+    width: 12.5em;
+}
+
+.all th:last-child, td:last-child {
+    width: 6.25em;
+}
+
 .negative{
     background-color: #d75a5a;
 }
@@ -10,58 +47,16 @@ button.remove {
     max-width: 62px;
 }
 
+/*
+     888888ba             dP     dP
+     88    `8b            88     88
+    a88aaaa8P' dP    dP d8888P d8888P .d8888b. 88d888b.
+     88   `8b. 88    88   88     88   88'  `88 88'  `88
+     88    .88 88.  .88   88     88   88.  .88 88    88
+     88888888P `88888P'   dP     dP   `88888P' dP    dP
+ */
+
 #addArticle {
     margin-bottom: 10px;
     max-width: 62px;
-}
-
-.table{
-    color: aliceblue;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-.form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-}
-.form-signin .checkbox {
-    font-weight: 400;
-}
-.form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-.form-signin .form-control:focus {
-    z-index: 2;
-}
-.form-signin input[type="email"] {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-.mt-custom {
-    margin-top: 10%;
-}
-
-.form-control {
-    margin-bottom: 10px;
-}
-
-.modal-content {
-    background-color: #272525;
-    color: aliceblue;
-}
-
-.close {
-    color: aliceblue;
 }

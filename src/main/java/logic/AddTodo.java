@@ -18,15 +18,9 @@ import java.util.Date;
 /**
  * Create Todo servlet that is called when the user tries to create a new todo for his wg
  */
-public class CreateToDo extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
-    public CreateToDo() {
+public class AddTodo extends HttpServlet {
+    public AddTodo() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**
@@ -46,18 +40,17 @@ public class CreateToDo extends HttpServlet {
 
         String task = request.getParameter("todo");
         String assignee = request.getParameter("username");
-        String dueDateString = request.getParameter("deadline");
+        String dueDateString = request.getParameter("date");
+        String dueDateTime = request.getParameter("time");
+        dueDateString = (dueDateString + " " + dueDateTime);
 
         String userId = sessionBean.getUserId();
 
-        String assigneeId = "";
-        if(RegexHelper.checkString(assignee)) {
-            assigneeId = loginBean.getUserId(assignee);
-        }
-        String wgId = toDoBean.getWgIdByUserId(userId);
+        String assigneeId = loginBean.getUserId(assignee);
+        String wgId = sessionBean.getWgId();
         Date dueDate = null;
         try {
-            dueDate = new SimpleDateFormat("yyyy-MM-dd").parse(dueDateString);
+            dueDate = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(dueDateString);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -69,13 +62,12 @@ public class CreateToDo extends HttpServlet {
                 //Redirect back to the todo page
                 response.sendRedirect("/todo");
                 break;
-            case FAILURE:
-                //Forward to failure page
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-                break;
-            case WRONGENTRY:
-                //Forward to wrong entry page
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
+            default:
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }

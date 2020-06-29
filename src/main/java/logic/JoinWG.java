@@ -15,8 +15,6 @@ import java.io.IOException;
  * Join wg servlet that is called when the user tries to join a wg via invite code or invite link
  */
 public class JoinWG extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public JoinWG() {
         super();
     }
@@ -36,33 +34,35 @@ public class JoinWG extends HttpServlet {
         SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
 
-        String wgCode = request.getParameter("wgcode");
+        // If user is not logged in, redirect him to the login page
+        if (sessionBean == null) {
+            response.sendRedirect("/");
+        } else {
+            String wgCode = request.getParameter("wgcode");
 
-        String userId = sessionBean.getUserId();
+            String userId = sessionBean.getUserId();
 
-        ErrorCodes status = settingsBean.setWgId(userId, wgCode);
+            ErrorCodes status = settingsBean.setWgId(userId, wgCode);
 
-        switch (status) {
-            case SUCCESS:
-                //Show success
-                // Change wgId and wgName in the Session Bean
-                sessionBean.setWgId(settingsBean.getWgIdFromUserId(userId));
-                sessionBean.setWgName(settingsBean.getWgNameFromUserID(userId));
-                response.sendRedirect("/settings");
-                break;
-            case FAILURE:
-                //Show failure
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-                break;
-            case WRONGENTRY:
-                //Show wrongentry
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
-                break;
+            switch (status) {
+                case SUCCESS:
+                    // Change wgId and wgName in the Session Bean
+                    sessionBean.setWgId(settingsBean.getWgIdFromUserId(userId));
+                    sessionBean.setWgName(settingsBean.getWgNameFromUserID(userId));
+                    //Show success
+                    request.setAttribute("isSadLlama", false);
+                    request.setAttribute("header", status.getHeader());
+                    request.setAttribute("message", status.getMessage());
+                    request.getServletContext().getRequestDispatcher("/status").forward(request, response);
+                    break;
+                default:
+                    //Show failure
+                    request.setAttribute("isSadLlama", true);
+                    request.setAttribute("header", status.getHeader());
+                    request.setAttribute("message", status.getMessage());
+                    request.getServletContext().getRequestDispatcher("/status").forward(request, response);
+                    break;
+            }
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

@@ -1,6 +1,5 @@
 package utilities;
 
-import org.apache.commons.codec.Decoder;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 

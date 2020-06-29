@@ -10,15 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Called when the user wants to delete a financial entry (expense / credit)
+ */
 public class RemoveFinancialEntry extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public RemoveFinancialEntry() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**
@@ -30,7 +27,7 @@ public class RemoveFinancialEntry extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         FinancialBean financialBean = new FinancialBean();
         SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
@@ -47,12 +44,12 @@ public class RemoveFinancialEntry extends HttpServlet {
                 //Show success
                 response.sendRedirect("/financial");
                 break;
-            case FAILURE:
+            default:
                 //Show failure
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
-                break;
-            case WRONGENTRY:
-                request.getServletContext().getRequestDispatcher("/responseWrongEntry").forward(request, response);
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }

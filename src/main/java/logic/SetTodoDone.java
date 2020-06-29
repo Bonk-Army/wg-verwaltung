@@ -14,18 +14,12 @@ import java.io.IOException;
  * Set todo done servlet that is called when the user tries to set a todo to done for their wg
  */
 public class SetTodoDone extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public SetTodoDone() {
         super();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ToDoBean toDoBean = new ToDoBean();
         SessionBean sessionBean = (SessionBean) request.getSession().getAttribute("sessionBean");
         request.setCharacterEncoding("UTF-8");
@@ -33,16 +27,25 @@ public class SetTodoDone extends HttpServlet {
         String todoId = request.getParameter("todoId");
         String wgId = sessionBean.getWgId();
 
+        boolean isMyTodoPage = Boolean.parseBoolean(request.getParameter("isMyTodo"));
+
         ErrorCodes status = toDoBean.setTodoDone(todoId, wgId);
 
         switch (status) {
             case SUCCESS:
                 //Show success
-                response.sendRedirect("/todo");
+                if (isMyTodoPage) {
+                    response.sendRedirect("/mytodo");
+                } else {
+                    response.sendRedirect("/todo");
+                }
                 break;
-            case FAILURE:
+            default:
                 //Show failure
-                request.getServletContext().getRequestDispatcher("/responseFailure").forward(request, response);
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
     }
