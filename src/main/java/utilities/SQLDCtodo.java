@@ -375,31 +375,26 @@ public class SQLDCtodo extends SQLDatabaseConnection {
      * Get the <b>number</b> of open todos for every user of the wg alongside their name string
      *
      * @param wgId The wgId of the wg to fetch the users for
-     * @return A list of maps of which each represents one user
+     * @return A map with the name as key and the number of open todos as value
      */
-    public static List<Map<String, String>> getOpenTodosPerUserOfWg(String wgId) {
-        List<Map<String, String>> openTodosPerUser = new ArrayList<Map<String, String>>();
+    public static Map<String, Integer> getOpenTodosPerUserOfWg(String wgId) {
+        Map<String, Integer> openTodosMap = new HashMap<String, Integer>();
 
         try {
             ResultSet rs = executeQuery(("SELECT COUNT(todo.uniqueID), users.firstName, users.lastName FROM todo "
-                    + "LEFT OUTER JOIN users ON users.uniqueID = todo.assignedId WHERE todo.wgId =" + Integer.valueOf(wgId)
-                    + "AND todo.isActive = 1 AND todo.isDone = 0 GROUP BY todo.assignedId"));
+                    + "LEFT OUTER JOIN users ON users.uniqueID = todo.assignedId WHERE todo.wgId = " + Integer.valueOf(wgId)
+                    + " AND todo.isActive = 1 AND todo.isDone = 0 GROUP BY todo.assignedId"));
 
             while (rs.next()) {
-                Map<String, String> currentUser = new HashMap<String, String>();
-
                 String nameString = rs.getString(2) + " " + rs.getString(3).substring(0, 1);
                 int openTodos = rs.getInt(1);
 
-                currentUser.put("nameString", nameString);
-                currentUser.put("todos", String.valueOf(openTodos));
-
-                openTodosPerUser.add(currentUser);
+                openTodosMap.put(nameString, openTodos);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return openTodosPerUser;
+        return openTodosMap;
     }
 }

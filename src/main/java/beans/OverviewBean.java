@@ -251,9 +251,9 @@ public class OverviewBean {
     /**
      * Get the number of open todos and their name string for every user of the wg
      *
-     * @return A list of maps of which each represents one user
+     * @return A map with the name as key and the number of open todos as value
      */
-    public List<Map<String, String>> getTodoChartData() {
+    public Map<String, Integer> getTodoChartData() {
         return SQLDCtodo.getOpenTodosPerUserOfWg(this.wgId);
     }
 
