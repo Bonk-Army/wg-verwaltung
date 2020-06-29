@@ -1,4 +1,4 @@
-var datenGuthaben = ${overview.getBalanceChartData()};
+var datenGuthaben = '${overview.getBalanceChartData()}';
 
 var monthNames = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
 
