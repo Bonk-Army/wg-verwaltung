@@ -17,15 +17,8 @@ import java.util.List;
  * Called when the user wants to update the assignees for the cleaning tasks
  */
 public class UpdateCleaningAssignees extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public UpdateCleaningAssignees() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
     /**

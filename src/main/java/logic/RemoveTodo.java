@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
  * Remove Todo servlet that is called when the users tries to delete a todo from his wg
  */
 public class RemoveTodo extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public RemoveTodo() {
         super();
     }
@@ -50,9 +48,5 @@ public class RemoveTodo extends HttpServlet {
                 request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }

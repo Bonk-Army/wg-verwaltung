@@ -14,8 +14,6 @@ import java.io.IOException;
  * email address he entered
  */
 public class Verify extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public Verify() {
         super();
     }
@@ -55,10 +53,5 @@ public class Verify extends HttpServlet {
                 request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

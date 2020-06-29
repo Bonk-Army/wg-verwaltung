@@ -14,8 +14,6 @@ import java.io.IOException;
  * Set todo done servlet that is called when the user tries to set a todo to done for their wg
  */
 public class SetTodoDone extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public SetTodoDone() {
         super();
     }
@@ -50,9 +48,5 @@ public class SetTodoDone extends HttpServlet {
                 request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }

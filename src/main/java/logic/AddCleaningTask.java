@@ -15,14 +15,8 @@ import utilities.ErrorCodes;
  * Called when the user wants to add a new cleaning task
  */
 public class AddCleaningTask extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public AddCleaningTask() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**

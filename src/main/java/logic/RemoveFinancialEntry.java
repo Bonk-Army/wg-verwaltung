@@ -14,8 +14,6 @@ import java.io.IOException;
  * Called when the user wants to delete a financial entry (expense / credit)
  */
 public class RemoveFinancialEntry extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public RemoveFinancialEntry() {
         super();
     }
@@ -54,9 +52,5 @@ public class RemoveFinancialEntry extends HttpServlet {
                 request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }

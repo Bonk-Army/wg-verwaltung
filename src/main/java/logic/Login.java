@@ -15,14 +15,8 @@ import java.io.IOException;
  * Login Servlet that is called when the users tries to log in or register from the login page
  */
 public class Login extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public Login() {
         super();
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
     /**

@@ -15,8 +15,6 @@ import utilities.ErrorCodes;
  * Called when the user wants to set a shopping request to done / bought
  */
 public class SetBoughtShopping extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     public SetBoughtShopping() {
         super();
     }
@@ -45,9 +43,5 @@ public class SetBoughtShopping extends HttpServlet {
                 request.getServletContext().getRequestDispatcher("/status").forward(request, response);
                 break;
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 }
