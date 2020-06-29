@@ -27,7 +27,7 @@
         <!-- Team Member 3 -->
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-0 shadow">
-                <img src="https://media-exp1.licdn.com/dms/image/C4D03AQG26fNQfZ6VhQ/profile-displayphoto-shrink_200_200/0?e=1598486400&v=beta&t=LuFqHAgdF2ZnkKRQXFT7aKfUVea56Fj1AD4TZ0y5s3U" class="card-img-top" alt="...">
+                <img src="../../assets/Images/Team/krissi.png" class="card-img-top" alt="...">
                 <div class="card-body text-center">
                     <h5 class="card-title mb-0">Kristin Agne</h5>
                     <div class="card-text text-black-50">Frontend Lead</div>
