@@ -1,5 +1,8 @@
 <div id="content">
     <h2 class="header">Settings</h2>
+    <c:if test="${settingBean.emailVerified}">
+        <p id="emailNotVerified">Deine E-Mail wurde noch nicht verifiziert. Bitte best&auml;tige deine E-Mail-Adresse &uuml;ber den Link, den du per Mail erhalten hast.</p>
+    </c:if>
     <section class="mb-4">
         <form action="changeNameLogic" method="POST">
             <label for="username">Benutzername</label>
