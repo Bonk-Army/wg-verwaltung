@@ -20,9 +20,5 @@ var chart = new Chart(ctx2, {
         }]
     },
     options: {
-        title: {
-            display: true,
-            text: 'Alle offenen ToDo\'s in der WG'
-        }
     }
 });
