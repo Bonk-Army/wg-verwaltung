@@ -15,7 +15,7 @@ var chart = new Chart(ctx2, {
         labels: namenToDo,
         datasets: [{
             label: "ToDo's der WG",
-            backgroundColor: ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00", "#001f3f", "#39CCCC", "#01FF70", "#85144b", "#F012BE", "#3D9970", "#111111", "#AAAAAA"],
+            backgroundColor: ["#558ed5", "#fc645c", "#6de77b", "#f89a50", "#8cd4f5", "#d27ce0", "#ece08a", "#343a58", "#66f6f6", "#6fffab", "#fa98c1", "#6c3c5d", "#50876f", "#111111", "#aaaaaa"],
             data: datenToDo
         }]
     },
