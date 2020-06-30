@@ -29,6 +29,9 @@ public class RegexHelperTest {
         assertFalse(checkString("Space Test"));
     }
 
+    /**
+     * Positive and negative tests for RegexHelper checkText()
+     */
     @Test
     public void checkTextTest() {
         assertTrue(checkText("toCheck"));
@@ -48,6 +51,9 @@ public class RegexHelperTest {
         assertFalse(checkText(">"));
     }
 
+    /**
+     * Positive and negative tests for RegexHelper checkEmail()
+     */
     @Test
     public void checkEmailTest() {
         assertTrue(checkEmail("toCheck@something.xy.de"));
