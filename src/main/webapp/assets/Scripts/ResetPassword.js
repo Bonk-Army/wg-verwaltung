@@ -12,7 +12,7 @@ $(document).ready(function () {
                 $('#resetPasswordButton').click();
             }
         } else {
-            window.alert(unescape("Deine Passw%F6rter sind nicht identisch.%0A"));
+            window.alert(unescape("Deine Passw%F6rter sind nicht identisch."));
         }
     });
 });
