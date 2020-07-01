@@ -121,14 +121,6 @@
         <url-pattern>/impressumPage</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>Team</servlet-name>
-        <jsp-file>/Pages/Public/Team.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Team</servlet-name>
-        <url-pattern>/teamPage</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>ResetPassword</servlet-name>
         <jsp-file>/Pages/Public/ResetPassword.jsp</jsp-file>
     </servlet>
@@ -213,6 +205,14 @@
     <servlet-mapping>
         <servlet-name>Shopping</servlet-name>
         <url-pattern>/shoppingPage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Team</servlet-name>
+        <jsp-file>/Pages/Public/Team.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Team</servlet-name>
+        <url-pattern>/teamPage</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Settings</servlet-name>
