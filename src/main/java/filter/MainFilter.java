@@ -19,7 +19,7 @@ import java.util.List;
 public class MainFilter extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<String> publicPages = Arrays.asList("/impressum", "/faq", "/contact", "/team");
+        List<String> publicPages = Arrays.asList("/impressum", "/faq", "/contact");
         boolean isPublicPage = false;
         boolean isLoginPage = false;
 
