@@ -4,15 +4,13 @@
 <html>
 <head>
     <%@include file="../../assets/Templates/Imports/Global.jsp" %>
-
-    <title>${requestScope.header}</title>
+    <title>Status</title>
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Status.css">
 </head>
 <body>
 <div>
     <h1>${requestScope.header}</h1>
-    <p>${requestScope.message}</p>
     <c:choose>
         <c:when test="${requestScope.isSadLlama}">
             <img src="../../assets/Images/sad-llama.png">

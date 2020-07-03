@@ -430,6 +430,14 @@
         <servlet-name>Status</servlet-name>
         <url-pattern>/status</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ProtectedPage</servlet-name>
+        <jsp-file>/Pages/Response/ProtectedPage.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProtectedPage</servlet-name>
+        <url-pattern>/protectedPage</url-pattern>
+    </servlet-mapping>
 
     <!-- Error Pages -->
     <error-page>

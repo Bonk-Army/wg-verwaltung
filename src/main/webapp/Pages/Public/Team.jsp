@@ -10,18 +10,23 @@
     <title>Team</title>
 
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
-    <link rel="stylesheet" type="text/css" href="./assets/Styles/Team.css">
     <c:if test="${sessionBean.loggedIn}">
+    <link rel="stylesheet" type="text/css" href="./assets/Styles/Team.css">
         <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
     </c:if>
 </head>
 <body>
-<%@include file="../../assets/Contents/Team.jsp" %>
-<c:if test="${sessionBean.loggedIn}">
-    <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
-    <script>
-        <%@include file="../../assets/Scripts/Sidebar.js" %>
-    </script>
-</c:if>
+<c:choose>
+    <c:when test="${sessionBean.loggedIn}">
+        <%@include file="../../assets/Contents/Team.jsp" %>
+        <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
+        <script>
+            <%@include file="../../assets/Scripts/Sidebar.js" %>
+        </script>
+    </c:when>
+    <c:otherwise>
+        <jsp:forward page="/protectedPage"/>
+    </c:otherwise>
+</c:choose>
 </body>
 </html>
