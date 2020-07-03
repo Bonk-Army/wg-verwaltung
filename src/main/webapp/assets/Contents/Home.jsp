@@ -1,8 +1,3 @@
-<jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
-<jsp:useBean id="overview" class="beans.OverviewBean"/>
-<jsp:setProperty name="overview" property="userId" value="${sessionBean.userId}"/>
-<jsp:setProperty name="overview" property="wgId" value="${sessionBean.wgId}"/>
-
 <div id="content">
     <h2 class="header">Willkommen
         <jsp:getProperty name="sessionBean" property="firstName"/>

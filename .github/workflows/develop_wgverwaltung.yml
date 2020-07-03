@@ -21,3 +21,6 @@ jobs:
 
       - name: Maven verify
         run: mvn verify --file pom.xml
+
+      - name: Run Unit Tests
+        run: mvn test

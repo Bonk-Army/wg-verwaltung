@@ -23,7 +23,7 @@ var chart = new Chart(ctx, {
     data: {
         labels: labels,
         datasets: [{
-            label: 'Mein Guthaben',
+            label: unescape("%DCbersicht") +  ' Finanzen',
             backgroundColor: 'rgb(215,90,90)',
             borderColor: 'rgb(215,90,90)',
             data: datenGuthaben

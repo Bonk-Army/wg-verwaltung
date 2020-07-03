@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
+<jsp:useBean id="settingBean" class="beans.SettingsBean" scope="request"/>
+<jsp:setProperty name="settingBean" property="userId" value="${sessionBean.userId}"/>
 <html>
 <head>
     <%@include file="../../assets/Templates/Imports/Global.jsp" %>

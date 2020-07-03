@@ -1,8 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
-<jsp:useBean id="todoBean" class="beans.ToDoBean" scope="request"/>
-<jsp:setProperty name="todoBean" property="userId" value="${sessionBean.userId}"/>
-<jsp:setProperty name="todoBean" property="wgId" value="${sessionBean.wgId}"/>
 <div id="content">
     <h2 class="header">Meine ToDos &#129433;</h2>
     <table class="table">

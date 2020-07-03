@@ -4,6 +4,17 @@ section {
     margin-right: auto;
 }
 
+#emailNotVerified {
+    max-width: 43.75em;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-style: solid;
+    border-width: thick;
+    border-color: #cc0000;
+    padding: 0.5em;
+}
+
 label {
     margin-top: 8px;
     margin-bottom: 4px;

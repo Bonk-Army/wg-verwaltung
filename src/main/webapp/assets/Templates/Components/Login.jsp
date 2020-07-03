@@ -1,5 +1,5 @@
 <div id="content" class="text-center">
-    <img src="/assets/Images/lama.png" style="height: 220px">
+    <img src="/assets/Images/security-llama.png" style="height: 220px">
     <form method="POST" action="loginLogic" class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal">Bitte melde dich an</h1>
         <label for="username" class="sr-only">Benutzername</label>
@@ -9,7 +9,7 @@
         <input name="isRegister" type="checkbox" hidden="hidden" id="isRegister">
         <div class="checkbox mb-3">
             <label>
-                <input name="keepSignedIn" type="checkbox" value="true"> Eingeloggt bleiben
+                <input name="keepSignedIn" type="checkbox" value="true" checked="checked"> Eingeloggt bleiben
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Anmelden</button>

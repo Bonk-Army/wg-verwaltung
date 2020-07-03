@@ -74,15 +74,19 @@ public class MainFilter extends HttpServlet {
 
                     User is not identified
 
-                     Session Bean does not exist, the session cookie that the user sent is invalid (too old)
-                     User gets an error page
+                    Session Bean does not exist, the session cookie that the user sent is invalid (too old)
+                    User gets an error page
                      */
-                    ErrorCodes status = ErrorCodes.AUTHFAIL;
-                    // Show an authentication error
-                    request.setAttribute("isSadLlama", true);
-                    request.setAttribute("header", status.getHeader());
-                    request.setAttribute("message", status.getMessage());
-                    request.getServletContext().getRequestDispatcher("/status").forward(request, response);
+                    if (isLoginPage) {
+                        request.getServletContext().getRequestDispatcher("/login").forward(request, response);
+                    } else {
+                        ErrorCodes status = ErrorCodes.AUTHFAIL;
+                        // Show an authentication error
+                        request.setAttribute("isSadLlama", true);
+                        request.setAttribute("header", status.getHeader());
+                        request.setAttribute("message", status.getMessage());
+                        request.getServletContext().getRequestDispatcher("/status").forward(request, response);
+                    }
                 } else {
                     /*
                       /$$$$$$                                       /$$$$$$

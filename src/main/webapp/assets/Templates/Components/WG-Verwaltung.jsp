@@ -1,5 +1,5 @@
 <div id="content" class="text-center">
-    <img src="/assets/Images/lama.png" style="width: 130px">
+    <img src="/assets/Images/security-llama.png" style="width: 130px">
     <form method="GET" action="joinWGLogic" class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal">WG Beitreten</h1>
         <label for="wgcode" class="sr-only">WG-Code</label>
