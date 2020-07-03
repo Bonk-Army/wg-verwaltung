@@ -384,7 +384,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
      */
     public static boolean clearWg(String userId) {
         try {
-            executeQuery(("UPDATE users SET wgID = " + null + ", rights = '' WHERE uniqueID = " + Integer.valueOf(userId)));
+            executeQuery(("UPDATE users SET wgID = " + null + " WHERE uniqueID = " + Integer.valueOf(userId)));
 
             return true;
         } catch (Exception e) {
@@ -395,7 +395,8 @@ public class SQLDCusers extends SQLDatabaseConnection {
     }
 
     /**
-     * Return all user data as a user object
+     * Return all user data as a user object.
+     * Used so we can get all data required for the session bean with just one SQL query
      *
      * @param userId The userId of the user to get data for
      * @return The User object
@@ -533,15 +534,24 @@ public class SQLDCusers extends SQLDatabaseConnection {
     }
 
     /**
-     * Set the passed right for the specified user
+     * Add the passed right for the specified user
      *
-     * @param userID The userId of the user
+     * @param userId The userId of the user
      * @param rights The rights to be set for the user
      * @return If it was successful
      */
-    public static boolean setUserRights(String userID, String rights) {
+    public static boolean setUserRights(String userId, String rights) {
         try {
-            executeQuery(("UPDATE users SET rights='" + rights + "' WHERE uniqueID=" + Integer.valueOf(userID)));
+            ResultSet rs = executeQuery(("SELECT rights FROM users WHERE uniqueID = " + userId));
+
+            String currentRights = "";
+            while (rs.next()) {
+                currentRights = rs.getString(1);
+            }
+
+            String newRights = currentRights.isEmpty() ? rights : currentRights + ";" + rights;
+
+            executeQuery(("UPDATE users SET rights='" + newRights + "' WHERE uniqueID=" + Integer.valueOf(userId)));
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -664,7 +674,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
      * Concatenates First name and the first letter of the last name
      *
      * @param userId The userId of the user
-     * @return The name string
+     * @return The name string (e.g. Max M)
      */
     public static String getNameStringById(String userId) {
         String firstName = "";
@@ -677,7 +687,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
                 lastName = rs.getString(2);
             }
 
-            return firstName + " " + lastName.substring(0, 1);
+            return (firstName + " " + lastName.substring(0, 1));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -688,7 +698,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
      * Concatenates First and Last Name
      *
      * @param userId The ID of the User
-     * @return Full Name
+     * @return Full Name (e.g. Max Mustermann)
      */
     public static String getFullName(String userId) {
         String firstName = "";
@@ -701,7 +711,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
                 firstName = rs.getString(1);
                 lastName = rs.getString(2);
             }
-            return firstName + " " + lastName;
+            return (firstName + " " + lastName);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -830,7 +840,8 @@ public class SQLDCusers extends SQLDatabaseConnection {
     }
 
     /**
-     * Check if the session cookie of the specified user is still valid
+     * Check if the session cookie of the specified user is still valid.
+     * This is done by checking the saved cookie lifetime against the current date.
      *
      * @param userId The userId of the user
      * @return If the cookie is still valid

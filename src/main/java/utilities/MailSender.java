@@ -136,7 +136,7 @@ public class MailSender {
     /**
      * Enum for types of emails we send
      */
-    public static enum Mailtypes {
+    public enum Mailtypes {
         VERIFY("d-48e403a281cb4e9382351342188b786b"),
         RESETPW("d-d6e6140c08c343fdb1c1136b07c36829"),
         CONTACT("d-0203b477107643089ad24671014480a9"),
