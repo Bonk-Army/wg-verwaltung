@@ -49,9 +49,11 @@
         |__ /faq                        | JSP Page : FAQ                    | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /contact                    | JSP Page : Kontakt                | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /impressum                  | JSP Page : Impressum              | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
+        |__ /team                       | JSP Page : Team                   | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /settings                   | JSP Page : Settings               | Zuständig : @KA      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
         |__ /wgverwaltung               | JSP Page : WGVerwaltung           | Zuständig : @KA/LK   | Mapped by @NH | Zuständig für Inhalt @DK | Initial
         |__ /resetPassword              | JSP Page : WGVerwaltung           | Zuständig : @KA      | Mapped by @KA | Zuständig für Inhalt @KA | Initial
+        |__ /team                       | JSP Page : Team                   | Zusätndig : @NH      | Mapped by @PM | Zuständig für Inhalt @NH | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -144,6 +146,7 @@
         <url-pattern>/settings</url-pattern>
         <url-pattern>/faq</url-pattern>
         <url-pattern>/impressum</url-pattern>
+        <url-pattern>/team</url-pattern>
         <url-pattern>/contact</url-pattern>
     </servlet-mapping>
     <!-- Protected via Filter Servlet -->
@@ -202,6 +205,14 @@
     <servlet-mapping>
         <servlet-name>Shopping</servlet-name>
         <url-pattern>/shoppingPage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Team</servlet-name>
+        <jsp-file>/Pages/Public/Team.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Team</servlet-name>
+        <url-pattern>/teamPage</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>Settings</servlet-name>
@@ -418,6 +429,14 @@
     <servlet-mapping>
         <servlet-name>Status</servlet-name>
         <url-pattern>/status</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ProtectedPage</servlet-name>
+        <jsp-file>/Pages/Response/ProtectedPage.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProtectedPage</servlet-name>
+        <url-pattern>/protectedPage</url-pattern>
     </servlet-mapping>
 
     <!-- Error Pages -->

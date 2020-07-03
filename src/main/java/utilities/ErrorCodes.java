@@ -16,7 +16,8 @@ public enum ErrorCodes {
     NOWGFOUND("Das Boss-Lama sagt, dass du in keiner WG bist. Einsame Alpakas sind schwach, sei kein einsames Alpaka!", "Keine WG"),
     DUPLICATEUNAME("Dieser Benutzername wird leider bereits von einem anderen Nutzer verwendet, sagt unser Gästebuch-Lama. Bitte versuche es mit einem anderen Namen.", "Benutzername bereits vergeben"),
     DUPLICATEEMAIL("Unser Post-Lama sagt, dass es diese E-Mail-Addresse schon im Verzeichnis gibt und es dann nicht wüsste, an wen es die Post jetzt ausliefern soll. Bitte versuche es mit einer anderen Addresse.",
-            "E-Mail-Addresse bereits verwendet");
+            "E-Mail-Addresse bereits verwendet"),
+    WGFULL("Das Verwalter-Lama sagt, dass diese WG leider schon voll ist. Bitte tritt einer anderen WG bei oder wende dich an den entsprechenden WG-Administrator.", "Fehler beim Beitreten");
 
     private String message;
     private String header;

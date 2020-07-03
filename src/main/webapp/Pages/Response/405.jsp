@@ -3,6 +3,8 @@
 <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
 <html>
 <head>
+    <%@include file="../../assets/Templates/Imports/Global.jsp" %>
+
     <title>405</title>
     <link rel="stylesheet" type="text/css" href="../../assets/Styles/Main.css">
     <link rel="stylesheet" type="text/css" href="../../assets/Styles/Status.css">

@@ -9,7 +9,7 @@ import java.util.List;
  * Bean used for the settings page
  */
 public class SettingsBean {
-    private String userId;
+    private String userId = "";
 
     public SettingsBean() {
     }
@@ -116,7 +116,12 @@ public class SettingsBean {
             if (allAccessKeys.contains(accessKey)) {
                 String wgId = SQLDCwgs.getWgId(accessKey);
                 if (!wgId.equals("")) {
-                    return SQLDCusers.setWgId(wgId, userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                    // If there are already 10 (or more, which should technically not happen) members in the wg,
+                    // the user can't join and gets an error.
+                    if (SQLDCusers.numberOfMembersInWg(wgId) < 10) {
+                        return SQLDCusers.setWgId(wgId, userId) ? ErrorCodes.SUCCESS : ErrorCodes.FAILURE;
+                    }
+                    return ErrorCodes.WGFULL;
                 }
             } else {
                 return ErrorCodes.WRONGENTRY;
@@ -218,5 +223,14 @@ public class SettingsBean {
         }
 
         return false;
+    }
+
+    /**
+     * Check if the user has already verified their email address
+     *
+     * @return If it is verified
+     */
+    public boolean isEmailVerified() {
+        return SQLDCusers.isEmailVerified(this.userId);
     }
 }

@@ -857,4 +857,44 @@ public class SQLDCusers extends SQLDatabaseConnection {
 
         return false;
     }
+
+    /**
+     * Check if the user has already verified their email address
+     *
+     * @param userId The userId of the user
+     * @return If the email address is verified
+     */
+    public static boolean isEmailVerified(String userId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT isVerified FROM users WHERE uniqueID = " + Integer.valueOf(userId)));
+
+            while (rs.next()) {
+                return rs.getBoolean(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * Get the number of users in the given wg (because we only allow each wg to have a maximum of 10 members
+     *
+     * @param wgId The wgId of the wg
+     * @return The number of current members
+     */
+    public static int numberOfMembersInWg(String wgId) {
+        try {
+            ResultSet rs = executeQuery(("SELECT COUNT(uniqueID) FROM users WHERE wgId = " + Integer.valueOf(wgId)));
+
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
 }

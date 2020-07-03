@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
+<jsp:useBean id="overview" class="beans.OverviewBean"/>
+<jsp:setProperty name="overview" property="userId" value="${sessionBean.userId}"/>
+<jsp:setProperty name="overview" property="wgId" value="${sessionBean.wgId}"/>
 <html>
 <head>
     <%@include file="../../assets/Templates/Imports/Global.jsp" %>
