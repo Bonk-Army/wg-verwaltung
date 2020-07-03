@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: krissi
-  Date: 19.06.2020
-  Time: 21:26
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="createFinancialBean" class="beans.FinancialBean" scope="request"/>
 <jsp:setProperty name="createFinancialBean" property="userId" value="${sessionBean.userId}"/>

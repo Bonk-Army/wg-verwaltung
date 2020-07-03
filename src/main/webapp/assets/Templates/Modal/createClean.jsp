@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kristin.agne
-  Date: 22.06.2020
-  Time: 21:39
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="createCleanBean" class="beans.CleanBean" scope="request"/>
 <jsp:setProperty name="createCleanBean" property="userId" value="${sessionBean.userId}"/>

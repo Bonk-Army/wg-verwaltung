@@ -1,3 +1,9 @@
+<!--
+Seite       :  Login
+Zweck       :  JSP für die Loginseite
+URL Mapping :  /login
+-->
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

@@ -1,3 +1,9 @@
+<!--
+Seite       :  WGVerwaltung
+Zweck       :  JSP der WGVerwaltung
+URL Mapping :  /wgverwaltungPage
+-->
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

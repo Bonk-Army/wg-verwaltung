@@ -1,3 +1,9 @@
+<!--
+Seite       :  Home
+Zweck       :  JSP der Seite Home
+URL Mapping :  /homePage
+-->
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
 <jsp:useBean id="overview" class="beans.OverviewBean"/>
