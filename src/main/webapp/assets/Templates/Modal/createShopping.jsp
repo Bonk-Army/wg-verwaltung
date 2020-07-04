@@ -1,8 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="createArticleBean" class="beans.ShoppingBean" scope="request"/>
-<jsp:setProperty name="createArticleBean" property="userId" value="${sessionBean.userId}"/>
-<jsp:setProperty name="createArticleBean" property="username" value="${sessionBean.username}"/>
-<jsp:setProperty name="createArticleBean" property="wgId" value="${sessionBean.wgId}"/>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -29,7 +24,7 @@
                 <label for="name" class="sr-only">Name</label>
                 <h6>Wer m&ouml;chte diesen Artikel?</h6>
                 <select id="name" class="form-control" name="requestedBy" required>
-                    <c:forEach items="${createArticleBean.usersOfWg}" var="user">
+                    <c:forEach items="${shoppingBean.usersOfWg}" var="user">
                     <option value="${user.username}">${user.nameString}</option>
                     </c:forEach>
                 </select>
