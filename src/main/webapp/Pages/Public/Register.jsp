@@ -1,7 +1,7 @@
 <!--
 Seite       :  Registrierung
 Zweck       :  JSP für die Registrierung
-URL Mapping :  /resetPassword
+URL Mapping :  /register
 -->
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

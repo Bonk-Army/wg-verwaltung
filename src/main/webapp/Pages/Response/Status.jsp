@@ -1,6 +1,6 @@
 <!--
 Seite       :  Status
-Zweck       :  Response, wie die Anmeldung verlaufen ist
+Zweck       :  Response, wie die Anfrage verlaufen ist
 URL Mapping :  /status
 -->
 

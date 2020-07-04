@@ -1,7 +1,7 @@
 <!--
 Seite       :  405 Error
 Zweck       :  Userinterface für 405
-URL Mapping :  bei Fehler 500
+URL Mapping :  bei Fehler 405
 -->
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
