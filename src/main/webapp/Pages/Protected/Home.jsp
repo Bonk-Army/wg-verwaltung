@@ -5,6 +5,7 @@ URL Mapping :  /homePage
 -->
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
 <jsp:useBean id="overview" class="beans.OverviewBean"/>
 <jsp:setProperty name="overview" property="userId" value="${sessionBean.userId}"/>
@@ -19,17 +20,27 @@ URL Mapping :  /homePage
     <title>Home</title>
 
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
-    <link rel="stylesheet" type="text/css" href="./assets/Styles/Home.css">
-    <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
+    <c:if test="${sessionBean.loggedIn}">
+        <link rel="stylesheet" type="text/css" href="./assets/Styles/Home.css">
+        <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
+    </c:if>
 </head>
 <body>
-<%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
+<c:choose>
+    <c:when test="${sessionBean.loggedIn}">
+        <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
 
-<%@include file="../../assets/Contents/Home.jsp" %>
+        <%@include file="../../assets/Contents/Home.jsp" %>
 
-<script><%@include file="../../assets/Scripts/Sidebar.js" %></script>
-
-<script><%@include file="../../assets/Scripts/ChartJS/ChartJS_Guthaben.js" %></script>
-<script><%@include file="../../assets/Scripts/ChartJS/ChartJS_ToDo.js" %></script>
+        <script>
+            <%@include file="../../assets/Scripts/Sidebar.js" %>
+            <%@include file="../../assets/Scripts/ChartJS/ChartJS_Guthaben.js" %>
+            <%@include file="../../assets/Scripts/ChartJS/ChartJS_ToDo.js" %>
+        </script>
+    </c:when>
+    <c:otherwise>
+        <jsp:forward page="/protectedPage"/>
+    </c:otherwise>
+</c:choose>
 </body>
 </html>

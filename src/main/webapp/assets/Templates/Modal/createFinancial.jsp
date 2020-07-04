@@ -1,7 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="createFinancialBean" class="beans.FinancialBean" scope="request"/>
-<jsp:setProperty name="createFinancialBean" property="userId" value="${sessionBean.userId}"/>
-<jsp:setProperty name="createFinancialBean" property="wgId" value="${sessionBean.wgId}"/>
 <!-- Modal -->
 <div class="modal fade" id="createFinancial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
