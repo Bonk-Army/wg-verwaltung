@@ -10,10 +10,9 @@ import java.util.Map;
  */
 public class FaqBean {
     private List<Map<String, String>> faqs = new ArrayList<Map<String, String>>();
-    private static final int numberOfQuestions = 10;
     private boolean isLoggedIn = false;
 
-    public FaqBean() {
+    public FaqBean(){
         Map<String, String> q1 = new HashMap<String, String>();
         q1.put("question", "Kostet die Benutzung des Services etwas?");
         q1.put("answer", "Nein, unser Service ist komplett kostenlos!");
