@@ -11,8 +11,9 @@ import java.util.Map;
 public class FaqBean {
     private List<Map<String, String>> faqs = new ArrayList<Map<String, String>>();
     private static final int numberOfQuestions = 10;
+    private boolean isLoggedIn = false;
 
-    public FaqBean(){
+    public FaqBean() {
         Map<String, String> q1 = new HashMap<String, String>();
         q1.put("question", "Kostet die Benutzung des Services etwas?");
         q1.put("answer", "Nein, unser Service ist komplett kostenlos!");
@@ -49,7 +50,24 @@ public class FaqBean {
         faqs.add(q7);*/
     }
 
+    /*
+      /$$$$$$              /$$     /$$                                               /$$        /$$$$$$              /$$     /$$
+     /$$__  $$            | $$    | $$                                              /$$/       /$$__  $$            | $$    | $$
+    | $$  \__/  /$$$$$$  /$$$$$$ /$$$$$$    /$$$$$$   /$$$$$$   /$$$$$$$           /$$/       | $$  \__/  /$$$$$$  /$$$$$$ /$$$$$$    /$$$$$$   /$$$$$$   /$$$$$$$
+    | $$ /$$$$ /$$__  $$|_  $$_/|_  $$_/   /$$__  $$ /$$__  $$ /$$_____/          /$$/        |  $$$$$$  /$$__  $$|_  $$_/|_  $$_/   /$$__  $$ /$$__  $$ /$$_____/
+    | $$|_  $$| $$$$$$$$  | $$    | $$    | $$$$$$$$| $$  \__/|  $$$$$$          /$$/          \____  $$| $$$$$$$$  | $$    | $$    | $$$$$$$$| $$  \__/|  $$$$$$
+    | $$  \ $$| $$_____/  | $$ /$$| $$ /$$| $$_____/| $$       \____  $$        /$$/           /$$  \ $$| $$_____/  | $$ /$$| $$ /$$| $$_____/| $$       \____  $$
+    |  $$$$$$/|  $$$$$$$  |  $$$$/|  $$$$/|  $$$$$$$| $$       /$$$$$$$/       /$$/           |  $$$$$$/|  $$$$$$$  |  $$$$/|  $$$$/|  $$$$$$$| $$       /$$$$$$$/
+     \______/  \_______/   \___/   \___/   \_______/|__/      |_______/       |__/             \______/  \_______/   \___/   \___/   \_______/|__/      |_______/
+    */
+
+    // Getters and Setters for use with JSPs
+
     public List<Map<String, String>> getFaqs() {
         return faqs;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        isLoggedIn = loggedIn;
     }
 }
