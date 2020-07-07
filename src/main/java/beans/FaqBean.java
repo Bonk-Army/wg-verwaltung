@@ -9,7 +9,6 @@ import java.util.Map;
  * Bean used for the FAQ Page to provide the FAQ strings
  */
 public class FaqBean {
-    private List<Map<String, String>> faqs = new ArrayList<Map<String, String>>();
     private boolean isLoggedIn = false;
 
     public FaqBean() {
@@ -29,6 +28,8 @@ public class FaqBean {
     // Getters and Setters for use with JSPs
 
     public List<Map<String, String>> getFaqs() {
+        List<Map<String, String>> faqs = new ArrayList<Map<String, String>>();
+
         Map<String, String> q1 = new HashMap<String, String>();
         q1.put("question", "Kostet die Benutzung des Services etwas?");
         q1.put("answer", "Nein, unser Service ist komplett kostenlos!");
