@@ -54,7 +54,9 @@ public class FaqBean {
         q7.put("question", "Wie melde ich mich an?");
         q7.put("answer", "<a href=\"/\">Klicke hier und gib deinen Benutzername und dein Passwort ein</a>");
         q7.put("number", "7");
-        faqs.add(q7);
+        if (!isLoggedIn) {
+            faqs.add(q7);
+        }
     }
 
     /*
