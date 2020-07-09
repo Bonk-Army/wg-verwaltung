@@ -1,3 +1,9 @@
+<!--
+Seite       :  Financial
+Zweck       :  JSP der Seite Financial
+URL Mapping :  /financialPage
+-->
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
@@ -13,17 +19,29 @@
     <title>Finanzielles</title>
 
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Main.css">
-    <link rel="stylesheet" type="text/css" href="./assets/Styles/Financial.css">
-    <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
+    <c:if test="${sessionBean.loggedIn}">
+        <link rel="stylesheet" type="text/css" href="./assets/Styles/Financial.css">
+        <link rel="stylesheet" type="text/css" href="./assets/Styles/Sidebar.css">
+    </c:if>
 </head>
-<body onload="validDate()">
-<%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
-<%@include file="../../assets/Templates/Modal/createFinancial.jsp" %>
-<%@include file="../../assets/Templates/Modal/removeFinancial.jsp" %>
+<c:choose>
+    <c:when test="${sessionBean.loggedIn}">
+        <body onload="validDate()">
+         <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
+         <%@include file="../../assets/Templates/Modal/createFinancial.jsp" %>
+         <%@include file="../../assets/Templates/Modal/removeFinancial.jsp" %>
 
-<%@include file="../../assets/Contents/Financial.jsp" %>
+         <%@include file="../../assets/Contents/Financial.jsp" %>
 
-<script><%@include file="../../assets/Scripts/Sidebar.js" %></script>
-<script><%@include file="../../assets/Scripts/Financial.js" %></script>
+        <script>
+            <%@include file="../../assets/Scripts/Sidebar.js" %>
+            <%@include file="../../assets/Scripts/Financial.js" %>
+        </script>
+    </c:when>
+    <c:otherwise>
+    <body>
+        <jsp:forward page="/protectedPage"/>
+        </c:otherwise>
+</c:choose>
 </body>
 </html>

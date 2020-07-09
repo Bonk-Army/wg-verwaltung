@@ -87,7 +87,12 @@ public class SQLDCshopping extends SQLDatabaseConnection {
     }
 
     /**
-     * Returns all recent (open + last seven days) article requests for the given wg
+     * Returns all recent (open + last seven days) article requests for the given wg.
+     * The method first fetches the data from sql and then parses it into a format that can be read directly
+     * in the frontend. It returns a list with the active requests and every request is saved into a map with
+     * the respective key value pairs.
+     * This method also "looks" at the data and gives the required color info into the maps so we don' need to
+     * have calculation for this in the frontend.
      *
      * @param wgId The wg Id of the wg
      * @return A List of Maps which contain an article each
@@ -96,6 +101,8 @@ public class SQLDCshopping extends SQLDatabaseConnection {
         List<Map<String, String>> requestList = new ArrayList<Map<String, String>>();
 
         try {
+            // Get all required info for each request that is active and is either not done or has been due in the last seven days.
+            // Ordered by their status and requests of the same status are ordered by their due date.
             ResultSet rs = executeQuery(("SELECT article, amount, createdBy, requestedBy, dateDue, dateCreated, uniqueID, isDone FROM shopping WHERE wgId="
                     + Integer.valueOf(wgId) + " AND (dateDue < DATE_ADD(CURDATE(), INTERVAL 7 DAY) OR isDone = 0) AND isActive = 1 ORDER BY isDone, dateDue ASC"));
 

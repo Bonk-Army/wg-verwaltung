@@ -1,3 +1,9 @@
+<!--
+Seite       :  Reset Password
+Zweck       :  JSP für den Passwortreset
+URL Mapping :  /resetPassword
+-->
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

@@ -1,3 +1,9 @@
+<!--
+Seite       :  404 Error
+Zweck       :  Userinterface für 404
+URL Mapping :  bei Fehler 404
+-->
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>

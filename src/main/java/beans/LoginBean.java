@@ -245,6 +245,7 @@ public class LoginBean {
 
     /**
      * Extract the user id from the session identifier and check the validity of the session identifier.
+     * THIS METHOD DOES NOT CHECK IF THE COOKIE IS STILL VALID! IT JUST CHECKS THE IDENTIFIER ITSELF!
      *
      * @param sessionIdentifier The session identifier
      * @return The user id as a String or an empty string in case of an error

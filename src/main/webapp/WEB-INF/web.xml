@@ -59,11 +59,13 @@
         |__ ^^-^^
         |__ Response                    |                                   | Zuständig : @NH      | Mapped by @NH                            | Initial
         |__ /status                     | JSP Page : Status                 | Zuständig : @KA      | Mapped by @KA                            | Initial
+        |__ /protectedPage              | JSP Page : ProtectedPage          | Zuständig : @KA      | Mapped by @KA                            | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
         |__ ErrorPages                  |                                   | Zuständig : @KA      | Mapped by @PM                            | Initial
         |__ 404                         | JSP Page : 404                    | Zuständig : @KA      | Mapped by @PM                            | Initial
+        |__ 405                         | JSP Page : 405                    | Zuständig : @KA      | Mapped by @KA                            | Initial
         |__ 500                         | JSP Page: 500                     | Zuständig : @KA      | Mapped by @KA                            | Initial
         |__ Java Exception              | JSP Page: Exception               | Zuständig : @KA      | Mapped by @KA                            | Initial
         |__ ^^-^^
@@ -208,7 +210,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Team</servlet-name>
-        <jsp-file>/Pages/Public/Team.jsp</jsp-file>
+        <jsp-file>/Pages/Protected/Team.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Team</servlet-name>
