@@ -48,7 +48,11 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
 
     /**
      * Returns a List with all entries for the specified wg.
-     * USE THIS ONLY FOR DISPLAYING, NOT FOR CALCULATIONS AS THE VALUE IS CONVERTED TO A DOUBLE!!!
+     * Each entry is saved into a map so we can directly access it in the frontend
+     * This method also "looks" at the data and gives the required color info into the maps so we don' need to
+     * have calculation for this in the frontend.
+     * <p>
+     * <b>USE THIS ONLY FOR DISPLAYING, NOT FOR CALCULATIONS AS THE VALUE IS CONVERTED TO A DOUBLE!!!</b>
      *
      * @param wgId The wgId of the wg for which the entries are returned
      * @return A List of maps of which each represents an entry
@@ -57,6 +61,7 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
         List<Map<String, String>> entries = new ArrayList<Map<String, String>>();
 
         try {
+            // Returns all info for each financial entry that is active, ordered by their creation date
             ResultSet rs = executeQuery(("SELECT reason, value, dateCreated, createdBy, uniqueID FROM financial WHERE wgId="
                     + Integer.valueOf(wgId) + " AND isActive = 1 ORDER BY dateCreated DESC LIMIT " + limit));
 
@@ -112,7 +117,7 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
     }
 
     /**
-     * Return a list of FinancialEntry objects for calculating wg specific financial stats
+     * Return a list of FinancialEntry objects for <b>calculating</b> wg specific financial stats
      *
      * @param wgId The wgId of the wg
      * @return A List of FinancialEntry objects
@@ -139,7 +144,7 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
     }
 
     /**
-     * Return a list of FinancialEntry objects for calculating user specific financial stats
+     * Return a list of FinancialEntry objects for <b>calculating</b> user specific financial stats
      *
      * @param userId The userId of the user
      * @return A List of FinancialEntry objects
@@ -263,6 +268,7 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
         List<Integer> monthlyBalance = new ArrayList<Integer>();
 
         try {
+            // Get the sum of expenses or income for each month in the last six months individually
             ResultSet rs = executeQuery(("SELECT SUM(value) FROM financial WHERE createdBy = " + Integer.valueOf(userId)
                     + " AND DATEDIFF(dateCreated, CURRENT_TIMESTAMP) <= 180 AND isActive = 1 GROUP BY EXTRACT(month FROM dateCreated)"));
 

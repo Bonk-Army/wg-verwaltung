@@ -53,15 +53,21 @@ public class SQLDCtodo extends SQLDatabaseConnection {
     }
 
     /**
-     * Return all To-Dos for a wg
+     * Return all active To-Dos for a wg.
+     * The method first fetches the data from sql and then parses it into a format that can be read directly in the
+     * frontend. It returns a list of todos where each todo is a map with the respective key-value pairs.
+     * This method also "looks" at the data and gives the required color info into the maps so we don' need to
+     * have calculation for this in the frontend.
      *
      * @param wgId the ID of the wg
-     * @return ArrayList<TodoModel>
+     * @return A list of maps of which each represents a todo
      */
     public static List<Map<String, String>> getAllActiveTodos(String wgId) {
         deactivateOldToDos();
         List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
         try {
+            // Get all required info for each todo that is active and is either not done or has been due in the last seven days.
+            // Ordered by their status and todos of the same status are ordered by their due date
             ResultSet rs = executeQuery(("SELECT task, assignedId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE wgId = "
                     + Integer.valueOf(wgId) + " AND isActive = 1 AND (isDone = 0 OR DATEDIFF(dateDue, CURRENT_TIMESTAMP) <= 7) ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
@@ -235,79 +241,11 @@ public class SQLDCtodo extends SQLDatabaseConnection {
     }
 
     /**
-     * Sends SQL Query in order to count number of To-Do's for specific WG
-     *
-     * @param wgId The ID of the WG
-     * @return Number of To-Do's for given WG, done or not
-     */
-    public static int countTodo(String wgId) {
-        int numberofTodo;
-        try {
-            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE wgID=" + Integer.valueOf(wgId) + ";");
-            numberofTodo = rs.getInt(1);
-            return numberofTodo;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
-    /**
-     * Sends SQL Query in order to count the number of done To-Do's for specific WG
-     *
-     * @param wgId The ID of the WG
-     * @return Number of done To-Do's
-     */
-    public static int countDone(String wgId) {
-        int numberofDone;
-        try {
-            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE wgID=" + Integer.valueOf(wgId) + " AND isDone=1;");
-            numberofDone = rs.getInt(1);
-            return numberofDone;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
-    /**
-     * Sends SQL Query in order to count the number of done To-Do's assigned to specific User
-     *
-     * @param assignedId The ID of the user
-     * @return Number of done To-Do's
-     */
-    public static int countDoneUser(String assignedId) {
-        int numberofDone;
-        try {
-            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE assignedId=" + Integer.valueOf(assignedId) + " AND isDone=1;");
-            numberofDone = rs.getInt(1);
-            return numberofDone;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
-    /**
-     * Sends SQL Query in order to count number of To-Do's for specific WG
-     *
-     * @param assignedId The ID of the user
-     * @return Number of To-Do's for given user, done or not
-     */
-    public static int countTodoUser(String assignedId) {
-        int numberofTodo;
-        try {
-            ResultSet rs = executeQuery("SELECT COUNT(*) FROM todo WHERE assignedId=" + Integer.valueOf(assignedId) + ";");
-            numberofTodo = rs.getInt(1);
-            return numberofTodo;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return -1;
-    }
-
-    /**
-     * Get all active todos where the given user is assigned
+     * Get all active todos where the given user is assigned.
+     * The method first fetches the data from sql and then parses it into a format that can be read directly in the
+     * frontend. It returns a list of todos where each todo is a map with the respective key-value pairs.
+     * This method also "looks" at the data and gives the required color info into the maps so we don' need to
+     * have calculation for this in the frontend.
      *
      * @param assignedId The assignedId of the user
      * @return The List of todos
@@ -316,6 +254,8 @@ public class SQLDCtodo extends SQLDatabaseConnection {
         deactivateOldToDos();
         List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
         try {
+            // Gets the required info for each todo that is active and is either not done or has been due in the last seven days.
+            // Ordered by the status and the todos of the same status are then ordered by their due date
             ResultSet rs = executeQuery(("SELECT task, assignedId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE assignedId = "
                     + Integer.valueOf(assignedId) + " AND wgId = " + Integer.valueOf(wgId) + " AND isActive = 1 "
                     + " AND (isDone = 0 OR DATEDIFF(dateDue, CURRENT_TIMESTAMP) <= 7) ORDER BY isDone, dateDue ASC"));
@@ -381,6 +321,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
         Map<String, Integer> openTodosMap = new HashMap<String, Integer>();
 
         try {
+            // Returns the count of open todos and required user info for each user of the wg individually
             ResultSet rs = executeQuery(("SELECT COUNT(todo.uniqueID), users.firstName, users.lastName FROM todo "
                     + "LEFT OUTER JOIN users ON users.uniqueID = todo.assignedId WHERE todo.wgId = " + Integer.valueOf(wgId)
                     + " AND todo.isActive = 1 AND todo.isDone = 0 GROUP BY todo.assignedId"));

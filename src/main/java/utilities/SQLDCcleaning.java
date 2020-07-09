@@ -82,6 +82,12 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
 
     /**
      * Get all cleaning tasks for a wg with their assignees.
+     * This fetches the data from sql and then parses it to the data structure that we need in the frontend.
+     * The parsed structure is a list of maps. Each of these maps represents one row in the frontend and therefore
+     * contains all required info for exactly one cleaning task. Now each of these maps contains other lists.
+     * In the first list, mapped under the key "general", we find a map with general info at index 0. The other lists,
+     * each mapped under a weekday name, contain the possible assignees for this task. These lists hence contain maps
+     * where each map represents one user.
      *
      * @param wgId The wgId of the wg
      * @return A list of maps of lists of maps (see datamodel below and code comments)
@@ -91,6 +97,20 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
      * </p>
      */
     public static List<Map<String, List<Map<String, String>>>> getAllCleaningTasksForWg(String wgId) {
+        /*
+        The graph below shows the structure. |--* means many children, |--1 means one child and so on
+
+        List (tasks)
+             |
+             |--* Map (Task)
+                     |
+                     |--1 List (General Info)
+                     |       |
+                     |       |--1 Map (General Info)
+                     |
+                     |--7 List (Users for Weekday)
+                             |--* Map (User Info)
+         */
         List<Map<String, List<Map<String, String>>>> tasksList = new ArrayList<Map<String, List<Map<String, String>>>>();
 
         try {

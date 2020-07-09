@@ -15,8 +15,19 @@ import java.util.List;
 
 /**
  * Servlet that is mapped before every content page to check if the user is already authenticated.
+ * If not, it will try to authenticate the user via our session cookie. If it is able to authenticate
+ * the user, it will bring them to the page they wanted. Otherwise, they will be prompted to login or see the
+ * page without our sidebar in case the requested page is a "public" page
  */
 public class MainFilter extends HttpServlet {
+    /**
+     * Called when the user opens any page
+     *
+     * @param request  The http GET request
+     * @param response The http response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> publicPages = Arrays.asList("/impressum", "/faq", "/contact");

@@ -1,3 +1,9 @@
+<!--
+Seite       :  Exception
+Zweck       :  Anzeige von Custom Fehlermeldungen für den User
+URL Mapping :  bei java.lang.Exception
+-->
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>

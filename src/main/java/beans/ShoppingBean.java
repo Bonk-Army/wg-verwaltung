@@ -87,21 +87,6 @@ public class ShoppingBean {
         return ErrorCodes.WRONGENTRY;
     }
 
-    /**
-     * Returns the first name and the first letter of the last name of a user as one string
-     *
-     * @param username The username of the user
-     * @return The String, e.g. Max M
-     */
-    public String getNameString(String username) {
-        if (RegexHelper.checkString(username)) {
-            return SQLDCusers.getNameString(username);
-        }
-
-        return "";
-    }
-
-
     /*
       /$$$$$$              /$$     /$$                                               /$$        /$$$$$$              /$$     /$$
      /$$__  $$            | $$    | $$                                              /$$/       /$$__  $$            | $$    | $$

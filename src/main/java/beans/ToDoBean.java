@@ -47,50 +47,6 @@ public class ToDoBean {
     }
 
     /**
-     * Convert a Date object to a String
-     *
-     * @param date The Date object
-     * @return The String
-     */
-    public String dateToString(Date date) {
-        return DateFormatter.dateTimeSecondsToString(date);
-    }
-
-    /**
-     * Return a list of all usernames of the users in the specified wg
-     *
-     * @param wgId The wgId of the wg
-     * @return The list with usernames
-     */
-    public List<String> getAllUsersOfWG(String wgId) {
-        return SQLDCusers.getAllUsersOfWG(wgId);
-    }
-
-    /**
-     * Returns the first name and the first letter of the last name of a user as one string
-     *
-     * @param username The username of the user
-     * @return The String, e.g. Max M
-     */
-    public String getNameString(String username) {
-        if (RegexHelper.checkString(username)) {
-            return SQLDCusers.getNameString(username);
-        }
-
-        return "";
-    }
-
-    /**
-     * Return the wgId of the specified user
-     *
-     * @param userId The userId of the user
-     * @return The wgId
-     */
-    public String getWgIdByUserId(String userId) {
-        return SQLDCusers.getWgIdByUser(userId);
-    }
-
-    /**
      * Set a todo to done
      *
      * @param todoId The todo to be set

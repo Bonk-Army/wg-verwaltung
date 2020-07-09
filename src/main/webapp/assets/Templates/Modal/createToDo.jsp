@@ -1,7 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<jsp:useBean id="createTodoBean" class="beans.ToDoBean" scope="request"/>
-<jsp:setProperty name="createTodoBean" property="userId" value="${sessionBean.userId}"/>
-<jsp:setProperty name="createTodoBean" property="wgId" value="${sessionBean.wgId}"/>
 <!-- Modal -->
 <div class="modal fade" id="createToDo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -21,7 +17,7 @@
                 <h6>Wem m&ouml;chtest du diese Aufgabe zuteilen?</h6>
                 <label for="name" class="sr-only">Name</label>
                 <select id="name" class="form-control" name="username" required>
-                    <c:forEach items="${createTodoBean.usersOfWg}" var="user">
+                    <c:forEach items="${todoBean.usersOfWg}" var="user">
                     <option value="${user.username}">${user.nameString}</option>
                     </c:forEach>
                 </select>

@@ -1,3 +1,9 @@
+<!--
+Seite       :  500 Error
+Zweck       :  Userinterface für 500
+URL Mapping :  bei Fehler 500
+-->
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
