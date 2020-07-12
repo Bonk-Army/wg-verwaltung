@@ -31,8 +31,8 @@ a:focus {
 button#logout{
     background-color: #272525;
     border-color: #272525;
-    max-width: 240px;
-    margin-left: 5px;
+    max-width: 15em;
+    margin-left: 0.3125em;
 }
 
 button#logout:hover{
@@ -59,9 +59,9 @@ button#logout:hover{
     display: none;
 }
 
-#sidebar.active button#logout{
-    max-width: 117px;
-    margin-left: 5px;
+#sidebar.active button#logout {
+    max-width: 7.3125em;
+    margin-left: 0.3125em;
 }
 
 #sidebar.active .sidebar-header strong {
@@ -73,7 +73,7 @@ button#logout:hover{
 }
 
 #sidebar.active ul li a {
-    padding: 20px 10px;
+    padding: 1.25em 0.625em;
     text-align: center;
     font-size: 0.85em;
 }
@@ -82,16 +82,16 @@ button#logout:hover{
     margin-right: 0;
     display: block;
     font-size: 1.8em;
-    margin-bottom: 5px;
+    margin-bottom: 0.3125em;
 }
 
 #sidebar.active ul ul a {
-    padding: 10px !important;
+    padding: 0.625em !important;
 }
 
 #sidebar.active .dropdown-toggle::after {
     top: auto;
-    bottom: 10px;
+    bottom: 0.625em;
     right: 50%;
     -webkit-transform: translateX(50%);
     -ms-transform: translateX(50%);
@@ -99,12 +99,12 @@ button#logout:hover{
 }
 
 #sidebar .sidebar-header {
-    padding: 20px;
+    padding: 1.25em;
     background: #3c415e;
 }
 
 #sidebar.active .sidebar-header {
-    padding: 20px 5px 20px 5px;
+    padding: 1.25em 0.3125em 1.25em 0.3125em;
     background: #3c415e;
 }
 
@@ -114,12 +114,12 @@ button#logout:hover{
 }
 
 #sidebar ul.components {
-    padding: 20px 0;
-    border-bottom: 1px solid #272525;
+    padding: 1.25em 0;
+    border-bottom: 0.0625em solid #272525;
 }
 
 #sidebar ul li a {
-    padding: 10px;
+    padding: 0.625em;
     font-size: 1.1em;
     display: block;
 }
@@ -130,7 +130,7 @@ button#logout:hover{
 }
 
 #sidebar ul li a i {
-    margin-right: 10px;
+    margin-right: 0.625em;
 }
 
 #sidebar ul li.active>a,
@@ -147,13 +147,13 @@ a[data-toggle="collapse"] {
     display: block;
     position: absolute;
     top: 50%;
-    right: 20px;
+    right: 1.25em;
     transform: translateY(-50%);
 }
 
 ul ul a {
     font-size: 0.9em !important;
-    padding-left: 30px !important;
+    padding-left: 1.875em !important;
     background: #3c415e;
 }
 
@@ -168,7 +168,7 @@ ul ul a {
 
 #content {
     width: calc(100% - 15.625em);
-    padding: 40px 20px;
+    padding: 2.5em 1.25em;
     min-height: 100vh;
     transition: all 0.3s;
     margin-left: 15.625em;
@@ -190,16 +190,16 @@ ul ul a {
                                                  dP
 */
 
-@media (max-width: 768px) {
+@media (max-width: 48em) {
     #sidebar {
         min-width: 7.9375em;
         max-width: 7.9375em;
         text-align: center;
-        margin-left: 0px !important;
+        margin-left: 0em !important;
     }
     .dropdown-toggle::after {
         top: auto;
-        bottom: 10px;
+        bottom: 0.625em;
         right: 50%;
         -webkit-transform: translateX(50%);
         -ms-transform: translateX(50%);
@@ -209,7 +209,7 @@ ul ul a {
         margin-left: 0 !important;
     }
     #sidebar .sidebar-header {
-        padding: 20px 5px 20px 5px;
+        padding: 1.25em 0.3125em 1.25em 0.3125em;
         background: #3c415e;
     }
     #sidebar .sidebar-header h3 {
@@ -228,12 +228,12 @@ ul ul a {
     }
 
     #sidebar button#logout{
-        max-width: 117px;
-        margin-left: 5px;
+        max-width: 7.3125em;
+        margin-left: 0.3125em;
     }
 
     #sidebar ul li a {
-        padding: 20px 10px;
+        padding: 1.25em 0.625em;
         text-align: center;
         font-size: 0.85em;
     }
@@ -242,7 +242,7 @@ ul ul a {
         display: block;
     }
     #sidebar ul ul a {
-        padding: 10px !important;
+        padding: 0.625em !important;
     }
     #sidebar ul li a i {
         font-size: 1.3em;
