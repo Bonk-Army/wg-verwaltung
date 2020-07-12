@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Enumeration;
 import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -36,8 +37,8 @@ public class MobileAPI extends HttpServlet {
 
         switch (reqType) {
             case "AUTHREQUEST":
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
+                String username = jsonObj.getString("username");
+                String password = jsonObj.getString("password");
 
                 PrintWriter out = response.getWriter();
                 out.print(apiBean.performLogin(username, password));
@@ -45,6 +46,7 @@ public class MobileAPI extends HttpServlet {
                 response.setStatus(200);
                 break;
             default:
+                response.setStatus(400);
                 break;
         }
     }
