@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /*
  Table structure:
 
-        - uniqueID      (int)
+        - uniqueID      (int)       (Primary key)
         - name          (String)
         - accessKey     (String)
         - createdBy     (int)       (Foreign key to users.uniqueID)
