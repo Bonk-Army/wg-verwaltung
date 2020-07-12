@@ -3,7 +3,7 @@ package utilities;
 /*
  Table structure:
 
-        - uniqueID          (int)
+        - uniqueID          (int)       (Primary key)
         - taskName          (String)
         - mondayUser        (int)       (Foreign key to users.uniqueID)
         - tuesdayUser       (int)       (Foreign key to users.uniqueID)

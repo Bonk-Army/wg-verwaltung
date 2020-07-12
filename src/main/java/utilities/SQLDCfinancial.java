@@ -9,7 +9,7 @@ import java.util.*;
 /*
  Table structure:
 
-        - uniqueID          (int)
+        - uniqueID          (int)       (Primary key)
         - reason            (String)
         - value             (int)
         - dateCreated       (Date)

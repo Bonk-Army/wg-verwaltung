@@ -8,7 +8,7 @@ import java.util.List;
 /*
  Table structure:
 
-        - uniqueID          (int)
+        - uniqueID          (int)       (Primary key)
         - isDone            (bool)
         - isActive          (bool)
         - amount            (String)
