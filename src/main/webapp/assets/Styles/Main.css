@@ -102,3 +102,19 @@ a, a:hover{
 .mt-custom {
     margin-top: 10%;
 }
+
+/*
+    d888888P          dP       dP
+       88             88       88
+       88    .d8888b. 88d888b. 88 .d8888b.
+       88    88'  `88 88'  `88 88 88ooood8
+       88    88.  .88 88.  .88 88 88.  ...
+       dP    `88888P8 88Y8888' dP `88888P'
+ */
+
+.table{
+    color: aliceblue;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}

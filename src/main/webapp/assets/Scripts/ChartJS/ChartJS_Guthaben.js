@@ -1,4 +1,4 @@
-var datenGuthaben = ${overview.getBalanceChartData()};
+var datenGuthaben = ${overviewBean.getBalanceChartData()};
 
 var monthNames = ["Januar", "Februar", unescape("M%E4rz"), "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
 
