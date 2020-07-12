@@ -16,8 +16,8 @@ section {
 }
 
 label {
-    margin-top: 8px;
-    margin-bottom: 4px;
+    margin-top: 0.5em;
+    margin-bottom: 0.25em;
 }
 
 button.leave, button.leave:focus {
@@ -52,7 +52,7 @@ button.join:hover {
                                                  dP
 */
 
-@media (max-width: 1069px) {
+@media (max-width: 66.8125em) {
     #content {
         margin-left: 15.625em;
         max-width: unset;

@@ -1,6 +1,6 @@
 <div id="content">
     <h2 class="header">Settings</h2>
-    <c:if test="${!settingBean.emailVerified}">
+    <c:if test="${!settingsBean.emailVerified}">
         <p id="emailNotVerified">Deine E-Mail wurde noch nicht verifiziert. Bitte best&auml;tige deine E-Mail-Adresse &uuml;ber den Link, den du per Mail erhalten hast.</p>
     </c:if>
     <section class="mb-4">
@@ -16,7 +16,7 @@
             <button id="saveButton" class="btn btn-lg btn-primary btn-block" type="submit">&Auml;nderungen speichern</button>
         </form>
         <c:choose>
-            <c:when test="${settingBean.userHasWg}">
+            <c:when test="${settingsBean.userHasWg}">
                 <label for="wg">WG</label>
                 <input id="wg" class="form-control" placeholder="${sessionBean.wgName}" readonly="readonly"/>
                 <form action="leaveWgLogic" method="GET">
