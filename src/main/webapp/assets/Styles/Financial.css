@@ -37,7 +37,7 @@ thead.tasks th:not(:nth-child(1), :last-child) {
 }
 
 button.remove {
-    max-width: 62px;
+    max-width: 3.875em;
 }
 
 /*
@@ -50,6 +50,6 @@ button.remove {
  */
 
 #addArticle {
-    margin-bottom: 10px;
-    max-width: 62px;
+    margin-bottom: 0.625em;
+    max-width: 3.875em;
 }

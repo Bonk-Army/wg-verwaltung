@@ -68,8 +68,8 @@ a, a:hover{
 
 .form-signin {
     width: 100%;
-    max-width: 330px;
-    padding: 15px;
+    max-width: 20.625em;
+    padding: 0.9375em;
 }
 
 .form-signin .checkbox {
