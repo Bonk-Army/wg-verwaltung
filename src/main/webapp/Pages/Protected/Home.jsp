@@ -7,9 +7,9 @@ URL Mapping :  /homePage
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="sessionBean" class="beans.SessionBean" scope="session"/>
-<jsp:useBean id="overview" class="beans.OverviewBean"/>
-<jsp:setProperty name="overview" property="userId" value="${sessionBean.userId}"/>
-<jsp:setProperty name="overview" property="wgId" value="${sessionBean.wgId}"/>
+<jsp:useBean id="overviewBean" class="beans.OverviewBean"/>
+<jsp:setProperty name="overviewBean" property="userId" value="${sessionBean.userId}"/>
+<jsp:setProperty name="overviewBean" property="wgId" value="${sessionBean.wgId}"/>
 <html>
 <head>
     <%@include file="../../assets/Templates/Imports/Global.jsp" %>

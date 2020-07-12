@@ -82,7 +82,7 @@
                     <img src="../../assets/Images/Team/nico.png" class="card-img-top" alt="...">
                     <div class="card-body text-center">
                         <h5 class="card-title mb-0">Nico Holzh&auml;user</h5>
-                        <div class="card-text text-black-50">&#129433;&#129433;</div>
+                        <div class="card-text text-black-50">Frontend</div>
                     </div>
                 </div>
             </div>

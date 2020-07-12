@@ -1,7 +1,7 @@
 var datenToDo = [];
 var namenToDo = [];
 
-var daten = JSON.parse('${overview.getTodoChartData()}');
+var daten = JSON.parse('${overviewBean.getTodoChartData()}');
 
 for(var person in daten) {
     namenToDo.push(person);

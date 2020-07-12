@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 /*
  Table structure:
 
-        - uniqueID          (int)
+        - uniqueID          (int)       (Primary key)
         - isActive          (bool)
         - task              (String)
         - assignedId        (int)       (Foreign key to users.uniqueID)
