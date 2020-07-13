@@ -111,8 +111,8 @@ public class SQLDCshopping extends SQLDatabaseConnection {
 
                 currentArticle.put("article", rs.getString(1));
                 currentArticle.put("amount", rs.getString(2));
-                currentArticle.put("dateDue", DateFormatter.dateToString(rs.getDate(5)));
-                currentArticle.put("dateCreated", DateFormatter.dateToString(rs.getDate(6)));
+                currentArticle.put("dateDue", DateFormatter.dateToString(rs.getTimestamp(5)));
+                currentArticle.put("dateCreated", DateFormatter.dateToString(rs.getTimestamp(6)));
                 currentArticle.put("requestId", String.valueOf(rs.getInt(7)));
 
                 String createdById = String.valueOf(rs.getInt(3));
@@ -127,7 +127,7 @@ public class SQLDCshopping extends SQLDatabaseConnection {
 
                 // Color the requests based on their priority
                 Date currentDate = DateFormatter.getCurrentDateTime();
-                Date dateDue = rs.getDate(5);
+                Date dateDue = rs.getTimestamp(5);
                 Calendar c = Calendar.getInstance();
                 c.setTime(currentDate);
                 c.add(Calendar.DATE, 1);

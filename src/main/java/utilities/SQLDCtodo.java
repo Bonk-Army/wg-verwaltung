@@ -79,8 +79,8 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 // Parameters for better visualization of the status of every todo
 
                 // Dates for colors
-                Date dateDue = rs.getDate(4);
-                Date dateCreated = rs.getDate(3);
+                Date dateDue = rs.getTimestamp(4);
+                Date dateCreated = rs.getTimestamp(3);
                 Date currentDate = DateFormatter.getCurrentDateTime();
                 Calendar c = Calendar.getInstance();
                 c.setTime(currentDate);
@@ -268,8 +268,8 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 // Parameters for better visualization of the status of every todo
 
                 // Dates for colors
-                Date dateDue = rs.getDate(4);
-                Date dateCreated = rs.getDate(3);
+                Date dateDue = rs.getTimestamp(4);
+                Date dateCreated = rs.getTimestamp(3);
                 Date currentDate = DateFormatter.getCurrentDateTime();
                 Calendar c = Calendar.getInstance();
                 c.setTime(currentDate);
