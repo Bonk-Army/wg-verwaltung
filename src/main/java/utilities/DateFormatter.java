@@ -2,10 +2,11 @@ package utilities;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * Utility class used to format a date to a localized date string
@@ -54,8 +55,10 @@ public class DateFormatter {
      * @return The Date object
      */
     public static Date getCurrentDateTime() {
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Berlin"));
-        Date currentDate = calendar.getTime();
+        Instant instant = new Date().toInstant();
+        ZoneId z = ZoneId.of("Europe/Berlin");
+        ZonedDateTime zdt = instant.atZone(z);
+        Date currentDate = Date.from(zdt.toInstant());
 
         return currentDate;
     }
