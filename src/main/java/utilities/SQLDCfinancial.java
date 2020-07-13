@@ -75,7 +75,7 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
                 formatter.format("%,.2f", (rs.getInt(2) / 100d));
                 String valueString = sb.toString();
 
-                String createdDateString = DateFormatter.dateToString(rs.getDate(3));
+                String createdDateString = DateFormatter.dateToString(rs.getTimestamp(3));
 
                 if (rs.getInt(2) < 0) {
                     currentEntry.put("colorClass", "negative");
@@ -131,7 +131,7 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
 
             while (rs.next()) {
                 int value = rs.getInt(1);
-                Date dateCreated = rs.getDate(2);
+                Date dateCreated = rs.getTimestamp(2);
                 String createdBy = String.valueOf(rs.getInt(3));
 
                 entries.add(new FinancialEntry(dateCreated, value, createdBy));
@@ -158,7 +158,7 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
 
             while (rs.next()) {
                 int value = rs.getInt(1);
-                Date dateCreated = rs.getDate(2);
+                Date dateCreated = rs.getTimestamp(2);
 
                 entries.add(new FinancialEntry(dateCreated, value, userId));
             }
