@@ -47,6 +47,8 @@ public class DateFormatter {
 
     /**
      * Get the current Date
+     * Because we work on Azure which is in a different time zone, we have to adjust the Date.
+     * Thats why it returns the correct Date on Azure but probably a wrong date when testing locally.
      *
      * @return The Date object
      */
@@ -54,19 +56,19 @@ public class DateFormatter {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.GERMAN);
         formatter.setTimeZone(TimeZone.getTimeZone("Europe/Berlin"));
 
+        SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.GERMAN);
+        formatter2.setTimeZone(TimeZone.getTimeZone("GMT"));
+
         String formattedDateString = formatter.format(new Date());
 
         Date adjustedDate;
 
         try {
-            adjustedDate = formatter.parse(formattedDateString);
+            adjustedDate = formatter2.parse(formattedDateString);
         } catch (Exception e) {
             e.printStackTrace();
             adjustedDate = new Date();
         }
-
-        System.out.println("---------------------------------------------------");
-        System.out.println(adjustedDate.toString());
 
         return adjustedDate;
     }
