@@ -65,6 +65,9 @@ public class DateFormatter {
             adjustedDate = new Date();
         }
 
+        System.out.println("---------------------------------------------------");
+        System.out.println(adjustedDate.toString());
+
         return adjustedDate;
     }
 }
