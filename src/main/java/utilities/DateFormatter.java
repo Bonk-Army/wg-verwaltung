@@ -1,10 +1,9 @@
 package utilities;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
@@ -19,10 +18,13 @@ public class DateFormatter {
      * @return The formatted string
      */
     public static String dateTimeSecondsToString(Date date) {
-        String pattern = "dd.MM.yyyy HH:mm:ss";
-        DateFormat df = new SimpleDateFormat(pattern, Locale.GERMAN);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss", Locale.GERMAN);
 
-        return df.format(date);
+        Instant instant = date.toInstant();
+        ZoneId z = ZoneId.of("Europe/Berlin");
+        ZonedDateTime zdt = instant.atZone(z);
+
+        return zdt.format(formatter);
     }
 
     /**
@@ -32,10 +34,13 @@ public class DateFormatter {
      * @return The formatted string
      */
     public static String dateTimeMinutesToString(Date date) {
-        String pattern = "dd.MM.yyyy HH:mm";
-        DateFormat df = new SimpleDateFormat(pattern, Locale.GERMAN);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm", Locale.GERMAN);
 
-        return df.format(date);
+        Instant instant = date.toInstant();
+        ZoneId z = ZoneId.of("Europe/Berlin");
+        ZonedDateTime zdt = instant.atZone(z);
+
+        return zdt.format(formatter);
     }
 
     /**
@@ -45,21 +50,25 @@ public class DateFormatter {
      * @return The formatted string
      */
     public static String dateToString(Date date) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd. MMMM yyyy", Locale.GERMAN);
-        return formatter.format(date);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy", Locale.GERMAN);
+
+        Instant instant = date.toInstant();
+        ZoneId z = ZoneId.of("Europe/Berlin");
+        ZonedDateTime zdt = instant.atZone(z);
+
+        return zdt.format(formatter);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(dateTimeSecondsToString(new Date()));
     }
 
     /**
-     * Get the current DateTime in MEZ/MESZ Time zone
+     * Get the current Date
      *
      * @return The Date object
      */
     public static Date getCurrentDateTime() {
-        Instant instant = new Date().toInstant();
-        ZoneId z = ZoneId.of("Europe/Berlin");
-        ZonedDateTime zdt = instant.atZone(z);
-        Date currentDate = Date.from(zdt.toInstant());
-
-        return currentDate;
+        return new Date();
     }
 }
