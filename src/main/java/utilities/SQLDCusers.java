@@ -750,6 +750,9 @@ public class SQLDCusers extends SQLDatabaseConnection {
         try {
             Date now = DateFormatter.getCurrentDateTime();
             Timestamp nowStamp = new Timestamp(now.getTime());
+            System.out.println("---------------------------------------------------");
+            System.out.println(nowStamp);
+            System.out.println("---------------------------------------------------");
             executeQuery(("UPDATE users SET lastLogin='" + nowStamp + "' WHERE uniqueID = " + Integer.valueOf(userId)));
 
             return true;
