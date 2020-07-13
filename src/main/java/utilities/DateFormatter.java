@@ -56,6 +56,10 @@ public class DateFormatter {
 
         String formattedDateString = formatter.format(new Date());
 
+        System.out.println("FORMATTED DATE");
+        System.out.println(formattedDateString);
+        System.out.println("---------------------------------------------------");
+
         Date adjustedDate;
 
         try {
@@ -64,6 +68,10 @@ public class DateFormatter {
             e.printStackTrace();
             adjustedDate = new Date();
         }
+
+        System.out.println("ADJUSTED DATE");
+        System.out.println(formatter.format(adjustedDate));
+        System.out.println("---------------------------------------------------");
 
         return adjustedDate;
     }
