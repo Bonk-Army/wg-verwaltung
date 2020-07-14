@@ -69,7 +69,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
             // Get all required info for each todo that is active and is either not done or has been due in the last seven days.
             // Ordered by their status and todos of the same status are ordered by their due date
             ResultSet rs = executeQuery(("SELECT task, assignedId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE wgId = "
-                    + Integer.valueOf(wgId) + " AND isActive = 1 AND (isDone = 0 OR DATEDIFF(dateDue, CURRENT_TIMESTAMP) <= 7) ORDER BY isDone, dateDue ASC"));
+                    + Integer.valueOf(wgId) + " AND isActive = 1 AND (isDone = 0 OR DATEDIFF(CURRENT_TIMESTAMP, dateDue) <= 7) ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
                 Map<String, String> currentTodo = new HashMap<String, String>();
                 currentTodo.put("task", rs.getString(1));
@@ -258,7 +258,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
             // Ordered by the status and the todos of the same status are then ordered by their due date
             ResultSet rs = executeQuery(("SELECT task, assignedId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE assignedId = "
                     + Integer.valueOf(assignedId) + " AND wgId = " + Integer.valueOf(wgId) + " AND isActive = 1 "
-                    + " AND (isDone = 0 OR DATEDIFF(dateDue, CURRENT_TIMESTAMP) <= 7) ORDER BY isDone, dateDue ASC"));
+                    + " AND (isDone = 0 OR DATEDIFF(CURRENT_TIMESTAMP, dateDue) <= 7) ORDER BY isDone, dateDue ASC"));
             while (rs.next()) {
                 Map<String, String> currentTodo = new HashMap<String, String>();
                 currentTodo.put("task", rs.getString(1));
