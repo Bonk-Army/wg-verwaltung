@@ -104,7 +104,7 @@ public class SQLDCshopping extends SQLDatabaseConnection {
             // Get all required info for each request that is active and is either not done or has been due in the last seven days.
             // Ordered by their status and requests of the same status are ordered by their due date.
             ResultSet rs = executeQuery(("SELECT article, amount, createdBy, requestedBy, dateDue, dateCreated, uniqueID, isDone FROM shopping WHERE wgId="
-                    + Integer.valueOf(wgId) + " AND (dateDue < DATE_ADD(CURDATE(), INTERVAL 7 DAY) OR isDone = 0) AND isActive = 1 ORDER BY isDone, dateDue ASC"));
+                    + Integer.valueOf(wgId) + " AND (DATEDIFF(CURRENT_TIMESTAMP, dateDue) <= 7 OR isDone = 0) AND isActive = 1 ORDER BY isDone, dateDue ASC"));
 
             while (rs.next()) {
                 Map<String, String> currentArticle = new HashMap<String, String>();
