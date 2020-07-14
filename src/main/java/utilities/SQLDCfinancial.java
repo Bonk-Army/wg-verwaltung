@@ -270,7 +270,7 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
         try {
             // Get the sum of expenses or income for each month in the last six months individually
             ResultSet rs = executeQuery(("SELECT SUM(value) FROM financial WHERE createdBy = " + Integer.valueOf(userId)
-                    + " AND DATEDIFF(dateCreated, CURRENT_TIMESTAMP) <= 180 AND isActive = 1 GROUP BY EXTRACT(month FROM dateCreated)"));
+                    + " AND DATEDIFF(CURRENT_TIMESTAMP, dateCreated) <= 180 AND isActive = 1 GROUP BY EXTRACT(month FROM dateCreated)"));
 
             while (rs.next()) {
                 monthlyBalance.add(rs.getInt(1));
