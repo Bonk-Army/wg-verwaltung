@@ -31,22 +31,19 @@ public class SetTodoDone extends HttpServlet {
 
         ErrorCodes status = toDoBean.setTodoDone(todoId, wgId);
 
-        switch (status) {
-            case SUCCESS:
-                //Show success
-                if (isMyTodoPage) {
-                    response.sendRedirect("/mytodo");
-                } else {
-                    response.sendRedirect("/todo");
-                }
-                break;
-            default:
-                //Show failure
-                request.setAttribute("isSadLlama", true);
-                request.setAttribute("header", status.getHeader());
-                request.setAttribute("message", status.getMessage());
-                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                break;
+        if (status == ErrorCodes.SUCCESS) {
+            //Show success
+            if (isMyTodoPage) {
+                response.sendRedirect("/mytodo");
+            } else {
+                response.sendRedirect("/todo");
+            }
+        } else {
+            //Show failure
+            request.setAttribute("isSadLlama", true);
+            request.setAttribute("header", status.getHeader());
+            request.setAttribute("message", status.getMessage());
+            request.getServletContext().getRequestDispatcher("/status").forward(request, response);
         }
     }
 }

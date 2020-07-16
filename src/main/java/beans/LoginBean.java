@@ -111,7 +111,7 @@ public class LoginBean {
                     }
 
                     // If the user creation was successful, send an email and continue registration
-                    if (SQLDCusers.createUser(username, email, hash, new String(salt), verificationCode, firstName, lastName, cookiePostfixHash, cookieLifetime)) {
+                    if (SQLDCusers.createUser(username, email, hash, salt, verificationCode, firstName, lastName, cookiePostfixHash, cookieLifetime)) {
                         // Now send an email to the user with the verification link
                         String verifyLink = "verify?uname=" + username + "&key=" + verificationCode;
                         String fullName = firstName + " " + lastName;
@@ -254,7 +254,7 @@ public class LoginBean {
         if (RegexHelper.checkString(sessionIdentifier) && !sessionIdentifier.isEmpty()) {
             int splitIndex = sessionIdentifier.indexOf('-');
             String userId = sessionIdentifier.substring(0, splitIndex);
-            String cookiePostfix = sessionIdentifier.substring(splitIndex + 1, sessionIdentifier.length());
+            String cookiePostfix = sessionIdentifier.substring(splitIndex + 1);
 
             String username = SQLDCusers.getUsername(userId);
 

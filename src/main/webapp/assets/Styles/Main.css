@@ -27,12 +27,12 @@ h2.header {
     margin-bottom: 3rem;
 }
 
-a, a:hover{
+a, a:hover {
     color: aliceblue;
     text-decoration: none
 }
 
-#content{
+#content {
     margin-left: auto;
     margin-right: auto;
 }
@@ -112,7 +112,7 @@ a, a:hover{
        dP    `88888P8 88Y8888' dP `88888P'
  */
 
-.table{
+.table {
     color: aliceblue;
     margin-left: auto;
     margin-right: auto;

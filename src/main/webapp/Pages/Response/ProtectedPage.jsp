@@ -18,7 +18,8 @@ URL Mapping :  /protectedPage
 <body>
 <div>
     <h1>Authentifikation fehlgeschlagen</h1>
-    <p>Es scheint so, als ob du auf eine geschützte Seite willst. Das Türsteher-Lama findet deinen Ausweis aber nicht. Bitte logge dich erst ein.</p>
+    <p>Es scheint so, als ob du auf eine geschützte Seite willst. Das Türsteher-Lama findet deinen Ausweis aber nicht. Bitte logge dich erst
+        ein.</p>
     <img src="../../assets/Images/sad-llama.png">
     <hr>
     <a href="./">Zur&uuml;ck zur Login-Seite</a>

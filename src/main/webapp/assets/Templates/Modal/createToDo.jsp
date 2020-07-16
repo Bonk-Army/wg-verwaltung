@@ -18,7 +18,7 @@
                 <label for="name" class="sr-only">Name</label>
                 <select id="name" class="form-control" name="username" required>
                     <c:forEach items="${todoBean.usersOfWg}" var="user">
-                    <option value="${user.username}">${user.nameString}</option>
+                        <option value="${user.username}">${user.nameString}</option>
                     </c:forEach>
                 </select>
                 <h6>Bis wann soll die Aufgabe erledigt sein?</h6>

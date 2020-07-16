@@ -29,18 +29,15 @@ public class RemoveShoppingRequest extends HttpServlet {
 
         ErrorCodes status = shoppingBean.setRequestInactive(requestId, wgId);
 
-        switch (status) {
-            case SUCCESS:
-                //Show success
-                response.sendRedirect("/shopping");
-                break;
-            default:
-                //Show failure
-                request.setAttribute("isSadLlama", true);
-                request.setAttribute("header", status.getHeader());
-                request.setAttribute("message", status.getMessage());
-                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                break;
+        if (status == ErrorCodes.SUCCESS) {
+            //Show success
+            response.sendRedirect("/shopping");
+        } else {
+            //Show failure
+            request.setAttribute("isSadLlama", true);
+            request.setAttribute("header", status.getHeader());
+            request.setAttribute("message", status.getMessage());
+            request.getServletContext().getRequestDispatcher("/status").forward(request, response);
         }
     }
 }

@@ -56,18 +56,15 @@ public class Logout extends HttpServlet {
                 }
             }
 
-            switch (status) {
-                case SUCCESS:
-                    //Redirect to login page
-                    response.sendRedirect("/");
-                    break;
-                default:
-                    //Show failure
-                    request.setAttribute("isSadLlama", true);
-                    request.setAttribute("header", status.getHeader());
-                    request.setAttribute("message", status.getMessage());
-                    request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                    break;
+            if (status == ErrorCodes.SUCCESS) {
+                //Redirect to login page
+                response.sendRedirect("/");
+            } else {
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
             }
         }
     }

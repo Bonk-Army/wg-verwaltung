@@ -1,6 +1,9 @@
 package beans;
 
-import utilities.*;
+import utilities.ErrorCodes;
+import utilities.RegexHelper;
+import utilities.SQLDCfinancial;
+import utilities.SQLDCusers;
 
 import java.util.*;
 
@@ -120,7 +123,7 @@ public class FinancialBean {
 
             // If the user has not had any expenses yet, he is not in the sumPerUserById map and
             // the sum fetching would fail, hence checking if the user exists in the map
-            if (sumPerUserById.keySet().contains(user.get("userId"))) {
+            if (sumPerUserById.containsKey(user.get("userId"))) {
                 int sum = sumPerUserById.get(user.get("userId"));
                 StringBuilder sb = new StringBuilder();
                 Formatter formatter = new Formatter(sb, Locale.GERMAN);

@@ -1,9 +1,7 @@
 package logic;
 
 import beans.CleanBean;
-import beans.LoginBean;
 import beans.SessionBean;
-import beans.SettingsBean;
 import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
@@ -56,17 +54,13 @@ public class UpdateCleaningAssignees extends HttpServlet {
 
             // If there was an error at any point in the iteration, abort the rest of the loop and directly forward
             // the user to the respective error page
-            switch (status) {
-                case SUCCESS:
-                    break;
-                default:
-                    //Show failure
-                    request.setAttribute("isSadLlama", true);
-                    request.setAttribute("header", status.getHeader());
-                    request.setAttribute("message", status.getMessage());
-                    request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                    hasError = true;
-                    break;
+            if (status != ErrorCodes.SUCCESS) {
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
+                hasError = true;
             }
 
             if (hasError) {

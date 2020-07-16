@@ -25,7 +25,7 @@
                 <h6>Wer m&ouml;chte diesen Artikel?</h6>
                 <select id="name" class="form-control" name="requestedBy" required>
                     <c:forEach items="${shoppingBean.usersOfWg}" var="user">
-                    <option value="${user.username}">${user.nameString}</option>
+                        <option value="${user.username}">${user.nameString}</option>
                     </c:forEach>
                 </select>
                 <div class="modal-footer">

@@ -37,21 +37,18 @@ public class LeaveWG extends HttpServlet {
 
         ErrorCodes status = settingsBean.leaveWg(userId);
 
-        switch (status) {
-            case SUCCESS:
-                // Clear wg fields on sessionBean
-                sessionBean.setWgName("");
-                sessionBean.setWgId("");
-                // Show success pages
-                response.sendRedirect("/settings");
-                break;
-            default:
-                //Show failure
-                request.setAttribute("isSadLlama", true);
-                request.setAttribute("header", status.getHeader());
-                request.setAttribute("message", status.getMessage());
-                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                break;
+        if (status == ErrorCodes.SUCCESS) {
+            // Clear wg fields on sessionBean
+            sessionBean.setWgName("");
+            sessionBean.setWgId("");
+            // Show success pages
+            response.sendRedirect("/settings");
+        } else {
+            //Show failure
+            request.setAttribute("isSadLlama", true);
+            request.setAttribute("header", status.getHeader());
+            request.setAttribute("message", status.getMessage());
+            request.getServletContext().getRequestDispatcher("/status").forward(request, response);
         }
     }
 }
