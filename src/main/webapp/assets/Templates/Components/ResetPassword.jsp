@@ -1,6 +1,6 @@
 <div id=content" class="text-center">
     <form method="POST" action="resetComplete" class="form-signin">
-        <img src="/assets/Images/security-llama.png" style="height: 220px">
+        <img src="/assets/Images/security-llama.png" style="height: 220px" alt="Ich bin das Türsteher-Lama">
         <div id="strengthbar"><div id="bar" class="bar0"></div></div>
         <label for="password" onkeyup="checkPassword()" class="sr-only">Passwort</label>
         <input type="password" id="password" class="form-control" placeholder="Neues Passwort" autofocus="autofocus" name="password">
