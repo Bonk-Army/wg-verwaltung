@@ -81,16 +81,32 @@ public class SessionBean {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getLastName() {
         return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getWgId() {
         return wgId;
     }
 
+    public void setWgId(String wgId) {
+        this.wgId = wgId;
+    }
+
     public String getWgName() {
         return wgName;
+    }
+
+    public void setWgName(String wgName) {
+        this.wgName = wgName;
     }
 
     public String getEmail() {
@@ -99,21 +115,5 @@ public class SessionBean {
 
     public boolean isLoggedIn() {
         return loggedIn;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setWgId(String wgId) {
-        this.wgId = wgId;
-    }
-
-    public void setWgName(String wgName) {
-        this.wgName = wgName;
     }
 }

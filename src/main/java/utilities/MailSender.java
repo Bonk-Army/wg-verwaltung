@@ -1,15 +1,17 @@
 package utilities;
 
-import com.sendgrid.*;
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.Response;
+import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Email;
+import com.sendgrid.helpers.mail.objects.Personalization;
+import config.globalConfig;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.sendgrid.helpers.mail.objects.Personalization;
-import config.globalConfig;
 
 /**
  * Used to send emails via SendGrid API
@@ -142,9 +144,9 @@ public class MailSender {
         CONTACT("d-0203b477107643089ad24671014480a9"),
         WGCREATE("d-32b313dcbfa44a89984a2ce83df781a7");
 
-        private String templateID;
+        private final String templateID;
 
-        private Mailtypes(String templateID) {
+        Mailtypes(String templateID) {
             this.templateID = templateID;
         }
 

@@ -546,7 +546,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
 
             String currentRights = "";
             while (rs.next()) {
-                if(rs.getString(1) != null){
+                if (rs.getString(1) != null) {
                     currentRights = rs.getString(1);
                 }
             }
