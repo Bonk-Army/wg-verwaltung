@@ -33,24 +33,21 @@ public class ChangeName extends HttpServlet {
 
         ErrorCodes status = settingsBean.changeName(userId, firstName, lastName);
 
-        switch (status) {
-            case SUCCESS:
-                // Update fields on sessionBean
-                sessionBean.setFirstName(firstName);
-                sessionBean.setLastName(lastName);
-                // Show success page
-                request.setAttribute("isSadLlama", false);
-                request.setAttribute("header", status.getHeader());
-                request.setAttribute("message", status.getMessage());
-                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                break;
-            default:
-                //Show failure
-                request.setAttribute("isSadLlama", true);
-                request.setAttribute("header", status.getHeader());
-                request.setAttribute("message", status.getMessage());
-                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                break;
+        if (status == ErrorCodes.SUCCESS) {
+            // Update fields on sessionBean
+            sessionBean.setFirstName(firstName);
+            sessionBean.setLastName(lastName);
+            // Show success page
+            request.setAttribute("isSadLlama", false);
+            request.setAttribute("header", status.getHeader());
+            request.setAttribute("message", status.getMessage());
+            request.getServletContext().getRequestDispatcher("/status").forward(request, response);
+        } else {
+            //Show failure
+            request.setAttribute("isSadLlama", true);
+            request.setAttribute("header", status.getHeader());
+            request.setAttribute("message", status.getMessage());
+            request.getServletContext().getRequestDispatcher("/status").forward(request, response);
         }
     }
 }

@@ -1,7 +1,6 @@
 package logic;
 
 import beans.CleanBean;
-import beans.FinancialBean;
 import beans.SessionBean;
 import utilities.ErrorCodes;
 
@@ -39,18 +38,15 @@ public class RemoveCleaning extends HttpServlet {
 
         ErrorCodes status = cleanBean.removeCleaningTask(taskId, wgId);
 
-        switch (status) {
-            case SUCCESS:
-                //Show success
-                response.sendRedirect("/clean");
-                break;
-            default:
-                //Show failure
-                request.setAttribute("isSadLlama", true);
-                request.setAttribute("header", status.getHeader());
-                request.setAttribute("message", status.getMessage());
-                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                break;
+        if (status == ErrorCodes.SUCCESS) {
+            //Show success
+            response.sendRedirect("/clean");
+        } else {
+            //Show failure
+            request.setAttribute("isSadLlama", true);
+            request.setAttribute("header", status.getHeader());
+            request.setAttribute("message", status.getMessage());
+            request.getServletContext().getRequestDispatcher("/status").forward(request, response);
         }
     }
 }

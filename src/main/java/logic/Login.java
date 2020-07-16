@@ -58,29 +58,26 @@ public class Login extends HttpServlet {
 
         //UserId required for session cookie
         String userId = "";
-        switch (status) {
-            case SUCCESS:
-                // Log the user in, save a cookie, create a session bean and redirect him to the home page
-                userId = bean.getUserId(username);
-                String sessionIdentifier = (userId + "-" + bean.getCookiePostfixNotHashed());
-                Cookie sessionCookie = new Cookie("session", (sessionIdentifier));
-                int cookieAge = stayLoggedIn ? 2592000 : -1;
-                // If user wants to stay logged in, make it live 30 days (2592000 seconds),
-                // otherwise let it be a session cookie
-                sessionCookie.setMaxAge(cookieAge);
-                response.addCookie(sessionCookie);
-                // Now create the session bean
-                SessionBean sessionBean = new SessionBean(userId);
-                request.getSession().setAttribute("sessionBean", sessionBean);
-                response.sendRedirect("/home");
-                break;
-            default:
-                //Show failure
-                request.setAttribute("isSadLlama", true);
-                request.setAttribute("header", status.getHeader());
-                request.setAttribute("message", status.getMessage());
-                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                break;
+        if (status == ErrorCodes.SUCCESS) {
+            // Log the user in, save a cookie, create a session bean and redirect him to the home page
+            userId = bean.getUserId(username);
+            String sessionIdentifier = (userId + "-" + bean.getCookiePostfixNotHashed());
+            Cookie sessionCookie = new Cookie("session", (sessionIdentifier));
+            int cookieAge = stayLoggedIn ? 2592000 : -1;
+            // If user wants to stay logged in, make it live 30 days (2592000 seconds),
+            // otherwise let it be a session cookie
+            sessionCookie.setMaxAge(cookieAge);
+            response.addCookie(sessionCookie);
+            // Now create the session bean
+            SessionBean sessionBean = new SessionBean(userId);
+            request.getSession().setAttribute("sessionBean", sessionBean);
+            response.sendRedirect("/home");
+        } else {
+            //Show failure
+            request.setAttribute("isSadLlama", true);
+            request.setAttribute("header", status.getHeader());
+            request.setAttribute("message", status.getMessage());
+            request.getServletContext().getRequestDispatcher("/status").forward(request, response);
         }
     }
 }

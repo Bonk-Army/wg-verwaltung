@@ -1,15 +1,14 @@
 package logic;
 
-import java.io.IOException;
+import beans.CleanBean;
+import beans.SessionBean;
+import utilities.ErrorCodes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import beans.CleanBean;
-import beans.SessionBean;
-import utilities.ErrorCodes;
+import java.io.IOException;
 
 /**
  * Called when the user wants to add a new cleaning task
@@ -40,18 +39,15 @@ public class AddCleaningTask extends HttpServlet {
 
         ErrorCodes status = cleanBean.addNewTask(taskname, wgId);
 
-        switch (status) {
-            case SUCCESS:
-                //Show success
-                response.sendRedirect("/clean");
-                break;
-            default:
-                //Show failure
-                request.setAttribute("isSadLlama", true);
-                request.setAttribute("header", status.getHeader());
-                request.setAttribute("message", status.getMessage());
-                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                break;
+        if (status == ErrorCodes.SUCCESS) {
+            //Show success
+            response.sendRedirect("/clean");
+        } else {
+            //Show failure
+            request.setAttribute("isSadLlama", true);
+            request.setAttribute("header", status.getHeader());
+            request.setAttribute("message", status.getMessage());
+            request.getServletContext().getRequestDispatcher("/status").forward(request, response);
         }
     }
 }

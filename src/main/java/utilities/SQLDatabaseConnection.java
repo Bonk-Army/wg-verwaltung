@@ -1,8 +1,11 @@
 package utilities;
 
-import java.sql.*;
-
 import config.globalConfig;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * Provides logic to make callouts to SQL. Actual access is provided via child-class-functions for clearer structure

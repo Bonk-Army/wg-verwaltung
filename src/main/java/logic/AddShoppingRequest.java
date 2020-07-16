@@ -4,7 +4,6 @@ import beans.LoginBean;
 import beans.SessionBean;
 import beans.ShoppingBean;
 import utilities.ErrorCodes;
-import utilities.RegexHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -56,18 +55,15 @@ public class AddShoppingRequest extends HttpServlet {
             status = shoppingBean.createRequest(article, amount, userId, requestedById, dateDue);
         }
 
-        switch (status) {
-            case SUCCESS:
-                //Show success
-                response.sendRedirect("/shopping");
-                break;
-            default:
-                //Show failure
-                request.setAttribute("isSadLlama", true);
-                request.setAttribute("header", status.getHeader());
-                request.setAttribute("message", status.getMessage());
-                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                break;
+        if (status == ErrorCodes.SUCCESS) {
+            //Show success
+            response.sendRedirect("/shopping");
+        } else {
+            //Show failure
+            request.setAttribute("isSadLlama", true);
+            request.setAttribute("header", status.getHeader());
+            request.setAttribute("message", status.getMessage());
+            request.getServletContext().getRequestDispatcher("/status").forward(request, response);
         }
     }
 }

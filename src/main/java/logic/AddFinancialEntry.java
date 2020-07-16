@@ -54,18 +54,15 @@ public class AddFinancialEntry extends HttpServlet {
 
         ErrorCodes status = financialBean.addFinancialEntry(reason, valueWithSign, userId, wgId, date);
 
-        switch (status) {
-            case SUCCESS:
-                //Show success
-                response.sendRedirect("/financial");
-                break;
-            default:
-                //Show failure
-                request.setAttribute("isSadLlama", true);
-                request.setAttribute("header", status.getHeader());
-                request.setAttribute("message", status.getMessage());
-                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                break;
+        if (status == ErrorCodes.SUCCESS) {
+            //Show success
+            response.sendRedirect("/financial");
+        } else {
+            //Show failure
+            request.setAttribute("isSadLlama", true);
+            request.setAttribute("header", status.getHeader());
+            request.setAttribute("message", status.getMessage());
+            request.getServletContext().getRequestDispatcher("/status").forward(request, response);
         }
     }
 }
