@@ -7,7 +7,7 @@ var d;
 var month;
 var labels = [];
 
-for(var i = 5; i >= 0; i -= 1) {
+for (var i = 5; i >= 0; i -= 1) {
     d = new Date(today.getFullYear(), today.getMonth() - i, 1);
     month = monthNames[d.getMonth()];
     labels.push(month);

@@ -8,10 +8,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" id="removeArticle" class="btn btn-primary odom-submit">Artikel l&ouml;chen</button>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="removeArticle" class="btn btn-primary odom-submit">Artikel l&ouml;chen</button>
+            </div>
         </div>
     </div>
 </div>

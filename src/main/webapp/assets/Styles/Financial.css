@@ -28,7 +28,7 @@ thead.tasks th:not(:nth-child(1), :last-child) {
     width: 6.25em;
 }
 
-.negative{
+.negative {
     background-color: #d75a5a;
 }
 

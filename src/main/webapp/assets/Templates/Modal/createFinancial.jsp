@@ -21,7 +21,8 @@
                     <option value="-">-</option>
                 </select>
                 <label for="expense" class="sr-only">Betrag</label>
-                <input id="expense" class="form-control" placeholder="Betrag" name="value" type="text" pattern="[0-9]+([,.][0-9][0-9]?)?" title="Deine Eingabe muss eine Zahl sein, wahlweise mit , und einer oder zwei folgemden Zahlen" required>
+                <input id="expense" class="form-control" placeholder="Betrag" name="value" type="text" pattern="[0-9]+([,.][0-9][0-9]?)?"
+                       title="Deine Eingabe muss eine Zahl sein, wahlweise mit , und einer oder zwei folgemden Zahlen" required>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary odom-submit">Einnahme / Ausgabe hinzuf&uuml;gen</button>

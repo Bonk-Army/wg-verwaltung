@@ -1,7 +1,8 @@
 <div id="content">
     <h2 class="header">Willkommen
         <jsp:getProperty name="sessionBean" property="firstName"/>
-        <jsp:getProperty name="sessionBean" property="lastName"/>,
+        <jsp:getProperty name="sessionBean" property="lastName"/>
+        ,
         oder besser bekannt als
         <jsp:getProperty name="sessionBean" property="username"/>
         aus der WG

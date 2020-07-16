@@ -17,8 +17,10 @@ URL Mapping :  /register
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Login.css">
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Password.css">
 
-    <script><%@include file="../../assets/Scripts/Register.js" %></script>
-    <script><%@include file="../../assets/Scripts/Password.js" %></script>
+    <script>
+        <%@include file="../../assets/Scripts/Register.js" %>
+        <%@include file="../../assets/Scripts/Password.js" %>
+    </script>
 </head>
 <body>
 <%@include file="../../assets/Templates/Components/Register.jsp" %>

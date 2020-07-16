@@ -19,7 +19,9 @@ URL Mapping :  /resetPassword
 </head>
 <body>
 <%@include file="../../assets/Templates/Components/ResetPassword.jsp" %>
-<script><%@include file="../../assets/Scripts/ResetPassword.js" %></script>
-<script><%@include file="../../assets/Scripts/Password.js" %></script>
+<script>
+    <%@include file="../../assets/Scripts/ResetPassword.js" %>
+    <%@include file="../../assets/Scripts/Password.js" %>
+</script>
 </body>
 </html>
