@@ -1,4 +1,4 @@
-<!-- Sidebar  -->
+<!-- Sidebar -->
 <nav id="sidebar">
     <div class="sidebar-header">
         <button type="button" id="sidebarCollapse" class="btn">
@@ -75,7 +75,9 @@
     <ul class="list-unstyled components">
         <li>
             <form action="logoutLogic" method="GET">
-                <button id="logout" class="btn btn-lg btn-primary btn-block" type="submit"><i class="fas fa-sign-out-alt"></i> <bold>Ausloggen</bold></button>
+                <button id="logout" class="btn btn-lg btn-primary btn-block" type="submit"><i class="fas fa-sign-out-alt"></i>
+                    <bold>Ausloggen</bold>
+                </button>
             </form>
         </li>
     </ul>

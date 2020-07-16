@@ -7,18 +7,18 @@
      88888888P `88888P'   dP     dP   `88888P' dP    dP
  */
 
-#addClean, #saveClean, button.remove{
+#addClean, #saveClean, button.remove {
     margin-bottom: 0.625em;
     max-width: 3.875em;
     height: 3em;
     display: inline;
 }
 
-th:not(:nth-child(1)){
+th:not(:nth-child(1)) {
     width: 12.5em;
 }
 
-th:last-child, td:last-child{
+th:last-child, td:last-child {
     width: 6.25em;
 }
 

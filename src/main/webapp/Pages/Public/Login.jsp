@@ -19,6 +19,8 @@ URL Mapping :  /login
 <body>
 <%@include file="../../assets/Templates/Components/Login.jsp" %>
 <%@include file="../../assets/Templates/Modal/Login.jsp" %>
-<script><%@include file="../../assets/Scripts/Modal.js" %></script>
+<script>
+    <%@include file="../../assets/Scripts/Modal.js" %>
+</script>
 </body>
 </html>

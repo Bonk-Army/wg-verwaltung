@@ -27,22 +27,22 @@ URL Mapping :  /settingsPage
 </head>
 <body>
 <c:choose>
-    <c:when test="${sessionBean.loggedIn}">
-        <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
-        <%@include file="../../assets/Contents/Settings.jsp" %>
-        <%@include file="../../assets/Templates/Modal/leaveWG.jsp" %>
+<c:when test="${sessionBean.loggedIn}">
+    <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
+    <%@include file="../../assets/Contents/Settings.jsp" %>
+    <%@include file="../../assets/Templates/Modal/leaveWG.jsp" %>
 
-        <script>
-            <%@include file="../../assets/Scripts/Sidebar.js"%>
-            <%@include file="../../assets/Scripts/Settings.js" %>
-            <%@include file="../../assets/Scripts/Password.js" %>
-        </script>
+<script>
+    <%@include file="../../assets/Scripts/Sidebar.js"%>
+    <%@include file="../../assets/Scripts/Settings.js" %>
+    <%@include file="../../assets/Scripts/Password.js" %>
+</script>
 
-    </c:when>
-    <c:otherwise>
-        <body>
-        <jsp:forward page="/protectedPage"/>
-    </c:otherwise>
+</c:when>
+<c:otherwise>
+<body>
+<jsp:forward page="/protectedPage"/>
+</c:otherwise>
 </c:choose>
 
 </body>

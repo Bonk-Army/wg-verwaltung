@@ -25,7 +25,7 @@
         <hr>
     </div>
     <div class="text-center">
-        <a href="./contact">Kontakt</a>  &emsp; <a href="./faq">FAQ's </a>  &emsp; <a href="./impressum">Impressum </a>
+        <a href="./contact">Kontakt</a> &emsp; <a href="./faq">FAQ's </a> &emsp; <a href="./impressum">Impressum </a>
     </div>
     <div class="center">
         <hr>
