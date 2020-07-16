@@ -35,7 +35,7 @@ public class SettingsBean {
      * @return If created successfully
      */
     public ErrorCodes createWg(String userId, String nameWg) {
-        if (RegexHelper.checkString(nameWg)) {
+        if (RegexHelper.checkText(nameWg)) {
             ArrayList<String> stringList = SQLDCwgs.getAccessKeyList();
             String accessKey = new RandomStringGenerator(20).nextString();
 
