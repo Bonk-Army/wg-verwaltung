@@ -79,7 +79,7 @@ public class FaqBean {
         q8.put("answer", ("Hier sind die Links: <br> https://www.petitkolibri.com/alpaca-wool <br>"
                 + "https://i.pinimg.com/564x/13/e4/60/13e4604c6b296d13b63f5309ee600cab.jpg <br>"
                 + "https://jadedeye.aminus3.com/image/2011-09-04.html <br>"
-                + "https://www.rudolfstein-alpakas.de/wp-content/uploads/2018/07/rudolfstein-alpakas-slider-header-mobile.jpg"
+                + "https://www.rudolfstein-alpakas.de/wp-content/uploads/2018/07/rudolfstein-alpakas-slider-header-mobile.jpg <br>"
                 + "https://cdn.pixabay.com/photo/2017/11/02/12/05/lama-2910939_960_720.jpg <br>"
                 + "https://www.bravo.de/assets/field/image/alpaka_wanderung_alle_infos_1.jpg"));
         q8.put("number", "8");
