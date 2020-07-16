@@ -35,7 +35,7 @@ public class JoinWG extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         // If user is not logged in, redirect him to the login page
-        if (sessionBean == null) {
+        if (sessionBean == null || !sessionBean.isLoggedIn()) {
             response.sendRedirect("/");
         } else {
             String wgCode = request.getParameter("wgcode");
