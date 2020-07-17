@@ -22,7 +22,7 @@ URL Mapping :  /contactPage
 
 </head>
 <body>
-<%@include file="../../assets/Templates/Components/Contact.jsp" %>
+<%@include file="../../assets/Contents/Contact.jsp" %>
 <c:if test="${sessionBean.loggedIn}">
     <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
     <script>
