@@ -23,6 +23,6 @@ URL Mapping :  /register
     </script>
 </head>
 <body>
-<%@include file="../../assets/Templates/Components/Register.jsp" %>
+<%@include file="../../assets/Contents/Register.jsp" %>
 </body>
 </html>
