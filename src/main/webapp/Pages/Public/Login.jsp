@@ -17,7 +17,7 @@ URL Mapping :  /login
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Login.css">
 </head>
 <body>
-<%@include file="../../assets/Templates/Components/Login.jsp" %>
+<%@include file="../../assets/Contents/Login.jsp" %>
 <%@include file="../../assets/Templates/Modal/Login.jsp" %>
 <script>
     <%@include file="../../assets/Scripts/Modal.js" %>

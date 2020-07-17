@@ -23,7 +23,7 @@ URL Mapping :  /wgverwaltungPage
 <body>
 <c:choose>
     <c:when test="${sessionBean.loggedIn}">
-        <%@include file="../../assets/Templates/Components/WG-Verwaltung.jsp" %>
+        <%@include file="../../assets/Contents/WG-Verwaltung.jsp" %>
         <%@include file="../../assets/Templates/Modal/WG.jsp" %>
         <script>
             <%@include file="../../assets/Scripts/Modal.js" %>
