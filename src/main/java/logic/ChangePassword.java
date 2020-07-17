@@ -33,21 +33,18 @@ public class ChangePassword extends HttpServlet {
 
         ErrorCodes status = settingsBean.changePassword(username, oldPassword, newPassword);
 
-        switch (status) {
-            case SUCCESS:
-                // Show success pages
-                request.setAttribute("isSadLlama", false);
-                request.setAttribute("header", status.getHeader());
-                request.setAttribute("message", status.getMessage());
-                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                break;
-            default:
-                //Show failure
-                request.setAttribute("isSadLlama", true);
-                request.setAttribute("header", status.getHeader());
-                request.setAttribute("message", status.getMessage());
-                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                break;
+        if (status == ErrorCodes.SUCCESS) {
+            // Show success pages
+            request.setAttribute("isSadLlama", false);
+            request.setAttribute("header", status.getHeader());
+            request.setAttribute("message", status.getMessage());
+            request.getServletContext().getRequestDispatcher("/status").forward(request, response);
+        } else {
+            //Show failure
+            request.setAttribute("isSadLlama", true);
+            request.setAttribute("header", status.getHeader());
+            request.setAttribute("message", status.getMessage());
+            request.getServletContext().getRequestDispatcher("/status").forward(request, response);
         }
     }
 }

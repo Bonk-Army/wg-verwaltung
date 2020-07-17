@@ -4,7 +4,6 @@ import beans.LoginBean;
 import beans.SessionBean;
 import beans.ToDoBean;
 import utilities.ErrorCodes;
-import utilities.RegexHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -57,18 +56,15 @@ public class AddTodo extends HttpServlet {
 
         ErrorCodes status = toDoBean.createTodo(task, assigneeId, wgId, dueDate, userId);
 
-        switch (status) {
-            case SUCCESS:
-                //Redirect back to the todo page
-                response.sendRedirect("/todo");
-                break;
-            default:
-                //Show failure
-                request.setAttribute("isSadLlama", true);
-                request.setAttribute("header", status.getHeader());
-                request.setAttribute("message", status.getMessage());
-                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                break;
+        if (status == ErrorCodes.SUCCESS) {
+            //Redirect back to the todo page
+            response.sendRedirect("/todo");
+        } else {
+            //Show failure
+            request.setAttribute("isSadLlama", true);
+            request.setAttribute("header", status.getHeader());
+            request.setAttribute("message", status.getMessage());
+            request.getServletContext().getRequestDispatcher("/status").forward(request, response);
         }
     }
 }

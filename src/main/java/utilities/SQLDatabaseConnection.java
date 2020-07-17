@@ -1,8 +1,11 @@
 package utilities;
 
-import java.sql.*;
-
 import config.globalConfig;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * Provides logic to make callouts to SQL. Actual access is provided via child-class-functions for clearer structure
@@ -20,9 +23,11 @@ public class SQLDatabaseConnection {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             String database = globalConfig.isTest() ? "wg_verwaltung_dev" : "wg_verwaltung";
+            String password = System.getenv("SQL_PASSWORD");
+            String server = System.getenv("SQL_SERVER");
 
             Connection con = DriverManager.getConnection(
-                    ("jdbc:mariadb://v220190910299696193.nicesrv.de:3306/" + database + "?user=wg_admin&password=" + System.getenv("SQL_PASSWORD")));
+                    ("jdbc:mariadb://" + server + ":3306/" + database + "?user=wg_admin&password=" + password));
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             returnSet = rs;

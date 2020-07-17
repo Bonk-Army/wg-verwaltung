@@ -1,4 +1,4 @@
-var datenGuthaben = ${overview.getBalanceChartData()};
+var datenGuthaben = ${overviewBean.getBalanceChartData()};
 
 var monthNames = ["Januar", "Februar", unescape("M%E4rz"), "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
 
@@ -7,7 +7,7 @@ var d;
 var month;
 var labels = [];
 
-for(var i = 5; i >= 0; i -= 1) {
+for (var i = 5; i >= 0; i -= 1) {
     d = new Date(today.getFullYear(), today.getMonth() - i, 1);
     month = monthNames[d.getMonth()];
     labels.push(month);
@@ -23,7 +23,7 @@ var chart = new Chart(ctx, {
     data: {
         labels: labels,
         datasets: [{
-            label: unescape("%DCbersicht") +  ' Finanzen',
+            label: unescape("%DCbersicht") + ' Finanzen',
             backgroundColor: 'rgb(215,90,90)',
             borderColor: 'rgb(215,90,90)',
             data: datenGuthaben
@@ -31,5 +31,7 @@ var chart = new Chart(ctx, {
     },
 
     // Configuration options go here
-    options: {}
+    options: {
+        legend: {onClick: (e) => e.stopPropagation()}
+    }
 });

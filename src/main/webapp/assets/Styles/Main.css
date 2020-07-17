@@ -27,12 +27,12 @@ h2.header {
     margin-bottom: 3rem;
 }
 
-a, a:hover{
+a, a:hover {
     color: aliceblue;
     text-decoration: none
 }
 
-#content{
+#content {
     margin-left: auto;
     margin-right: auto;
 }
@@ -68,8 +68,8 @@ a, a:hover{
 
 .form-signin {
     width: 100%;
-    max-width: 330px;
-    padding: 15px;
+    max-width: 20.625em;
+    padding: 0.9375em;
 }
 
 .form-signin .checkbox {
@@ -101,4 +101,20 @@ a, a:hover{
 
 .mt-custom {
     margin-top: 10%;
+}
+
+/*
+    d888888P          dP       dP
+       88             88       88
+       88    .d8888b. 88d888b. 88 .d8888b.
+       88    88'  `88 88'  `88 88 88ooood8
+       88    88.  .88 88.  .88 88 88.  ...
+       dP    `88888P8 88Y8888' dP `88888P'
+ */
+
+.table {
+    color: aliceblue;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }

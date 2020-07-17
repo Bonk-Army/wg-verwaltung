@@ -9,7 +9,7 @@ import java.util.*;
 /*
  Table structure:
 
-        - uniqueID          (int)
+        - uniqueID          (int)       (Primary key)
         - username          (String)
         - email             (String)
         - pwhash            (String)
@@ -546,7 +546,9 @@ public class SQLDCusers extends SQLDatabaseConnection {
 
             String currentRights = "";
             while (rs.next()) {
-                currentRights = rs.getString(1);
+                if (rs.getString(1) != null) {
+                    currentRights = rs.getString(1);
+                }
             }
 
             String newRights = currentRights.isEmpty() ? rights : currentRights + ";" + rights;
@@ -809,7 +811,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
             ResultSet rs = executeQuery(("SELECT lastLogin FROM users WHERE uniqueID=" + Integer.valueOf(userId)));
 
             while (rs.next()) {
-                Date lastLoginDate = rs.getDate(1);
+                Date lastLoginDate = rs.getTimestamp(1);
 
                 return DateFormatter.dateTimeSecondsToString(lastLoginDate);
             }
@@ -852,7 +854,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
 
             while (rs.next()) {
                 Date now = DateFormatter.getCurrentDateTime();
-                Date lastPasswordLogin = rs.getDate(2);
+                Date lastPasswordLogin = rs.getTimestamp(2);
                 int cookieLifetime = rs.getInt(1);
 
                 Calendar c = Calendar.getInstance();

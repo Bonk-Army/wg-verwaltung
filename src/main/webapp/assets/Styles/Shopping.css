@@ -7,14 +7,7 @@
        dP    `88888P8 88Y8888' dP `88888P'
  */
 
-.table{
-    color: aliceblue;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-th:not(:nth-child(2)){
+th:not(:nth-child(2)) {
     width: 12.5em;
 }
 
@@ -47,9 +40,9 @@ tr.late {
      88888888P `88888P'   dP     dP   `88888P' dP    dP
  */
 
-#addShopping, button.remove{
-    margin-bottom: 10px;
-    max-width: 62px;
+#addShopping, button.remove {
+    margin-bottom: 0.625em;
+    max-width: 3.875em;
 }
 
 /*

@@ -25,26 +25,26 @@ URL Mapping :  /todoPage
     </c:if>
 </head>
 <c:choose>
-    <c:when test="${sessionBean.loggedIn}">
-        <body onload="validDate()">
-        <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
-        <%@include file="../../assets/Templates/Modal/createToDo.jsp" %>
-        <%@include file="../../assets/Templates/Modal/doneToDo.jsp" %>
-        <%@include file="../../assets/Templates/Modal/removeToDo.jsp" %>
+<c:when test="${sessionBean.loggedIn}">
+<body onload="validDate()">
+    <%@include file="../../assets/Templates/Components/Sidebar.jsp" %>
+    <%@include file="../../assets/Templates/Modal/createToDo.jsp" %>
+    <%@include file="../../assets/Templates/Modal/doneToDo.jsp" %>
+    <%@include file="../../assets/Templates/Modal/removeToDo.jsp" %>
 
-        <%@include file="../../assets/Contents/ToDo.jsp" %>
+    <%@include file="../../assets/Contents/ToDo.jsp" %>
 
-        <script>
-            <%@include file="../../assets/Scripts/Sidebar.js" %>
-            <%@include file="../../assets/Scripts/Modal.js" %>
-            <%@include file="../../assets/Scripts/ToDo.js" %>
-        </script>
+<script>
+    <%@include file="../../assets/Scripts/Sidebar.js" %>
+    <%@include file="../../assets/Scripts/Modal.js" %>
+    <%@include file="../../assets/Scripts/ToDo.js" %>
+</script>
 
-    </c:when>
-    <c:otherwise>
-        <body>
-        <jsp:forward page="/protectedPage"/>
-    </c:otherwise>
+</c:when>
+<c:otherwise>
+<body>
+<jsp:forward page="/protectedPage"/>
+</c:otherwise>
 </c:choose>
 
 </body>

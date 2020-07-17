@@ -31,8 +31,8 @@ public enum ErrorCodes {
     // The wg that the user wants to join has reached its maximum capacity
     WGFULL("Das Verwalter-Lama sagt, dass diese WG leider schon voll ist. Bitte tritt einer anderen WG bei oder wende dich an den entsprechenden WG-Administrator.", "Fehler beim Beitreten");
 
-    private String message;
-    private String header;
+    private final String message;
+    private final String header;
 
     ErrorCodes(String message, String header) {
         this.message = message;

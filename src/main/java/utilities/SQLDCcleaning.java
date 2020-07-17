@@ -3,7 +3,7 @@ package utilities;
 /*
  Table structure:
 
-        - uniqueID          (int)
+        - uniqueID          (int)       (Primary key)
         - taskName          (String)
         - mondayUser        (int)       (Foreign key to users.uniqueID)
         - tuesdayUser       (int)       (Foreign key to users.uniqueID)
@@ -131,7 +131,7 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
                 generalInfoList.add(generalInfoMap);
                 currentTask.put("general", generalInfoList);
 
-                String weekdays[] = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
+                String[] weekdays = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
 
                 // Iterate over each weekday. Create a new List for each weekday which contains the user info for the
                 // dropdown menu. Then put that list in the currentTask map under the corresponding week day.

@@ -18,8 +18,10 @@ URL Mapping :  /resetPassword
     <link rel="stylesheet" type="text/css" href="./assets/Styles/Password.css">
 </head>
 <body>
-<%@include file="../../assets/Templates/Components/ResetPassword.jsp" %>
-<script><%@include file="../../assets/Scripts/ResetPassword.js" %></script>
-<script><%@include file="../../assets/Scripts/Password.js" %></script>
+<%@include file="../../assets/Contents/ResetPassword.jsp" %>
+<script>
+    <%@include file="../../assets/Scripts/ResetPassword.js" %>
+    <%@include file="../../assets/Scripts/Password.js" %>
+</script>
 </body>
 </html>

@@ -35,7 +35,7 @@ public class JoinWG extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         // If user is not logged in, redirect him to the login page
-        if (sessionBean == null) {
+        if (sessionBean == null || !sessionBean.isLoggedIn()) {
             response.sendRedirect("/");
         } else {
             String wgCode = request.getParameter("wgcode");
@@ -44,24 +44,21 @@ public class JoinWG extends HttpServlet {
 
             ErrorCodes status = settingsBean.setWgId(userId, wgCode);
 
-            switch (status) {
-                case SUCCESS:
-                    // Change wgId and wgName in the Session Bean
-                    sessionBean.setWgId(settingsBean.getWgIdFromUserId(userId));
-                    sessionBean.setWgName(settingsBean.getWgNameFromUserID(userId));
-                    //Show success
-                    request.setAttribute("isSadLlama", false);
-                    request.setAttribute("header", status.getHeader());
-                    request.setAttribute("message", status.getMessage());
-                    request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                    break;
-                default:
-                    //Show failure
-                    request.setAttribute("isSadLlama", true);
-                    request.setAttribute("header", status.getHeader());
-                    request.setAttribute("message", status.getMessage());
-                    request.getServletContext().getRequestDispatcher("/status").forward(request, response);
-                    break;
+            if (status == ErrorCodes.SUCCESS) {
+                // Change wgId and wgName in the Session Bean
+                sessionBean.setWgId(settingsBean.getWgIdFromUserId(userId));
+                sessionBean.setWgName(settingsBean.getWgNameFromUserID(userId));
+                //Show success
+                request.setAttribute("isSadLlama", false);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
+            } else {
+                //Show failure
+                request.setAttribute("isSadLlama", true);
+                request.setAttribute("header", status.getHeader());
+                request.setAttribute("message", status.getMessage());
+                request.getServletContext().getRequestDispatcher("/status").forward(request, response);
             }
         }
     }

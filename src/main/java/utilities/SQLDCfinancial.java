@@ -9,7 +9,7 @@ import java.util.*;
 /*
  Table structure:
 
-        - uniqueID          (int)
+        - uniqueID          (int)       (Primary key)
         - reason            (String)
         - value             (int)
         - dateCreated       (Date)
@@ -75,7 +75,7 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
                 formatter.format("%,.2f", (rs.getInt(2) / 100d));
                 String valueString = sb.toString();
 
-                String createdDateString = DateFormatter.dateToString(rs.getDate(3));
+                String createdDateString = DateFormatter.dateToString(rs.getTimestamp(3));
 
                 if (rs.getInt(2) < 0) {
                     currentEntry.put("colorClass", "negative");
@@ -131,7 +131,7 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
 
             while (rs.next()) {
                 int value = rs.getInt(1);
-                Date dateCreated = rs.getDate(2);
+                Date dateCreated = rs.getTimestamp(2);
                 String createdBy = String.valueOf(rs.getInt(3));
 
                 entries.add(new FinancialEntry(dateCreated, value, createdBy));
@@ -158,7 +158,7 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
 
             while (rs.next()) {
                 int value = rs.getInt(1);
-                Date dateCreated = rs.getDate(2);
+                Date dateCreated = rs.getTimestamp(2);
 
                 entries.add(new FinancialEntry(dateCreated, value, userId));
             }
@@ -270,7 +270,7 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
         try {
             // Get the sum of expenses or income for each month in the last six months individually
             ResultSet rs = executeQuery(("SELECT SUM(value) FROM financial WHERE createdBy = " + Integer.valueOf(userId)
-                    + " AND DATEDIFF(dateCreated, CURRENT_TIMESTAMP) <= 180 AND isActive = 1 GROUP BY EXTRACT(month FROM dateCreated)"));
+                    + " AND DATEDIFF(CURRENT_TIMESTAMP, dateCreated) <= 180 AND isActive = 1 GROUP BY EXTRACT(month FROM dateCreated)"));
 
             while (rs.next()) {
                 monthlyBalance.add(rs.getInt(1));

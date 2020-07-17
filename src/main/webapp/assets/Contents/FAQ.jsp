@@ -22,11 +22,11 @@
         </c:forEach>
     </div>
     <c:if test="${!sessionBean.loggedIn}">
-    <div class="center">
-        <hr>
-    </div>
-    <div class="text-center">
-        <a href="./">Zur&uuml;ck zur Login-Seite</a>
-    </div>
+        <div class="center">
+            <hr>
+        </div>
+        <div class="text-center">
+            <a href="./">Zur&uuml;ck zur Login-Seite</a>
+        </div>
     </c:if>
 </div>

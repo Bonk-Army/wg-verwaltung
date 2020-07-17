@@ -9,10 +9,10 @@
                 </button>
             </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" id="doneToDo" class="btn btn-primary odom-submit">ToDo erledigt</button>
-                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="doneToDo" class="btn btn-primary odom-submit">ToDo erledigt</button>
+            </div>
         </div>
     </div>
 </div>

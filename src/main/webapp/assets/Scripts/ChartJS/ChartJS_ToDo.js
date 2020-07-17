@@ -1,9 +1,9 @@
 var datenToDo = [];
 var namenToDo = [];
 
-var daten = JSON.parse('${overview.getTodoChartData()}');
+var daten = JSON.parse('${overviewBean.getTodoChartData()}');
 
-for(var person in daten) {
+for (var person in daten) {
     namenToDo.push(person);
     datenToDo.push(daten[person]);
 }
@@ -19,6 +19,5 @@ var chart = new Chart(ctx2, {
             data: datenToDo
         }]
     },
-    options: {
-    }
+    options: {}
 });
