@@ -4,14 +4,14 @@ package models;
  * Model for users used in the backend exclusively
  */
 public class User {
-    private String userId;
-    private String username;
-    private String firstName;
-    private String lastName;
-    private String nameString;
-    private String wgId;
-    private String wgName;
-    private String email;
+    private String userId = "";
+    private String username = "";
+    private String firstName = "";
+    private String lastName = "";
+    private String nameString = "";
+    private String wgId = "";
+    private String wgName = "";
+    private String email = "";
 
     public User(String userId, String username, String firstName, String lastName, String nameString, String wgId, String wgName, String email) {
         this.userId = userId;
