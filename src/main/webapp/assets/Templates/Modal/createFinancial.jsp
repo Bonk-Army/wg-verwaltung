@@ -3,13 +3,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Neue Ausgabe erstellen</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Neue Einnahme / Ausgabe erstellen</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Aufgabe eingeben
+                Einnahme /Ausgabe eingeben
             </div>
             <form action="addFinancialEntryLogic" method="POST">
                 <label for="date" class="sr-only">Deadline</label>
