@@ -1,7 +1,7 @@
 package logic;
 
 import beans.APIBean;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,10 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Enumeration;
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MobileAPI extends HttpServlet {
     public MobileAPI() {
@@ -35,13 +31,22 @@ public class MobileAPI extends HttpServlet {
         JSONObject jsonObj = new JSONObject(body);
         String reqType = jsonObj.getString("type");
 
+        PrintWriter out = response.getWriter();
+
         switch (reqType) {
             case "AUTHREQUEST":
                 String username = jsonObj.getString("username");
                 String password = jsonObj.getString("password");
 
-                PrintWriter out = response.getWriter();
                 out.print(apiBean.performLogin(username, password));
+                out.flush();
+                response.setStatus(200);
+                break;
+            case "CHECKSESSION":
+                String userId = jsonObj.getString("userId");
+                String sessionId = jsonObj.getString("sessionId");
+
+                out.print(apiBean.checkSessionToken(userId, sessionId));
                 out.flush();
                 response.setStatus(200);
                 break;

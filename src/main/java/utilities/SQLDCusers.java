@@ -111,6 +111,28 @@ public class SQLDCusers extends SQLDatabaseConnection {
     }
 
     /**
+     * Get the salt required for hashing the password of the given username
+     *
+     * @param userId The userId the salt is returned for
+     * @return The salt as a String
+     */
+    public static String getPasswordSaltByID(String userId) {
+        String salt = "";
+
+        ResultSet rs = executeQuery("SELECT pwsalt FROM users WHERE uniqueID='" + userId + "'");
+
+        try {
+            while (rs.next()) {
+                salt = rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return salt;
+    }
+
+    /**
      * Set the "isVerified" field for the specified user to true and delete verification code to de-validate it.
      *
      * @param username The user that has been verified
@@ -909,5 +931,44 @@ public class SQLDCusers extends SQLDatabaseConnection {
         }
 
         return -1;
+    }
+
+    /**
+     * Save the session token used for mobile authentication of the user
+     *
+     * @param userId           The userId of the user
+     * @param sessionTokenHash The new sessionToken
+     * @return If it was successful
+     */
+    public static boolean setSessionTokenHash(String userId, String sessionTokenHash) {
+        try {
+            executeQuery("UPDATE users SET mobileSessionToken = '" + sessionTokenHash + "' WHERE uniqueID = " + Integer.valueOf(userId));
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    /**
+     * Get the saved mobile session token hash for the given user
+     *
+     * @param userId The userId of the user
+     * @return The hash as a String
+     */
+    public static String getSessionTokenHash(String userId) {
+        try {
+            ResultSet rs = executeQuery("SELECT mobileSessionToken FROM users WHERE uniqueID = " + Integer.valueOf(userId));
+
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return "";
     }
 }

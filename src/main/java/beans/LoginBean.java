@@ -56,7 +56,7 @@ public class LoginBean {
             String newHash = PasswordHasher.hashPassword(password, salt);
 
             //Login was either successful or one of the entered params was wrong
-            if (newHash.equals(hash)) {
+            if (newHash != null && newHash.equals(hash)) {
                 if (SQLDCusers.setCookiePostfix(username, cookiePostfixHash) && SQLDCusers.setCookieLifetime(username, cookieLifetime)
                         && SQLDCusers.setLastPasswordLogin(username)) {
                     setLastLogin(userId);
