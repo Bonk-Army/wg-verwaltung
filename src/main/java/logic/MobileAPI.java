@@ -32,21 +32,25 @@ public class MobileAPI extends HttpServlet {
         String reqType = jsonObj.getString("type");
 
         PrintWriter out = response.getWriter();
+        String username;
+        String password;
+        String userId;
+        String sessionId;
 
         switch (reqType) {
             case "AUTHREQUEST":
-                String username = jsonObj.getString("username");
-                String password = jsonObj.getString("password");
+                username = jsonObj.getString("username");
+                password = jsonObj.getString("password");
 
                 out.print(apiBean.performLogin(username, password));
                 out.flush();
                 response.setStatus(200);
                 break;
-            case "CHECKSESSION":
-                String userId = jsonObj.getString("userId");
-                String sessionId = jsonObj.getString("sessionId");
+            case "DATAREQUEST":
+                userId = jsonObj.getString("userId");
+                sessionId = jsonObj.getString("sessionId");
 
-                out.print(apiBean.checkSessionToken(userId, sessionId));
+                out.print(apiBean.getAllData(userId, sessionId));
                 out.flush();
                 response.setStatus(200);
                 break;

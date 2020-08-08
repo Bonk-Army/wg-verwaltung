@@ -1,15 +1,12 @@
 package beans;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import utilities.PasswordHasher;
 import utilities.RandomStringGenerator;
 import utilities.RegexHelper;
 import utilities.SQLDCusers;
+import org.json.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class APIBean {
 
@@ -21,7 +18,7 @@ public class APIBean {
      * @return A JSON with the answer parameters
      */
     public String performLogin(String username, String password) {
-        Map<String, String> answerMap = new HashMap<String, String>();
+        JSONObject json = new JSONObject();
         List<String> allUserNames = SQLDCusers.getAllUserNames();
 
         if (RegexHelper.checkString(username) && allUserNames.contains(username)) {
@@ -39,39 +36,38 @@ public class APIBean {
                     String sessionTokenHash = PasswordHasher.hashPassword(sessionToken, salt);
 
                     if (sessionTokenHash != null && SQLDCusers.setSessionTokenHash(userId, sessionTokenHash)) {
-                        answerMap.put("status", "success");
-                        answerMap.put("sessionToken", sessionToken);
-                        answerMap.put("userId", userId);
+                        json.put("status", "success");
+                        json.put("sessionToken", sessionToken);
+                        json.put("userId", userId);
                     } else {
-                        answerMap.put("status", "failure");
-                        answerMap.put("reason", "Serverfehler");
+                        json.put("status", "failure");
+                        json.put("reason", "Serverfehler");
                     }
 
                 } else {
-                    answerMap.put("status", "failure");
-                    answerMap.put("reason", "Falsches Passwort");
+                    json.put("status", "failure");
+                    json.put("reason", "Falsches Passwort");
                 }
             } else {
-                answerMap.put("status", "failure");
-                answerMap.put("reason", "Serverfehler");
+                json.put("status", "failure");
+                json.put("reason", "Serverfehler");
             }
         } else {
-            answerMap.put("status", "failure");
-            answerMap.put("reason", "Falscher Benutzername");
+            json.put("status", "failure");
+            json.put("reason", "Falscher Benutzername");
         }
 
-        return convertToJSON(answerMap);
+        return json.toString();
     }
 
     /**
-     * Check if the given session for the user is (still) valid
-     *
-     * @param userId       The userId of the user
-     * @param sessionToken The sessionToken transmitted by the app
-     * @return A JSON with the answer parameters
+     * Return all data for the given user for use in the mobile App
+     * @param userId The userId of the user
+     * @param sessionToken The session token transmitted by the app
+     * @return A JSON Object containing all data accessible to the user
      */
-    public String checkSessionToken(String userId, String sessionToken) {
-        Map<String, String> answerMap = new HashMap<String, String>();
+    public String getAllData(String userId, String sessionToken) {
+        JSONObject json = new JSONObject();
 
         if (RegexHelper.checkString(userId)) {
             String savedSessionHash = SQLDCusers.getSessionTokenHash(userId);
@@ -79,37 +75,20 @@ public class APIBean {
             String newSessionHash = PasswordHasher.hashPassword(sessionToken, salt);
 
             if (newSessionHash != null && newSessionHash.equals(savedSessionHash)) {
-                answerMap.put("status", "success");
+                // User authentication successful, fetch and return data
+                json.put("status", "success");
+
+
             } else {
-                answerMap.put("status", "failure");
-                answerMap.put("reason", "Ungültige Sitzung");
+                json.put("status", "failure");
+                json.put("reason", "Ungültige Sitzung");
             }
 
         } else {
-            answerMap.put("status", "failure");
-            answerMap.put("reason", "Falsche Nutzer-ID");
+            json.put("status", "failure");
+            json.put("reason", "Falsche Nutzer-ID");
         }
 
-        return convertToJSON(answerMap);
-    }
-
-    /**
-     * Convert the given Map to a JSON Object
-     *
-     * @param mapToConvert The Map<String, String>
-     * @return A JSON Object as a String
-     */
-    private String convertToJSON(Map<String, String> mapToConvert) {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        String json = "";
-
-        try {
-            json = objectMapper.writeValueAsString(mapToConvert);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        return json;
+        return json.toString();
     }
 }
