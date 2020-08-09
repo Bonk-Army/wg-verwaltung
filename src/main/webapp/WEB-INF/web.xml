@@ -37,6 +37,7 @@
         |__ /changePasswordLogic        | Servlet : ChangePassword          | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /leaveWgLogic               | Servlet : LeaveWG                 | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ /logoutLogic                | Servlet : Logout                  | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
+        |__ /api                        | Servlet : MobileAPI               | Zuständig : @PM      | Mapped by @PM | Zuständig für Inhalt @PM | Initial
         |__ ^^-^^
         |__
         |__ ^^-^^
@@ -412,6 +413,14 @@
     <servlet-mapping>
         <servlet-name>RemoveCleaningLogic</servlet-name>
         <url-pattern>/removeCleaningLogic</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MobileAPI</servlet-name>
+        <servlet-class>logic.MobileAPI</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MobileAPI</servlet-name>
+        <url-pattern>/api</url-pattern>
     </servlet-mapping>
     <!-- ############################################################################################################ -->
     <!--

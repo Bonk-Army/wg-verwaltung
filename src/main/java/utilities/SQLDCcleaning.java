@@ -16,6 +16,8 @@ package utilities;
         - isActive          (bool)
  */
 
+import models.CleanEntry;
+
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -235,5 +237,78 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
         }
 
         return false;
+    }
+
+    /**
+     * Get all clean entries of the specified wg for use in the mobile app
+     *
+     * @param wgId The wgId of the wg
+     * @return A List of CleanEntry Objects
+     */
+    public static List<CleanEntry> getEntriesForMobileApp(String wgId) {
+        List<CleanEntry> tasksList = new ArrayList<CleanEntry>();
+        Map<String, String> idNameStringMap = SQLDCusers.getIdNameStringMap();
+
+        try {
+            ResultSet rs = executeQuery(("SELECT uniqueID, taskName, mondayUser, tuesdayUser, wednesdayUser, thursdayUser,"
+                    + " fridayUser, saturdayUser, sundayUser FROM cleaning WHERE wgId = " + Integer.valueOf(wgId)
+                    + " AND isActive = 1"));
+
+            while (rs.next()) { // Each iteration is one row in the cleaning table
+                String entryId = String.valueOf(rs.getInt(1));
+                String task = rs.getString(2);
+
+                //String[] weekdays = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
+
+                // Iterate over each weekday. Create a new List for each weekday which contains the user info for the
+                // dropdown menu. Then put that list in the currentTask map under the corresponding week day.
+                /*for (int i = 0; i < 7; i++) {
+                    String weekday = weekdays[i]; // Current weekday
+
+                    // The fetched list of users for that wg
+                    List<Map<String, String>> currentNamesForWg = new ArrayList<>(namesForWg);
+                    // The copy of that list to be sorted so the assigned user is at index 0
+                    List<Map<String, String>> currentUserList = new ArrayList<Map<String, String>>();
+
+                    String assignedUserId = rs.getString((3 + i));
+
+                    // If no user is assigned, put an empty map at index 0. Otherwise, put the assigned user at
+                    // index 0 and just append the rest of the list to the currentUserList
+                    if (assignedUserId == null || assignedUserId.equals("")) {
+                        currentUserList.add(new HashMap<String, String>());
+                        currentUserList.addAll(currentNamesForWg);
+                    } else {
+                        for (Map<String, String> user : currentNamesForWg) {
+                            if (user.get("userId").equals(assignedUserId)) {
+                                currentUserList.add(user);
+                                currentUserList.add(new HashMap<String, String>());
+                                currentNamesForWg.remove(user);
+
+                                currentUserList.addAll(currentNamesForWg);
+
+                                break;
+                            }
+                        }
+                    }
+
+                    currentTask.put(weekday, currentUserList);
+                }*/
+
+                String mondayAssignee = idNameStringMap.get(rs.getString(3));
+                String tuesdayAssignee = idNameStringMap.get(rs.getString(4));
+                String wednesdayAssignee = idNameStringMap.get(rs.getString(5));
+                String thursdayAssignee = idNameStringMap.get(rs.getString(6));
+                String fridayAssignee = idNameStringMap.get(rs.getString(7));
+                String saturdayAssignee = idNameStringMap.get(rs.getString(8));
+                String sundayAssignee = idNameStringMap.get(rs.getString(9));
+
+
+                tasksList.add(new CleanEntry(task, mondayAssignee, tuesdayAssignee, wednesdayAssignee, thursdayAssignee, fridayAssignee, saturdayAssignee, sundayAssignee, entryId));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return tasksList;
     }
 }

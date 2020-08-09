@@ -59,6 +59,8 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
      */
     public static List<Map<String, String>> getAllActiveEntries(String wgId, int limit) {
         List<Map<String, String>> entries = new ArrayList<Map<String, String>>();
+        Map<String, String> idUsernameMap = SQLDCusers.getIdUsernameMap();
+        Map<String, String> idNameStringMap = SQLDCusers.getIdNameStringMap();
 
         try {
             // Returns all info for each financial entry that is active, ordered by their creation date
@@ -85,8 +87,8 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
 
                 currentEntry.put("value", valueString);
                 currentEntry.put("dateCreated", createdDateString);
-                String createdByUsername = SQLDCusers.getUsername(String.valueOf(rs.getInt(4)));
-                currentEntry.put("createdBy", SQLDCusers.getNameString(createdByUsername));
+                String createdByUsername = idUsernameMap.get(String.valueOf(rs.getInt(4)));
+                currentEntry.put("createdBy", idNameStringMap.get(createdByUsername));
                 currentEntry.put("entryId", String.valueOf(rs.getInt(5)));
 
                 entries.add(currentEntry);
@@ -292,5 +294,53 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
         }
 
         return monthlyBalance;
+    }
+
+    /**
+     * Returns the 20 newest financial entries associated with the user's wg
+     *
+     * @param wgId The wgId of the wg
+     * @return A List of Financial Entry objects
+     */
+    public static List<FinancialEntry> getEntriesForMobileApp(String wgId) {
+        List<FinancialEntry> entries = new ArrayList<FinancialEntry>();
+        Map<String, String> idUsernameMap = SQLDCusers.getIdUsernameMap();
+        Map<String, String> idNameStringMap = SQLDCusers.getIdNameStringMap();
+
+        try {
+            // Returns all info for each financial entry that is active, ordered by their creation date
+            ResultSet rs = executeQuery(("SELECT reason, value, dateCreated, createdBy, uniqueID FROM financial WHERE wgId="
+                    + Integer.valueOf(wgId) + " AND isActive = 1 ORDER BY dateCreated DESC LIMIT 20"));
+
+            while (rs.next()) {
+                String reason = rs.getString(1);
+
+                StringBuilder sb = new StringBuilder();
+                Formatter formatter = new Formatter(sb, Locale.GERMAN);
+                formatter.format("%,.2f", (rs.getInt(2) / 100d));
+                String valueString = sb.toString();
+
+                String createdDateString = DateFormatter.dateToString(rs.getTimestamp(3));
+
+                boolean isNegative = false;
+                if (rs.getInt(2) < 0) {
+                    isNegative = true;
+                }
+
+                String createdByUsername = idUsernameMap.get(String.valueOf(rs.getInt(4)));
+                String createdByString = idNameStringMap.get(String.valueOf(rs.getInt(4)));
+
+                String uniqueID = String.valueOf(rs.getInt(5));
+
+                FinancialEntry entry = new FinancialEntry(createdDateString, valueString, createdByString, reason,
+                        isNegative, createdByUsername, uniqueID);
+
+                entries.add(entry);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return entries;
     }
 }

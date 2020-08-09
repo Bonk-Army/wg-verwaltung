@@ -1,5 +1,7 @@
 package utilities;
 
+import models.TodoEntry;
+
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.*;
@@ -64,6 +66,9 @@ public class SQLDCtodo extends SQLDatabaseConnection {
     public static List<Map<String, String>> getAllActiveTodos(String wgId) {
         deactivateOldToDos();
         List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
+        Map<String, String> idUsernameMap = SQLDCusers.getIdUsernameMap();
+        Map<String, String> idNameStringMap = SQLDCusers.getIdNameStringMap();
+
         try {
             // Get all required info for each todo that is active and is either not done or has been due in the last seven days.
             // Ordered by their status and todos of the same status are ordered by their due date
@@ -109,11 +114,11 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 // Text formatting
                 String assignedId = rs.getString(2);
                 String creatorId = rs.getString(7);
-                String assignee = SQLDCusers.getUsername(assignedId);
-                String creator = SQLDCusers.getUsername(creatorId);
+                String assignee = idUsernameMap.get(assignedId);
+                String creator = idUsernameMap.get(creatorId);
 
-                currentTodo.put("assignee", SQLDCusers.getNameString(assignee));
-                currentTodo.put("creator", SQLDCusers.getNameString(creator));
+                currentTodo.put("assignee", idNameStringMap.get(assignee));
+                currentTodo.put("creator", idNameStringMap.get(creator));
 
                 todoList.add(currentTodo);
             }
@@ -252,6 +257,9 @@ public class SQLDCtodo extends SQLDatabaseConnection {
     public static List<Map<String, String>> getAllActiveTodosForUser(String assignedId, String wgId) {
         deactivateOldToDos();
         List<Map<String, String>> todoList = new ArrayList<Map<String, String>>();
+        Map<String, String> idUsernameMap = SQLDCusers.getIdUsernameMap();
+        Map<String, String> idNameStringMap = SQLDCusers.getIdNameStringMap();
+
         try {
             // Gets the required info for each todo that is active and is either not done or has been due in the last seven days.
             // Ordered by the status and the todos of the same status are then ordered by their due date
@@ -297,9 +305,9 @@ public class SQLDCtodo extends SQLDatabaseConnection {
 
                 // Text formatting
                 String creatorId = rs.getString(7);
-                String creator = SQLDCusers.getUsername(creatorId);
+                String creator = idUsernameMap.get(creatorId);
 
-                currentTodo.put("creator", SQLDCusers.getNameString(creator));
+                currentTodo.put("creator", idNameStringMap.get(creator));
 
                 todoList.add(currentTodo);
             }
@@ -336,5 +344,54 @@ public class SQLDCtodo extends SQLDatabaseConnection {
         }
 
         return openTodosMap;
+    }
+
+    /**
+     * Get todos on wg-level for use in the mobile app
+     *
+     * @param wgId The wgId of the wg to fetch the todos for
+     * @return A List of TodoEntry Objects
+     */
+    public static List<TodoEntry> getWgEntriesForMobileApp(String wgId) {
+        deactivateOldToDos();
+        List<TodoEntry> todoList = new ArrayList<TodoEntry>();
+        Map<String, String> idNameStringMap = SQLDCusers.getIdNameStringMap();
+
+        try {
+            // Get all required info for each todo that is active and is either not done or has been due in the last seven days.
+            // Ordered by their status and todos of the same status are ordered by their due date
+            ResultSet rs = executeQuery(("SELECT task, assignedId, dateCreated, dateDue, isDone, isActive, createdBy, uniqueID FROM todo WHERE wgId = "
+                    + Integer.valueOf(wgId) + " AND isActive = 1 AND (isDone = 0 OR DATEDIFF(CURRENT_TIMESTAMP, dateDue) <= 7) ORDER BY isDone, dateDue ASC"));
+            while (rs.next()) {
+                String task = rs.getString(1);
+                boolean isDone = rs.getBoolean(5);
+                String entryId = String.valueOf(rs.getInt(8));
+
+                // Parameters for better visualization of the status of every todo
+
+                // Dates for colors
+                Date dateDue = rs.getTimestamp(4);
+                Date dateCreated = rs.getTimestamp(3);
+                Date currentDate = DateFormatter.getCurrentDateTime();
+                Calendar c = Calendar.getInstance();
+                c.setTime(currentDate);
+                c.add(Calendar.DATE, 3);
+                Date threeDaysDate = c.getTime();
+
+                String dueDateString = DateFormatter.dateTimeMinutesToString(dateDue);
+                String createdDateString = DateFormatter.dateTimeMinutesToString(dateCreated);
+
+                // Text formatting
+                String assignedId = rs.getString(2);
+                String creatorId = rs.getString(7);
+                String assignee = idNameStringMap.get(assignedId);
+                String creator = idNameStringMap.get(creatorId);
+
+                todoList.add(new TodoEntry(task, dueDateString, createdDateString, assignee, creator, isDone, entryId));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return todoList;
     }
 }

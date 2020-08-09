@@ -1,5 +1,7 @@
 package utilities;
 
+import models.ShoppingEntry;
+
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.*;
@@ -98,6 +100,8 @@ public class SQLDCshopping extends SQLDatabaseConnection {
      */
     public static List<Map<String, String>> getActiveArticleRequests(String wgId) {
         List<Map<String, String>> requestList = new ArrayList<Map<String, String>>();
+        Map<String, String> idUsernameMap = SQLDCusers.getIdUsernameMap();
+        Map<String, String> idNameStringMap = SQLDCusers.getIdNameStringMap();
 
         try {
             // Get all required info for each request that is active and is either not done or has been due in the last seven days.
@@ -116,13 +120,13 @@ public class SQLDCshopping extends SQLDatabaseConnection {
 
                 String createdById = String.valueOf(rs.getInt(3));
                 String requestedById = String.valueOf(rs.getInt(4));
-                String createdBy = SQLDCusers.getUsername(createdById);
-                String requestedBy = SQLDCusers.getUsername(requestedById);
+                String createdBy = idUsernameMap.get(createdById);
+                String requestedBy = idUsernameMap.get(requestedById);
 
                 boolean isDone = rs.getBoolean(8);
 
-                currentArticle.put("requestedBy", SQLDCusers.getNameString(requestedBy));
-                currentArticle.put("createdBy", SQLDCusers.getNameString(createdBy));
+                currentArticle.put("requestedBy", idNameStringMap.get(requestedBy));
+                currentArticle.put("createdBy", idNameStringMap.get(createdBy));
 
                 // Color the requests based on their priority
                 Date currentDate = DateFormatter.getCurrentDateTime();
@@ -177,5 +181,57 @@ public class SQLDCshopping extends SQLDatabaseConnection {
         }
 
         return "";
+    }
+
+    /**
+     * Get the shopping entries for the specified wg for use in the mobile app
+     *
+     * @param wgId The wgId of the wg
+     * @return A List of ShoppingEntry Objects
+     */
+    public static List<ShoppingEntry> getEntriesForMobileApp(String wgId) {
+        List<ShoppingEntry> requestList = new ArrayList<>();
+        Map<String, String> idNameStringMap = SQLDCusers.getIdNameStringMap();
+
+        try {
+            // Get all required info for each request that is active and is either not done or has been due in the last seven days.
+            // Ordered by their status and requests of the same status are ordered by their due date.
+            ResultSet rs = executeQuery(("SELECT article, amount, createdBy, requestedBy, dateDue, dateCreated, uniqueID, isDone FROM shopping WHERE wgId="
+                    + Integer.valueOf(wgId) + " AND (DATEDIFF(CURRENT_TIMESTAMP, dateDue) <= 7 OR isDone = 0) AND isActive = 1 ORDER BY isDone, dateDue ASC"));
+
+            while (rs.next()) {
+                String article = rs.getString(1);
+                String amount = rs.getString(2);
+                String dueDateString = DateFormatter.dateToString(rs.getTimestamp(5));
+                String createdDateString = DateFormatter.dateToString(rs.getTimestamp(6));
+                String createdBy = idNameStringMap.get(String.valueOf(rs.getInt(3)));
+                String requestedBy = idNameStringMap.get(String.valueOf(rs.getInt(4)));
+                String entryId = String.valueOf(rs.getInt(7));
+
+                boolean isDone = rs.getBoolean(8);
+
+                // Color the requests based on their priority
+                /*Date currentDate = DateFormatter.getCurrentDateTime();
+                Date dateDue = rs.getTimestamp(5);
+                Calendar c = Calendar.getInstance();
+                c.setTime(currentDate);
+                c.add(Calendar.DATE, 1);
+                Date tomorrow = c.getTime();
+                currentArticle.put("doneMessage", "Nein");
+                currentArticle.put("buttonHideStatus", "");
+
+                String colorClass = "";
+                if (currentDate.after(dateDue)) {
+                    colorClass = "tooLate";
+                } else if (tomorrow.after(dateDue)) {
+                    colorClass = "late";
+                }*/
+
+                requestList.add(new ShoppingEntry(article, amount, dueDateString, createdDateString, createdBy, requestedBy, entryId, isDone));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return requestList;
     }
 }
