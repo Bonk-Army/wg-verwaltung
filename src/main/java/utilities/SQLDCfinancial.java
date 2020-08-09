@@ -88,7 +88,7 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
                 currentEntry.put("value", valueString);
                 currentEntry.put("dateCreated", createdDateString);
                 String createdByUsername = idUsernameMap.get(String.valueOf(rs.getInt(4)));
-                currentEntry.put("createdBy", idNameStringMap.get(createdByUsername));
+                currentEntry.put("createdBy", idNameStringMap.get(String.valueOf(rs.getInt(4))));
                 currentEntry.put("entryId", String.valueOf(rs.getInt(5)));
 
                 entries.add(currentEntry);
