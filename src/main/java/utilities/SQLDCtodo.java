@@ -117,8 +117,8 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 String assignee = idUsernameMap.get(assignedId);
                 String creator = idUsernameMap.get(creatorId);
 
-                currentTodo.put("assignee", idNameStringMap.get(assignee));
-                currentTodo.put("creator", idNameStringMap.get(creator));
+                currentTodo.put("assignee", idNameStringMap.get(assignedId));
+                currentTodo.put("creator", idNameStringMap.get(creatorId));
 
                 todoList.add(currentTodo);
             }
@@ -307,7 +307,7 @@ public class SQLDCtodo extends SQLDatabaseConnection {
                 String creatorId = rs.getString(7);
                 String creator = idUsernameMap.get(creatorId);
 
-                currentTodo.put("creator", idNameStringMap.get(creator));
+                currentTodo.put("creator", idNameStringMap.get(creatorId));
 
                 todoList.add(currentTodo);
             }
