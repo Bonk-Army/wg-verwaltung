@@ -125,8 +125,8 @@ public class SQLDCshopping extends SQLDatabaseConnection {
 
                 boolean isDone = rs.getBoolean(8);
 
-                currentArticle.put("requestedBy", idNameStringMap.get(requestedBy));
-                currentArticle.put("createdBy", idNameStringMap.get(createdBy));
+                currentArticle.put("requestedBy", idNameStringMap.get(requestedById));
+                currentArticle.put("createdBy", idNameStringMap.get(createdById));
 
                 // Color the requests based on their priority
                 Date currentDate = DateFormatter.getCurrentDateTime();
