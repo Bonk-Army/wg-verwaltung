@@ -23,6 +23,7 @@ public class MobileAPI extends HttpServlet {
         APIBean apiBean = new APIBean();
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
         String jsonData = request.getParameter("jsondata");
         Enumeration<String> params = request.getParameterNames();

@@ -1,12 +1,11 @@
 package beans;
 
-import utilities.PasswordHasher;
-import utilities.RandomStringGenerator;
-import utilities.RegexHelper;
-import utilities.SQLDCusers;
-import org.json.*;
+import models.*;
+import org.json.JSONObject;
+import utilities.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class APIBean {
 
@@ -62,7 +61,8 @@ public class APIBean {
 
     /**
      * Return all data for the given user for use in the mobile App
-     * @param userId The userId of the user
+     *
+     * @param userId       The userId of the user
      * @param sessionToken The session token transmitted by the app
      * @return A JSON Object containing all data accessible to the user
      */
@@ -78,6 +78,99 @@ public class APIBean {
                 // User authentication successful, fetch and return data
                 json.put("status", "success");
 
+                // General user data
+                User thisUser = SQLDCusers.getAllUserData(userId);
+                JSONObject userDataJson = new JSONObject();
+                userDataJson.put("firstName", thisUser.getFirstName());
+                userDataJson.put("lastName", thisUser.getLastName());
+                userDataJson.put("email", thisUser.getEmail());
+                userDataJson.put("wgId", thisUser.getWgId());
+                userDataJson.put("wgName", thisUser.getWgName());
+
+                json.put("userData", userDataJson);
+
+                // Financial data
+                List<FinancialEntry> financialEntries = SQLDCfinancial.getEntriesForMobileApp(thisUser.getWgId());
+                List<JSONObject> entriesJsonList = new ArrayList<JSONObject>();
+
+                for (FinancialEntry entry : financialEntries) {
+                    JSONObject entryJSON = new JSONObject();
+
+                    entryJSON.put("createdDateString", entry.getCreatedDateString());
+                    entryJSON.put("valueString", entry.getValueString());
+                    entryJSON.put("createdBy", entry.getCreatedBy());
+                    entryJSON.put("createdByUsername", entry.getCreatedByUsername());
+                    entryJSON.put("reason", entry.getReason());
+                    entryJSON.put("isNegative", entry.isNegative());
+                    entryJSON.put("entryId", entry.getEntryId());
+
+                    entriesJsonList.add(entryJSON);
+                }
+
+                json.put("financialData", entriesJsonList);
+
+                // ToDo data
+                List<TodoEntry> todoEntries = SQLDCtodo.getWgEntriesForMobileApp(thisUser.getWgId());
+                List<JSONObject> todoJsonList = new ArrayList<JSONObject>();
+
+                for (TodoEntry entry : todoEntries) {
+                    JSONObject entryJSON = new JSONObject();
+
+                    entryJSON.put("task", entry.getTask());
+                    entryJSON.put("dueDateString", entry.getDueDateString());
+                    entryJSON.put("createdDateString", entry.getCreatedDateString());
+                    entryJSON.put("assignee", entry.getAssignee());
+                    entryJSON.put("creator", entry.getCreator());
+                    entryJSON.put("isDone", entry.isDone());
+                    entryJSON.put("entryId", entry.getEntryId());
+
+                    todoJsonList.add(entryJSON);
+                }
+
+                json.put("todoData", todoJsonList);
+
+                // Clean data
+                List<CleanEntry> cleanEntries = SQLDCcleaning.getEntriesForMobileApp(thisUser.getWgId());
+                List<JSONObject> cleanJsonList = new ArrayList<>();
+
+                for (CleanEntry entry : cleanEntries) {
+                    JSONObject entryJSON = new JSONObject();
+
+                    entryJSON.put("task", entry.getTask());
+                    entryJSON.put("entryId", entry.getEntryId());
+                    entryJSON.put("mondayAssignee", entry.getMondayAssignee());
+                    entryJSON.put("tuesdayAssignee", entry.getTuesdayAssignee());
+                    entryJSON.put("wednesdayAssignee", entry.getWednesdayAssignee());
+                    entryJSON.put("thursdayAssignee", entry.getThursdayAssignee());
+                    entryJSON.put("fridayAssignee", entry.getFridayAssignee());
+                    entryJSON.put("saturdayAssignee", entry.getSaturdayAssignee());
+                    entryJSON.put("sundayAssignee", entry.getSundayAssignee());
+
+                    cleanJsonList.add(entryJSON);
+                }
+
+                json.put("cleanData", cleanJsonList);
+
+                // Shopping data
+                List<ShoppingEntry> shoppingEntries = SQLDCshopping.getEntriesForMobileApp(thisUser.getWgId());
+                List<JSONObject> shoppingJsonList = new ArrayList<>();
+
+                for (ShoppingEntry entry : shoppingEntries) {
+                    JSONObject entryJSON = new JSONObject();
+
+                    entryJSON.put("article", entry.getArticle());
+                    entryJSON.put("amount", entry.getAmount());
+                    entryJSON.put("createdDateString", entry.getCreatedDateString());
+                    entryJSON.put("dueDateString", entry.getDueDateString());
+                    entryJSON.put("createdBy", entry.getCreatedBy());
+                    entryJSON.put("requestedBy", entry.getRequestedBy());
+                    entryJSON.put("isDone", entry.isDone());
+                    entryJSON.put("entryId", entry.getEntryId());
+
+                    shoppingJsonList.add(entryJSON);
+                }
+
+                json.put("shoppingData", shoppingJsonList);
 
             } else {
                 json.put("status", "failure");
@@ -88,6 +181,8 @@ public class APIBean {
             json.put("status", "failure");
             json.put("reason", "Falsche Nutzer-ID");
         }
+
+        System.out.println(json.toString());
 
         return json.toString();
     }
