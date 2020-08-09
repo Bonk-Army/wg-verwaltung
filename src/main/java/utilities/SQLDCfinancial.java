@@ -59,6 +59,8 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
      */
     public static List<Map<String, String>> getAllActiveEntries(String wgId, int limit) {
         List<Map<String, String>> entries = new ArrayList<Map<String, String>>();
+        Map<String, String> idUsernameMap = SQLDCusers.getIdUsernameMap();
+        Map<String, String> idNameStringMap = SQLDCusers.getIdNameStringMap();
 
         try {
             // Returns all info for each financial entry that is active, ordered by their creation date
@@ -85,8 +87,8 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
 
                 currentEntry.put("value", valueString);
                 currentEntry.put("dateCreated", createdDateString);
-                String createdByUsername = SQLDCusers.getUsername(String.valueOf(rs.getInt(4)));
-                currentEntry.put("createdBy", SQLDCusers.getNameString(createdByUsername));
+                String createdByUsername = idUsernameMap.get(String.valueOf(rs.getInt(4)));
+                currentEntry.put("createdBy", idNameStringMap.get(createdByUsername));
                 currentEntry.put("entryId", String.valueOf(rs.getInt(5)));
 
                 entries.add(currentEntry);
@@ -302,6 +304,8 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
      */
     public static List<FinancialEntry> getEntriesForMobileApp(String wgId) {
         List<FinancialEntry> entries = new ArrayList<FinancialEntry>();
+        Map<String, String> idUsernameMap = SQLDCusers.getIdUsernameMap();
+        Map<String, String> idNameStringMap = SQLDCusers.getIdNameStringMap();
 
         try {
             // Returns all info for each financial entry that is active, ordered by their creation date
@@ -323,8 +327,8 @@ public class SQLDCfinancial extends SQLDatabaseConnection {
                     isNegative = true;
                 }
 
-                String createdByUsername = SQLDCusers.getUsername(String.valueOf(rs.getInt(4)));
-                String createdByString = SQLDCusers.getNameStringById(String.valueOf(rs.getInt(4)));
+                String createdByUsername = idUsernameMap.get(String.valueOf(rs.getInt(4)));
+                String createdByString = idNameStringMap.get(String.valueOf(rs.getInt(4)));
 
                 String uniqueID = String.valueOf(rs.getInt(5));
 

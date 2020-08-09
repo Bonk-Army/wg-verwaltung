@@ -711,7 +711,7 @@ public class SQLDCusers extends SQLDatabaseConnection {
                 lastName = rs.getString(2);
             }
 
-            return (firstName + " " + lastName.substring(0, 1));
+            return (firstName + " " + lastName.charAt(0));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -970,5 +970,46 @@ public class SQLDCusers extends SQLDatabaseConnection {
         }
 
         return "";
+    }
+
+    /**
+     * Get a map with the id and corresponding username for every user
+     * @return The map with id as key and username as value
+     */
+    public static Map<String, String> getIdUsernameMap() {
+        Map<String, String> resultMap = new HashMap<>();
+
+        try {
+            ResultSet rs = executeQuery("SELECT uniqueID, username FROM users");
+
+            while(rs.next()){
+                resultMap.put(String.valueOf(rs.getInt(1)), rs.getString(2));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return resultMap;
+    }
+
+    /**
+     * Get a map with the id and corresponding name string for every user
+     * @return The map with id as key and name string as value
+     */
+    public static Map<String, String> getIdNameStringMap() {
+        Map<String, String> resultMap = new HashMap<>();
+
+        try {
+            ResultSet rs = executeQuery("SELECT uniqueID, firstName, lastName FROM users");
+
+            while(rs.next()){
+                String nameString = (rs.getString(2) + " " + rs.getString(3).charAt(0));
+                resultMap.put(String.valueOf(rs.getInt(1)), nameString);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return resultMap;
     }
 }

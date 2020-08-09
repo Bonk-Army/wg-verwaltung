@@ -182,8 +182,6 @@ public class APIBean {
             json.put("reason", "Falsche Nutzer-ID");
         }
 
-        System.out.println(json.toString());
-
         return json.toString();
     }
 }
