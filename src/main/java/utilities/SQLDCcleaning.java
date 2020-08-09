@@ -247,19 +247,12 @@ public class SQLDCcleaning extends SQLDatabaseConnection {
      */
     public static List<CleanEntry> getEntriesForMobileApp(String wgId) {
         List<CleanEntry> tasksList = new ArrayList<CleanEntry>();
+        Map<String, String> idNameStringMap = SQLDCusers.getIdNameStringMap();
 
         try {
             ResultSet rs = executeQuery(("SELECT uniqueID, taskName, mondayUser, tuesdayUser, wednesdayUser, thursdayUser,"
                     + " fridayUser, saturdayUser, sundayUser FROM cleaning WHERE wgId = " + Integer.valueOf(wgId)
                     + " AND isActive = 1"));
-
-            // Get the name string and corresponding user id for each user of the wg
-            List<Map<String, String>> namesForWg = SQLDCusers.getAllNameStringsWithUserIdForWg(wgId);
-            Map<String, String> idNameStringMap = new HashMap<>();
-
-            for (Map<String, String> user : namesForWg) {
-                idNameStringMap.put(user.get("userId"), user.get("nameString"));
-            }
 
             while (rs.next()) { // Each iteration is one row in the cleaning table
                 String entryId = String.valueOf(rs.getInt(1));

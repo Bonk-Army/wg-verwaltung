@@ -100,6 +100,8 @@ public class SQLDCshopping extends SQLDatabaseConnection {
      */
     public static List<Map<String, String>> getActiveArticleRequests(String wgId) {
         List<Map<String, String>> requestList = new ArrayList<Map<String, String>>();
+        Map<String, String> idUsernameMap = SQLDCusers.getIdUsernameMap();
+        Map<String, String> idNameStringMap = SQLDCusers.getIdNameStringMap();
 
         try {
             // Get all required info for each request that is active and is either not done or has been due in the last seven days.
@@ -118,13 +120,13 @@ public class SQLDCshopping extends SQLDatabaseConnection {
 
                 String createdById = String.valueOf(rs.getInt(3));
                 String requestedById = String.valueOf(rs.getInt(4));
-                String createdBy = SQLDCusers.getUsername(createdById);
-                String requestedBy = SQLDCusers.getUsername(requestedById);
+                String createdBy = idUsernameMap.get(createdById);
+                String requestedBy = idUsernameMap.get(requestedById);
 
                 boolean isDone = rs.getBoolean(8);
 
-                currentArticle.put("requestedBy", SQLDCusers.getNameString(requestedBy));
-                currentArticle.put("createdBy", SQLDCusers.getNameString(createdBy));
+                currentArticle.put("requestedBy", idNameStringMap.get(requestedBy));
+                currentArticle.put("createdBy", idNameStringMap.get(createdBy));
 
                 // Color the requests based on their priority
                 Date currentDate = DateFormatter.getCurrentDateTime();
@@ -189,6 +191,7 @@ public class SQLDCshopping extends SQLDatabaseConnection {
      */
     public static List<ShoppingEntry> getEntriesForMobileApp(String wgId) {
         List<ShoppingEntry> requestList = new ArrayList<>();
+        Map<String, String> idNameStringMap = SQLDCusers.getIdNameStringMap();
 
         try {
             // Get all required info for each request that is active and is either not done or has been due in the last seven days.
@@ -201,8 +204,8 @@ public class SQLDCshopping extends SQLDatabaseConnection {
                 String amount = rs.getString(2);
                 String dueDateString = DateFormatter.dateToString(rs.getTimestamp(5));
                 String createdDateString = DateFormatter.dateToString(rs.getTimestamp(6));
-                String createdBy = SQLDCusers.getNameStringById(String.valueOf(rs.getInt(3)));
-                String requestedBy = SQLDCusers.getNameStringById(String.valueOf(rs.getInt(4)));
+                String createdBy = idNameStringMap.get(String.valueOf(rs.getInt(3)));
+                String requestedBy = idNameStringMap.get(String.valueOf(rs.getInt(4)));
                 String entryId = String.valueOf(rs.getInt(7));
 
                 boolean isDone = rs.getBoolean(8);
