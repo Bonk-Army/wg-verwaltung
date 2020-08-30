@@ -48,7 +48,7 @@ public class PasswordHasher {
     /**
      * Generate a random salt used to salt the hash of the password
      *
-     * @return The salt as a byte array
+     * @return The salt as a String
      */
     public static String generateSalt() {
         SecureRandom random = new SecureRandom();
